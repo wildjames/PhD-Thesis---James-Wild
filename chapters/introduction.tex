@@ -195,14 +195,17 @@ The wind then robs the star associated with the magnetic field of rotational ang
 
 As an aside, \citet{wickramasinghe1996} presented theoretical motivation that CVs can have too strong a magnetic field to allow magnetic braking. Open field lines are necessary for wind to escape the system, so too strong a white dwarf magnetic field can trap the ionised gas in-system, suppressing the wind of the secondary. This Magnetic CV subclass is briefly described in \S\ref{sect:introduction:magnetic CVs}.
 
-As the magnetic braking mechanism is a direct consequence of the donor star spinning down, the CV community is able to borrow insights from adjacent fields of study. The majority of M dwarfs experience some form of spin-down under magnetic braking \todo{cite this}, so observations of the magnetic field strengths of singletons should inform the efficacy of magnetic braking in CV binaries\todo{reference this}. Unfortunately, the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day\todo{Cite this}. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
+As the magnetic braking mechanism is a direct consequence of the donor star spinning down, the CV community is able to borrow insights from adjacent fields of study. The majority of M dwarfs experience some form of spin-down under magnetic braking \todo{cite this}, so observations of the magnetic field strengths of singletons should inform the efficacy of magnetic braking in CV binaries\todo{cite this}. Unfortunately, the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day\todo{cite this}. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
 
 This carries with it some major practical issues. One is that while the broad effects of magnetic fields is relatively easy to intuit, quantitative physical understanding the mechanics and origins of magnetic fields is difficult, involving fluid dynamics, considering interactions with the accretion disc, and magnetism acting on large systems, which quickly become prohibitive to model and is usually handled with one of a variety of recipes. \citealt{knigge11} contains a detailed compilation of some older approaches, but the decade since has seen a few newer methodologies emerge. Here, two recent magnetic braking prescriptions are described in moderate detail: the \citet{matt2015} prescription, and the \citet{garraffo2018a} prescription. For a more complete, detailed summary of the modern understanding of M dwarf magnetic fields refer to \citet{kochukhov2021}. 
 
+
 \subsection{Matt prescription for magnetic torque}
+\label{sect:introduction:matt braking}
 
 In \citet{matt2015}, an empirical prescription is derived that relates the torque felt by a low mass main sequence star to that stars' mass, radius, and Rossby number. The Rossby number is a fluid dynamics term for the ratio between the inertial and Coriolis force terms of the Navier-Stokes equations. A small Rossby number indicates a system dominated by Coriolis effects, and a large Rossby number indicates that centrifugal and inertial forces dominate. The Rossby number of a main sequence star can be calculated from $\Omega$, it's angular rotation rate, and $\tau_{\rm cz}$, the convective turnover timescale.
 \begin{equation}
+    \label{eqn:introduction:rossby number}
     {\rm Ro} = (\Omega \cdot \tau_{\rm cz})^{-1}
 \end{equation}
 Through the Rossby number, the effectiveness of magnetic braking is tied to rotation, which is extremely fast in CVs, and stellar mass and age, which affect $\tau_{\rm cz}$.
@@ -219,7 +222,7 @@ in the saturated regime. Here, $M_*$ and $R_*$ are the stellar mass and radius, 
 
 The authors use these equations to eventually derive the spin rates for main sequence stars at some time $t$ after their initial spin period, $\Omega_i$, 
 \begin{equation}
-    \lim_{\Omega_* \gg \Omega_{\rm sat}} \bigg(\frac{\Omega_*}{\Omega_\odot}\bigg) \rightarrow \bigg(\frac{\tau_{\rm unsat}}{t}\bigg)^(\frac{1}{p})
+    \lim_{\Omega_* \gg \Omega_{\rm sat}} \bigg(\frac{\Omega_*}{\Omega_\odot}\bigg) \rightarrow \bigg(\frac{\tau_{\rm unsat}}{t}\bigg)^{\frac{1}{p}}
 \end{equation}
 \begin{equation}
     \Omega_* = \Omega_i \cdot e^{-t/\tau_{\rm sat}}
@@ -253,27 +256,104 @@ More importantly for the CV field, the parameter space of CVs is completely unco
 
 \subsection{Garraffo prescription for magnetic torque}
 
+The \citet{garraffo2018a} model considers the morphology of the magnetic field to also be important the the strength of magnetic braking, based on the work by \citet{garraffo2015}. The primary justification for this inclusion is observations of open clusters of a known age, where a bimodality is seen in the rotation rates of stars of similar masses\todo{Cite skumanich gap}. Some stars appear to be fast rotators, and some are slow rotators, and there is a dearth of systems between the two. 
+Previous attempts to model this bimodality have relied on a random, unexplained transition between an efficient braking state, and an inefficient braking state \citep{spada2011,reiners2012, gallet2013}, and \citet{garraffo2018a} expand on this by offering a shift in magnetic field morphology as the underlying trigger.
 
+Their formalisation of this is based on two assumptions. They assume that stars with the dipolar component of the magnetic field dominating  follow a known spin-down law, with a mass dependence reflecting $\tau_{\rm cz}$\todo{cite Skumanich}. Second, they assume that there is some relationship between field morphology and stellar spin rate. Specifically, that stars rotating more rapidly have more complex magnetic fields. This is formalised via an AML rate, $\dot J$,
+\begin{equation}
+    \dot J = \dot J_{\rm dipole}Q_J(n)
+\end{equation}
+where $\dot J_{\rm dipole}$ is the dipole loss under the Skumanich law, $\dot J_{\rm dipole} \propto \Omega^3 \tau$. $Q_J$ is a modulating factor that encapsulates the field complexity at the stellar surface, and is controlled by the complexity factor, $n$, which has its own prescription \citep{garraffo2016}.
+\begin{equation}
+    Q_J(n) = 4.05 e^{-1.4n} + \frac{n-1}{60Bn}
+\end{equation}
+Where $B$ is the magnetic field strength at the stellar surface. As the second term is only significant for $n > 7$, \citet{garraffo2018a} consider only the first term of this relation. This is the equivalent of the saturation of magnetic braking from \S\ref{sect:introduction:matt braking}, but here is contingent on field complexity rather than $\rm Ro$. 
 
+\citet{garraffo2018a} suggest the following relation between $\rm Ro$ and $n$,
+\begin{equation}
+    n = 1 + \frac{0.02}{\rm Ro} + 2 {\rm Ro}
+\end{equation}
+based on observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$. 
+This prescription means that the AML of a star is purely a function of its Rossby number, c.f. Equation~\ref{eqn:introduction:rossby number}.
+
+Similarly to \citet{matt2015}, \citet{garraffo2018a} run a population synthesis model to compare to observations using initial conditions taken from the 13 Myr old h Persei cluster \citep{moraux2013}, but the authors show that differences between alternative initial conditions do not survive longer than 200 Myrs. Observations of stellar rotation periods and colour from several clusters with known ages are then compared to the synthetic population.
+
+The resulting distribution does recover the Skumanich bifurcation observed in open clusters, reproducing the fast and slow rotating populations and the gap between them, though the large uncertainty in the age of the cluster does introduce some discrepancy. 
+In addition, the synthetic cluster does not consider the effects of close binary stars, which will affect the spin-down rate through tidal effects. As the comparison to data is done with color, filtering out binaries is difficult. However, this effect is ignored by the author, as there is evidence that the binary fraction in open clusters is low \citep{meibom2007}.
+The mass dependency of this track is also reproduced by the model, and Figure~\ref{fig:introduction:garraffo 2018a fig 4}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth, trim={0 5cm 0 5cm}]{figures/introduction/garraffo2018_M37_346_hPer.pdf}
+    \caption{Example comparison between synthetic and observed cluster populations taken from \citet{garraffo2018a}. Red points are observations of M37, which has its age measured at $\sim 346 - 550$ Myrs. Blue points are the probability distribution of the synthetic cluster population from \citet{garraffo2018a}.}
+    \label{fig:introduction:garraffo 2018a fig 4}
+\end{figure}
+
+The \citet{garraffo2018a} prescription is simpler in concept than the \citet{matt2015} prescription, and both prescriptions perform well. However, neither formulation covers the parameter space of CV donors, and both are semi-empirical with some arbitrary decisions made in order to fit data. This makes both approaches highly vulnerable to extrapolation errors and difficult to trust in the context of CV evolution, especially in the short period regime.
 
 
 \section{Accretion in CVs}
 \label{sect:introduction:accretion}
-\todo{Proof read this, this is still a first draft.}
-Accretion physics is important to the appearance and behaviour of a CV. While it is described briefly here,  more in-depth discussions can be found in \citet{warner1995} and \citet{hellier2001}.
+Accretion physics is important to the appearance and behaviour of a CV. While it is summarised here, more in-depth descriptions can be found in \citet{warner1995, hellier2001, ritter2010}.
 
-When the donor star overfills its Roche lobe, matter is ejected from its surface at thermal velocities, $\sim 10 \rm km\ s^{-1}$ for a 5000K M dwarf, which is small when compared to the orbital velocity of the system. M dwarf velocities of $\sim 400-500 \rm\ km s^{-1}$ are common in the observations contained later in this work. Since the ejected material is effectively stationary as it leaves the donor, it falls along a ballistic trajectory towards the white dwarf primary and forms an accretion disc around it. 
+When the donor star overfills its Roche lobe, matter is ejected from its surface at thermal velocities -- $\sim 10 \rm km\ s^{-1}$ for a 5000K M dwarf. This is small when compared to the orbital velocity of the system, and M dwarf velocities of $\sim 400-500 \rm\ km s^{-1}$ are common in the observations reported in \S\todo{Put this section in!}. Since the ejected material is effectively stationary as it leaves the donor, it falls along a ballistic trajectory towards the white dwarf primary and forms an accretion disc around it. 
 
-Disc material gradually loses angular momentum and gravitational potential energy due to its viscosity, which acts over time to concentrate the majority of the disc's angular momentum in the minority of the disc's mass, effectively ejecting some material at high velocities at the expense of moving the remainder closer to the white dwarf. This viscosity partially arises from friction within the fluid of the disc, but the main source is thought to be from turbulence, random eddy currents moving material to different radii. This form of turbulence in a thin disc was formalised in the alpha disc model by \citet{shakura1973}, where viscosity, $\nu$, is related to scale height, $H$, and the speed of sound, $c_s$, by a free parameter, $\alpha$.
-
+Disc material gradually loses angular momentum and gravitational potential energy due to its viscosity, which acts over time to concentrate the majority of the disc's angular momentum in the minority of the disc's mass, ejecting some material at high velocities at the expense of moving the remainder closer to the white dwarf. This viscosity partially arises from friction within the fluid of the disc but the main source is thought to be from turbulence, random eddy currents moving material to different radii. This form of turbulence in a thin disc was formalised in the alpha disc model by \citet{shakura1973}, where viscosity, $\nu$, is related to scale height, $H$, and the speed of sound, $c_s$, by a free parameter, $\alpha$.
 \begin{equation}
     \label{eqn:disc viscocity}
     \nu = \alpha c_s H
 \end{equation}
+Since turbulent eddies cannot be larger than $H$ or have velocities greater than $c_s$, $c_s H$ forms the upper limit of $\nu$, and $\alpha$ is limited in this model to values between 0 and 1. In typical CV accretion discs (i.e. quiescent discs, see \S\ref{sect:introduction:dwarf novae}), $\alpha$ takes values from $\sim 0.01 - 0.05$ \citet{hellier2001}.
 
-Since turbulent eddies cannot be larger than $H$ or have velocities greater than $c_s$, $c_s H$ forms the upper limit of $\nu$, and $\alpha$ is limited in this model to values between 0 and 1. In typical CV accretion discs (i.e. quiescent discs, see \S\ref{sect:introduction:dwarf novae and superhumping}), $\alpha$ takes values from $\sim 0.01 - 0.05$ \citet{hellier2001}.
+Material that enters the disc must lose gravitational potential energy before it can be accreted to the white dwarf surface. Approximately half of this energy is lost thermally, through radiating accretion light, and the other half is converted to the kinetic energy necessary to maintain orbit about the white dwarf at lower altitudes. This low orbit has typical velocities roughly an order of magnitude higher than the rotational velocity of the white dwarf, so for material to settle on the stars' surface it must dissipate a large amount of kinetic energy. A region between the inner edge of the disc, and the surface of the white dwarf where this deceleration occurs is called the boundary layer, and can be a significant contributor to the total brightness of a CV. 
 
-Material that enters the disc must lose gravitational potential energy before it can be accreted to the white dwarf surface. Approximately half of this energy is lost thermally, through radiating accretion light, and the other half is converted to the kinetic energy necessary to maintain orbit about the white dwarf at lower altitudes. This low orbit has typical velocities roughly an order of magnitude higher than the rotational velocity of the white dwarf, so for material to settle on the stars' surface, it must dissipate a large amount of kinetic energy. A region between the inner edge of the disc, and the surface of the white dwarf where this deceleration occurs is called the boundary layer, and can be a significant contributor to the total brightness of a CV. 
+As the white dwarf is accreting material to its surface, one might expect it to grow in mass over time, and possibly even detonate as a Ia supernova as it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \todo{ref}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae, outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Indeed, this serial detonation is invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
+
+
+
+
+\section{A modern understanding of AML}
+% Here, put in some motivation about why we should try and understand AML in CVs - i.e. they are a good test bed since we can get so much information on their characteristics, and they're relatively simple systems. Understanding them is a good step towards larger and more complex phenomena.
+A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independently observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. CVs provide a testbed for probing magnetism in low mass stars that will be useful in other contexts. 
+
+The missing source of AML is not necessarily magnetic in nature. 
+
+
+Here are some links to papers that I should reference here.
+\begin{itemize}
+    \item \href{https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.5717B/abstract}{Evidence for reduced magnetic braking}
+    \item \href{https://iopscience.iop.org/article/10.3847/0004-637X/817/1/69}{THE INFLUENCE OF NOVA ERUPTIONS}
+    \item \href{https://academic.oup.com/mnrasl/article/455/1/L16/2589619}{eCAML paper, schrieber 2016}
+    \item \href{https://ui.adsabs.harvard.edu/abs/2021ApJ...914....5S/abstract}{Nova-produced Common Envelope: Source of the Nonsolar Abundances and an Additional Frictional Angular Momentum Loss in Cataclysmic Variables}
+    \item \href{https://ui.adsabs.harvard.edu/abs/2018MNRAS.481.3604B/abstract}{The origin of magnetic fields in CV white dwarfs (2020)}
+\end{itemize}
+
+\subsection{The missing AML problem}
+See the first year literature review for some content here. This subsection should quantify the missing AML problem with real observations and models, and tee up the next parts where some proposed solutions are discussed.
+
+\subsection{Residual magnetic braking}
+
+\subsection{Consequential AML}
+\label{sect:introduction:CAML}
+also talk about empirical CAML, eCAML, here \citep{Schreiber2016}.
+
+This will be very important! Lower mass donors will be able to accrete and retain less nova-processed material, so more will be lost from the system and carry with it more angular momentum. 
+I think this dovetails with the lower mass white dwarf correlating with higher excess AML, since the same logic applies - the lower escape velocity from the system should allow more material to carry away angular momentum.
+(https://ui.adsabs.harvard.edu/abs/2021ApJ...914....5S/abstract)
+
+\section{Further issues with established CV models}
+
+Population studies expect that up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been notoriously difficult to test. 
+\citet{zorotovic2010} examined a sample of post-common envelope binaries and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf. \href{https://arxiv.org/pdf/1609.06940.pdf}{On the white dwarf mass problem of CVs}
+
+Additionally, observation and theory disagree on the white dwarf mass produced in CV evolution \citep{Wijnen2015, liu2016, parsons2017}, with models predicting an excess of low-mass white dwarfs that are not observed. 
+On top of this, there is the question of "do CVs grow in mass over time as they accrete?", to which the answer is no. 
+
+
+Also, we expect there to be about 13\% of systems forming with a brown dwarf, which would put them below the period minimum -- which is not observed.
+
+\href{https://articles.adsabs.harvard.edu/pdf/2010MmSAI..81..849R}{Ritter has some good points that I should include}
+
 
 
 
@@ -296,19 +376,20 @@ A small number of CV donors are helium-rich, with much smaller radii than their 
 
 
 \subsection{Classical Novae}
-\todo{This section should also mention recurrent novae, briefly.}
+\label{sect:introduction:classical novae}
+
 The white dwarf in a CV is almost constantly accreting matter onto its surface. Over time this surface layer can build up, and get placed under immense pressure by the gravity of the white dwarf. Eventually, pressures rise enough to force material at the boundary to become degenerate, and once hot enough this boundary layer can begin nuclear fusion. 
 Since the accreted material has become degenerate, it cannot expand in response to the extra energy from fusion and simply heats further, leading to more and more fusion and culminating in a complete detonation of the accreted material on the white dwarf's surface \citep{warner1995}. This detonation is finally able to overcome the surface gravity of the white dwarf, and the accreted material is blown from the surface.
 These are generally one-off events, recognised by a significant brightening of the system of between 6 and 19 magnitudes, lasting anywhere from a few days, so several months. 
 
 Once a system has experienced a classical nova, it is classified as a CNe system. \citep{warner1995}. However, theory suggests that all CVs experience classical novae many times over their lifetimes. The required amount of accreted material for the nova to occur depends on mass, but lies between $3\times10^{-5} M_\odot$ of hydrogen for a $1.3 M_\odot$ white dwarf, and $5\times10^{-3} M_\odot$ for a low mass, $0.6 M_\odot$ white dwarf \citep{hellier2001}. Typical CV accretion rates are around $10^{-9} M_\odot\ yr^{-1}$ for long period systems, and $10^{-10} M_\odot\ yr^{-1}$ for short period systems \citep{hellier2001, Pala2021}, suggesting classical novae recur at most every few million years, down to every few tens of thousands of years.
 
-The amount of material retained by the white dwarf is likely negligible. Both population synthesis by \citep{wijnen2015} and observations by \citep{McAllister2017} indicate no evidence of mass growth over time for the white dwarfs in CVs, and hence that the expulsion of the accreted material in a classical nova is complete.
+The amount of material retained by the white dwarf is likely negligible. Both population synthesis by \citep{Wijnen2015} and observations by \citep{McAllister2017} indicate no evidence of mass growth over time for the white dwarfs in CVs, and hence that the expulsion of the accreted material in a classical nova is complete.
 
 A final note is that some CVs show multiple classical novae in relatively quick succession \citep{schaeffer2010}. These Recurrent Novae (RNe) are distinguished by having more than one observed nova event recorded. As good quality data only exist for the last few centuries, this enforces a soft limit on recurrence interval of a few hundred years, though recent efforts have been made to search ancient records for candidate events \citep{hoffmann2022}. Only a handful of confirmed RNe are known; the variable star index \citep{Watson2006} only contains 11 systems classified as RNe.
 
 \subsection{Dwarf Novae}
-\label{sect:introduction:dwarf novae }
+\label{sect:introduction:dwarf novae}
 
 CVs also undergo less extreme brightening events, called Dwarf Nova (DN) outbursts. These brighten the system by between 2 and 5 magnitudes \citep{warner1995} and are more brief than typical CNe, lasting less than $\sim 20$ days. However, in contrast to CNe, they have recurrence times much more in line with human timescales, ranging from a few days to some decades. This is due to the fundamental difference in the physical origin of the two phenomena.
 
@@ -316,7 +397,7 @@ DN outbursts do not originate directly from either star in the system, but rathe
 
 Initially, the disc is in a cooler, ``low'' state with low temperature, low surface density, and low viscosity. Material in the disc moves inwards due to friction from turbulence (see \S\ref{sect:introduction:accretion}) which is relatively weak in the low viscosity material, so radial movement of disc material is slow.
 
-If the accretion rate of donor material exceeds the rate material falls onto the surface of the white dwarf, then a buildup of matter begins in the disc\todo{Unsure if I should talk about the outburst starting in an annulus, and spreading outwards from there? Seems irrelevant...}, raising the density and temperature. Eventually, this annulus reaches $\sim 7000K$, at which point hydrogen becomes partially ionised and a rapid further increase in temperature is triggered as the material becomes optically thick and heat is trapped in the disc. In addition, as the temperature and density rise, so does $c_s$, and following Equation~\ref{eqn:disc viscocity}, so does viscosity, even assuming constant $\alpha$. In fact, $\alpha$ {\it rises} during outburst, to $\alpha \sim 0.1 - 0.5$ \citep{hellier2001}. This hot, luminous, ``high'' state is again stable, and the disc is said to be in outburst. Now that the disc is more viscous, material is moved inwards more readily. The infall rate onto the white dwarf is much increased, and is now higher than the mass transfer rate, so the disc is drained onto the surface of the white dwarf. As it does so, the surface density and temperature begin to fall, and eventually protons and electrons recombine into hydrogen. While recombination is an exothermic process, the release of energy is outweighed by the material once again becoming optically thin and allowing radiation to more easily escape the disc. The disc now quickly cools back down to the quiescent, ``low'' state, returning to a low surface density, and the cycle can repeat itself. For a more in-depth look at this model, refer to discussions by \citet{cannizzo1993}, \citet{osaki1996}, \citet{warner1995}, \citep{hellier2001}, and \citet{Hameury2002}.
+If the accretion rate of donor material exceeds the rate material falls onto the surface of the white dwarf, then a buildup of matter begins in the disc\todo{Unsure if I should talk about the outburst starting in an annulus, and spreading outwards from there? Seems unnecessary}, raising the density and temperature. Eventually, this annulus reaches $\sim 7000K$, at which point hydrogen becomes partially ionised and a rapid further increase in temperature is triggered as the material becomes optically thick and heat is trapped in the disc. In addition, as the temperature and density rise, so does $c_s$, and following Equation~\ref{eqn:disc viscocity}, so does viscosity, even assuming constant $\alpha$. In fact, $\alpha$ {\it rises} during outburst, to $\alpha \sim 0.1 - 0.5$ \citep{hellier2001}. This hot, luminous, ``high'' state is again stable, and the disc is said to be in outburst. Now that the disc is more viscous, material is moved inwards more readily. The infall rate onto the white dwarf is much increased, and is now higher than the mass transfer rate, so the disc is drained onto the surface of the white dwarf. As it does so, the surface density and temperature begin to fall, and eventually protons and electrons recombine into hydrogen. While recombination is an exothermic process, the release of energy is outweighed by the material once again becoming optically thin and allowing radiation to more easily escape the disc. The disc now quickly cools back down to the quiescent, ``low'' state, returning to a low surface density, and the cycle can repeat itself. For a more in-depth look at this model, refer to discussions by \citet{cannizzo1993}, \citet{osaki1996}, \citet{warner1995}, \citep{hellier2001}, and \citet{Hameury2002}.
 
 Three types of DNe exist, which exhibit somewhat different behaviour than what is outlined above. The first of which are SS Cyg stars, distinguished by very consistent amplitudes across outbursts, though there is variation in length, shape, and recurrence time.
 
@@ -347,47 +428,6 @@ The disc instability model applies to CVs with mass transfer rates that are high
 
 
 
-
-\section{A modern understanding of AML}
-% Here, put in some motivation about why we should try and understand AML in CVs - i.e. they are a good test bed since we can get so much information on their characteristics, and they're relatively simple systems. Understanding them is a good step towards larger and more complex phenomena.
-A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independently observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. CVs provide a testbed for probing magnetism in low mass stars that will be useful in other contexts. 
-
-The missing source of AML is not necessarily magnetic in nature. 
-
-
-Here are some links to papers that I should reference here.
-\begin{itemize}
-    \item \href{https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.5717B/abstract}{Evidence for reduced magnetic braking}
-    \item \href{https://iopscience.iop.org/article/10.3847/0004-637X/817/1/69}{THE INFLUENCE OF NOVA ERUPTIONS}
-    \item \href{https://academic.oup.com/mnrasl/article/455/1/L16/2589619}{eCAML paper, schrieber 2016}
-    \item \href{https://ui.adsabs.harvard.edu/abs/2021ApJ...914....5S/abstract}{Nova-produced Common Envelope: Source of the Nonsolar Abundances and an Additional Frictional Angular Momentum Loss in Cataclysmic Variables}
-    \item \href{https://ui.adsabs.harvard.edu/abs/2018MNRAS.481.3604B/abstract}{The origin of magnetic fields in CV white dwarfs (2020)}
-\end{itemize}
-
-\subsection{The missing AML problem}
-See the first year literature review for some content here. This subsection should quantify the missing AML problem with real observations and models, and tee up the next parts where some proposed solutions are discussed.
-
-\subsection{Residual magnetic braking}
-
-\subsection{Consequential AML}
-also talk about empirical CAML, eCAML, here \citep{Schreiber2016}.
-
-This will be very important! Lower mass donors will be able to accrete and retain less nova-processed material, so more will be lost from the system and carry with it more angular momentum. 
-I think this dovetails with the lower mass white dwarf correlating with higher excess AML, since the same logic applies - the lower escape velocity from the system should allow more material to carry away angular momentum.
-(https://ui.adsabs.harvard.edu/abs/2021ApJ...914....5S/abstract)
-
-\section{Further issues with established CV models}
-
-Population studies expect that up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been notoriously difficult to test. 
-\citet{zorotovic2010} examined a sample of post-common envelope binaries and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf. \href{https://arxiv.org/pdf/1609.06940.pdf}{On the white dwarf mass problem of CVs}
-
-Additionally, observation and theory disagree on the white dwarf mass produced in CV evolution \citep{wijnen2015, liu2016, parsons2017}, with models predicting an excess of low-mass white dwarfs that are not observed. 
-On top of this, there is the question of "do CVs grow in mass over time as they accrete?", to which the answer is no. 
-
-
-Also, we expect there to be about 13\% of systems forming with a brown dwarf, which would put them below the period minimum -- which is not observed.
-
-\href{https://articles.adsabs.harvard.edu/pdf/2010MmSAI..81..849R}{Ritter has some good points that I should include}
 
 \section{Probing CV evolution}
 The technique used for this thesis is primarily eclipse modelling, and MESA stellar evolution modelling, both of which are explained in detail in Chapter~\ref{chpt:modelling and techniques}
