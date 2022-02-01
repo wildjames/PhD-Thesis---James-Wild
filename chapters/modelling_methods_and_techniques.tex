@@ -1,0 +1,33 @@
+\label{chpt:modelling and techniques} % for referencing this chapter elsewhere, use 
+\lhead{\emph{Modelling, techniques, and methods}} % This is for the header on each page - perhaps a shortened title
+
+
+In the preamble, give the short version of "we can extract a lot of data from eclipsing CVs" etc.
+Also bring up that, because a CV is so compact, the population of eclipsers is actually fairly high.
+Talk about the state of stellar modelling, and say that we can apply it to CVs. Talk about how we can use this to convert eclipse modelling characterisation directly to an empirical mass loss rate, slash AML rate.
+
+
+\section{Eclipse modelling of a CV}
+Talk about how this is already a well-established method \citep{wood1986, Savoury2011, McAllister2017, McAllister2019}, and its advantages over spectroscopic modelling and superhumping period excess.
+
+Describe the model, i.e. its components and its parameters, and how it can be converted to physical parameters if we have the period and white dwarf temperature. Probably do two subsections for that. Point out that this is only possible due to *CAM - refer to \citet{wild2021} for a pre-written version of this, and tweak it a bit. This will likely be quite a lengthy section, don't be afraid to break it up into subsections.
+
+\subsection{Capturing flickering with Gaussian Processes}
+Explain GPs from scratch, and get into detail about which kernels you're using. 
+
+\section{The optimisation problem}
+Here I should discuss the problem of searching 15 dimensions for the best solution - then point out how much worse it is with 100+ dimensions. Here, I should put in some illustrative model fitting - perhaps a graph with steps vs. ln(like) for 1D, 5D, 10D, 15D? Dunno yet. Think about it. Alternatively, just make "MCMC Fitting" the section heading, and get straight into it. Mention binning eclipse lightcurves here as a primary mitigation strategy for the highly complex parameter space
+
+\subsection{Hierarchical model structure}
+This is going to take some work. Fit synthetic lightcurves with various amounts of noise, (5\%, 10\%, 20\%?), and compare convergence times and posterior widths as a function of noise. Do this with one eclipse, then with three eclipses of the same band, then with three eclipses in each of three bands.
+I should see an improvement in final probability distribution with more eclipses, since they can communicate.
+
+Also, I need to come up with a way to demonstrate the potential to break degeneracies. Some lightcurves might be produced by two different parameter vectors, e.g. disc and donor might look similar to each other. 
+
+\subsection{MCMC Fitting}
+I need to talk about the MCMC aspect of the fitting. Obviously explain MCMC fitting from scratch, but also make sure you explain the stretch move thing, ensemble sampling, 
+
+\subsection{Parallel Tempering}
+Make sure you point out the downfall of PT - it's not suitable for more than 5 parameters! We seem to get away with it by using a lot of walkers, perhaps?
+
+

@@ -1,0 +1,216 @@
+% Chapter Template
+
+\label{chpt:observations and observational techniques} % for referencing this chapter elsewhere, use \ref{chpt:label}
+\lhead{\emph{Observations, and observational techniques}} % This is for the header on each page - perhaps a shortened title
+
+% Here, the preamble needs to restate the need for observations of CVs, and specifically ones using our method. I think the motivation for why we need these types of observations will have been well covered by the previous section by now, so probably dont need to belabour the point.
+
+% From here on out, basically just insert the observational section of the paper.
+
+For CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor will eclipse all other components of the system in quick succession, once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can lead to a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature and radius from the white dwarf colours, and using the timing of eclipse features to find the component masses, donor radius, and orbital separation.
+
+The work of this thesis has made extensive use of three instruments: ULTRACAM, HiPERCAM, and ULTRASPEC \todo{Cite the instrument papers!}.
+These are time-series photometric imaging instruments, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively. Crucially, HiPERCAM and ULTRACAM make their multi-colour images simultaneously, which is later very important to the modelling technique used to characterise our CV systems. The eclipses we observe typically span less than 30 minutes, and the instruments must be sensitive to changes on the order of a few seconds to be useful for analysis, and these three cameras are ideal for this task.
+
+
+\section{HiPERCAM}
+
+
+\section{ULTRACAM}
+
+
+\section{ULTRASPEC}
+
+
+\section{Data reduction}
+\label{sect:data reduction}
+
+\subsection{The HiPERCAM pipeline}
+\todo{Talk about the pipeline on a high level here. Outline how a reduction config file is made that encapsulates the reduction settings, and embeds these settings in the final output files.}
+
+\subsubsection{Bias frames}
+
+\subsubsection{Flat fielding}
+
+\subsubsection{Aperture photometry}
+\todo{Here is where I should talk about normal and optimal reduction methods}
+
+\section{Photometric calibration}
+\label{sect:photometric extraction and calibration}
+
+For all observational data contained in this thesis, the HiPERCAM data reduction pipeline \citep{dhillon2016} was used to perform debiassing and flat-field corrections on the raw frames, as described in \S\ref{sect:data reduction}. The software was also used for the extraction of aperture photometery, producing the flux in Analog-to-Digital Units, ADU, per frame of each source. 
+A comparison star in the same image as the target was used to account for transparency variations, and standard stars from \citet{smith2002} were used to transform the lightcurves from ADU to the SDSS $u'g'r'i'z'$ photometric system. 
+
+
+\subsection{Calculating atmospheric extinction coefficients}
+\label{sect:calcualting atmospheric extinction}
+
+Atmospheric extinction was calculated using the longest continuous ULTRACAM observation available within 3 days of the target observations.
+The atmospheric extinction values are reported in Table~\ref{table:atmos_extinction}\todo{Currently, this is only for a very narrow range of the actual observations. Generalise this table to include all instruments and locations.}.
+For dates where no observations spanned a satisfactory range of airmasses, the nearest observation in time was used as a stand-in, as atmospheric extinction coefficients are usually relatively stable over time.
+Aperture photometery was extracted for five sources in these long observations, and the instrumental magnitude, $m_{\rm inst}$, vs airmass, $\chi$, was fit with a straight line for each source. 
+The gradients of these lines are the atmospheric extinction coefficients, $k_{\rm ext}$, for the relevant band, and the y-intercept is the instrumental magnitude of that object above the atmosphere, $m_{\rm inst,0}$:
+\begin{align*}
+    m_{\rm inst} =& m_{\rm inst,0} + \chi k_{\rm ext} 
+\end{align*}
+
+\begin{table}
+    \centering
+    \caption{Atmospheric extinction coefficients for La Silla, derived from ULTRACAM/NTT observations.}
+    \label{table:atmos_extinction}
+    \begin{tabular}{cccc}
+        \hline
+        Date of Observation & Airmass Range & Band & $k_{ext}$ \\
+        \hline
+        \hline
+        14 Oct 2018   & 1.30-1.98 & $u_{\rm reg}$ & $0.4476$ \\
+                      &           & $g_{\rm reg}$ & $0.1776$ \\
+                      &           & $r_{\rm reg}$ & $0.0861$ \\
+        \hline
+        30 Sept 2019  & 1.03-1.63 & $u_{\rm sup}$ & $0.4867$ \\
+                      &           & $g_{\rm sup}$ & $0.1803$ \\
+                      &           & $r_{\rm sup}$ & $0.0713$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Transformations between filter systems}
+\label{sect:colour correction method}
+
+The ULTRACAM\todo{This section needs to be expanded out to include HiPERCAM. ULTRASPEC is okay since it uses the SDSS-like filters, but that needs to be mentioned. Can probably just say "using ULTRACAM as an example..."} photometric system previously matched the SDSS reasonably closely, however in early 2019 it was upgraded and now uses an SDSS-\emph{like} filter system with higher efficiency bandpasses, referred to as Super SDSS. There are three optical paths that are relevant:
+\begin{itemize}
+\item SDSS filters, $u', g', r', i', z'$;
+\item ULTRACAM SDSS, NTT, $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}, z_{\rm reg}$;
+\item ULTRACAM Super SDSS,  NTT, $u_{\rm sup}, g_{\rm sup}, r_{\rm sup}, i_{\rm sup}, z_{\rm sup}$.
+\end{itemize}
+
+We aim to place our photometery in the SDSS $u'g'r'i'z'$ system, as this is the system later used by the white dwarf atmospheric models. The $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}$\ filters were sufficiently similar to standard SDSS filters that the uncorrected magnitudes of standard reference stars from \citet{smith2002} could be used to calibrate absolute photometery without issue. However, with the new filters, there was concern that the different shape of the sensitivity curve, particularly in the $u'$\ band, differ enough from the standard filters to cause issues with our photometric calibration. Figure~\ref{fig:sdss vs super filters}\todo{Make a version of this for HiPERCAM and ULTRASPEC} illustrates the change in throughput between the SDSS photometric system, and the Super SDSS filters, on ULTRACAM on the NTT. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/three_cvs_with_weird_colours/GeneralFigs/bandpass_diffs_SDSS_dots_UCAMNTT_solid.pdf}
+    \caption{The differences in photometric throughput for SDSS filter system (dotted lines), and ULTRACAM Super SDSS filters, for ULTRACAM mounted on the NTT (solid lines). Blue: $u$ bands, Green: $g$ bands, Red: $r$ bands, Black: $i$ bands. Both throughputs include atmospheric extinction of $\chi = 1.3$.}
+    \label{fig:sdss vs super filters}
+\end{figure}
+
+% As the difference in magnitude between photometric systems will be dependent on the shape of a stars spectrum, calculating the colour terms between the three systems is important.
+
+To perform the colour corrections, the following equation for the magnitude of a star was used, using the $g'$\ band as an example:
+\begin{equation}
+    \label{eqn:gen magnitudes}
+    g' = g_{\rm inst} + \chi k_{\rm ext} + g_{\rm zp} + c_{\rm g, sup}(g'-r') 
+\end{equation}
+where $g_{\rm zp}$\ is the zero point, $g_{\rm inst} = -2.5 \rm log(ADU/{\it t}_{\rm exp})$
+for an exposure time of $t_{\rm exp}$, and $c_{\rm g, sup}$\ is the colour term correction gradient. 
+
+The optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM\todo{Generalise} components in the optical path. Models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the \teff\ and \logg\ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$. These span from \logg $= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which was then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with \logg$=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to asses the impact of the different spectral shape on the resulting colour terms.
+
+We synthesised the colour terms between the SDSS and ULTRACAM\todo{generalise} Super SDSS systems, e.g., $g'-g_{\rm sup}$, for each model atmosphere. These data were plotted against SDSS colours, i.e. $(u'-g')$, $(g'-r')$, $(g'-i')$, and a straight line was fit to the colour relationship. In the example case of $g'-g_{\rm sup}$, this would be
+\begin{align*}
+    g' &= g_{\rm sup} + g_{\rm zp} + c_{\rm g, sup}(g'-r') \\
+    % g' - g_{\rm sup} &= g_{\rm zp} + c_{\rm g, sup}(g'-r')
+\end{align*}
+Note we ignore the effects of secondary extinction. 
+These relationships are shown in Figure~\ref{fig:all colour corrections} for all four ULTRACAM\todo{generalise} filters used to observe these CVs, and Table~\ref{table:all colour corrections}\todo{Generalise} contains the coefficients of each colour term.
+$(u'-g')$\ was used to correct $u$\ magnitudes, $(g'-r')$\ was used to correct $g$\ and $r$\ magnitudes, $(g'-i')$\ was used to correct the $i$\ band.
+These colour corrections are not generally the same for main sequence stars and white dwarfs, though the colours of the white dwarfs presented in this work are all such that the discrepancy is on the order of a few percent, and is considered negligible.
+
+\begin{table}
+    \centering
+    \caption{Colour term best fit lines from Figure~\ref{fig:all colour corrections}. The data are modelled by equations of the form $(u'-u_s) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
+    \label{table:all colour corrections}
+    \begin{tabular}{cccc}
+        Correction & Diagnostic &   y-intercept, $\phi$\   & Colour Gradient \\
+        \hline
+        \hline
+          $(u'-u_s)$ &  $(u'-g')$   & 0.003 & 0.036 \\
+                    &  $(g'-r')$   & 0.033 & 0.063 \\
+                    &  $(g'-i')$   & 0.038 & 0.044 \\
+        \hline
+          $(g'-g_s)$ &  $(u'-g')$   & -0.001 & 0.014 \\
+                    &  $(g'-r')$   & 0.010  & 0.027 \\
+                    &  $(g'-i')$   & 0.012  & 0.018 \\
+        \hline
+          $(r'-r_s)$ &  $(u'-g')$   & -0.017 & 0.016 \\
+                    &  $(g'-r')$   & -0.004 & 0.032 \\
+                    &  $(g'-i')$   & -0.002 & 0.022 \\
+        \hline
+          $(i'-i_s)$ &  $(u'-g')$   & -0.031 & 0.020 \\
+                    &  $(g'-r')$   & -0.015 & 0.040 \\
+                    &  $(g'-i')$   & -0.012 & 0.028 \\
+        \hline
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/three_cvs_with_weird_colours/GeneralFigs/colour_term_tracks.pdf}
+    \caption{The difference between the classic SDSS photometric system, and the ULTRACAM SuperSDSS filters on the NTT, as a function of SDSS colours, are calculated for model atmospheres. Red points are Koester white dwarf models, black points are Phoenix main sequence model atmospheres, and the blue line is the best fit straight line to both datasets. When applying colour corrections, the highlighted relations were used.}
+    \label{fig:all colour corrections}
+\end{figure*}
+
+\subsection{Calculating comparison star magnitudes}
+\label{sect:comparison star mag calc}
+
+Equation \ref{eqn:gen magnitudes} was used to calculate the zero points in each band from the standard star, for the SDSS photometric system.
+The comparison star SDSS magnitudes are then determined. As the colour term corrections are dependent on SDSS colours, an iterative approach was used to converge on these values. The SDSS magnitudes are related to the instrumental magnitudes by:
+\begin{align*}
+    u' =& u_{\rm inst,0} + u_{\rm zp} + c_{\rm u, sup}(u' - g') \\
+    g' =& g_{\rm inst,0} + g_{\rm zp} + c_{\rm g, sup}(g' - r') \\
+    r' =& r_{\rm inst,0} + r_{\rm zp} + c_{\rm r, sup}(g' - r')
+\end{align*}
+Initially, $u',g',r'$\ magnitudes are set equal to the instrumental magnitudes, and a new set of $u',g',r'$\ magnitudes are calculated. The new values are then used to repeat the calculation until a new iteration produces no change, typically after $\sim$4 loops. For the data taken with $u_{\rm sup},g_{\rm sup},i_{\rm sup}$\ filters, the process is identical but replaces $r$ with $i$.
+
+
+\subsection{Producing a flux-calibrated target lightcurve}
+\label{sect:flux calibrating the lightcurve}
+
+Finally, the target lightcurves can be calculated. We need to both correct the target star lightcurve for transparency variations, and convert from counts to calibrated fluxes. As we are producing a flux-calibrated lightcurve in the SDSS photometric system using a significantly different photometric system, the simple ADU ratio between the target and comparison is insufficient. Consider the target star $g'$ magnitude and flux, $g^t, F^t$, and comparison star $g'$ magnitude and flux, $g^c, F^c$:
+\begin{align*}
+    g^t =& g^t_{\rm inst,0} + g_{\rm zp} + c_{\rm g, sup}(g'-r')^t \\
+    g^c =& g^c_{\rm inst,0} + g_{\rm zp} + c_{\rm g, sup}(g'-r')^c \\
+\end{align*}
+since,
+\begin{equation*}
+    g^t - g^c = -2.5{\rm log}\Big(\frac{F^t}{F^c}\Big) \\
+\end{equation*}
+we can write
+\begin{align*}
+    % g^t - g^c =& g^t_{\rm inst,0} - g^c_{\rm inst,0} + c_{\rm g, sup}\big((g-r)^t - (g-r)^c\big) \\
+    \frac{F^t}{F^c} =& 10^{-0.4(g^t_{\rm inst,0} - g^c_{\rm inst,0})} \cdot 10^{-0.4c_{\rm g, sup}\big((g'-r')^t - (g'-r')^c\big)} \\
+    % \frac{F^t}{F^c} =& \frac{ADU^t/s}{ADU^c/s}\cdot 10^{c_{\rm g, sup}\big((g-r)^t - (g-r)^c\big)} \\
+    \frac{F^t}{F^c} =& \frac{ADU^t}{ADU^c}\cdot K^{t,c} \\
+\end{align*}
+where $K^{t,c} = 10^{-0.4c_{\rm g, sup}\big((g'-r')^t - (g'-r')^c\big)}$.
+This accounts for differences in wavelength response between the two systems when calculating the flux ratio, and is applied to each frame. The $(g'-r')^t$\ magnitudes are calculated using a sigma-clipped mean instrumental magnitudes computed from all frames in the observation. In practice, the factor $K^{t,c}$\ varies from $\sim 1.0 - 1.1$\ across the three systems. 
+
+ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. In all cases, the flux-calibrated lightcurves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
+
+To account for residual error in flux calibration, we add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature.
+
+
+\section{Catalogue of observations}
+
+The observations analysed in this work span the full decade from 2011, through to 2021, and have been taken from multiple sites as the instruments move from telescope to telescope. To aid with the readability, a key is provided in Table~\ref{tab:observation acronyms} of the acronyms used for instruments and telescopes. 
+
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c}
+        Acronym & Expansion \\
+        \hline
+        NTT & New Technology Telescope \\
+        GTC & Gran Telescopio Canarias \\
+        TNT & Thai National Telescope \\
+        WHT & William Herschel Telescope \\
+        VLT & Very Large Telescope \\ 
+        HCAM & HiPERCAM \\
+        UCAM & ULTRACAM \\
+        USPEC & ULTRASPEC \\
+    \end{tabular}
+    \caption{Acronyms used in the observation summaries.}
+    \label{tab:observation acronyms}
+\end{table}
