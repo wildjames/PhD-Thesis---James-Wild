@@ -75,7 +75,7 @@ AML drives the two bodies closer together and triggers mass transfer, and mass l
 The mass transfer timescale of the donor is much shorter than its nuclear timescale, so mass loss dominates its evolution and gives rise to a single, unified CV evolutionary path.
 
 There is a further complicating factor to consider; while the secondary is losing mass, it is not in thermodynamic equilibrium. The outer layers are being lost, which reduces the pressure on the core and so reduces the rate of fusion. 
-The thermal timescale is much longer than the mass loss timescale, so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and so its radius increases in response to the mass loss, and a higher mass loss rate results in larger inflation.
+Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than the mass loss timescale (this is demonstrated in \S\ref{sect:method:evolutionary modelling}), so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and so its radius increases in response to the mass loss, and a higher mass loss rate results in larger inflation.
 When the donor first connects to its Roche lobe, this causes an initial spurt of mass loss and an increase in orbital period, but reconnection quickly reoccurs and remains stable. 
 
 
@@ -197,38 +197,64 @@ As an aside, \citet{wickramasinghe1996} presented theoretical motivation that CV
 
 As the magnetic braking mechanism is a direct consequence of the donor star spinning down, the CV community is able to borrow insights from adjacent fields of study. The majority of M dwarfs experience some form of spin-down under magnetic braking \todo{cite this}, so observations of the magnetic field strengths of singletons should inform the efficacy of magnetic braking in CV binaries\todo{reference this}. Unfortunately, the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day\todo{Cite this}. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
 
-This carries with it some major practical issues. One is that while the broad effects of magnetic fields is relatively easy to intuit, quantitative physical understanding the mechanics and origins of magnetic fields is difficult, involving fluid dynamics, considering interactions with the accretion disc, and magnetism acting on large systems, which quickly become prohibitive to model and is usually handled with one of a variety of recipes. \citealt{knigge11} contains a detailed compilation of some older approaches, but the decade since has seen a few newer methodologies emerge. Here, a brief description of two recent magnetic braking prescriptions: the \citet{matt2015} prescription, and the \citet{garraffo2018a} prescription. However, for a detailed summary of the modern understanding of M dwarf magnetic fields refer to \citet{kochukhov2021}. 
+This carries with it some major practical issues. One is that while the broad effects of magnetic fields is relatively easy to intuit, quantitative physical understanding the mechanics and origins of magnetic fields is difficult, involving fluid dynamics, considering interactions with the accretion disc, and magnetism acting on large systems, which quickly become prohibitive to model and is usually handled with one of a variety of recipes. \citealt{knigge11} contains a detailed compilation of some older approaches, but the decade since has seen a few newer methodologies emerge. Here, two recent magnetic braking prescriptions are described in moderate detail: the \citet{matt2015} prescription, and the \citet{garraffo2018a} prescription. For a more complete, detailed summary of the modern understanding of M dwarf magnetic fields refer to \citet{kochukhov2021}. 
 
-\subsection{Mass dependant angular momentum loss}
+\subsection{Matt prescription for magnetic torque}
 
-In \citet{matt2015}, an empirical prescription is derived that relates the torque felt by a low mass main sequence star to that stars' mass, radius, and Rossby number. The Rossby number is a fluid dynamics term for the ratio between the inertial and Coriolis force terms of the Navier-Stokes equations. A small Rossby number indicates a system dominated by Coriolis effects, and a large Rossby number indicates that centrifugal and inertial forces dominate. Through the Rossby number, the effectiveness of magnetic braking is tied to rotation, which is extremely fast in CVs.
+In \citet{matt2015}, an empirical prescription is derived that relates the torque felt by a low mass main sequence star to that stars' mass, radius, and Rossby number. The Rossby number is a fluid dynamics term for the ratio between the inertial and Coriolis force terms of the Navier-Stokes equations. A small Rossby number indicates a system dominated by Coriolis effects, and a large Rossby number indicates that centrifugal and inertial forces dominate. The Rossby number of a main sequence star can be calculated from $\Omega$, it's angular rotation rate, and $\tau_{\rm cz}$, the convective turnover timescale.
+\begin{equation}
+    {\rm Ro} = (\Omega \cdot \tau_{\rm cz})^{-1}
+\end{equation}
+Through the Rossby number, the effectiveness of magnetic braking is tied to rotation, which is extremely fast in CVs, and stellar mass and age, which affect $\tau_{\rm cz}$.
 
 Their work makes use of observations of stars with masses less than $0.15 - 1.3 M_\odot$ and span ages of $\sim 10^{6-9}$ yrs, that have had their rotation periods measured. This dataset is used to calibrate a theoretically motivated empirical prescription for magnetic braking. There is some evidence for a saturation of magnetic activity below a critical Rossby value (a.k.a. above a critical rotational period) \citep{reiners2009}, where magnetic activity seems to no longer respond to changes in rotation. \citet{matt2015} adopt two generic relationships, 
 \begin{equation}
-    \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \bigg(\frac{Ro_\odot}{Ro} \bigg)^{p}
+    \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \bigg(\frac{\rm Ro_\odot}{\rm Ro} \bigg)^{p}
 \end{equation}
 in the unsaturated regime, and 
 \begin{equation}
     \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \chi^{p}
 \end{equation}
-in the unsaturated regime. Here, $M_*$ and $R_*$ are the stellar mass and radius, $B_*$ is the magnetic field strength at the stellar surface, and $M_\omega$ is the total mass outflow rate. The $m$ exponent is determined by the field geometry and wind acceleration profile, but functionally is a tuning parameter that likely falls in the range of $0.20 < m < 0.25$ \citep{matt2015}. The $p$ exponent encodes the dependence of magnetism on the Rossby number, $Ro$, and is assigned as $p = 2$. $\chi$ is the inverse critical Rossby number for saturation - here, \citet{matt2015} adopt a value of $10$. $Q$ is a generic scale factor that the authors fit to observations. 
+in the saturated regime. Here, $M_*$ and $R_*$ are the stellar mass and radius, $B_*$ is the magnetic field strength at the stellar surface, and $M_\omega$ is the total mass outflow rate. The $m$ exponent is determined by the field geometry and wind acceleration profile, but functionally is a tuning parameter that likely falls in the range of $0.20 < m < 0.25$ \citep{matt2015}. The $p$ exponent encodes the dependence of magnetism on the Rossby number, $Ro$, and is assigned as $p = 2$. $\chi$ is the inverse critical Rossby number for saturation, for which \citet{matt2015} adopt a value of $10$. $Q$ is a generic scale factor that the authors fit to observations. 
 
-The authors take two clusters, the $\sim 5$ Myr old ONC cluster and the $\sim 580$ Myr old Praesepe cluster, and use the first as initial conditions and the second as target distribution to reproduce. Figure~\ref{fig:introduction:Matt 2015 figure 2} is taken from \citet{matt2015}, and compares the initial and final conditions of the model compared to these two boundary conditions.
+The authors use these equations to eventually derive the spin rates for main sequence stars at some time $t$ after their initial spin period, $\Omega_i$, 
+\begin{equation}
+    \lim_{\Omega_* \gg \Omega_{\rm sat}} \bigg(\frac{\Omega_*}{\Omega_\odot}\bigg) \rightarrow \bigg(\frac{\tau_{\rm unsat}}{t}\bigg)^(\frac{1}{p})
+\end{equation}
+\begin{equation}
+    \Omega_* = \Omega_i \cdot e^{-t/\tau_{\rm sat}}
+\end{equation}
+for a rotation period of $\Omega_*$, and the threshold for saturation at $\Omega_{\rm sat}$. The two $\tau$ factors, $\tau_{\rm sat}$ and $\tau_{\rm unsat}$, are the spin-down timescales in the saturated and unsaturated regimes, and $\tau_{\rm sat} \ll \tau_{\rm unsat}$.
+
+The authors take observations of two clusters, the $\sim 5$ Myr old ONC cluster and the $\sim 580$ Myr old Praesepe cluster, and use the first as initial conditions and the second as target distribution to reproduce. Figure~\ref{fig:introduction:Matt 2015 figure 2} is taken from \citet{matt2015}, and compares the initial and final conditions of their synthetic cluster model compared to these two boundary conditions. During the first few tens of Myrs of this model, the stars in the synthetic cluster are spun up as they contract, lowering their periods by factors of $\sim 5-10$. After this initial phase, which is much shorter than the spin down timescales, the more long-term spin evolution begins.
 
 \begin{figure}[!tbp]
-  \centering
-  \label{fig:introduction:Matt 2015 figure 2}
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{figures/introduction/matt_2015_fig2a.pdf}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth]{figures/introduction/matt_2015_fig2b.pdf}
-  \end{minipage}
-  \caption{From \citet{matt2015}.}
+    \centering
+    \begin{minipage}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/introduction/matt_2015_fig2a.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/introduction/matt_2015_fig2b.pdf}
+    \end{minipage}
+    \caption{Figure taken from \citet{matt2015}. Red crosses are observations of the ONC ({\it top}) and Praesepe ({\it bottom}) cluster stars. Black diamonds are synthetic cluster stars. In the bottom panel, the solid green line is the theoretical asymptotic spin rate of unsaturated stars and the dotted blue line delimits magnetically saturated and unsaturated stars.}
+    \label{fig:introduction:Matt 2015 figure 2}
 \end{figure}
 
-Unfortunately, despite generally performing well, this model fails in a two key respects. Of primary concern to this work is the failure to reproduce observations at the short end of their available observations, a period of 
+The agreement between the synthetic cluster and the Praesepe cluster at 574 Mrys is impressive. Above $\sim 0.8 M_\odot$, stars converge on a single narrow mass - period track just as is seen in the observations, and the large scatter below $\sim 0.8 M_\odot$ is also reproduced. Also, just as is seen in the cluster observations of Praesepe, the fastest rotators are those with the lowest masses. Both of these features arise from the transition from saturated braking, to unsaturated braking \citep{matt2015}. 
+
+At formation, almost all stars are experiencing saturated magnetic braking. The single narrow track arises from higher mass stars spinning down faster than lower mass stars, bringing them down to the much less efficient unsaturated braking regime sooner. The pile-up of systems then produces the narrow track. The mass dependancy of this track comes from the fact that $\tau_{unsat}$ is shorter for lower mass stars.
+The broad population of low mass rapid rotators is a direct result of the broad initial conditions, which span an order of magnitude themselves, and the longer spin-down time of lower mass stars in the saturated regime allowing them to remain at high rotation rates for longer. 
+
+However, this model does fail in a few key respects. In the right panel of Figure~\ref{fig:introduction:Matt 2015 figure 2}, a small population of very slow rotators can be seen at $\sim 0.4 M_\odot$. The slower rotation rates of these stars suggests an alternative spin-down mechanism. The inverse problem is seel at $\sim 0.7 M_\odot$, where a handful of stars are seen rotating {\it faster} than predicted by any of the synthetic cluster stars, suggesting that magnetic braking is not as effective in their case.
+More importantly for the CV field, the parameter space of CVs is completely uncovered, as CVs have rotation periods of $< 0.2$ days on the high end, and the systems that this work concerns have periods of $\lesssim 0.07$ days. While this would firmly place CVs in the saturated regime, there is evidence of a `supersaturated' regime at extreme rotation periods that may be relevant to CV donors \citep{James2000, Wright2011, Argiroffi2016}. This possibility is also noted by \citet{Gossage2021} when outlining best practice use of this prescription in the stellar evolution code MESA, though the subject is not a settled matter and competing evidence for the {\it lack} of supersaturation has been reported by \citet{jeffries2011}.
+
+
+\subsection{Garraffo prescription for magnetic torque}
+
+
+
 
 
 \section{Accretion in CVs}
