@@ -338,16 +338,23 @@ The evolution of CVs is driven by the donor stars. The orbital period is determi
 \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\todo{ref the evo track figure} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\todo{ref evo track figure} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
 This also moves the period minimum to longer periods. The period minimum is caused by the donor's $\tau_{therm}$ becoming longer than $\tau_{\dot M}$, and since a faster mass loss will result in a shorter mass loss timescale, this crossover point is moved to higher masses and therefore longer periods. This is compounded by the faster mass loss resulting in more severe bloating of the donor star, so a donor of the same mass will connect to its Roche lobe at longer periods. 
 
+\citet{knigge11} used took observations of donor masses and radii, with masses determined by either eclipse modelling, or the $\epsilon - q$ superhumper relationship, and radii are readily found from equating the donor radius to the expected Roche lobe radius. 
+With donor properties for masses $\sim 0.1 - 1 M_\odot$, an unknown additional source of AML was added to their models, simply scaled relative to gravitational braking. This source is motivated by the disagreement between data and the model that omits this source. \citet{knigge11} find that the best-fit model to their data uses an excess braking that is $2.47 \times \dot J_{GR}$, where $\dot J_{GR}$ is AML due to gravity. Figure~\ref{fig:introduction:Knigge 2011 figure 9} is reproduced from their work, and shows the significant improvement in agreement with data.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth, trim={0 2cm 0 2cm}]{figures/introduction/Knigge11_fig9.pdf}
+    \caption{Reproduced from \citet{knigge11}. {Black} markers are data from superhumpers, {Red} markers are data from eclipsers. {Crosses} denote candidate period bouncer CVs, {Squares} are short-period CVs, and {Circles} are long period CVs. {Open symbols} are omitted from their analysis due to lying in the period gap. The {Dashed Black lines} are their `standard', naiive model, and the {Solid Red line} includes an empirically determined excess AML source, scaled to gravitational wave braking. In the top panel, the {Vertical black line} signifies the observed period minimum, with the grey region as the FWHM of the period spike as measured in \citet{gaensicke2009}.}
+    \label{fig:introduction:Knigge 2011 figure 9}
+\end{figure}
+
+\citet{Pala2017a} used the effective temperatures of the white dwarfs to probe CV evolution. The white dwarf temperature can be enhanced by accretion, so a hotter white dwarf suggests a higher mass transfer rate. This is sensitive to changes in $\dot M$ on short timescales, but still provides a valuable insight. \citet{Pala2017a} compare their white dwarf temperatures (and therefore mass transfer rates, and therefore AML rates) to MESA CV evolutionary tracks, and find that their observed temperatures are poorly described by only gravitational AML, but are more well-fitted by models that includes excess AML equivalent to gravitational losses, i.e. double-strength gravitational AML. Their analysis is useful but not wholly convincing, as the white dwarf temperatures are both quite poorly constrained, and sensitive to short-term variations in accretion rate that are known to occur \todo{cite}. In addition, the scaling of excess AML in relation to gravitational losses is not a free parameter in their analysis, and is only presented in the context of being obviously better by eye, rather than being tailored to the data.
+
 The disagreement between theory and observation at short periods indicates that our understanding of AML in this regime is lacking, and a few proposals to rectify this have been suggested.
 
+The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking that remains after the bulk of magnetic braking ceases. This is called Residual Magnetic Braking (RMB). Some evidence for RMB has been found in binary population synthesis models that focus on magnetic CVs \citep{belloni2020}. This approach asserts that a strong magnetic field from the white dwarf significantly reduces the effectiveness of magnetic braking by trapping a large fraction of the wind within the system, preventing it from carrying angular momentum away. The models that include this result in a better fit to key CV observables, specifically the orbital period distribution, white dwarf temperature distribution, and space density. While this theory does not apply to CVs in general, as the majority of systems do not have white dwarfs with strong enough magnetic fields, it has been suggested that a similar process could  occur on the donor \citep{garraffo2018}. 
 
-\subsection{Residual magnetic braking}
-
-The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking, dubbed Residual Magnetic Braking (RMB). 
-
-Models of RMB are not yet physically motivated, but rather use simple scaling of the gravitational losses already known to be in effect. \citet{knige11} used...\todo{re-read K11 and fill this in}
-
-\citet{Pala2017a} used the effective temperatures of the white dwarfs to probe CV evolution. The white dwarf temperature can be enhanced by accretion, so a hotter white dwarf suggests a higher mass transfer rate. This is sensitive to changes in $\dot M$ on short timescales, but still provides a valuable insight. \citet{Pala2017a} compare their white dwarf temperatures (and therefore mass transfer rates, and therefore AML rates) to MESA CV evolutionary tracks, and find that their observed temperatures are poorly described by only gravitational AML, but are more well-fitted by models that includes RMB equivalent to gravitational losses, i.e. double-strength gravitational braking. Their analysis is useful, but not wholly convincing, as the white dwarf temperatures are both quite poorly constrained, and sensitive to short-term variations in accretion rate that are known to occur \todo{cite}. In addition, the scaling of RMB in relation to gravitational losses is not a free parameter in their analysis, and is only presented in the context of being obviously better by eye, rather than being tailored to the data.
+The period gap is frequently attributed to the donor becoming fully convective, and this triggering a large reduction in magnetic field strength. However, observations of field M dwarfs of the same mass, with convective envelopes, are seen with key tracers of magnetism. Specifically, X-ray observations find that the coronal magnetic energy dissipation of fully convective stars is similar to non-convective stars \citep{wright2016}, and Zeeman-Doppler imaging of rapidly rotating M dwarfs indicate that the complexity of surface magnetic fields increases alongside rotation rate (e.g. \citealt{donati2003,donati2009,marsden2011,waite2011,waite2015}). Together, these observations strongly indicate that the disrupted magnetic braking model commonly accepted is ill-motivated, and may be more closely tied to field complexity than field strength \citep{garraffo2018}. If the gap is indeed driven by a sudden increase in field complexity, then it is reasonable to assume that magnetic braking remains significant after the system emerges from the period gap. However, this is not the only candidate explanation for excess AML, and another strong candidate is consequential AML.
 
 
 \subsection{Consequential AML}
@@ -447,19 +454,18 @@ The disc instability model applies to CVs with mass transfer rates that are high
 
 
 
-\section{Probing CV evolution}
-The technique used for this thesis is primarily eclipse modelling, and MESA stellar evolution modelling, both of which are explained in detail in Chapter~\ref{chpt:modelling and techniques}
-
-\subsection{$\epsilon - q$ relation for superhumpers}
-
-\subsection{Donor mass-radius relation}
-\todo{Essentially, Knigge 2011}
-
-\subsection{Spectroscopy of the white dwarf}
-\todo{Pala 2021 should be talked about here, along with whatever else you can dig up about spectroscopic analysis.}
+% \section{Probing CV evolution}
+% The technique used for this thesis is primarily eclipse modelling, and MESA stellar evolution modelling, both of which are explained in detail in Chapter~\ref{chpt:modelling and techniques}
 
 
-\section{Closing remarks, and recap}
+% \subsection{Donor mass-radius relation}
+% \todo{Essentially, Knigge 2011}
+
+% \subsection{Spectroscopy of the white dwarf}
+% \todo{Pala 2021 should be talked about here, along with whatever else you can dig up about spectroscopic analysis.}
+
+
+\section{The contributions of this work}
 
 
 
