@@ -75,7 +75,7 @@ AML drives the two bodies closer together and triggers mass transfer, and mass l
 The mass transfer timescale of the donor is much shorter than its nuclear timescale, so mass loss dominates its evolution and gives rise to a single, unified CV evolutionary path.
 
 There is a further complicating factor to consider; while the secondary is losing mass, it is not in thermodynamic equilibrium. The outer layers are being lost, which reduces the pressure on the core and so reduces the rate of fusion. 
-Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than the mass loss timescale (this is demonstrated in \S\ref{sect:method:evolutionary modelling}), so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and so its radius increases in response to the mass loss, and a higher mass loss rate results in larger inflation.
+Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than the mass loss timescale (this is demonstrated in \S\ref{sect:method:evolutionary modelling}), so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and so its radius increases in response to the mass loss, and a higher mass loss rate results in larger inflation \citep{knigge2006, knigge11}.
 When the donor first connects to its Roche lobe, this causes an initial spurt of mass loss and an increase in orbital period, but reconnection quickly reoccurs and remains stable. 
 
 
@@ -92,7 +92,7 @@ Additionally, \citet{Townsley2009}, \citet{Pala2021} infer the mass transfer rat
 If one of the stars has a strong magnetic field (often assumed to be the secondary, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}), any wind emanating from the system, which is made up of charged particles, and likely originating from the secondary, will couple with the magnetic field to some degree and carry some angular momentum away from the binary with it.
 In the case of a CV, the wind originates from the secondary star, and the magnetic field is often assumed to be associated with the secondary also, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}.
 
-\todo{Is this wise? I think it's a catch 22 - I need MB to explain CV evolution, but I need to have talked about the long-P, Pgap, and short P CVs to really get into the MB weeds...}A detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}, after the following outline of CV evolution. Some elements of CV evolution are necessary to understand magnetism in CVs.
+\todo{Is this wise? I think it's a catch 22 - I need MB to explain CV evolution, but I need to have talked about the long-P, Pgap, and short P CVs to really get into the MB weeds...}A more detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}.
 
 
 
@@ -167,7 +167,9 @@ The system is still subject to gravitational radiation, however, so gradually ev
 \label{sect:introduction:period minimum and bouncers}
 
 The period minimum was first predicted by \citet{rappaport1982}, and can be understood by considering the two governing timescales affecting the secondary. 
-For donors with masses above $\sim0.1 M_{\odot}$, the donor is contracting in response to mass loss. However, at a period of about 80 minutes \citep{ritter1998, McAllister2019}, $\tau_{\dot M}$ becomes longer than $\tau_{therm}$, causing the donor to lose mass adiabatically and expand rather than contract. This now allows the donor to remain in contact with its Roche Lobe when mass loss raises it to a higher orbit, and the system evolves to longer periods over time.
+For donors with masses above $\sim0.1 M_{\odot}$, the donor is contracting in response to mass loss. 
+As this proceeds, both $\tau_{therm}$ and $\tau_{\dot M}$ are increasing (the latter due to $\dot M_2 / M_2$ rising as the period shrinks). However, $\tau_{therm}$ rises faster, and at a period of $\sim80$ minutes \citep{ritter1998, McAllister2019}, $\tau_{therm}$ exceeds $\tau_{\dot M}$, causing the donor to lose mass adiabatically and expand rather than contract in respose to mass loss.
+This allows the donor to remain in contact with its Roche Lobe when mass loss raises it to a higher orbit, and the system evolves to longer periods over time.
 
 More quantitatively, as the components of a short period CV move closer together and the donor falls in mass, $\tau_{therm}$ and $\tau_{\dot M}$ become more out of balance, corresponding to $\alpha$ in equation \ref{eqn:MP_relation} decreasing \citep{Knigge2011b}. A main-sequence star will have $\alpha \sim 1$, but a secondary subjected to fast, adiabatic mass loss will have $\alpha \simeq -1/3$. Looking at the gradient of equation \ref{eqn:MP_relation}, the existence of a period minimum can be easily seen.
 \begin{equation}
@@ -179,8 +181,6 @@ This has been confirmed by \citet{knigge11}, who found that for period bouncer C
 \begin{align}
     M_2 \propto P^{-5.4}
 \end{align}
-
-\todo{First-pass proof read up to here}
 
 
 \section{Magnetic Braking}
@@ -293,7 +293,7 @@ The \citet{garraffo2018a} prescription is simpler in concept than the \citet{mat
 
 
 \subsection{Comparisons to the Rappaport, Verbundt and Joss model}
-\todo{Plot the MB laws of Matt and Garraffo as a function of mass / period, and compare to the MESA default Rappaport model.}
+\todo{Plot the MB laws of Matt and Garraffo as a function of mass / period, and compare to the MESA default Rappaport model. Discuss differences and their consequences.}
 
 
 \section{Accretion in CVs}
@@ -318,9 +318,8 @@ As the white dwarf is accreting material to its surface, one might expect it to 
 
 \section{A modern understanding of AML}
 % Here, put in some motivation about why we should try and understand AML in CVs - i.e. they are a good test bed since we can get so much information on their characteristics, and they're relatively simple systems. Understanding them is a good step towards larger and more complex phenomena.
-A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independently observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. CVs provide a testbed for probing magnetism in low mass stars that will be useful in other contexts. 
-
-The missing source of AML is not necessarily magnetic in nature. 
+A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independently observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. 
+As pointed out in \S\ref{sect:introduction:matt braking}, the spin rate and masses of CV donors is not seen in the singleton stars that are usually used to characterise magnetic braking. I stress again that the semi-empirical braking laws constructed for other fields of study are not trustworthy in the case of CVs, and it may be that a better understanding of magnetic braking in this extreme parameter space lends a better understanding to stellar magnetism as a whole. 
 
 
 Here are some links to papers that I should reference here.
@@ -333,9 +332,23 @@ Here are some links to papers that I should reference here.
 \end{itemize}
 
 \subsection{The missing AML problem}
-See the first year literature review for some content here. This subsection should quantify the missing AML problem with real observations and models, and tee up the next parts where some proposed solutions are discussed.
+
+The evolution of CVs is driven by the donor stars. The orbital period is determined by the mass-radius relationship of the donor under mass loss, and the decay of the orbit should simply result directly from the two braking mechanisms (gravitational and magnetic). Figure~\todo{put in the one from my 2021 paper here} shows the relationship between the donor mass and orbital period, and the single unified CV track can be seen. Stellar evolution models can be built to try and reproduce this track, and indeed at long periods, our understanding of those mechanisms seem robust enough to produce models that satisfy observations. The period gap can, with some manual tweaks, also be reproduced with some accuracy. Unfortunately, at short periods ($\lesssim 2 hours$), the data begin to diverge from models. 
+
+\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\todo{ref the evo track figure} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\todo{ref evo track figure} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
+This also moves the period minimum to longer periods. The period minimum is caused by the donor's $\tau_{therm}$ becoming longer than $\tau_{\dot M}$, and since a faster mass loss will result in a shorter mass loss timescale, this crossover point is moved to higher masses and therefore longer periods. This is compounded by the faster mass loss resulting in more severe bloating of the donor star, so a donor of the same mass will connect to its Roche lobe at longer periods. 
+
+The disagreement between theory and observation at short periods indicates that our understanding of AML in this regime is lacking, and a few proposals to rectify this have been suggested.
+
 
 \subsection{Residual magnetic braking}
+
+The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking, dubbed Residual Magnetic Braking (RMB). 
+
+Models of RMB are not yet physically motivated, but rather use simple scaling of the gravitational losses already known to be in effect. \citet{knige11} used...\todo{re-read K11 and fill this in}
+
+\citet{Pala2017a} used the effective temperatures of the white dwarfs to probe CV evolution. The white dwarf temperature can be enhanced by accretion, so a hotter white dwarf suggests a higher mass transfer rate. This is sensitive to changes in $\dot M$ on short timescales, but still provides a valuable insight. \citet{Pala2017a} compare their white dwarf temperatures (and therefore mass transfer rates, and therefore AML rates) to MESA CV evolutionary tracks, and find that their observed temperatures are poorly described by only gravitational AML, but are more well-fitted by models that includes RMB equivalent to gravitational losses, i.e. double-strength gravitational braking. Their analysis is useful, but not wholly convincing, as the white dwarf temperatures are both quite poorly constrained, and sensitive to short-term variations in accretion rate that are known to occur \todo{cite}. In addition, the scaling of RMB in relation to gravitational losses is not a free parameter in their analysis, and is only presented in the context of being obviously better by eye, rather than being tailored to the data.
+
 
 \subsection{Consequential AML}
 \label{sect:introduction:CAML}
@@ -347,12 +360,13 @@ I think this dovetails with the lower mass white dwarf correlating with higher e
 
 \section{Further issues with established CV models}
 
+Disrupted mag braking - often said to be triggered by star becoming convective, but convective M dwarf singletons are seen with significant magnetic fields (ref), so I personally doubt that this is an accurate picture.
+
 Population studies expect that up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been notoriously difficult to test. 
 \citet{zorotovic2010} examined a sample of post-common envelope binaries and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf. \href{https://arxiv.org/pdf/1609.06940.pdf}{On the white dwarf mass problem of CVs}
 
 Additionally, observation and theory disagree on the white dwarf mass produced in CV evolution \citep{Wijnen2015, liu2016, parsons2017}, with models predicting an excess of low-mass white dwarfs that are not observed. 
 On top of this, there is the question of "do CVs grow in mass over time as they accrete?", to which the answer is no. 
-
 
 Also, we expect there to be about 13\% of systems forming with a brown dwarf, which would put them below the period minimum -- which is not observed.
 
