@@ -7,7 +7,7 @@
 
 Cataclysmic Variable (CV) systems consist of a white dwarf primary, and a lower mass red dwarf secondary star. The two are in extremely close proximity, such that the outer layers of the secondary are gradually accreted onto the white dwarf; this mass transfer process affects the evolution of both stars, in particular the donor, and is the main driving mechanism for the evolution of the system as a whole.
 The accretion also gives two further key features of a CV: an accretion disc around the white dwarf, and a shock-heated bright spot region where accreted donor material impacts the outer rim of the disc\todo{Do I really need a reference for this? Probably just reference that "on cataclysmic variables" or whatever that book was. You know the one.}\todo{Put in your CV schematic here. Maybe update it and try to make it prettier?}.
-Systems actively undergoing mass transfer are important to our understanding of stellar evolution, as a diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for. Of such systems, CVs in particular are interesting as modelling their eclipse lightcurves can yield precise, independent measures of both stars' mass and radius \citep{wood1986, Littlefair2008, Savoury2011}. Further, since the donor stars' evolution is completely dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}.
+Systems actively undergoing mass transfer are important to our understanding of stellar evolution, as a diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for. Of such systems, CVs in particular are interesting as modelling their eclipse lightcurves can yield precise, independant measures of both stars' mass and radius \citep{wood1986, Littlefair2008, Savoury2011}. Further, since the donor stars' evolution is completely dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}.
 
 Since CVs involve poorly understood physics, such as magnetism and the structure and evolution of low mass stars, but are also open to comprehensive analysis, they provide an excellent test-bed for binary evolution modelling, and the difficult processes that contribute to them. Unfortunately, whilst modelling most of a CV's life is now possible \citep{Paxton_2015}, the field has yet to produce physically motivated models capable of accurately reproducing either the CV population distribution, or complete evolutionary track, indicating some shortfalls in our understanding\todo{ref here - was it a savoury paper? Perhaps pala? I cant remember}. Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with extremely low mass donor stars appear to be losing angular momentum much faster than our models predict\todo{ref}. This first chapter will summarise the current understanding of CV formation and evolution, and the current state of CV modelling. 
 
@@ -314,17 +314,15 @@ Material that enters the disc must lose gravitational potential energy before it
 As the white dwarf is accreting material to its surface, one might expect it to grow in mass over time, and possibly even detonate as a Ia supernova as it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \todo{ref}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae, outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
 
 
-
-
 \section{A modern understanding of AML}
 % Here, put in some motivation about why we should try and understand AML in CVs - i.e. they are a good test bed since we can get so much information on their characteristics, and they're relatively simple systems. Understanding them is a good step towards larger and more complex phenomena.
-A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independently observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. 
+A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \todo{ref} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independantly observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. 
 As pointed out in \S\ref{sect:introduction:matt braking}, the spin rate and masses of CV donors is not seen in the singleton stars that are usually used to characterise magnetic braking. I stress again that the semi-empirical braking laws constructed for other fields of study are not trustworthy in the case of CVs, and it may be that a better understanding of magnetic braking in this extreme parameter space lends a better understanding to stellar magnetism as a whole. 
 
 
 Here are some links to papers that I should reference here.
 \begin{itemize}
-    \item \href{https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.5717B/abstract}{Evidence for reduced magnetic braking}
+    % \item \href{https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.5717B/abstract}{Evidence for reduced magnetic braking}
     \item \href{https://iopscience.iop.org/article/10.3847/0004-637X/817/1/69}{THE INFLUENCE OF NOVA ERUPTIONS}
     \item \href{https://academic.oup.com/mnrasl/article/455/1/L16/2589619}{eCAML paper, schrieber 2016}
     \item \href{https://ui.adsabs.harvard.edu/abs/2021ApJ...914....5S/abstract}{Nova-produced Common Envelope: Source of the Nonsolar Abundances and an Additional Frictional Angular Momentum Loss in Cataclysmic Variables}
@@ -335,7 +333,7 @@ Here are some links to papers that I should reference here.
 
 The evolution of CVs is driven by the donor stars. The orbital period is determined by the mass-radius relationship of the donor under mass loss, and the decay of the orbit should simply result directly from the two braking mechanisms (gravitational and magnetic). Figure~\todo{put in the one from my 2021 paper here} shows the relationship between the donor mass and orbital period, and the single unified CV track can be seen. Stellar evolution models can be built to try and reproduce this track, and indeed at long periods, our understanding of those mechanisms seem robust enough to produce models that satisfy observations. The period gap can, with some manual tweaks, also be reproduced with some accuracy. Unfortunately, at short periods ($\lesssim 2 hours$), the data begin to diverge from models. 
 
-\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\todo{ref the evo track figure} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\todo{ref evo track figure} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
+\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
 This also moves the period minimum to longer periods. The period minimum is caused by the donor's $\tau_{therm}$ becoming longer than $\tau_{\dot M}$, and since a faster mass loss will result in a shorter mass loss timescale, this crossover point is moved to higher masses and therefore longer periods. This is compounded by the faster mass loss resulting in more severe bloating of the donor star, so a donor of the same mass will connect to its Roche lobe at longer periods. 
 
 \citet{knigge11} used took observations of donor masses and radii, with masses determined by either eclipse modelling, or the $\epsilon - q$ superhumper relationship, and radii are readily found from equating the donor radius to the expected Roche lobe radius. 
@@ -359,6 +357,32 @@ The period gap is frequently attributed to the donor becoming fully convective, 
 
 \subsection{Consequential AML}
 \label{sect:introduction:CAML}
+
+At its core, consequential AML (CAML) is a simple concept. It's known that the accreted material on CV white dwarfs detonates, and the majority of this material is lost from the system \citep{McAllister2019}. This will carry with it angular momentum, and so forms a third source of AML \citep{schenker1998}. By modelling CV evolution including this process, several issues with CV evolution can be solved at once \citep{Schreiber2016}. These issues are: 
+\begin{enumerate}
+    \item the observed mass of CV white dwarfs is systematically higher than singleton white dwarfs \citep{McAllister2019};
+    \item since the short period regime has much lower AML rates, CVs should spend most of their time below the period gap, and $\sim 99\%$ of CVs are expected to be short period \citep{kolb1993a}, but observations see a roughly even distribution between long and short period systems \citep{knigge2006};
+    \item under purely gravitational losses, the period minimum was first calculated at $\sim 67$ minutes \citep{kolb99}, but is observed at $\sim 79$ minutes \citep{McAllister2019};
+    \item the space density of CVs is roughly 1-2 orders of magnitude lower than population synthesis models predict.
+\end{enumerate} 
+The introduction of CAML can solve these issues, making a compelling case for its validity. 
+
+The maximum dynamically stable mass transfer rate of a CV is a function of $q$, related via the adiabatic mass-radius exponent, $\alpha_{ad}$, and the mass-radius exponent of the Roche radius, $\alpha_{L}$. Where the two intersect forms a threshold beyond which runaway mass transfer (much like the pre-CV common envelope phase) is triggered, and most likely results in a merger between the two bodies.
+\begin{equation}
+    \label{eqn:introduction:CAML stability threshold}
+    \alpha_{ad} = \frac{{\rm d} ln(R_2)}{{\rm d} ln(M_2)}_{ad} = \frac{{\rm d} ln(R_L)}{{\rm d} ln(M_2)} = \alpha_L
+\end{equation}
+Where $\alpha_{ad}$ for convective stars is $-1/3$. Recalling the Eggleton approximation for the Roche radius, Equation~\ref{eqn:eggleton approximation}, we can find $\alpha_{ad}(q)$ \citep{Schreiber2016} in the absence of CAML,
+\begin{equation}
+    \alpha_{ad} = \frac{2}{3}\frac{ln(1+q^{1/3}) - \frac{1}{2}\frac{q^{1/3}}{1+q^{1/3}}}{0.6q^{2/3} + ln(1+q^{1/3})} (1 + q) + 2(q - 1) = -1/3
+\end{equation}
+Solving this equation gives a critical maximum value of $q < 0.634$. However, under the additional CAML, the right hand side of Equation~\ref{eqn:introduction:CAML stability threshold} is altered by the increased mass loss rate,
+\begin{equation}
+    \alpha_{ad} = \frac{2}{3} \Bigg( \frac{ln(1+q^{1/3}) - \frac{1}{2}\frac{q^{1/3}}{1+q^{1/3}}}{0.6q^{2/3} + ln(1+q^{1/3})} \Bigg)
+\end{equation}
+
+
+
 also talk about empirical CAML, eCAML, here \citep{Schreiber2016}.
 
 This will be very important! Lower mass donors will be able to accrete and retain less nova-processed material, so more will be lost from the system and carry with it more angular momentum. 
