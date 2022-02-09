@@ -13,13 +13,17 @@ The work of this thesis has made extensive use of three instruments: ULTRACAM, H
 These are time-series photometric imaging instruments, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively. Crucially, HiPERCAM and ULTRACAM make their multi-colour images simultaneously, which is later very important to the modelling technique used to characterise our CV systems. The eclipses we observe typically span less than 30 minutes, and the instruments must be sensitive to changes on the order of a few seconds to be useful for analysis, and these three cameras are ideal for this task.
 
 
-\section{HiPERCAM}
+\section{Instruments}
+
+The cameras used were mounted on several telescopes across the decade of observations. The three most commonly used telescopes were the Gran Telescopio de Canarias (GTC) on La Palma (with HiPERCAM), the New Technology Telescope (NTT) in Chil\'e (with ULTRACAM), the Thai National Telescope (TNT) with ULTRASPEC, and prior to \todo{When was ULTRACAM taken off the WHT?}, ULTRACAM was hosted on the William Herschel Telescope (WHT), also on La Palma. 
+
+\subsection{HiPERCAM}
 
 
-\section{ULTRACAM}
+\subsection{ULTRACAM}
 
 
-\section{ULTRASPEC}
+\subsection{ULTRASPEC}
 
 
 \section{Data reduction}
@@ -27,6 +31,7 @@ These are time-series photometric imaging instruments, capable of taking high-ca
 
 \subsection{The HiPERCAM pipeline}
 \todo{Talk about the pipeline on a high level here. Outline how a reduction config file is made that encapsulates the reduction settings, and embeds these settings in the final output files.}
+The three instruments all use the HiPERCAM data reduction pipeline \footnote{Available https://cygnus.astro.warwick.ac.uk/phsaap/hipercam/docs/html/}
 
 \subsubsection{Bias frames}
 
@@ -39,16 +44,22 @@ These are time-series photometric imaging instruments, capable of taking high-ca
 \label{sect:photometric extraction and calibration}
 
 For all observational data contained in this thesis, the HiPERCAM data reduction pipeline \citep{dhillon2016} was used to perform debiassing and flat-field corrections on the raw frames, as described in \S\ref{sect:data reduction}. The software was also used for the extraction of aperture photometery, producing the flux in Analog-to-Digital Units, ADU, per frame of each source. 
-A comparison star in the same image as the target was used to account for transparency variations, and standard stars from \citet{smith2002} were used to transform the lightcurves from ADU to the SDSS $u'g'r'i'z'$ photometric system. 
+A comparison star in the same image as the target was used to account for transparency variations, and standard stars from \citet{smith2002} were used to transform the lightcurves from ADU to the SDSS $u'g'r'i'z'$ photometric system. At the core of the photometric calibrations is the following expression of the apparent magnitude in some band, $m_{app}$, of a target,
+\begin{equation}
+    \label{eqn:observations:instrumental magnitude from scratch}
+    m_{app} = m_{inst} + \chi k_{ext} + m_{zp} + C_{inst}c_{m}
+\end{equation}
+where $m_{inst}$ is the instrumental magnitude, $-2.5 \rm log(ADU)$, $\chi$ is the airmass of the obervation and $k_{ext}$ is the atmospheric extinction coefficient in the relevant band. $m_{zp}$ is the zero point offset of the instrument. $c_{m}$ is the colour term correction between the response curve of the instrument, and the target photometric system, and $C_{inst}$ is a diagnostic instrumental colour. Each of these terms must be properly handled, and are discussed in turn. 
 
 
 \subsection{Calculating atmospheric extinction coefficients}
 \label{sect:calcualting atmospheric extinction}
 
-Atmospheric extinction was calculated using the longest continuous ULTRACAM observation available within 3 days of the target observations.
+Atmospheric extinction was calculated using the longest continuous observation available within a reasonable time from target observations.
 The atmospheric extinction values are reported in Table~\ref{table:atmos_extinction}\todo{Currently, this is only for a very narrow range of the actual observations. Generalise this table to include all instruments and locations.}.
-For dates where no observations spanned a satisfactory range of airmasses, the nearest observation in time was used as a stand-in, as atmospheric extinction coefficients are usually relatively stable over time.
-Aperture photometery was extracted for five sources in these long observations, and the instrumental magnitude, $m_{\rm inst}$, vs airmass, $\chi$, was fit with a straight line for each source. 
+% For dates where no observations spanned a satisfactory range of airmasses, the nearest observation in time was used as a stand-in, as atmospheric extinction coefficients are usually relatively stable over time.
+
+To calculate the atmospheric extinction coefficients, aperture photometery was extracted for five sources in these long observations, and the instrumental magnitude, $m_{\rm inst}$, vs airmass, $\chi$, was fit with a straight line for each source. 
 The gradients of these lines are the atmospheric extinction coefficients, $k_{\rm ext}$, for the relevant band, and the y-intercept is the instrumental magnitude of that object above the atmosphere, $m_{\rm inst,0}$:
 \begin{align*}
     m_{\rm inst} =& m_{\rm inst,0} + \chi k_{\rm ext} 

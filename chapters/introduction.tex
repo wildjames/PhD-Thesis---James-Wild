@@ -8,18 +8,25 @@
 \todo{I'm not sure I'm happy with the structure here... Revisit the order of your sections *after* reading this chapter again.}
 
 Cataclysmic Variable (CV) systems consist of a white dwarf primary, and a lower mass red dwarf secondary star. The two are in extremely close proximity, such that the outer layers of the secondary are gradually accreted onto the white dwarf; this mass transfer process affects the evolution of both stars, in particular the donor, and is the main driving mechanism for the evolution of the system as a whole.
-The accretion also gives two further key features of a CV: an accretion disc around the white dwarf, and a shock-heated bright spot region where accreted donor material impacts the outer rim of the disc\todo{Do I really need a reference for this? Probably just reference that "on cataclysmic variables" or whatever that book was. You know the one.}\todo{Put in your CV schematic here. Maybe update it and try to make it prettier?}.
-Systems actively undergoing mass transfer are important to our understanding of stellar evolution, as a diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for. Of such systems, CVs in particular are interesting as modelling their eclipse lightcurves can yield precise, independant measures of both stars' mass and radius \citep{wood1986, Littlefair2008, Savoury2011}. Further, since the donor stars' evolution is completely dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}.
+The accretion also gives two further key features of a CV: an accretion disc around the white dwarf, and a shock-heated bright spot region where accreted donor material impacts the outer rim of the disc \citep{warner1995,hellier2001}. Figure~\ref{fig:introduction:CV schematic} shows a schematic of this structure.
 
-Since CVs involve poorly understood physics, such as magnetism and the structure and evolution of low mass stars, but are also open to comprehensive analysis, they provide an excellent test-bed for binary evolution modelling, and the difficult processes that contribute to them. Unfortunately, whilst modelling most of a CV's life is now possible \citep{Paxton_2015}, the field has yet to produce physically motivated models capable of accurately reproducing either the CV population distribution, or complete evolutionary track, indicating some shortfalls in our understanding\todo{ref here - was it a savoury paper? Perhaps pala? I cant remember}. Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with extremely low mass donor stars appear to be losing angular momentum much faster than our models predict\todo{ref}. This first chapter will summarise the current understanding of CV formation and evolution, and the current state of CV modelling. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/introduction/CV_schematic.png}
+    \caption{A schematic of the structure of a CV. The black dashed line outlines each Roche lobe}
+    \label{fig:introduction:CV schematic}
+\end{figure}
 
-The bulk of this thesis is focused on two elements: firstly, the sample of well-characterised (i.e. measured masses and radii for both stars, white dwarf temperature and surface gravity, orbital period, and inclination) eclipse modelled CVs is small - only 18 systems prior to this work. I characterise an additional XXX systems\todo{Put in here how many systems}. While this is still a small sample, it is now enough for approximate statistical analysis. Second, using stellar models, I affirm the observations\todo{cite this} that the canonical CV evolutionary track fails at periods shorter than $\sim 2.5$ hours, and produce an empirical correction to predicted AML, as a function of donor mass. Through this, I hope to constrain the possible sources of missing AML. 
+Systems actively undergoing mass transfer are important to our understanding of stellar evolution. A diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for. Of such systems, CVs in particular are interesting as modelling their eclipse lightcurves can yield precise, independant measures of both stars' mass and radius \citep{wood1986, Littlefair2008, Savoury2011}. Further, since the donor stars' evolution is completely dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}. The mass loss itself is driven by poorly-understood mechanisms, often attributed to magnetism and gravitational waves, that can also be probed using CV observation and modelling.
+Since CVs are binary stars, they are open to comprehensive analysis, providing an excellent test-bed for binary modelling, and the difficult processes that contribute to them. Unfortunately, whilst semi-empirical modelling of most of the CV evolutionary track and population distribution is now possible \citep{Savoury2011,knigge11,Paxton_2015}, the field has yet to produce {\it physically motivated} models capable of accurately reproducing either the CV population distribution, or complete evolutionary track, indicating some shortfalls in our understanding. Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with extremely low mass donor stars appear to be losing angular momentum much faster than our models predict \citep{wild2021}. This first chapter will summarise the current understanding of CV formation and evolution, and the current state of CV modelling. 
+
+The bulk of this thesis is focused on two elements: firstly, the sample of well-characterised (i.e. measured masses and radii for both stars, white dwarf temperature and surface gravity, orbital period, and inclination) eclipse modelled CVs is small - only 18 systems prior to this work. I characterise an additional XXX systems\todo{Put in here how many systems}. While this is still a small sample, it is now enough for approximate statistical analysis. Second, using stellar models, I affirm the observations \citep{knigge2006,knigge11} that the canonical CV evolutionary track fails at periods shorter than $\sim 2.5$ hours, and produce an empirical correction to predicted AML, as a function of donor mass\todo{Hopefully!}. Through this, I hope to constrain the possible sources of missing AML. 
 
 \section{Roche geometry}
 \label{sect:introduction:Roche geometry}
 \todo{Proof read this section}
 
-Before discussing the formation, structure, and evolution of CVs, it is critical to understand Roche lobes.
+Before discussing the formation, structure, and evolution of CVs, it is first critical to understand Roche lobes.
 In a two-body orbital system, the Roche potential of a point is an effective potential in the non-inertial, co-rotating frame of reference. It is given by the sum of the gravitational potential energies due to the two masses, and the potential energy arising from centrifugal force. This can be described mathematically for each position vector:
 \begin{equation}
     {\bf \phi} = -\frac{G M_1}{|{\bf r - r}_1|} - \frac{G M_2}{|{\bf r - r}_2|} - \frac{1}{2}({\bf \Omega} \times {\bf r})^2
@@ -224,7 +231,7 @@ in the unsaturated regime, and
 \begin{equation}
     \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \chi^{p}
 \end{equation}
-in the saturated regime. Here, $M_*$ and $R_*$ are the stellar mass and radius, $B_*$ is the magnetic field strength at the stellar surface, and $M_\omega$ is the total mass outflow rate. The $m$ exponent is determined by the field geometry and wind acceleration profile, but functionally is a tuning parameter that likely falls in the range of $0.20 < m < 0.25$ \citep{matt2015}. The $p$ exponent encodes the dependence of magnetism on the Rossby number, $\rm Ro$, and is assigned as $p = 2$. $\chi$ is the inverse critical Rossby number for saturation, for which \citet{matt2015} adopt a value of $10$. $Q$ is a generic scale factor that the authors fit to observations.
+in the saturated regime. Here, $M_\omega$ is the global mass outflow rate, $B_*$ is the magnetic field strength at the stellar surface, and $M_\omega$ is the total mass outflow rate. The $m$ exponent is determined by the field geometry and wind acceleration profile, but functionally is a tuning parameter that likely falls in the range of $0.20 < m < 0.25$ \citep{matt2015}. The $p$ exponent encodes the dependence of magnetism on the Rossby number, $\rm Ro$, and is assigned as $p = 2$. $\chi$ is the inverse critical Rossby number for saturation, for which \citet{matt2015} adopt a value of $10$. $Q$ is a generic scale factor that the authors fit to observations.
 
 The authors use these equations to eventually derive the spin rates for main sequence stars at some time $t$ after their initial spin period, $\Omega_i$, 
 \begin{equation}
@@ -271,12 +278,14 @@ Their formalisation of this is based on two assumptions. They assume that stars 
 \end{equation}
 where $\dot J_{\rm dipole}$ is the dipole loss under the Skumanich law, $\dot J_{\rm dipole} \propto \Omega^3 \tau$. $Q_J$ is a modulating factor that encapsulates the field complexity at the stellar surface, and is controlled by the complexity factor, $n$, which has its own prescription. \citet{garraffo2016} derive an equation for $Q_J$, based on fitting the results of simulations with varying field complexities.\todo{Explain the model, and the origin of these numbers before reporting the relationship}
 \begin{equation}
+    \label{eqn:introduction:garraffo complexity modulation}
     Q_J(n) = 4.05 e^{-1.4n} + \frac{n-1}{60Bn}
 \end{equation}
-Where $B$ is the magnetic field strength at the stellar surface. As the second term is only significant for $n > 7$, \citet{garraffo2018a} consider only the first term of this relation. This is the equivalent of the saturation of magnetic braking from \S\ref{sect:introduction:matt braking}, but here is contingent on field complexity rather than $\rm Ro$. 
+Where $B$ is the magnetic field strength at the stellar surface. As the second term is only significant for $n > 7$, \citet{garraffo2018a} consider $n = 7$ as the maximum complexity, consider only the first term of this relation. This is the equivalent of the saturation of magnetic braking from \S\ref{sect:introduction:matt braking}, but here is contingent on field complexity rather than $\rm Ro$. 
 
 \citet{garraffo2018a} suggest the following relation between $\rm Ro$ and $n$,
 \begin{equation}
+    \label{eqn:introduction:garraffo field complexity}
     n = 1 + \frac{0.02}{\rm Ro} + 2 {\rm Ro}
 \end{equation}
 based on observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$. 
@@ -299,7 +308,25 @@ The \citet{garraffo2018a} prescription is simpler in concept than the \citet{mat
 
 
 \subsection{Comparisons to the Rappaport, Verbundt and Joss model}
-\todo{Plot the MB laws of Matt and Garraffo as a function of mass / period, and compare to the MESA default Rappaport model. Discuss differences and their consequences.}
+
+We can examine the differences between these prescriptions in the case of CV evolution by applying them to a donor evolutionary track, and \citet{knigge11} has constructed a donor sequence using their own models that reasonably accurately reproduces observations. The masses, radii, and periods along the sequence are given, so the would-be effects of the magnetic braking prescriptions described above can be calculated. In addition to the two previously discussed prescriptions, the default MESA \citep{Paxton_2015} magnetic braking prescription \citep{rappaport1983} is included. This prescription includes a magnetic braking index, $\gamma$,
+\begin{equation}
+    \dot J = -3.8\times10^{-30} M R_\odot^4 \bigg( \frac{R}{R_\odot} \bigg) \omega^3
+\end{equation}
+
+Note that in the specific case of CVs, period and radius are synonymous with one another, due to the requirement that the donor is in contact with the Roche lobe, and is tidally locked. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth, trim={1cm 0 0 0}]{figures/introduction/rappaport_matt_magbraking.png}
+    \caption{Showing the AML rates, $\dot J$, of three magnetic braking prescriptions, applied to the masses, radii, and spin periods of the `standard' CV donor track of \citet{knigge11}. The vertical black line shows the mass at which \citet{knigge11} enforces the period gap to occur. {\bf Green lines} show the \citet{rappaport1983} magnetic braking prescription, which is the default used in MESA \citep{Paxton_2015}. The {\bf red line} shows the \citet{matt2015} prescription.}
+    \label{fig:introduction:rappaport garraffo matt magnetic braking}
+\end{figure}
+
+Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} \todo{Take out the Garraffo prescription - we can't reproduce the tracks she shows in her paper!} shows the strength of $\dot J$ across a CV's mass range, though below the period gap is not thought to be present. 
+The \citet{garraffo2018a} prescription is shown in two forms - as the complexity is assumed to be $n < 7$, there is a region of CV evolution where the assumption in Equation~\ref{eqn:introduction:garraffo complexity modulation} that neglects the second term does not apply. The dotted line in the figure shows the torque on the star is we use $n = 7$ for this parameter space, and the solid line shows the torque if we contunie using the calculated $n$ regardless. 
+
+The differences between the three prescriptions is clear in both the overall strength of the prescriptions, but also in how they evolve with mass. All the prescriptions shown decrease at lower masses, but at different rates. In the context of CV evolution, a different dropoff rates of magnetic braking would alter the shape of the donor mass-radius sequence, so observations of CV donors should be able to allow us to evaluate the effectiveness of different braking prescriptions.
 
 
 \section{Accretion in CVs}
