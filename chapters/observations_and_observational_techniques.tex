@@ -7,35 +7,66 @@
 
 % From here on out, basically just insert the observational section of the paper.
 
-For CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor will eclipse all other components of the system in quick succession, once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can lead to a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature and radius from the white dwarf colours, and using the timing of eclipse features to find the component masses, donor radius, and orbital separation.
+For CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor will eclipse all other components of the system in quick succession, once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can yield a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature and radius from the white dwarf colours, and using the timing of eclipse features to find the component masses, donor radius, and orbital separation. Hence, to properly characterise a CV, we need flux-calibrated, high time resolution, multi-colour photometery of the target. 
 
-The work of this thesis has made extensive use of three instruments: ULTRACAM, HiPERCAM, and ULTRASPEC \todo{Cite the instrument papers!}.
-These are time-series photometric imaging instruments, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively. Crucially, HiPERCAM and ULTRACAM make their multi-colour images simultaneously, which is later very important to the modelling technique used to characterise our CV systems. The eclipses we observe typically span less than 30 minutes, and the instruments must be sensitive to changes on the order of a few seconds to be useful for analysis, and these three cameras are ideal for this task.
+The work of this thesis has made extensive use of three instruments: ULTRACAM, HiPERCAM, and ULTRASPEC.
+These are time-series photometric imaging instruments, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively. Crucially, HiPERCAM and ULTRACAM make their multi-colour images simultaneously, which removes the possibility of changes in brightness in the disc or bright spot polluting the white dwarf colour measurement. The eclipses we observe typically span around 30 minutes, and the instruments must be sensitive to changes on the order of a few seconds to be useful for analysis, making these three cameras are ideal for this task.
 
 
 \section{Instruments}
 
-The cameras used were mounted on several telescopes across the decade of observations. The three most commonly used telescopes were the Gran Telescopio de Canarias (GTC) on La Palma (with HiPERCAM), the New Technology Telescope (NTT) in Chil\'e (with ULTRACAM), the Thai National Telescope (TNT) with ULTRASPEC, and prior to \todo{When was ULTRACAM taken off the WHT?}, ULTRACAM was hosted on the William Herschel Telescope (WHT), also on La Palma. 
+The cameras used were mounted on several telescopes across the decade of our observations. These were the Gran Telescopio de Canarias (GTC) on La Palma (with HiPERCAM), the Thai National Telescope (TNT) with ULTRASPEC, the New Technology Telescope (NTT) in Chil\'e (with ULTRACAM). Prior to \todo{When was ULTRACAM taken off the WHT? 2014, I think?}, ULTRACAM was hosted on the William Herschel Telescope (WHT), also on La Palma. 
+
 
 \subsection{HiPERCAM}
+HiPERCAM is an impressive quintuple-beam optical imaging camera that saw first light on the GTC in 2018, and is sensitive to wavelengths between $320 - 1060 \rm nm$ \citep{dhillon2021}. This camera has a series of dichroic beamspliters, that sequentially pick off the $u_s, g_s, r_s, i_s, z_s$ bands and funnel each into dedicated cameras that use highly sensitive, low readout noise electron-multiplying CCDs (EMCCDs). These Super SDSS filters are specifically designed for HiPERCAM to match the classic SDSS band cutoff wavelengths \citep{fukugita1996}, but allow a higher throughput and so give a more sensitive instrument. This improvement is not constant across the bands, shown in Figure~\ref{fig:observations:superSDSS throughput comparison}. Unfortunately, as our calibrating standard stars are reported in the classic SDSS photometric system, some work was necessary to color-correct the HiPERCAM observations, which is described in detail in \S\ref{sect:observations:colour correction method}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/observations/plot_dichs_supersdss_asbuilt_v3.png}
+    \caption{Taken from \citet{dhillon2021}. Transmission profiles of the as-built HiPERCAM dichroic beamsplitters (dashed lines), the HiPERCAM standard SDSS filters (dotted lines), and the HiPERCAM Super SDSS filters (solid
+    lines).}
+    \label{fig:observations:superSDSS throughput comparison}
+\end{figure}
+
+On the GTC, HiPERCAM is capable of detecting sources down to $g_s \sim 23$ in exposures of only a second, and can achieve $g_s \sim 28$ with an hour of exposure. This has allowed us to make excellent observations of fainter CVs than previous studies \citep{McallisterThesis}, with faint, low mass donors and short periods. In addition, HiPERCAM is capable to incredibly fast framerates of up to $\sim 1000 \rm Hz$, though this capability was not used for this work. However, paritally in an effort to achieve this framerate by reducing dead-time between frames HiPERCAM is capable of exposing a frame and {\it simultaneously} reading out the previous image. This is achieved by splitting the photodetector in half, and masking one side. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ms) and can be read out during the next exposure time. This is a significant benefit when resolving the large, rapid changes in flux during the ingresses and egresses of CV eclipses.
 
 
 \subsection{ULTRACAM}
+ULTRACAM is a three-beam optical imager sensitive to wavelengths between $\sim 300 - 1100 \rm nm$, and is the direct predecessor to HiPERCAM \citep{dhillon2007}. 
+It is similarly built for high-speed photometric studies, but is `only' capable of framerates of $\sim 500 \rm Hz$ in three of its five bands. 
+It uses the same split-frame readout technique to HiPERCAM, though uses more typical CCDs rather than HiPERCAM's EMCCDs. Observing an object in more than three bands requires multiple observing runs, and manually swapping the filters.
+
+ULTRACAM was originally commissioned with SDSS-like $u',g',r',i',z'$ filters, that match the SDSS closely and did not necessitate colour-term corrections. However, in \todo{When did we move to super SDSS on ultracam? 2018?} ULTRACAM was upgraded to use the same Super SDSS photometric system used by HiPERCAM. As such, observations were translated to the classic SDSS system as described in \S\ref{sect:observations:colour correction method}. 
 
 
 \subsection{ULTRASPEC}
+Finally, the ULTRASPEC instrument was occasionally used to suppliment ULTRACAM and HiPERCAM observations where possible. ULTRASPEC was originally commissioned as a spectrographic cousin of ULTRACAM, using again a split-frame design, with EMCCDs \citep{dhillon2014}. 
+However, after a brief proof-of-concept trial as a photometric imager in June 2009, ULTRASPEC was modified to a full-time imaging instrument and mounted on the 2.4m TNT in November 2013, and is now operated by the National Astronomical Research Institute of Thailand (NARIT).
+
+This is a single-colour instrument that uses the $u',g',r',i',z'$ filters, in addition to a wide-band KG5 filter that is approximately equivalent to $u' + g' + r'$. It is also the slowest of the three cameras, but is still capable of high framerates up to $\sim 200 \rm Hz$.
 
 
 \section{Data reduction}
 \label{sect:data reduction}
 
-\subsection{The HiPERCAM pipeline}
-\todo{Talk about the pipeline on a high level here. Outline how a reduction config file is made that encapsulates the reduction settings, and embeds these settings in the final output files.}
-The three instruments all use the HiPERCAM data reduction pipeline \footnote{Available https://cygnus.astro.warwick.ac.uk/phsaap/hipercam/docs/html/}
+All three cameras use Charge-Coupled Device (CCD) detectors, which are a staple of ground-based astronomy due to their high sensitivity, and low noise.
+CCDs are made up of a large grid of photosensitive pixels, which release electrons proportionally to the number of photons that fall on them to form the signal of an observation. This signal is then moved into the readout electronics pixel-by-pixel, essentially a capacitor that has its voltage measured to determine the number of electrons that were released. This voltage is converted to electron counts with an Analog-to-Digital Converter (ADC), that outputs the corresponding integer number of electrons to the input charge.
+
+To extract photometric information from the raw image files, the HiPERCAM data reduction pipeline was used\footnote{Available https://cygnus.astro.warwick.ac.uk/phsaap/hipercam/docs/html/}. 
+% The cameras store data for a series of images as FITS `cubes', from which the sources are characterised and extracted.
+Bias and flat field corrections are done for each observation, with calibration frames taken nightly as standard procedure.
 
 \subsubsection{Bias frames}
+The readout electronics of a CCD are not perfect, and contribute a small amount of gaussian noise to each pixel called readout noise. The ADC is only capable of recording {\it positive integer values}, and functionally discards negative pixel counts. To illustrate why this is an issue, take the exaggerated example of a readout noise of $7 e^-/{\rm px}$ on a region of the CCD that is stimulated by $5 e^-/{\rm px}$. If negative values are limited to 0, the effect is to increase the average. This will have a small corrupting effect on low-signal areas of the CCD, and Figure\ref{fig:observations:bias frame histogram} illustrates this graphically.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/observations/bias_frame_histogram.pdf}
+    \caption{Illustrating the effect of omitting negative values on the average of a distribution. The black line is a Gaussian distribution with an average of 5 and a standard deviation of 7. The vertical dashed line shows the `true' average of 5 ADU, and the vertical red line shows the average given by an ADC that reports negative electron counts as 0.}
+    \label{fig:observations:bias frame histogram}
+\end{figure}
 
 \subsubsection{Flat fielding}
+The response of each pixel to photons is similar, but is not exactly equal. Further, the optics of the telescope is not perfect, and throughput can vary across the field of view. These effects mean that \todo{I'm done for the day. Pick back up here.}
 
 \subsubsection{Aperture photometry}
 \todo{Here is where I should talk about normal and optimal reduction methods}
@@ -87,7 +118,7 @@ The gradients of these lines are the atmospheric extinction coefficients, $k_{\r
 
 
 \subsection{Transformations between filter systems}
-\label{sect:colour correction method}
+\label{sect:observations:colour correction method}
 
 The ULTRACAM\todo{This section needs to be expanded out to include HiPERCAM. ULTRASPEC is okay since it uses the SDSS-like filters, but that needs to be mentioned. Can probably just say "using ULTRACAM as an example..."} photometric system previously matched the SDSS reasonably closely, however in early 2019 it was upgraded and now uses an SDSS-\emph{like} filter system with higher efficiency bandpasses, referred to as Super SDSS. There are three optical paths that are relevant:
 \begin{itemize}
