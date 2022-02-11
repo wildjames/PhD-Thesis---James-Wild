@@ -5,15 +5,13 @@
 
 % Here, re-write and update the first year literature review. re-contextualise it in the narrower scope of AML, which I ended up actually doing.
 
-\todo{I'm not sure I'm happy with the structure here... Revisit the order of your sections *after* reading this chapter again.}
-
 Cataclysmic Variable (CV) systems consist of a white dwarf primary, and a lower mass red dwarf secondary star. The two are in extremely close proximity, such that the outer layers of the secondary are gradually accreted onto the white dwarf; this mass transfer process affects the evolution of both stars, in particular the donor, and is the main driving mechanism for the evolution of the system as a whole.
 The accretion also gives two further key features of a CV: an accretion disc around the white dwarf, and a shock-heated bright spot region where accreted donor material impacts the outer rim of the disc \citep{warner1995,hellier2001}. Figure~\ref{fig:introduction:CV schematic} shows a schematic of this structure.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{figures/introduction/CV_schematic.png}
-    \caption{A schematic of the structure of a CV. The black dashed line outlines each Roche lobe}
+    \caption{A schematic of the structure of a CV, not to scale. The black dashed line outlines each Roche lobe . The dark blue circle is the white dwarf and is surrounded by its accretion disc. The lower red teardrop is the secondary star, and is connected to the donor via the mass stream. The light blue spot where the mass stream meets the disc is the bright spot impact region.}
     \label{fig:introduction:CV schematic}
 \end{figure}
 
@@ -22,9 +20,9 @@ Since CVs are binary stars, they are open to comprehensive analysis, providing a
 
 The bulk of this thesis is focused on two elements: firstly, the sample of well-characterised (i.e. measured masses and radii for both stars, white dwarf temperature and surface gravity, orbital period, and inclination) eclipse modelled CVs is small - only 18 systems prior to this work. I characterise an additional XXX systems\todo{Put in here how many systems}. While this is still a small sample, it is now enough for approximate statistical analysis. Second, using stellar models, I affirm the observations \citep{knigge2006,knigge11} that the canonical CV evolutionary track fails at periods shorter than $\sim 2.5$ hours, and produce an empirical correction to predicted AML, as a function of donor mass\todo{Hopefully!}. Through this, I hope to constrain the possible sources of missing AML. 
 
+
 \section{Roche geometry}
 \label{sect:introduction:Roche geometry}
-\todo{Proof read this section}
 
 Before discussing the formation, structure, and evolution of CVs, it is first critical to understand Roche lobes.
 In a two-body orbital system, the Roche potential of a point is an effective potential in the non-inertial, co-rotating frame of reference. It is given by the sum of the gravitational potential energies due to the two masses, and the potential energy arising from centrifugal force. This can be described mathematically for each position vector:
@@ -35,12 +33,12 @@ Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth, trim={0mm 0mm 380px 0mm}, clip]{figures/introduction/roche.png}
-    \caption{Showing the Roche potential in the neighbourhood of the binary system. Each line represents a line of equipotential. Taken from \citet{cerutti2007}}
+    \includegraphics[width=.6\columnwidth]{figures/introduction/roche.png}
+    \caption{Showing the Roche potential in the neighbourhood of the binary system, with the more massive primary star on the left. Darker regions are lower potentials. The red line illustrates the Roche lobes.}
     \label{fig:roche}
 \end{figure}
 
-Near to each of the bodies, the gravitational potential is large and negative, and dominates the Roche potential. This becomes \textit{less negative} as we move away from that body. Conversely, angular momentum is less negative closer to the center of mass, and more negative as we move away from the system and larger velocities are required to co-rotate. Broadly, there are then three regimes: a very negative Roche potential near each of the two bodies, a less negative region immediately surrounding the two bodies, and a very negative region far from the two bodies. The overall potential is smooth, so joining the three regions requires a ridge encircling the orbiting bodies, and a saddle between them. Figure~\ref{fig:roche}\todo{Make your own version of this figure - this one is blurry and ugly} shows this graphically. The saddle is centred on the first Lagrangian point, $L_1$, and is the point at which a small (co-rotating) mass is attracted equally and oppositely by both bodies. We can trace the line of constant potential that passes through the $L_1$ point, giving two teardrops joined at the tips. The teardrop that encapsulates a star is known as its Roche lobe. Matter that extends beyond the Roche lobe is no longer gravitationally bound to its parent body, and will either fall onto its companion via the $L_1$ point, or otherwise be ejected from the star. This material will no longer be in a stable orbit, so will either be ejected from the system, or find a new higher orbit where the two-body effects are negligible.
+Near to each of the bodies, the gravitational potential is large and negative, and dominates the Roche potential. This becomes \textit{less negative} as we move away from that body. Conversely, angular momentum is less negative closer to the center of mass, and more negative as we move away from the system and larger velocities are required to co-rotate. Broadly, there are then three regimes: a very negative Roche potential near each of the two bodies, a less negative region immediately surrounding the two bodies, and a very negative region far from the two bodies. The overall potential is smooth, so joining the three regions requires a ridge encircling the orbiting bodies, and a saddle between them. Figure~\ref{fig:roche} shows this graphically. The saddle is centred on the first Lagrangian point, $L_1$, and is the point at which a small (co-rotating) mass is attracted equally and oppositely by both bodies. We can trace the line of constant potential that passes through the $L_1$ point, giving two teardrops joined at the tips. The teardrop that encapsulates a star is known as its Roche lobe. Matter that extends beyond the Roche lobe is no longer gravitationally bound to its parent body, and will either fall onto its companion via the $L_1$ point, or otherwise be ejected from the star. This material will no longer be in a stable orbit, so will either be ejected from the system, or find a new higher orbit where the two-body effects are negligible.
 
 The shape of the Roche lobes are non-trivial to calculate, and must be done numerically. However, approximations exist for the volume-equivalent radius of a Roche lobe (that is, the radius of a sphere of equivalent volume). Most commonly used is the \citet{Eggleton1983} approximation,
 \begin{equation}
@@ -68,9 +66,9 @@ The common envelope phase can be parameterised with the energies involved, namel
 \end{equation}
 This is known as the $\alpha$ formalism \citep{demarco2011}, and is a good illustration of how poorly we understand CE evolution. $\alpha$ should be a metric we can predict with models, but this has proven very challenging and several competing frameworks exist \citep{ivanova2020}. 
 
-The energy needed to liberate the envelope is expected to come from the angular momentum of the binary, but some systems have been observed and characterised with $\alpha > 1$. This suggests that other sources, like the thermal output of the stars, contributes to the envelope ejection \citep{demarco2011, ivanova2013}. Common envelope evolution remains a very difficult problem to solve, and only approximate models currently exist \citep{ivanova2020}, but the following scenario is generally accepted as likely in the case of CVs.
+The energy needed to liberate the envelope is expected to come from the angular momentum of the binary, but some systems have been observed and characterised with $\alpha > 1$. suggesting that other sources, like the thermal output of the stars, can contribute to the envelope ejection \citep{demarco2011, ivanova2013}. Common envelope evolution remains a very difficult problem to solve, and only approximate models currently exist \citep{ivanova2020}, but the following scenario is generally accepted as likely in the case of CVs.
 
-During the common envelope phase, the envelope is expelled into a planetary nebula \citep{Ritter2012}, and $\alpha$ in the case of a proto-CV hass been loosely estimated to be $\sim 0.2 - 0.6$ \citep{politano2007}, and some evidence exists for lower $q$ systems having larger $\alpha$\citep{passy2013}. The ejecta carries with it angular momentum, causing $a$ to quickly fall from $\sim 100 R_\odot$ to less than $1 R_\odot$\todo{cite}, leaving behind a white dwarf and a low mass companion star -- usually a cool, red M dwarf -- in an extremely compact orbit, typically a few \Rsun. At this point, the red dwarf detaches from its Roche lobe and mass transfer is shut off. Angular momentum is shed through magnetic braking and gravitational wave braking until the donor comes into contact with its Roche lobe. Mass transfer can then resume, though this time in the more stable secondary-to-primary direction. The system is now a CV, and its evolution from here will be dominated by AML and mass transfer, detailed in \S\ref{sect:introduction:AMLMechs}.
+During the common envelope phase, the envelope is expelled into a planetary nebula \citep{Ritter2012}, and $\alpha$ in the case of a proto-CV hass been loosely estimated to be $\sim 0.2 - 0.6$ \citep{politano2007}, and some evidence exists for lower $q$ systems having larger $\alpha$ \citep{passy2013}. The ejecta carries with it angular momentum, causing $a$ to quickly fall from $\sim 100 R_\odot$ to less than $1 R_\odot$ \citep{Ritter2012}, leaving behind a white dwarf and a low mass companion star -- usually a cool, red M dwarf -- in an extremely compact orbit, typically a few \Rsun. At this point, the red dwarf detaches from its Roche lobe and mass transfer is shut off. Angular momentum is shed through magnetic braking and gravitational wave braking until the donor comes into contact with its Roche lobe. Mass transfer can then resume, though this time in the more stable secondary-to-primary direction. The system is now a CV, and its evolution from here will be dominated by AML and mass transfer, detailed in \S\ref{sect:introduction:AMLMechs}.
 
 
 \section{CV evolution}
@@ -79,28 +77,28 @@ During the common envelope phase, the envelope is expelled into a planetary nebu
 Initially, mass from the more massive star transferred to the smaller one, but once the system emerges from the common envelope phase, AML causes the orbit to tighten until the less massive red dwarf secondary fills its Roche lobe. This now means that mass transfer is moving matter closer to the system's centre of mass, imparting angular momentum to the secondary as it does so. This causes the donor to retreat, and increases $R_L$. Hence, mass transfer now acts to decrease further transfer \citep{Ritter2008}, rather than exacerbate it.
 
 To resume mass transfer some mechanism is necessary to shed angular momentum and bring the secondary back in contact with its Roche lobe. 
-Canonically, two mechanisms are thought to drive this; gravitational wave braking, and magnetic braking.
+Canonically, two mechanisms are thought to drive this; gravitational wave braking, and magnetic braking \citep{knigge2006,knigge11}.
 AML drives the two bodies closer together and triggers mass transfer, and mass loss from the donor drives it to retreat from the white dwarf primary. These two processes find equilibrium when the donor is just barely overflowing its Roche lobe, and the angular momentum gained by the donor from mass transfer is offset by the AML from the system.
 The mass transfer timescale of the donor is much shorter than its nuclear timescale, so mass loss dominates its evolution and gives rise to a single, unified CV evolutionary path.
 
 There is a further complicating factor to consider; while the secondary is losing mass, it is not in thermodynamic equilibrium. The outer layers are being lost, which reduces the pressure on the core and so reduces the rate of fusion. 
-Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than the mass loss timescale (this is demonstrated in \S\ref{sect:method:evolutionary modelling}), so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and so its radius increases in response to the mass loss, and a higher mass loss rate results in larger inflation \citep{knigge2006, knigge11}.
-When the donor first connects to its Roche lobe, this causes an initial spurt of mass loss and an increase in orbital period, but reconnection quickly reoccurs and remains stable. 
+Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than the mass loss timescale (this is later demonstrated in \S\ref{sect:method:evolutionary modelling}), so the star is unable to cool and contract to its equilibrium radius. This leaves the star hotter than it would be under zero mass loss, and its radius increased in response to the mass loss, proportionally to the mass loss rate \citep{knigge2006, knigge11}.
+% When the donor first connects to its Roche lobe, this causes an initial spurt of mass loss and an increase in orbital period, but reconnection quickly reoccurs and remains stable. 
 
 
 \subsection{Sources of angular momentum loss}
 \label{sect:introduction:AMLMechs}
 
-When two bodies orbit each other in space, the periodic warping of space-time produces gravitational waves. These waves carry energy away from the system, robbing it of angular momentum and reducing the orbital radius \citep{Paczynski1967}. In CVs, the rate of momentum loss from gravitational waves is small, so long timescales (by human standards) are needed to significantly alter the orbital period, $P$.
-The rate of change of the period, $\dot P$, should be possible to probe with long-baseline observations (e.g. \citealt{qian2007, shafter2021}), but are prone to large errors and are difficult to gather data for. However, this has not prevented some systems having their $\dot P$ inferred indirectly and a few such characterisations have been done. Notably, \citet{pala2020} recently inferred the mass loss rates (which directly relates to $\dot P$) of 42 CVs from HST spectra, using the white dwarf temperature and mass as diagnostics. 
+When two bodies orbit each other in space, the periodic warping of space-time produces gravitational waves \citep{einstein1918} and these waves carry energy away from the system, robbing it of angular momentum and reducing the orbital radius \citep{Paczynski1967}. In CVs, the rate of momentum loss from gravitational waves is small, so long timescales (by human standards) are needed to significantly alter the orbital period, $P$.
+The rate of change of the period, $\dot P$, should be possible to probe with long-baseline observations (e.g. \citealt{qian2007, shafter2021}), but are prone to large errors and are difficult to gather data for. However, this has not prevented some systems having their $\dot P$ inferred indirectly and a few such characterisations have been done. 
+Notably, \citet{pala2020} recently inferred the mass loss rates (which directly relates to $\dot P$) of 42 CVs from HST spectra, using the white dwarf temperature and mass as diagnostics. 
 In the near future, CV gravitational waves are expected to be visible to the LISA mission, and direct measurements of $\dot P$ at scale will become feasible \citep{Meliani2000, kalomeni2016}. 
 
 Population synthesis models do not match observations with gravitational braking alone, and magnetic braking is thought to make up the deficit (e.g. \citet{kolb1993a, kolb1993, Davis2008, garraffo2018}).
 Additionally, \citet{Townsley2009}, \citet{Pala2021} infer the mass transfer rate (a diagnostic of $\dot P$) from the white dwarf surface temperature, and find results inconsistent with pure gravitational braking.
 
 If one of the stars has a strong magnetic field (often assumed to be the secondary, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}), any wind emanating from the system, which is made up of charged particles, and likely originating from the secondary, will couple with the magnetic field to some degree and carry some angular momentum away from the binary with it.
-In the case of a CV, the wind originates from the secondary star, and the magnetic field is often assumed to be associated with the secondary also, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}.
-
+In the case of a CV, the wind originates from the secondary star and the magnetic field is often assumed to be associated with the secondary also, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}.
 A more detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}.
 
 
