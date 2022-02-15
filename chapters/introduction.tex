@@ -18,14 +18,12 @@ The mass transfer also gives rise to two more observable features of a CV: an ac
 Systems actively undergoing mass transfer are important to our understanding of stellar evolution. A diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for\todo{Cite this}. Of such systems, CVs in particular are interesting as modelling their eclipse lightcurves can yield precise, independant measures of both stars' mass and radius \citep{wood1986,Littlefair2008,Savoury2011}. Further, since the donor stars' evolution is dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}.
 The mass loss itself is driven by poorly-understood mechanisms, often attributed to stellar magnetism and gravitational waves, that can also be probed using CV observation and modelling.
 
-Since CVs are binary stars, in the case of eclipsing systems it is possible to make direct observations of orbital separations, and stellar masses and radii, in addition to more general techniques, like spectroscopic analysis.
-The ability to thoroughly characterise CVs makes them an excellent test-bed for binary modelling, and the complex processes that contribute to their evolution.
-Unfortunately, whilst semi-empirical modelling of most of the CV evolutionary track and population distribution is now possible (e.g. \citealt{knigge11,Paxton_2015}), the field has yet to produce {\it physically motivated} models capable of accurately reproducing either the CV population distribution or complete evolutionary track, indicating some shortfalls in our understanding \citep{schreiber2015,Schreiber2016}. Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with extremely low mass donor stars appear to be losing angular momentum much faster than our models predict \citep{wild2021}. This first chapter will summarise the current understanding of CV formation and evolution, and some of the issues with both.
+Since CVs are binary stars, in the case of eclipsing systems it is possible to make direct observations of orbital separations, stellar masses, and radii. This lends some powerful diagnostics, in addition to more general techniques like spectroscopic analysis.
+The ability to thoroughly characterise CVs makes them an excellent testbed for binary modelling, and the complex processes that contribute to their evolution.
+Unfortunately, whilst reasonably accurate semi-empirical modelling of most of the CV evolutionary track and population distribution is now possible (e.g. \citealt{knigge11,Paxton_2015}), the field has yet to produce physically motivated theoretical models capable of accurately reproducing either the CV population distribution or complete evolutionary track, indicating some shortfalls in our understanding \citep{schreiber2015,Schreiber2016}. Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with extremely low mass donor stars appear to be losing angular momentum much faster than our models predict \citep{Schreiber2016,wild2021}. This first chapter will summarise the current understanding of CV formation and evolution, and some of the issues with both.
 
 The bulk of this thesis is focused on two elements. Firstly, the sample of eclipse modelled CVs is small - only 18 systems prior to this work. 
-% Such systems are valuable, as eclipse modelling provides the stellar masses and radii, and the white dwarf temperature. 
 I characterise an additional XXX\todo{Put in here how many systems} CV systems below periods of $\lesssim 2.5$ hours.
-While this is still a small sample, it is now enough for approximate statistical analysis.
 Second, using this sample, I give further confirmation of the failure of the canonical CV evolutionary track to reproduce observations, and measure the AML rates of short period CVs as functions of donor mass, and orbital period\todo{Make sure to update this when the science is done!}. Through this, I hope to constrain the possible sources of missing AML.
 
 
@@ -38,7 +36,7 @@ In a two-body orbital system, the Roche potential of a point is an effective pot
 \begin{equation}
     {\bf \phi} = -\frac{G M_1}{|{\bf r - r}_1|} - \frac{G M_2}{|{\bf r - r}_2|} - \frac{1}{2}({\bf \Omega} \times {\bf r})^2
 \end{equation}
-Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is the position vector being considered, and $\bf \Omega$ is the angular momentum vector of the binary. $M_{1,2}$ and ${\bf r}_{1,2}$ are the masses and position vectors of the two orbiting bodies. measured from the centre of mass. Figure~\ref{fig:roche} shows this graphically. 
+Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is the position vector being considered relative to the centre of mass, and $\bf \Omega$ is the angular momentum vector of the binary. $M_{1,2}$ and ${\bf r}_{1,2}$ are the masses and position vectors of the two orbiting bodies. measured from the centre of mass. Figure~\ref{fig:roche} shows this graphically. 
 
 \begin{figure}
     \centering
@@ -47,7 +45,7 @@ Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is
     \label{fig:roche}
 \end{figure}
 
-The two teardrop-shaped Roche lobes meet at the first Lagrangian point, $L_1$, and is the point at which a small (co-rotating) mass is attracted equally and oppositely by both bodies. We can trace the line of constant potential that passes through the $L_1$ point, giving two teardrops joined at the tips. The teardrop that encapsulates a star is known as its Roche lobe. Matter that extends beyond the Roche lobe is no longer gravitationally bound to its parent body, and will either fall onto its companion, or otherwise be ejected from the star. This material will no longer be in a stable orbit, so will either be ejected from the system, or find a new higher orbit where the two-body effects are negligible.
+The two teardrop-shaped Roche lobes meet at the first Lagrangian point, $L_1$, and is the point at which a small (co-rotating) mass is attracted equally and oppositely by both bodies. We can trace the line of constant potential that passes through the $L_1$ point, giving two teardrops joined at the tips. The teardrop that encapsulates a star is known as its Roche lobe. Matter that extends beyond the Roche lobe is no longer gravitationally bound to its parent body, and will either fall onto its companion, or be ejected from the star. Ejected material will no longer be in a stable orbit, so will go on to either be ejected from the system entirely, or find a new higher orbit where the two-body effects are negligible.
 
 The shape of the Roche lobes are non-trivial to calculate, and must be done numerically. However, approximations exist for the volume-equivalent radius of a Roche lobe (that is, the radius of a sphere of equivalent volume). Most commonly used is the \citet{Eggleton1983} approximation,
 \begin{equation}
@@ -68,46 +66,45 @@ Disc material gradually loses angular momentum and gravitational potential energ
     \label{eqn:disc viscocity}
     \nu = \alpha c_s H
 \end{equation}
-Since turbulent eddies cannot be larger than $H$ or have velocities greater than $c_s$, $c_s H$ forms the upper limit of $\nu$, and $\alpha$ is limited in this model to values between 0 and 1. In typical CV accretion discs (i.e. quiescent discs, see \S\ref{sect:introduction:dwarf novae}), $\alpha$ takes values from $\sim 0.01 - 0.05$ \citet{hellier2001}.
+Since turbulent eddies cannot be larger than $H$ or have velocities greater than $c_s$, $c_s H$ forms the upper limit of $\nu$, and $\alpha$ is limited in this model to values between 0 and 1. In typical CV accretion discs (i.e. quiescent discs, see \S\ref{sect:introduction:dwarf novae}), $\alpha$ takes values from $\sim 0.01 - 0.05$ \citep{hellier2001}.
 
 Material that enters the disc must lose gravitational potential energy before it can be accreted to the white dwarf surface. Approximately half of this energy is lost thermally, through radiating accretion light, and the other half is converted to the kinetic energy necessary to maintain orbit about the white dwarf at lower altitudes. This low orbit has typical velocities roughly an order of magnitude higher than the rotational velocity of the white dwarf, so for material to settle on the stars' surface it must dissipate a large amount of kinetic energy. A region between the inner edge of the disc, and the surface of the white dwarf where this deceleration occurs is called the boundary layer, and can be a significant contributor to the total brightness of a CV. 
 
-As the white dwarf is accreting material to its surface, one might expect it to grow in mass over time, and possibly even detonate as a Ia supernova as it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \todo{ref}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae, outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
+As the white dwarf is accreting material onto its surface, one might expect it to grow in mass over time, and possibly even detonate as a type Ia supernova when it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \citep{zorotovic2011}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae, outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
+
 
 
 \section{CV variability and subtypes}
-The sections above have outlined the general structure and evolution of a CV, but not all systems are well described by this picture. CVs exhibit significant variability even on human timescales, often on the order of several magnitudes in brightness. Further, a few subtypes of CV exist that either lie significantly outside the normal evolutionary tracks we expect, or contain exotic components. These are briefly discussed, though the focus of this work is on ``classic'' CVs, and the majority of these subtypes are fundamentally incompatible with our analysis techniques.
+Several subtypes of CV exist that either lie significantly outside the normal evolutionary tracks we expect, or contain exotic components. These are briefly discussed, though the focus of this work is on ``classic'' CVs, and the majority of these subtypes are fundamentally incompatible with our analysis techniques.
 
 \subsection{Brown dwarf donors}
 \label{sect:introduction:brown dwarf donors}
 
-The formation channel of CVs does not require that the secondary star meets any minimum mass requirement, and it is theoretically possible to form a CV with a substellar brown dwarf donor \citep{politano2002,politano2004}. Because the donor is so small, these systems can form well below the period minimum, between 46 minutes and 2.5 hours \citep{politano2004}. CVs are observed with sub-minimum orbital periods, but observational evidence of these hosting brown dwarfs is rare. However, a few confirmations do exist, for example in SDSS J150722.30+523039.8 \citep{littlefair2007}
+The formation channel of CVs does not require that the secondary star meets any minimum mass requirement, and it is theoretically possible to form a CV with a substellar brown dwarf donor \citep{politano2002,politano2004}. Because the donor is so small, these systems can form well below the theoretical minimum period (see \S\ref{sect:introduction:period minimum and bouncers}), between 46 minutes and 2.5 hours \citep{politano2004}. CVs are observed with extremely short orbital periods, but observational evidence of these hosting brown dwarfs is rare. However, a few confirmations do exist, for example in SDSS J150722.30+523039.8 \citep{littlefair2007}
 
 \subsection{Magnetic CVs}
 \label{sect:introduction:magnetic CVs}
 
 It is possible for white dwarfs to have very strong magnetic fields, in the region of tens to hundreds of megagauss. Such white dwarfs are called polars, and are an interesting field of study in their own right, but when a polar is accreting material from a donor star the system is designated as an AM Her star. The intense magnetic field strength alters the CV evolution in a two main ways. The strong field lines of the polar mean that the hot, charged photosphere material transferred to the primary cannot form an accretion disc and instead falls directly onto the surface of the white dwarf. The impacting material forms a bright spot on its surface, which is usually bright enough to be visible from earth. In addition, the strong field lines force the white dwarf to become tidally locked to the donor star. 
 
-There is also a subclass of magnetic CVs with weaker field strengths of a few megagauss, known as DQ Her stars. In these systems, the white dwarf is not tidally locked, and a partial disc can exist. However, as the existence of a disc is crucial to the characterisation technique used in this work (see \S WHAT\todo{Put in the relevant section here} for details), magnetic CVs are unsuitable for our analysis.
+There is also a subclass of magnetic CVs with weaker field strengths of a few megagauss, known as DQ Her stars. In these systems, the white dwarf is not tidally locked, and a partial disc can exist.
 
 \subsection{Helium-rich CVs}
 \label{sect:introduction:AM CVn}
 
 A small number of CV donors are helium-rich, with much smaller radii than their hydrogen-rich counterparts; these can be semi-degenerate helium stars, the cores of highly evolved main sequence stars, or a second white dwarf. The  As a CV donor must be in contact with its Roche lobe, such systems are far more compact than usual, with orbital periods $\lesssim 65$ minutes. Such systems are AM CVn stars, after the prototypical system AM Canum Venaticorum. For further discussion on AM CVn stars, see \citep{solheim2010}.
 
-Early population studies expect that up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been difficult to test. \citet{zorotovic2010} examined a sample of CV progenitors, and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf.
-
 
 \subsection{Classical Novae}
 \label{sect:introduction:classical novae}
 
 The white dwarf in a CV is almost constantly accreting matter onto its surface. Over time this surface layer can build up, and get placed under immense pressure by the gravity of the white dwarf. Eventually, pressures rise enough to force material at the boundary to become degenerate, and once hot enough this boundary layer can begin nuclear fusion. 
-Since the accreted material has become degenerate, it cannot expand in response to the extra energy from fusion and simply heats further, leading to more and more fusion and culminating in a complete detonation of the accreted material on the white dwarf's surface \citep{warner1995}. This detonation is finally able to overcome the surface gravity of the white dwarf, and the accreted material is blown from the surface.
-These are generally one-off events, recognised by a significant brightening of the system of between 6 and 19 magnitudes, lasting anywhere from a few days, so several months. 
+Since the accreted material has become degenerate, it cannot expand in response to the extra energy from fusion and simply heats further, leading to more and more fusion and culminating in a complete detonation of the accreted material on the white dwarf's surface \citep{warner1995}. This detonation heats the material enough to lift degeneracy, and the accreted material is blown from the surface.
+These are recognised by a significant brightening of the system of between 6 and 19 magnitudes, lasting anywhere from a few days, to several months. 
 
-Once a system has experienced a classical nova, it is classified as a CNe system. \citep{warner1995}. However, theory suggests that all CVs experience classical novae many times over their lifetimes. The required amount of accreted material for the nova to occur depends on mass, but lies between $3\times10^{-5} M_\odot$ of hydrogen for a $1.3 M_\odot$ white dwarf, and $5\times10^{-3} M_\odot$ for a low mass, $0.6 M_\odot$ white dwarf \citep{hellier2001}. Typical CV accretion rates are around $10^{-9} M_\odot\ yr^{-1}$ for long period systems, and $10^{-10} M_\odot\ yr^{-1}$ for short period systems \citep{hellier2001, Pala2021}, suggesting classical novae recur at most every few million years, down to every few tens of thousands of years.
+Once a system has experienced a classical nova, it is classified as a CNe system. \citep{warner1995}. However, theory suggests that all CVs experience classical novae many times over their lifetimes. The required amount of accreted material for the nova to occur depends on the white dwarf mass, but lies between $3\times10^{-5} M_\odot$ of hydrogen for a $1.3 M_\odot$ white dwarf, and $5\times10^{-3} M_\odot$ for a $0.6 M_\odot$ white dwarf \citep{hellier2001}. Typical CV accretion rates are around $10^{-9} M_\odot\ yr^{-1}$ for long period systems, and $10^{-10} M_\odot\ yr^{-1}$ for short period systems \citep{hellier2001, Pala2021}, suggesting classical novae recur every few million years, or every few tens of thousands of years at most.
 
-The amount of material retained by the white dwarf is likely negligible. Both population synthesis by \citep{Wijnen2015} and observations by \citep{McAllister2017} indicate no evidence of mass growth over time for the white dwarfs in CVs, and hence that the expulsion of the accreted material in a classical nova is complete.
+The amount of material retained by the white dwarf is likely negligible. Both population synthesis \citep{Wijnen2015} and observations \citep{McAllister2017} indicate no evidence of mass growth over time for the white dwarfs in CVs, and hence that the expulsion of the accreted material in a classical nova is complete.
 
 A final note is that some CVs show multiple classical novae in relatively quick succession \citep{schaeffer2010}. These Recurrent Novae (RNe) are distinguished by having more than one observed nova event recorded. As good quality data only exist for the last few centuries, this enforces a soft limit on recurrence interval of a few hundred years, though recent efforts have been made to search ancient records for candidate events \citep{hoffmann2022}. Only a handful of confirmed RNe are known; the variable star index \citep{Watson2006} only contains 11 systems classified as RNe.
 
@@ -122,7 +119,7 @@ Initially, the disc is in a cooler, ``low'' state with low temperature, low surf
 
 If the accretion rate of donor material exceeds the rate material falls onto the surface of the white dwarf, then a buildup of matter begins in the disc, raising the density and temperature. Eventually, this annulus reaches $\sim 7000K$, at which point hydrogen becomes partially ionised and a rapid further increase in temperature is triggered as the material becomes optically thick and heat is trapped in the disc. In addition, as the temperature and density rise, so does $c_s$, and following Equation~\ref{eqn:disc viscocity}, so does viscosity, even assuming constant $\alpha$. In fact, $\alpha$ {\it rises} during outburst, to $\alpha \sim 0.1 - 0.5$ \citep{hellier2001}. This hot, luminous, ``high'' state is again stable, and the disc is said to be in outburst. 
 
-Now that the disc is more viscous, material is moved inwards more readily. The infall rate onto the white dwarf is much increased, and is now higher than the mass transfer rate, so the disc is drained onto the surface of the white dwarf. As it does so, the surface density and temperature begin to fall, and eventually protons and electrons recombine into hydrogen. While recombination is an exothermic process, the release of energy is outweighed by the material once again becoming optically thin and allowing radiation to more easily escape the disc. The disc now quickly cools back down to the quiescent, ``low'' state, returning to a low surface density, and the cycle can repeat itself. For a more in-depth look at this model, refer to discussions by \citet{cannizzo1993}, \citet{osaki1996}, \citet{warner1995}, \citep{hellier2001}, and \citet{Hameury2002}.
+Now that the disc is more viscous, material is moved inwards more readily. The infall rate onto the white dwarf is much increased, and is now higher than the mass transfer rate, so the disc is drained onto the surface of the white dwarf. As it does so, the surface density and temperature begin to fall, and eventually protons and electrons recombine into hydrogen. While recombination is an exothermic process, the release of energy is outweighed by the material once again becoming optically thin and allowing radiation to more easily escape the disc. The disc now quickly cools back down to the quiescent, ``low'' state, returning to a low surface density, and the cycle can repeat itself. For a more in-depth look at this model, refer to discussions by \citet{cannizzo1993}, \citet{osaki1996},, and \citet{Hameury2002}.
 
 Three types of DNe exist, which exhibit somewhat different behaviour than what is outlined above. The first of which are SS Cyg stars, distinguished by very consistent amplitudes across outbursts, though there is variation in length, shape, and recurrence time.
 
@@ -133,139 +130,41 @@ The third subtype are SU UMa stars. These systems are known for their more compl
 \subsection{SU UMa stars}
 \label{sect:introduction:SU UMa}
 
-SU UMa stars are distinguished by exhibiting superoutbursts, similar to the regular outbursts that the star still undergoes, but with greater amplitudes and durations, but longer recurrence times. These outbursts are triggered by the disc radius growing to such an extent that it becomes tidally perturbed by the donor star, and turns elliptical. This can only take place for when the donor star is less than $\sim 1/3$ the white dwarf mass, so only short period systems see these superoutbursts. \citep{hellier2001}. 
-SU UMa stars are also known for their superhumping, which also arises from the disc eccentricity. The tidal interaction between the disc and the donor produces an area of increased luminosity at the edge of the disc between the white dwarf and the donor \citep{warner1988}. As the disc is elliptical, the distance between this disc edge and the donor varies over the course of an orbit, causing a similar variation in brightness as the donor moves around the disc.
+SU UMa stars are distinguished by exhibiting superoutbursts, similar to the regular outbursts that the star still undergoes, but with greater amplitudes and durations, and longer recurrence times. These outbursts are triggered by the disc radius growing to such an extent that it becomes tidally perturbed by the donor star, and becomes elliptical. This can only take place when the donor star is less than $\sim 1/3$ the white dwarf mass, so only short period systems see these superoutbursts. \citep{hellier2001}. 
+SU UMa stars are also known for their superhumps, which also arises from the disc eccentricity. The tidal interaction between the disc and the donor produces an area of increased luminosity at the edge of the disc between the white dwarf and the donor \citep{warner1988}. As the disc is elliptical, the distance between this disc edge and the donor varies over the course of an orbit, causing a similar variation in brightness as the donor moves around the disc.
 These fluctuations are called superhumps, and are useful as they provide a diagnostic to the mass ratio for the system as the  \citep{Patterson1998, Patterson2001, patterson2005}. 
 
 Because of the strong influence of the donor, the disc is also subject to precession, with a precession rate slightly longer than the orbital period. The superhump period, $P_{\rm hump}$ is then a combination of the orbital period, $P_{\rm orb}$, and the precessional period $P_{\rm pr}$,
 \begin{equation}
     \frac{1}{P_{\rm hump}} = \frac{1}{P_{\rm orb}} - \frac{1}{P_{\rm pr}}
 \end{equation}
-and while $P_{\rm pr}$ is difficult to observe, both $P_{\rm orb}$ and $P_{\rm hump}$ can be readily observed with photometry from earth without the need for precise alignment that eclipse modelling requires. Since the precession period is dependant on the mass ratio and the disc radius, by finding the superhumping period of eclipsing CVs an empirical relationship can be found between the superhumping excess, $\epsilon$, and the mass ratio of a CV, where:
+and while $P_{\rm pr}$ is difficult to observe, both $P_{\rm orb}$ and $P_{\rm hump}$ can be readily observed with photometry. Since the precession period is dependant on the mass ratio and the disc radius, by finding the superhump period of eclipsing CVs an empirical relationship can be found between the superhump excess, $\epsilon$, and the mass ratio of a CV, where:
 \begin{equation}
     \epsilon = \frac{P_{\rm hump} - P_{\rm orb}}{P_{\rm orb}}
 \end{equation}
-and several papers exist discussing and calibrating this relationship, see \citet{McAllister2019} for a recent calibration and good starting point for more information.
+and several papers exist discussing and calibrating this relationship, see \citet{McAllister2019} and \citet{kato2022} for some recent calibrations and a good starting point for more information.
 
 
 \subsection{Nova-like systems}
 
-The disc instability model applies to CVs with mass transfer rates that are high enough to exceed the infall rate onto the CV during the ``low'' state, but low enough that the ``high'' state can still empty the disc. However, a subset of CVs have mass transfer rates high enough to sustain the high state and maintain a permanent outburst mode. Such systems are called Novalikes, or NL systems. Most NL CVs show little to no brightness variation, though a small number known as VY Scl stars do occasionally enter ``low'' states and dip in brightness by several magnitudes. \citet{livio1994} propose that this is triggered by a starspot rotating into the L1 point causing a fall in mass transfer rate. A precise mechanism here is not given, but since star spots are regions of concentrated magnetic fields, it is postulated that the stronger magnetic field of the spot disrupts magnetic braking in some fashion. A competing theory from \citet{wu1995} proposes that the fall in brightness is caused by the irradiation of the donor stars' atmosphere driving mass transfer, and that when this irradiation becomes blocked, the mass transfer rate falls enough for the disc to enter the low state for a short time.
-
-
-
-\section{Accretion in CVs}
-\label{sect:introduction:accretion}
-Accretion physics is important to the appearance and behaviour of a CV. While it is summarised here, more in-depth descriptions can be found in \citet{warner1995, hellier2001, ritter2010}.
-
-When the donor star overfills its Roche lobe, matter is ejected from its surface at thermal velocities -- $\sim 10 \rm km\ s^{-1}$ for a 5000K M dwarf. This is small when compared to the orbital velocity of the system, and M dwarf velocities of $\sim 400-500 \rm\ km s^{-1}$ are common in the observations reported in \S\todo{Put this section in!}. Since the ejected material is effectively stationary as it leaves the donor, it falls along a ballistic trajectory towards the white dwarf primary and forms an accretion disc around it. 
-
-Disc material gradually loses angular momentum and gravitational potential energy due to its viscosity, which acts over time to concentrate the majority of the disc's angular momentum in the minority of the disc's mass, ejecting some material at high velocities at the expense of moving the remainder closer to the white dwarf. This viscosity partially arises from friction within the fluid of the disc but the main source is thought to be from turbulence, random eddy currents moving material to different radii. This form of turbulence in a thin disc was formalised in the alpha disc model by \citet{shakura1973}, where viscosity, $\nu$, is related to scale height, $H$, and the speed of sound, $c_s$, by a free parameter, $\alpha$.
-\begin{equation}
-    \label{eqn:disc viscocity}
-    \nu = \alpha c_s H
-\end{equation}
-Since turbulent eddies cannot be larger than $H$ or have velocities greater than $c_s$, $c_s H$ forms the upper limit of $\nu$, and $\alpha$ is limited in this model to values between 0 and 1. In typical CV accretion discs (i.e. quiescent discs, see \S\ref{sect:introduction:dwarf novae}), $\alpha$ takes values from $\sim 0.01 - 0.05$ \citet{hellier2001}.
-
-Material that enters the disc must lose gravitational potential energy before it can be accreted to the white dwarf surface. Approximately half of this energy is lost thermally, through radiating accretion light, and the other half is converted to the kinetic energy necessary to maintain orbit about the white dwarf at lower altitudes. This low orbit has typical velocities roughly an order of magnitude higher than the rotational velocity of the white dwarf, so for material to settle on the stars' surface it must dissipate a large amount of kinetic energy. A region between the inner edge of the disc, and the surface of the white dwarf where this deceleration occurs is called the boundary layer, and can be a significant contributor to the total brightness of a CV. 
-
-As the white dwarf is accreting material to its surface, one might expect it to grow in mass over time, and possibly even detonate as a Ia supernova as it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \todo{ref}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae, outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
-
-
-
-\section{CV variability and subtypes}
-The sections above have outlined the general structure and evolution of a CV, but not all systems are well described by this picture. CVs exhibit significant variability even on human timescales, often on the order of several magnitudes in brightness. Further, a few subtypes of CV exist that either lie significantly outside the normal evolutionary tracks we expect, or contain exotic components. These are briefly discussed, though the focus of this work is on ``classic'' CVs, and the majority of these subtypes are fundamentally incompatible with our analysis techniques.
-
-\subsection{Brown dwarf donors}
-\label{sect:introduction:brown dwarf donors}
-
-The formation channel of CVs does not require that the secondary star meets any minimum mass requirement, and it is theoretically possible to form a CV with a substellar brown dwarf donor \citep{politano2002,politano2004}. Because the donor is so small, these systems can form well below the period minimum, between 46 minutes and 2.5 hours \citep{politano2004}. CVs are observed with sub-minimum orbital periods, but observational evidence of these hosting brown dwarfs is rare. However, a few confirmations do exist, for example in SDSS J150722.30+523039.8 \citep{littlefair2007}
-
-\subsection{Magnetic CVs}
-\label{sect:introduction:magnetic CVs}
-
-It is possible for white dwarfs to have very strong magnetic fields, in the region of tens to hundreds of megagauss. Such white dwarfs are called polars, and are an interesting field of study in their own right, but when a polar is accreting material from a donor star the system is designated as an AM Her star. The intense magnetic field strength alters the CV evolution in a two main ways. The strong field lines of the polar mean that the hot, charged photosphere material transferred to the primary cannot form an accretion disc and instead falls directly onto the surface of the white dwarf. The impacting material forms a bright spot on its surface, which is usually bright enough to be visible from earth. In addition, the strong field lines force the white dwarf to become tidally locked to the donor star. 
-
-There is also a subclass of magnetic CVs with weaker field strengths of a few megagauss, known as DQ Her stars. In these systems, the white dwarf is not tidally locked, and a partial disc can exist. However, as the existence of a disc is crucial to the characterisation technique used in this work (see \S WHAT\todo{Put in the relevant section here} for details), magnetic CVs are unsuitable for our analysis.
-
-\subsection{Helium-rich CVs}
-\label{sect:introduction:AM CVn}
-
-A small number of CV donors are helium-rich, with much smaller radii than their hydrogen-rich counterparts; these can be semi-degenerate helium stars, the cores of highly evolved main sequence stars, or a second white dwarf. The  As a CV donor must be in contact with its Roche lobe, such systems are far more compact than usual, with orbital periods $\lesssim 65$ minutes. Such systems are AM CVn stars, after the prototypical system AM Canum Venaticorum. For further discussion on AM CVn stars, see \citep{solheim2010}.
-
-Early population studies expect that up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been difficult to test. \citet{zorotovic2010} examined a sample of post-common envelope binaries and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf.
-
-
-\subsection{Classical Novae}
-\label{sect:introduction:classical novae}
-
-The white dwarf in a CV is almost constantly accreting matter onto its surface. Over time this surface layer can build up, and get placed under immense pressure by the gravity of the white dwarf. Eventually, pressures rise enough to force material at the boundary to become degenerate, and once hot enough this boundary layer can begin nuclear fusion. 
-Since the accreted material has become degenerate, it cannot expand in response to the extra energy from fusion and simply heats further, leading to more and more fusion and culminating in a complete detonation of the accreted material on the white dwarf's surface \citep{warner1995}. This detonation is finally able to overcome the surface gravity of the white dwarf, and the accreted material is blown from the surface.
-These are generally one-off events, recognised by a significant brightening of the system of between 6 and 19 magnitudes, lasting anywhere from a few days, so several months. 
-
-Once a system has experienced a classical nova, it is classified as a CNe system. \citep{warner1995}. However, theory suggests that all CVs experience classical novae many times over their lifetimes. The required amount of accreted material for the nova to occur depends on mass, but lies between $3\times10^{-5} M_\odot$ of hydrogen for a $1.3 M_\odot$ white dwarf, and $5\times10^{-3} M_\odot$ for a low mass, $0.6 M_\odot$ white dwarf \citep{hellier2001}. Typical CV accretion rates are around $10^{-9} M_\odot\ yr^{-1}$ for long period systems, and $10^{-10} M_\odot\ yr^{-1}$ for short period systems \citep{hellier2001, Pala2021}, suggesting classical novae recur at most every few million years, down to every few tens of thousands of years.
-
-The amount of material retained by the white dwarf is likely negligible. Both population synthesis by \citep{Wijnen2015} and observations by \citep{McAllister2017} indicate no evidence of mass growth over time for the white dwarfs in CVs, and hence that the expulsion of the accreted material in a classical nova is complete.
-
-A final note is that some CVs show multiple classical novae in relatively quick succession \citep{schaeffer2010}. These Recurrent Novae (RNe) are distinguished by having more than one observed nova event recorded. As good quality data only exist for the last few centuries, this enforces a soft limit on recurrence interval of a few hundred years, though recent efforts have been made to search ancient records for candidate events \citep{hoffmann2022}. Only a handful of confirmed RNe are known; the variable star index \citep{Watson2006} only contains 11 systems classified as RNe.
-
-\subsection{Dwarf Novae}
-\label{sect:introduction:dwarf novae}
-
-CVs also undergo less extreme brightening events, called Dwarf Nova (DN) outbursts. These brighten the system by between 2 and 5 magnitudes \citep{warner1995} and are more brief than typical CNe, lasting less than $\sim 20$ days. However, in contrast to CNe, they have recurrence times much more in line with human timescales, ranging from a few days to some decades. This is due to the fundamental difference in the physical origin of the two phenomena.
-
-DN outbursts do not originate directly from either star in the system, but rather from the accretion disc around the white dwarf. Such outbursts are well-described by the disc instability model \citep{cannizzo1993, dubus2018}.
-
-Initially, the disc is in a cooler, ``low'' state with low temperature, low surface density, and low viscosity. Material in the disc moves inwards due to friction from turbulence (see \S\ref{sect:introduction:accretion}) which is relatively weak in the low viscosity material, so radial movement of disc material is slow.
-
-If the accretion rate of donor material exceeds the rate material falls onto the surface of the white dwarf, then a buildup of matter begins in the disc, raising the density and temperature. Eventually, this annulus reaches $\sim 7000K$, at which point hydrogen becomes partially ionised and a rapid further increase in temperature is triggered as the material becomes optically thick and heat is trapped in the disc. In addition, as the temperature and density rise, so does $c_s$, and following Equation~\ref{eqn:disc viscocity}, so does viscosity, even assuming constant $\alpha$. In fact, $\alpha$ {\it rises} during outburst, to $\alpha \sim 0.1 - 0.5$ \citep{hellier2001}. This hot, luminous, ``high'' state is again stable, and the disc is said to be in outburst. 
-
-Now that the disc is more viscous, material is moved inwards more readily. The infall rate onto the white dwarf is much increased, and is now higher than the mass transfer rate, so the disc is drained onto the surface of the white dwarf. As it does so, the surface density and temperature begin to fall, and eventually protons and electrons recombine into hydrogen. While recombination is an exothermic process, the release of energy is outweighed by the material once again becoming optically thin and allowing radiation to more easily escape the disc. The disc now quickly cools back down to the quiescent, ``low'' state, returning to a low surface density, and the cycle can repeat itself. For a more in-depth look at this model, refer to discussions by \citet{cannizzo1993}, \citet{osaki1996}, \citet{warner1995}, \citep{hellier2001}, and \citet{Hameury2002}.
-
-Three types of DNe exist, which exhibit somewhat different behaviour than what is outlined above. The first of which are SS Cyg stars, distinguished by very consistent amplitudes across outbursts, though there is variation in length, shape, and recurrence time.
-
-Z Cam stars exhibit standstills, events where the system enters outburst, peaks in brightness, then begins to dim. However, rather than returning to its quiescent magnitude, the brightness is maintained $\sim 1-1.5$ magnitudes below peak brightness for a long period of time, typically between a few days, and a few years \citep{simonsen2014}.
-
-The third subtype are SU UMa stars. These systems are known for their more complex behaviour, exhibiting superoutbursts and superhumping, and are described in \S\ref{sect:introduction:SU UMa}
-
-\subsection{SU UMa stars}
-\label{sect:introduction:SU UMa}
-
-SU UMa stars are distinguished by exhibiting superoutbursts, similar to the regular outbursts that the star still undergoes, but with greater amplitudes and durations, but longer recurrence times. These outbursts are triggered by the disc radius growing to such an extent that it becomes tidally perturbed by the donor star, and turns elliptical. This can only take place for when the donor star is less than $\sim 1/3$ the white dwarf mass, so only short period systems see these superoutbursts. \citep{hellier2001}. 
-SU UMa stars are also known for their superhumping, which also arises from the disc eccentricity. The tidal interaction between the disc and the donor produces an area of increased luminosity at the edge of the disc between the white dwarf and the donor \citep{warner1988}. As the disc is elliptical, the distance between this disc edge and the donor varies over the course of an orbit, causing a similar variation in brightness as the donor moves around the disc.
-These fluctuations are called superhumps, and are useful as they provide a diagnostic to the mass ratio for the system as the  \citep{Patterson1998, Patterson2001, patterson2005}. 
-
-Because of the strong influence of the donor, the disc is also subject to precession, with a precession rate slightly longer than the orbital period. The superhump period, $P_{\rm hump}$ is then a combination of the orbital period, $P_{\rm orb}$, and the precessional period $P_{\rm pr}$,
-\begin{equation}
-    \frac{1}{P_{\rm hump}} = \frac{1}{P_{\rm orb}} - \frac{1}{P_{\rm pr}}
-\end{equation}
-and while $P_{\rm pr}$ is difficult to observe, both $P_{\rm orb}$ and $P_{\rm hump}$ can be readily observed with photometry from earth without the need for precise alignment that eclipse modelling requires. Since the precession period is dependant on the mass ratio and the disc radius, by finding the superhumping period of eclipsing CVs an empirical relationship can be found between the superhumping excess, $\epsilon$, and the mass ratio of a CV, where:
-\begin{equation}
-    \epsilon = \frac{P_{\rm hump} - P_{\rm orb}}{P_{\rm orb}}
-\end{equation}
-and several papers exist discussing and calibrating this relationship, see \citet{McAllister2019} for a recent calibration and good starting point for more information.
-
-
-\subsection{Nova-like systems}
-
-The disc instability model applies to CVs with mass transfer rates that are high enough to exceed the infall rate onto the CV during the ``low'' state, but low enough that the ``high'' state can still empty the disc. However, a subset of CVs have mass transfer rates high enough to sustain the high state and maintain a permanent outburst mode. Such systems are called Novalikes, or NL systems. Most NL CVs show little to no brightness variation, though a small number known as VY Scl stars do occasionally enter ``low'' states and dip in brightness by several magnitudes. \citet{livio1994} propose that this is triggered by a starspot rotating into the L1 point causing a fall in mass transfer rate. A precise mechanism here is not given, but since star spots are regions of concentrated magnetic fields, it is postulated that the stronger magnetic field of the spot disrupts magnetic braking in some fashion. A competing theory from \citet{wu1995} proposes that the fall in brightness is caused by the irradiation of the donor stars' atmosphere driving mass transfer, and that when this irradiation becomes blocked, the mass transfer rate falls enough for the disc to enter the low state for a short time.
+The disc instability model applies to CVs with mass transfer rates that are high enough to exceed the infall rate onto the CV during the ``low'' state, but low enough that the ``high'' state can still empty the disc. However, a subset of CVs have mass transfer rates high enough to sustain the high state and maintain a permanent outburst mode. Such systems are called Novalikes, or novalike systems. Most novalike CVs show little to no brightness variation, though a small number known as VY Scl stars do occasionally enter ``low'' states and dip in brightness by several magnitudes. \citet{livio1994} propose that this is triggered by a starspot rotating into the L1 point causing a fall in mass transfer rate. This fall is because the stellar surface in a starspot is lower than at the unspotted surface, causing the donor to temporarily disconnect from the L1 point while the L1 is covered with a spot.
+A competing theory from \citet{wu1995} proposes that the fall in brightness is caused by the irradiation of the donor stars' atmosphere driving mass transfer, and that when this irradiation becomes blocked, the mass transfer rate falls enough for the disc to enter the low state for a short time.
 
 
 \section{CV formation}
 \label{sect:introduction:formation of CVs}
 
-The formation of a CV begins with a binary system forming at a distance of $\sim 100{R_\odot}$. Crucially, the stars differ significantly in mass, one typically being $<1{M_\odot}$ and the other $>1{M_\odot}$ \citep{Ritter2012}. The lifespan of a star falls as its mass increases, so the larger star evolves faster than its companion, increasing in radius as it does so. Eventually, the star fills its Roche lobe, usually when it ascends to the red giant branch. 
-As the outer layers contact the Roche lobe, stellar material crosses the boundary between being gravitationally bound to the donor and being ejected from its surface. 
+The formation of a CV begins with a binary system forming at a distance of $\sim 100{R_\odot}$. Crucially, the stars differ significantly in mass, one typically being $<1{M_\odot}$ and the other $>1{M_\odot}$ \citep{Ritter2012}. The lifespan of a star falls as its mass increases, so the larger star evolves faster than its companion, increasing in radius as it does so. Eventually, the primary fills its Roche lobe, usually when it ascends to the red giant branch. 
 Once the outer layers of the primary contact the Roche lobe, the $\mathrm L_1$\ point forms a locus for mass to move from the massive, evolved star onto the less evolved secondary star.
 
 As mass moves away from the primary, and away from the centre of mass of the system, it gains angular momentum. However, because angular momentum is conserved within the binary this is offset by a drop in separation, $a$, and the radius of the Roche Lobe, ${R_L}$, contracts. \textit{More} matter is now outside the primary Roche lobe, encouraging further mass transfer and hence further reduction in orbital separation \citep{Ritter2008}.
 
-With this positive feedback loop, the primary can rapidly transfer its whole envelope. The process is very rapid -- so rapid that models have been unable to properly resolve it, but is probably $\sim 10^2 - 10^3$ years in duration \citep{Ritter2012}. With this influx of mass, the secondary star grows and the accreted matter forms a thick, bloated, and deeply convective envelope on the star. The increased radius of the secondary brings the two bodies into contact \citep{Ritter2008} and the stars enter a common envelope phase of evolution. See \citet{paczynski1976} for an original reference on common envelope evolution, or \citet{ivanova2020} for a recent review of the topic. For detail on this phase as it relates to CVs, see \citet{taam1978, webbink1984, zorotovic2010, passy2011}.
+With this positive feedback loop, the primary can quickly transfer its whole envelope. The process is very rapid -- so rapid that models have been unable to properly resolve it, but is probably $\sim 10^2 - 10^3$ years in duration \citep{Ritter2012}. With this influx of mass, the secondary star grows and the accreted matter forms a thick, bloated, deeply convective envelope on the star. The increased radius of the secondary brings the two bodies into contact \citep{Ritter2008} and the stars enter a common envelope phase of evolution. See \citet{paczynski1976} for an original reference on common envelope evolution, or \citet{ivanova2020} for a recent review of the topic. For detail on this phase as it relates to CVs, see \citet{taam1978, webbink1984, zorotovic2010, passy2011}.
 
 The common envelope phase transfers much of the secondary stars' angular momentum to the shared envelope, though the mechanism for this is poorly understood \citep{demarco2011}. 
 If the common envelope is substantial enough, all the energy can be removed from the orbit and the two stars will merge. 
-If it is not, the entire envelope is unbound from the stars, and the stars are left in a compact orbit. 
-CV systems are the product of the latter scenario - the common envelope is ejected via a strong wind, leaving the remnant core of the primary as a white dwarf, and a low mass secondary companion M dwarf. 
+If it is not substantial enough, the entire common envelope is unbound from the stars, and the stars are left in a compact orbit. 
+CV systems are the product of the latter scenario - the common envelope is ejected via a strong wind, leaving the remnant core of the primary as a white dwarf, and a low mass secondary companion M dwarf still on the main sequence. 
 
 The common envelope phase can be parameterised with the energies involved, namely the gravitational binding energy of the envelope, $U_{\rm bind}$, and the change in the angular momentum contained in the orbit before and after the common envelope phase, $\Delta U_{\rm orb}$, as the common envelope efficiency parameter, $\alpha$.
 \begin{equation}
@@ -278,14 +177,16 @@ The energy needed to liberate the envelope is expected to come from the angular 
 For proto-CVs, $\alpha$ has been loosely estimated to be $\sim 0.2 - 0.6$ \citep{politano2007}, and some evidence exists for lower $q$ systems having larger $\alpha$ \citep{passy2013}. The ejecta carries with it angular momentum, causing $a$ to quickly fall from $\sim 100 R_\odot$ to a few $R_\odot$ \citep{politano2007}, leaving behind a white dwarf and a low mass companion star -- usually a cool, red M dwarf -- in an extremely compact orbit. 
 Following the common-envelope phase, angular momentum is shed through magnetic braking and gravitational wave braking until the donor comes into contact with its Roche lobe, a process that takes $\sim 1-2$ Gyrs\todo{get a citation}. Mass transfer can then resume, though this time in the more stable secondary-to-primary direction. The system is now a CV, and its evolution from here will be dominated by AML and mass transfer, detailed in \S\ref{sect:introduction:AMLMechs}.
 
+Early population studies expect that under this formation process up to 50\% of CVs should host a helium white dwarf \citep{politano1996}, though to date this has been difficult to test. 
+\citet{zorotovic2010} examined a sample of post-common envelope binaries and found only $13\pm7\%$ of the sample to be expected to evolve into a CV containing a helium white dwarf. However, no confirmed helium white dwarfs have been observed in CVs.
 
 
 \section{CV evolution}
 \label{sect:introduction:Summary of how AML and Mdot drive period evolution}
 
-Initially, mass from the more massive star transferred to the smaller one, but once the system emerges from the common envelope phase, AML causes the orbit to tighten until the less massive red dwarf secondary fills its Roche lobe. This now means that mass transfer is moving matter closer to the system's centre of mass, imparting angular momentum to the secondary as it does so. This causes the donor to retreat, and increases $R_L$. Hence, mass transfer now acts to decrease further transfer \citep{Ritter2008}, rather than exacerbate it.
+Initially, mass from the more massive star transferred to the smaller one, but once the system emerges from the common envelope phase, AML causes the orbit to tighten until the less massive red dwarf secondary fills its Roche lobe. Converse to during formation, mass transfer is now moving matter closer to the system's centre of mass, imparting angular momentum to the secondary as it does so. This causes the orbit to widen, and increases $R_L$. Hence, mass transfer now acts to decrease further transfer \citep{Ritter2008}, rather than exacerbate it.
 
-To resume mass transfer some mechanism is necessary to shed angular momentum and bring the secondary back in contact with its Roche lobe. 
+To maintain mass transfer some mechanism is necessary to shed angular momentum and bring the secondary back in contact with its Roche lobe. 
 Canonically, two mechanisms are thought to drive this; gravitational wave braking, and magnetic braking \citep{knigge2006,knigge11}.
 AML drives the two bodies closer together and triggers mass transfer, and mass loss from the donor drives it to retreat from the white dwarf primary. These two processes find equilibrium when the donor is just barely overflowing its Roche lobe, and the angular momentum gained by the donor from mass transfer is offset by the AML from the system.
 The mass transfer timescale of the donor is much shorter than its nuclear timescale, so mass loss dominates its evolution and gives rise to a single, unified CV evolutionary path.
@@ -297,17 +198,72 @@ Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than th
 \subsection{The classical picture of CV evolution}
 \label{sect:introduction:AMLMechs}
 
+\todo{rewrite this section}
 When two bodies orbit each other in space, the periodic warping of space-time produces gravitational waves \citep{einstein1918} and these waves carry energy away from the system, robbing it of angular momentum and reducing the orbital radius \citep{Paczynski1967}. In CVs, the rate of momentum loss from gravitational waves is small, so long timescales (by human standards) are needed to significantly alter the orbital period, $P$.
-The rate of change of the period, $\dot P$, is possible to probe directly with medium-to-long-baseline observations (e.g. \citealt{qian2007, shafter2021}), but is a stochastic process and highly variable on observable timescales. However, this has not prevented some systems having their average $\dot P$ inferred indirectly and a few such characterisations have been done. 
-Notably, \citet{pala2020} recently inferred the mass loss rates (which directly relates to $\dot P$) of 42 CVs from HST spectra, using the white dwarf temperature and mass as diagnostics. 
-In the near future, CV gravitational waves are expected to be visible to the LISA mission, and direct measurements of $\dot P$ at scale will become feasible \citep{Meliani2000, kalomeni2016}. 
-
-Population synthesis models do not match observations with gravitational braking alone, and magnetic braking is thought to make up the deficit (e.g. \citet{kolb1993a, kolb1993, Davis2008, garraffo2018}).
-Additionally, \citet{Townsley2009}, \citet{Pala2021} infer the mass transfer rate (a diagnostic of $\dot P$) from the white dwarf surface temperature, and find results inconsistent with pure gravitational braking.
+Both population synthesis models and evolutionary models of CVs do not match the observed population distribution with gravitational braking alone, and magnetic braking is thought to make up the deficit (e.g. \citet{kolb1993a, kolb1993, Davis2008, garraffo2018}).
 
 If one of the stars has a strong magnetic field (often assumed to be the secondary, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}), any wind emanating from the system, which is made up of charged particles, and likely originating from the secondary, will couple with the magnetic field to some degree and carry some angular momentum away from the binary with it.
 In the case of a CV, the wind originates from the secondary star and the magnetic field is often assumed to be associated with the secondary also, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}.
 A more detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}.
+
+
+\subsection{The effect of mass transfer on the binary}
+\label{sect:introduction:stability criterion}
+
+\todo{I added this section to explain the maximum stable $q$ value. Also helps the eCAML section, and the period minimum section.}
+When mass moves from the donor to the white dwarf primary, the redistribution of matter within the system must take place whilst conserving angular momentum. The total angular momentum of the binary, $J$, is given by,
+\begin{equation}
+    J = M_1 a_1 v_1 + M_2 a_2 v_2 = M_1 a_1 \frac{2\pi a_1}{P_{orb}} + M_2 a_2 \frac{2\pi a_2}{P_{orb}}
+\end{equation}
+where the distance from each star to the centre of mass is $a_{1,2}$, and the velocity of each star is $v_{1,2}$. 
+The binary separation between the stars is $a = a_1 + a_1$, and the ratio between the masses of the stars is the inverse of their distance, $\frac{M_1}{M_2} = \frac{a_2}{a_1}$. By substituting $P_{orb}$ for Kepler's 3rd law, we can construct a simple equation for $J$,
+\begin{equation}
+    J = M_1 M_2 \bigg( \frac{Ga}{M_1 + M_2} \bigg)^{1/2}
+\end{equation}
+Now, by taking the natural log of both sides and differentiating with respect to time we find the following relation between the derivatives.
+\begin{equation}
+    \frac{\dot a}{a} = 2\frac{\dot J}{J} + \frac{(\dot M_1+\dot M_2)}{M_1+M_2} + 2\frac{\dot M_1}{M_1} + 2\frac{\dot M_2}{M_2}
+\end{equation}
+For the specific case where the total system mass is fully conserved, we can use $\dot M = 0$, $\dot M_1 = -\dot M_2$, and $\dot J \equiv 0$ to simplify the above
+\begin{equation}
+    \label{eqn:introduction:orbital separation change due to mass transfer}
+    \frac{\dot a}{a} = 2\frac{\dot M_1}{M_1} + 2\frac{\dot M_2}{M_2} = 2(q-1) \frac{\dot M_2}{M_2}
+\end{equation}
+or by similarly differentiating the logarithm of $P_{orb}^2 \propto a^3$,
+\begin{equation}
+    \label{eqn:introduction:orbital period change due to mass transfer}
+    \frac{\dot P_{orb}}{P_{orb}} = \frac{3}{2}\frac{\dot a}{a} = 3(q-1) \frac{\dot M_2}{M_2}
+\end{equation}
+
+Equations \ref{eqn:introduction:orbital separation change due to mass transfer} and \ref{eqn:introduction:orbital period change due to mass transfer} tell us how the binary responds to mass transfer. As mass is lost from the secondary, $\dot M_2$ is negative and we can see that systems with $q>1$ will have their orbits contract, and systems with $q<1$ will have their orbits widen in response to mass transfer.
+
+We must also consider the response of the Roche lobe radius to mass transfer.
+A simpler, more easily manipulated alternative to the Eggleton $R_L$ approximation (Equation~\ref{eqn:eggleton approximation}) from \citep{paczynski1971},
+\begin{equation}
+    \frac{R_L}{a} = 0.462 \frac{q}{1 + q}^{1/3}
+\end{equation}
+although this only holds between $0 < q < 0.8$ and is accurate to 2\%. Taking the logarithm, differentiating with respect to time, and substituting Equation~\ref{eqn:introduction:orbital separation change due to mass transfer},
+\begin{equation}
+    \label{eqn:introduction:Roche lobe in response to mass loss}
+    \frac{\dot R_L}{R_L} = \frac{\dot a}{a} + \frac{\dot M_2}{3 M_2} = \bigg ( 2q - \frac{5}{3} \bigg )\frac{\dot M_2}{M_2}
+\end{equation}
+However, this reveals a flaw in assuming fully conservative mass transfer ($\dot M \equiv 0$, $\dot J \equiv 0$), as this implies that for $q < 5/6$, $R_L$ will increase in response to mass transfer. This is not compatible with continuous mass transfer without some mechanism (such as the nuclear expansion of an evolved donor ascending the red giant branch, as during the CV formation\todo{You wrote this at 3am. Is it true?}), and as most CVs are observed with $q < 5/6$ and do not possess such a mechanism. 
+
+Finally, we can also approximate the stability criteria for mass transfer using the equations above. 
+The maximum stable value of $q$ can be found by considering the mass-radius exponent of the donor ($\xi$), and its Roche lobe ($\xi_{\rm L}$). For the donor, $\xi$ can be found by simply differentiating the general equation $R \propto M^\xi$.
+\begin{equation}
+    \xi = \frac{{\rm d\ ln\ }R}{{\rm d\ ln\ }M}
+\end{equation}
+Similarly, by using Equation~\ref{eqn:introduction:Roche lobe in response to mass loss} we find
+\begin{equation}
+    \xi_{\rm L} = \frac{{\rm d\ ln\ }R}{{\rm d\ ln\ }M_1} = 2q - \frac{5}{3}
+\end{equation}
+
+For stable mass transfer, the response of the Roche lobe must be less than the response of the donor, $\xi > \xi_{\rm L}$. This ensures that mass loss causes the star to contract faster than the Roche lobe contracts, and gives the following stability criterion,
+\begin{equation}
+    q < \frac{1}{2}\xi + \frac{5}{6}
+\end{equation}
+for which we can substitute in a theoretical value of $\xi$ to find the maximum $q$. For a low mass, main sequence star ($M < 0.8M_\odot$), $xi \simeq 0.8$ \citep{knigge11} and we find $q < 1.23$. Below $M_2 \lesssim 0.43 M_\odot$, the star becomes deeply convective and $\xi$ falls sharply to $\xi = -1/3$ \citep{paczynski1965,rappaport1982}, and $q \lesssim 2/3$. 
 
 
 \subsection{Period evolution and key population features}
@@ -315,11 +271,11 @@ A more detailed description of the modern understanding of magnetic braking is g
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/introduction/pd-rk.eps}
-    \caption{Reproduced from \citet{southworth2015}, Figure~14. The orbital period distribution of RKCat \citep{RKCat} CVs identified by the SDSS (white histogram) and of the subset of these which are eclipsing (grey histogram). The light grey rectangle delineates the period gap at 2.1–3.1 hours. The periods have been collected into histogram bins which are of equal size in log space.}
+    \caption{Reproduced from \citet{southworth2015}, Figure~14. The orbital period distribution of RKCat \citep{RKCat} CVs identified by the SDSS (white histogram) and of the subset of these which are eclipsing (grey histogram). The light grey rectangle delineates the period gap at 2.1 - 3.1 hours. The periods have been collected into histogram bins which are of equal size in log space.}
     \label{fig:period hist}
 \end{figure}
 
-Through careful observation, The orbital period of a CV can be measured by tracking either their spectroscopic radial velocities (e.g. \citealt{gaensicke2009}), or the timings of repeating features in their lightcurves (e.g. \citealt{Littlefair2008}). Once this has been done for a large enough sample, a histogram of the periods can be plotted. This plot, shown in fig.~\ref{fig:period hist}, is important to understanding how a CV will evolve over time.
+The orbital period of a CV can be measured by tracking either their spectroscopic radial velocities (e.g. \citealt{gaensicke2009}), or the timings of repeating features in their lightcurves (e.g. \citealt{Littlefair2008}). Once this has been done for a large enough sample, a histogram of the periods can be plotted. This plot, shown in fig.~\ref{fig:period hist}, is important to understanding how a CV will evolve over time.
 There are three immediately obvious features of the plot;
 \begin{itemize}
     \item a long period cutoff, as the number of systems taper off after $\sim12$hrs
@@ -332,16 +288,9 @@ Each of these features are discussed in turn.
 \label{sect:introduction:period maximum}
 In order for a system be be a CV, mass must be transferring from a less massive star, onto a compact object, constraining the maximum value of $q$ to $\sim1$, and demanding that the secondary extends out to $\sim R_L$. 
 
-There are two immediately obvious constraints for a CV. The mass ratio, $q = \frac{M_{\rm donor}}{M_{\rm WD}}$, must be less than 1 for stable mass transfer, and the donor radius must be approximately equal to the Roche radius.
-An additional constraint is that the maximum mass of a white dwarf is well known to be limited to $\le 1.4M_{\odot}$ before triggering thermonuclear runaway \citep{chandrasekhar1942}.
+There are three constraints on a CV pertinent to the maximum allowable period. The mass ratio, $q = \frac{M_{\rm donor}}{M_{\rm WD}}$, must be low enough for thermally stable mass transfer ($q < 1.23$, \S\ref{sect:introduction:stability criterion}), the donor radius must be approximately equal to the Roche radius, and maximum mass of a white dwarf is well known to be limited to $\le 1.4M_{\odot}$ before triggering thermonuclear runaway \citep{chandrasekhar1942}.
 
-An important feature of a Roche lobe is that for a fixed mass ratio, $q=\frac{M_1}{M_2}$, its radius, $R_L$, is roughly linearly dependant on the orbital separation, $a$. Recall the Eggleton approximation for a Roche lobe radius, Equation~\ref{eqn:eggleton approximation}:
-\begin{equation}
-    \tag{\ref{eqn:eggleton approximation}}
-    \frac{R_L}{a} = \frac{0.49 q^{2/3}}{0.6 q^{2/3} + \mathrm{ln}(1 + q^{1/3})}
-\end{equation}
-
-\citet{warner1995} found that the average density, $\rho_{av}$, for objects that fill their $R_L$ follows a robust relationship;
+Now, to find the theoretical period maximum, we simply find the period corresponding to the largest possible donor star. \citet{warner1995} found that the average density, $\rho_{av}$, for objects that fill their $R_L$ follows a robust relationship;
 \begin{equation}
     \frac{\rho_{av}}{\rho_{\odot}} = 75.9 P_{orb}^{-2}(h)
 \end{equation}
@@ -357,7 +306,7 @@ Combining the above gives a pleasingly simple relationship.
     M_2^{(1-3\alpha)} \propto P^{-2}
 \end{equation}
 
-For long-period CVs, $\alpha = 0.67\pm0.04$ \citep{knigge11}, and equation \ref{eqn:MP_relation} becomes $M_2^{1.01} \propto P^{2}$, and larger secondary masses require longer periods. The theoretical maximum secondary mass of $1.4 M_{\odot}$ corresponds to a period of $\sim12$hrs, though in reality these higher masses are rarer and the frequency of CVs at these higher periods begins to drop much earlier, at $\sim6$hrs \citep{gaensicke2009}. Note while the above is specific to long-period systems, and $\alpha$ is a non-linear function of mass, and different values are needed for the period gap and short period regimes.
+For long-period CVs, $\alpha = 0.67\pm0.04$ \citep{knigge11}, and equation \ref{eqn:MP_relation} becomes $M_2^{1.01} \propto P^{2}$, and larger secondary masses require longer periods. The theoretical maximum secondary mass of $1.4 M_{\odot}$ corresponds to a period of $\sim12$hrs, though in reality these higher masses are rarer and the frequency of CVs at these higher periods begins to drop much earlier, at $\sim6$hrs \citep{gaensicke2009}.
 
 
 \subsubsection{The period gap}
