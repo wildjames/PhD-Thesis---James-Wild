@@ -312,17 +312,16 @@ For long-period CVs, $\alpha = 0.67\pm0.04$ \citep{knigge11}, and equation \ref{
 \subsubsection{The period gap}
 \label{sect:introduction:period gap}
 
-Between periods of around 2-3 hours, there is a dramatic fall in the number of CVs we detect. Volume-limited samples indicate that this is a real effect and not a selection bias \citep{Kolb1998}. However, the origin of this gap in the period is something of an open problem.
+Between periods of around 2-3 hours, there is a dramatic fall in the number of CVs we detect. Volume-limited samples indicate that this is a real effect and not a selection bias \citep{Kolb1998,pala2020}. The origin of this gap in the period distribution is something of an open problem.
 
 Models indicate that long period systems ($P > 3$h) have far higher mass loss rates than short period systems ($P < 2$h) \citep{ritter1985}. This suggests a significant change in braking mechanisms between the two regimes. 
+If this transition is sharp, i.e. magnetic braking suddenly ceases, the donor disconnects from its Roche lobe and is allowed to contract to its equilibrum radius, shutting off mass transfer.
+The system is still subject to gravitational radiation, however, so gradually continues to evolve towards shorter periods. Once the secondary reconnects with its Roche lobe, mass transfer resumes and the system again presents itself as a CV, emerging from the period gap at a $\sim2$hr period \citep{kolb2002}.
 
 The disruption of magnetic braking was proposed early on to explain the period gap \citep{rappaport1983, spruit1983}, and relatively shortly after \citet{kolb1993} showed more quantitatively that a sub-class of purely gravitational braking CV systems does not reproduce the observed population. 
-Historically, the standard evolutionary path of CVs has involved the secondary becoming fully convective which was thought to disrupt the magnetic field and so cease MB \citep{knigge11}, though this mechanism has frequently been questioned. \todo{Gather references}
+The standard evolutionary path of CVs has involved the secondary becoming fully convective which was thought to disrupt the magnetic field and so cease magnetic braking \citep{knigge11}, though this mechanism has frequently been questioned. \todo{Gather references}
+\citet{Davis2008} used population synthesis to demonstrate that, if the period gap is caused by disrupted magnetic braking, this may affect the mass function of quiescent CVs that are moving through the gap. They expect an excess of non-transferring CVs over low mass post-common envelope CVs that emerge from the common envelope phase directly into the period gap. These should form at a predictable rate across $q$, but due to the slow crossing of quiescent CVs, the latter `pile up' in the gap - a detectable effect observed by \citet{zorotovic2011} that lends some credence to disrupted magnetic braking causing the period gap.
 
-It is important to develop diagnostics for the nature of the period gap, and \citet{smith1998} show how spectral analysis could yield an accurate observed mass-radius relation for donor stars in CVs as evidence for MB, though they lacked the observations to apply their method. The mass-radius relation would later be carried out by \citet{knigge11}.
-\citet{Davis2008} used population synthesis to demonstrate that, if the period gap is caused by disrupted MB, this may affect the mass function of quiescent CVs that are moving through the gap. They expect an excess of non-transferring CVs over low mass post-common envelope CVs that emerge from the common envelope phase directly into the period gap. These should form at a predictable rate across $q$, but due to the slow crossing of quiescent CVs, the latter `pile up' in the gap - a detectable effect observed by \citet{zorotovic2011}.
-
-The system is still subject to gravitational radiation, however, so gradually evolves back towards shorter periods. Once the secondary reconnects with its Roche lobe, mass transfer resumes and the system again presents itself as a CV, emerging from the period gap at a $\sim2$hr period \citep{kolb2002}.
 
 \subsubsection{The period minimum, and period bouncer systems}
 \label{sect:introduction:period minimum and bouncers}
@@ -349,20 +348,18 @@ This has been confirmed by \citet{knigge11}, who found that for period bouncer C
 A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the only two sources of AML \todo{ref}, but attempts to quantify this with evolutionary models \citep{knigge11} and population synthesis models \todo{ref} consistently fall short, as outlined in \S\ref{sect:introduction:AMLMechs}. Gravitational losses are well understood, and have been independantly observed and studied, but the sources and consequences of magnetism in a stellar context is not so easy. 
 
 The spin rate and masses of CV donors is not seen in the singleton stars that are usually used to characterise magnetic braking \citep{rappaport1983,matt2015,garraffo2018a}. 
-In addition, the disruption of magnetic braking is often motivated by the donor transitioning to a fully convective state, but X-ray emission level is a diagnostic of magnetic flux \citep{pevtsov2003}, and \citet{wright2016} found that the X-ray flux of CVs is similar between fully convective and non-convective main-sequence stars, implying a similar magnetic field strength. Furthermore, disagreement between observational and theoretical period gap and minimum locations \citep{knigge11} has left the disrupted MB model an area of active research. 
-\citet{garraffo2018} recently proposed that the magnetic field does not weaken, but rather becomes more complex which reduces the efficiency of MB. This concept is discussed quantitavely in \S\ref{sect:introduction:Garraffo MB prescription}.
+In addition, the disruption of magnetic braking is often motivated by the donor transitioning to a fully convective state, but X-ray emission level is a diagnostic of magnetic flux \citep{pevtsov2003}, and \citet{wright2016} found that the X-ray flux of main sequence stars is similar between fully convective and non-convective main-sequence stars, implying a similar magnetic field strength. Furthermore, disagreement between observational and theoretical period gap and minimum locations \citep{knigge11} has left the disrupted magnetic braking model an area of active research. 
+\citet{garraffo2018} recently proposed that the magnetic field does not weaken, but rather becomes more complex which reduces the efficiency of magnetic braking. This concept is discussed quantitavely in \S\ref{sect:introduction:Garraffo magnetic braking prescription}.
 
 
 \subsection{The missing AML problem}
 
-The evolution of CVs is driven by the donor stars. The orbital period is determined by the mass-radius relationship of the donor under mass loss, and the decay of the orbit should simply result directly from the two braking mechanisms (gravitational and magnetic). Figure~\todo{put in the one from my 2021 paper here} shows the relationship between the donor mass and orbital period, and the single unified CV track can be seen. Stellar evolution models can be built to try and reproduce this track, and indeed at long periods, our understanding of those mechanisms seem robust enough to produce models that satisfy observations. The period gap can, with some manual tweaks, also be reproduced with some accuracy. Unfortunately, at short periods ($\lesssim 2 hours$), the data begin to diverge from models. 
+The evolution of CVs is driven by the donor stars. The orbital period is determined by the mass-radius relationship of the donor under mass loss, and the decay of the orbit should simply result directly from the two braking mechanisms (gravitational and magnetic). Figure~\todo{put in the one from my 2021 paper here} shows the relationship between the donor mass and orbital period, and the single unified CV track can be seen. CV evolution models can be built to try and reproduce this track, and indeed at long periods, our understanding of those mechanisms seem robust enough to produce models that satisfy observations. The period gap can, with some manual tweaks, also be reproduced with some accuracy. Unfortunately, at short periods ($\lesssim 2 hours$), the data begin to diverge from models. 
 
-\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
-This also moves the period minimum to longer periods. The period minimum is caused by the donor's $\tau_{therm}$ becoming longer than $\tau_{\dot M}$, and since a faster mass loss will result in a shorter mass loss timescale, this crossover point is moved to higher masses and therefore longer periods. This is compounded by the faster mass loss resulting in more severe bloating of the donor star, so a donor of the same mass will connect to its Roche lobe at longer periods. 
+\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution} describes how the donor has its mass-radius relation altered by the presence of continued mass loss. The donor is larger than a singleton of the same mass, as the mass loss timescale is comparable to the thermal timescale and the donor is not quite able to maintain thermal equilibrium \citep{knigge11}. The degree of this inflation increases with more rapid mass loss. As mass loss is driven by AML, it follows that a CV donor that has stronger AML will have a larger radius, and therefore sit at a longer period than a CV with weaker AML, altering the gradient of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} at periods of $\lesssim 3h$. In this way, the shape of the tracks in Figure~\ref{fig:introduction:Knigge 2011 figure 9} is a diagnostic of the form of AML experienced by a CV across its lifetime \citep{knigge11}.
 
-\citet{knigge11} used took observations of donor masses and radii, with masses determined by either eclipse modelling, or the $\epsilon - q$ superhumper relationship, and radii are readily found from equating the donor radius to the expected Roche lobe radius. 
-With donor properties for masses $\sim 0.1 - 1 M_\odot$, an unknown additional source of AML was added to their models, simply scaled relative to gravitational braking. This source is motivated by the disagreement between data and the model that omits this source. \citet{knigge11} find that the best-fit model to their data uses an excess braking that is $2.47 \times \dot J_{GR}$, where $\dot J_{GR}$ is AML due to gravity. Figure~\ref{fig:introduction:Knigge 2011 figure 9} is reproduced from their work, and shows the significant improvement in agreement with data.
-
+\citet{knigge11} used observations of donor masses and radii and attempted to recreate the donor evolutionary sequence.
+An unknown additional source of AML was added to their models, simply scaled relative to gravitational braking. This unknown contribution to AML is motivated by the disagreement between data and the model that omits this source. \citet{knigge11} find that the best-fit model to their data uses an excess braking below the period gap that is $2.47 \times \dot J_{GR}$, where $\dot J_{GR}$ is AML due to gravity. Figure~\ref{fig:introduction:Knigge 2011 figure 9} is reproduced from their work, and shows the significant improvement in agreement with data.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth, trim={0 2cm 0 2cm}]{figures/introduction/Knigge11_fig9.pdf}
@@ -370,13 +367,16 @@ With donor properties for masses $\sim 0.1 - 1 M_\odot$, an unknown additional s
     \label{fig:introduction:Knigge 2011 figure 9}
 \end{figure}
 
-\citet{Pala2017a} used the effective temperatures of the white dwarfs to probe CV evolution. The white dwarf temperature can be enhanced by accretion, so a hotter white dwarf suggests a higher mass transfer rate. This is sensitive to changes in $\dot M$ on short timescales, but still provides a valuable insight. \citet{Pala2017a} compare their white dwarf temperatures (and therefore mass transfer rates, and therefore AML rates) to MESA CV evolutionary tracks, and find that their observed temperatures are poorly described by only gravitational AML, but are more well-fitted by models that includes excess AML equivalent to gravitational losses, i.e. double-strength gravitational AML. Their analysis is useful but not wholly convincing, as the white dwarf temperatures are both quite poorly constrained, and sensitive to short-term variations in accretion rate that are known to occur\todo{cite}. In addition, the scaling of excess AML in relation to gravitational losses is not a free parameter in their analysis, and is only presented in the context of being obviously better by eye, rather than being tailored to the data.
+\citet{Pala2017a} used the effective temperatures of the white dwarfs to probe CV evolution. The white dwarf temperature can be enhanced by accretion, so a hotter white dwarf suggests a higher mass transfer rate. This is sensitive to changes in $\dot M$ on short timescales, but still provides a valuable insight. \citet{Pala2017a} compare their white dwarf temperatures (and therefore mass transfer rates, and therefore AML rates) to MESA CV evolutionary tracks, and find that their observed temperatures are poorly described by only gravitational AML, but are more well-fitted by models that includes excess AML equivalent to gravitational losses, i.e. double-strength gravitational AML. 
 
 The disagreement between theory and observation at short periods indicates that our understanding of AML in this regime is lacking, and a few proposals to rectify this have been suggested.
 
-The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking that remains after the bulk of magnetic braking ceases. This is called Residual Magnetic Braking (RMB). Some evidence for RMB has been found in binary population synthesis models that focus on magnetic CVs \citep{belloni2020}. This approach asserts that a strong magnetic field from the white dwarf significantly reduces the effectiveness of magnetic braking by trapping a large fraction of the wind within the system, preventing it from carrying angular momentum away. The models that include this result in a better fit to key CV observables, specifically the orbital period distribution, white dwarf temperature distribution, and space density. While this theory does not apply to CVs in general, as the majority of systems do not have white dwarfs with strong enough magnetic fields, it has been suggested that a similar process could  occur on the donor \citep{garraffo2018}. 
+The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking that remains after the bulk of magnetic braking ceases, a.k.a. residual magnetic braking. 
 
-The period gap is frequently attributed to the donor becoming fully convective, and this triggering a large reduction in magnetic field strength. However, observations of field M dwarfs of the same mass, with convective envelopes, are seen with key tracers of magnetism. Specifically, X-ray observations find that the coronal magnetic energy dissipation of fully convective stars is similar to non-convective stars \citep{wright2016}, and Zeeman-Doppler imaging of rapidly rotating M dwarfs indicate that the complexity of surface magnetic fields increases alongside rotation rate (e.g. \citealt{donati2003,donati2009,marsden2011,waite2011,waite2015}). Together, these observations strongly indicate that the disrupted magnetic braking model commonly accepted is ill-motivated, and may be more closely tied to field complexity than field strength \citep{garraffo2018}. If the gap is indeed driven by a sudden increase in field complexity, then it is reasonable to assume that magnetic braking remains significant after the system emerges from the period gap. However, this is not the only explanation for excess AML, and another strong candidate is consequential AML.
+The period gap is frequently attributed to the donor becoming fully convective, and this triggering a large reduction in magnetic field strength. However, observations of field M dwarfs of the same mass, with convective envelopes, are seen with key tracers of magnetism. Specifically, X-ray observations find that the coronal magnetic energy dissipation of fully convective stars is similar to non-convective stars \citep{wright2016}, and Zeeman-Doppler imaging of rapidly rotating M dwarfs indicate that the complexity of surface magnetic fields increases alongside rotation rate (e.g. \citealt{donati2003,donati2009,marsden2011,waite2011,waite2015}). Together, these observations strongly indicate that the disrupted magnetic braking model commonly accepted is ill-motivated, and may be more closely tied to field complexity than field strength \citep{garraffo2018}. If the gap is indeed driven by a sudden increase in field complexity, then it is reasonable to assume that magnetic braking remains significant after the system emerges from the period gap. However, magnetism is not the only possible explanation for excess AML, and another strong candidate is consequential AML. Both of these mechanisms are discussed below.
+
+% Cant think of a good place to put this, so I've cut it
+% Some evidence for AML suppression under strong magnetic fields, though not in the context of the period gap, has been found in binary population synthesis models that focus on magnetic CVs \citep{belloni2020}. The models that include magnetic wind suppression result in a better fit to key CV observables, specifically the orbital period distribution, white dwarf temperature distribution, and space density. 
 
 
 \subsection{Consequential AML}
@@ -404,7 +404,7 @@ Solving this equation gives a critical maximum value of $q < 0.634$. However, un
 \begin{equation}
     \frac{\dot J_{CAML}}{J} = \nu \frac{\dot M_2}{M_2}
 \end{equation}
-Here, $\nu = M_2^2 / (M_1(M_1 + M_2))$ and describes the angular momentum carried by ejected nova material, defined to be teh same as teh white dwarf momentum.
+Here, $\nu = M_2^2 / (M_1(M_1 + M_2))$ and describes the angular momentum carried by ejected nova material, defined to be the same as the white dwarf momentum.
 The right hand side of Equation~\ref{eqn:introduction:CAML stability threshold} is then altered by the increased AML rate.
 \begin{equation}
     \alpha_{ad} = \frac{2}{3} \Bigg( \frac{ln(1+q^{1/3}) - \frac{1}{2}\frac{q^{1/3}}{1+q^{1/3}}}{0.6q^{2/3} + ln(1+q^{1/3})} \Bigg) + 2\nu + \frac{M_2}{M_1 + M_2} - 2
@@ -416,7 +416,9 @@ $\nu$ is altered to a simple function of the white dwarf primary mass,
     \label{eqn:introduction:eCAML nu}
     \nu (M_1) = \frac{C}{M_1}
 \end{equation}
-where $C$ is an arbitrary constant chosen to best reflect observations, and \citep{Schreiber2016} adopt values of $C = 0.3 - 0.4$. The inverse relationship of more CAML at lower white dwarf masses is motivated by lower mass systems being able to retain less nova material, so more can be ejected and so carry more angular momentum. 
+where $C$ is an arbitrary constant chosen to best reflect observations, and \citep{Schreiber2016} adopt values of $C = 0.3 - 0.4$. 
+% The inverse relationship of more CAML at lower white dwarf masses is motivated by lower mass systems being able to retain less nova material, so more can be ejected and so carry more angular momentum. 
+The inverse relationship of more CAML at lower white dwarf masses is motivated by lower mass systems ejecting material at a lower velocity, meaning the binary is immersed in a friction-generating medium for longer and imparting more energy into the ejecta. 
 
 With eCAML, the dynamically unstable region \todo{put in their fig 1+2} is expanded. This has the important effect of making CVs with low-mass white dwarfs prone to dynamically unstable mass transfer, removing them from the CV population -- this simultaneously answers the question of CV white dwarfs being more massive than expected, and also vastly lowers the space density \citep{belloni2018}. Finally, the majority of systems that are now dynamically unstable are short-period CVs, so the observed period distribution is significantly more well-reproduced\todo{point at the Schreiber fig 2 panel}. 
 
@@ -428,13 +430,17 @@ In addition to this, \citet{sparks2021} observed the spectra of CV donors and fo
 \subsection{Magnetic Braking}
 \label{sect:introduction:magnetic braking}
 
-Consider a blob of this charged wind material, moving with some sideways velocity in the plane of the orbit, almost certainly slower than the magnetic field lines. 
-The blob will interact with the field and accelerated to co-rotate with them.
+The M dwarf secondary of a CV will eminate some wind, made up of charged ions, and have some magnetic field which co-rotates with the star.
+Consider a blob of charged wind material, moving with some sideways velocity in the plane of the orbit, almost certainly slower than the magnetic field lines. 
+The blob will interact with the field and be accelerated to co-rotate with them.
 This higher velocity causes it to move outwards, to a higher orbit, where the field lines are moving even faster, accelerating the blob more. 
-The wind then robs the star associated with the magnetic field of rotational angular momentum and its spin rate is slowed. The close proximity of the binary means that tidal effects are strong, and the donor is spun up again by robbing the orbit of angular momentum, reducing their separation and hardening the binary further \citep{verbunt1981}.
+% The wind then robs the secondary star of rotational angular momentum and its spin rate is slowed. 
+As the wind material is accelerated, it exerts a drag force on the magnetic field of the donor and slows its rotation rate.
+The close proximity of the binary means that tidal effects are strong, and the donor is spun up again by robbing the orbit of angular momentum, reducing the binary separation and hardening the binary \citep{verbunt1981}.
 
-As an aside, \citet{wickramasinghe1996} presented theoretical motivation that CVs can have too strong a magnetic field to allow magnetic braking. Open field lines are necessary for wind to escape the system, so too strong a white dwarf magnetic field can trap the ionised gas in-system, suppressing the wind of the secondary. This Magnetic CV subclass is briefly described in \S\ref{sect:introduction:magnetic CVs}.
+As an aside, \citet{wickramasinghe1996} presented theoretical motivation that CVs can have too strong a magnetic field to allow magnetic braking. Open field lines are necessary for wind to escape the system, so too strong a white dwarf magnetic field can trap the ionised gas in-system, suppressing the wind of the secondary. Magnetic CVs are briefly described in \S\ref{sect:introduction:magnetic CVs}.
 
+\todo{Rewrite}
 As the magnetic braking mechanism is a direct consequence of the donor star spinning down, the CV community is able to borrow insights from adjacent fields of study. The majority of M dwarfs experience some form of spin-down under magnetic braking \todo{cite this}, so observations of the magnetic field strengths of singletons should inform the efficacy of magnetic braking in CV binaries\todo{cite this}. Unfortunately, the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day\todo{cite this}. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
 
 This carries with it some major practical issues. One is that while the broad effects of magnetic fields is relatively easy to intuit, quantitative physical understanding the mechanics and origins of magnetic fields is difficult, involving fluid dynamics, considering interactions with the accretion disc, and magnetism acting on large systems, which quickly become prohibitive to model and is usually handled with one of a variety of recipes. \citealt{knigge11} contains a detailed compilation of some older approaches, but the decade since has seen a few newer methodologies emerge. Here, two recent magnetic braking prescriptions are described in moderate detail: the \citet{matt2015} prescription, and the \citet{garraffo2018a} prescription. For a more complete, detailed summary of the modern understanding of M dwarf magnetic fields refer to \citet{kochukhov2021}. 
@@ -443,34 +449,29 @@ This carries with it some major practical issues. One is that while the broad ef
 \subsubsection{Matt prescription for magnetic torque}
 \label{sect:introduction:matt braking}
 
-In \citet{matt2015}, an empirical prescription is derived that relates the torque felt by a low mass main sequence star to that stars' mass, radius, and Rossby number. The Rossby number is a fluid dynamics term for the ratio between the inertial and Coriolis force terms of the Navier-Stokes equations. A small Rossby number indicates a system dominated by Coriolis effects, and a large Rossby number indicates that centrifugal and inertial forces dominate. The Rossby number of a main sequence star can be calculated from $\Omega$, it's angular rotation rate, and $\tau_{\rm cz}$, the convective turnover timescale.
+In \citet{matt2015}, an empirical prescription is derived that relates the torque felt by a low mass main sequence star to that stars' mass, radius, and Rossby number. The Rossby number is a fluid dynamics term for the ratio between the inertial and Coriolis force terms of the Navier-Stokes equations. A small Rossby number indicates a system dominated by Coriolis effects, and a large Rossby number indicates that centrifugal and inertial forces dominate. The Rossby number of a main sequence star can be calculated from $P_{rot}$, it's rotation period, and $\tau_{\rm cz}$, the convective turnover timescale.
 \begin{equation}
     \label{eqn:introduction:rossby number}
-    {\rm Ro} = (\Omega \cdot \tau_{\rm cz})^{-1}
+    {\rm Ro} = \frac{P_{rot}}{\tau_{\rm cz}}
 \end{equation}
 Through the Rossby number, the effectiveness of magnetic braking is tied to rotation, which is extremely fast in CVs, and stellar mass and age, which affect $\tau_{\rm cz}$.
 
-Their work makes use of observations of stars with masses less than $0.15 - 1.3 M_\odot$ and span ages of $\sim 10^{6-9}$ yrs, that have had their rotation periods measured. This dataset is used to calibrate a theoretically motivated empirical prescription for magnetic braking. There is some evidence for a saturation of magnetic activity below a critical Rossby value (a.k.a. above a critical rotational period) \citep{reiners2009}, where magnetic activity seems to no longer respond to changes in rotation. \citet{matt2015} adopt two generic relationships, 
+\citet{matt2015} make use of observations of stars with masses less than $0.15 - 1.3 M_\odot$ and span ages of $\sim 10^{6-9}$ yrs, that have had their rotation periods measured. This dataset is used to calibrate a theoretically motivated empirical prescription for magnetic braking. There is some evidence for a saturation of magnetic activity below a critical Rossby value (a.k.a. above a critical rotational period) \citep{reiners2009}, where magnetic activity seems to no longer respond to changes in rotation. \citet{matt2015} motivate and adopt two relationships for torque, $T$, modulated by an empirical value, $p$,
 \begin{equation}
-    \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \bigg(\frac{\rm Ro_\odot}{\rm Ro} \bigg)^{p}
+    T = -T_0 \bigg( \frac{\tau_{\rm cz}}{\tau_{cz,\odot}} \bigg)^p \bigg( \frac{\Omega_{*}}{\Omega_{\odot}} \bigg)^{p+1} 
 \end{equation}
-in the unsaturated regime, and 
+for the unsaturated regime, and 
 \begin{equation}
-    \bigg(\frac{B_*}{B_\odot}\bigg)^{4m} \bigg(\frac{\dot M_\omega}{\dot M_\odot}\bigg)^{1-2m} = Q \chi^{p}
+    T = -T_0 \chi^p \bigg( \frac{\Omega_*}{\Omega_\odot} \bigg)
 \end{equation}
-in the saturated regime. Here, $M_\omega$ is the global mass outflow rate, $B_*$ is the magnetic field strength at the stellar surface, and $M_\omega$ is the total mass outflow rate. The $m$ exponent is determined by the field geometry and wind acceleration profile, but functionally is a tuning parameter that likely falls in the range of $0.20 < m < 0.25$ \citep{matt2015}. The $p$ exponent encodes the dependence of magnetism on the Rossby number, $\rm Ro$, and is assigned as $p = 2$. $\chi$ is the inverse critical Rossby number for saturation, for which \citet{matt2015} adopt a value of $10$. $Q$ is a generic scale factor that the authors fit to observations.
-
-The authors use these equations to eventually derive the spin rates for main sequence stars at some time $t$ after their initial spin period, $\Omega_i$, 
+in the saturated regime. In both cases, $p$ is assigned as $p = 2$ in order to agree with the most common literature spin-scaling prescription ($T \propto \Omega_*^3$). 
+$\chi$ is the inverse critical Rossby number for saturation, for which \citet{matt2015} adopt a value of $10$.
+The rotation rates of the donor and the sun are $\Omega_{*,\odot}$, and $T_0$ is given by a function of mass and radius,
 \begin{equation}
-    \lim_{\Omega_* \gg \Omega_{\rm sat}} \bigg(\frac{\Omega_*}{\Omega_\odot}\bigg) \rightarrow \bigg(\frac{\tau_{\rm unsat}}{t}\bigg)^{\frac{1}{p}}
+    T_0 = 9.5 \times 10^{30} {\rm erg} \bigg(\frac{R_*}{R_\odot} \bigg) \bigg(\frac{M_*}{M_\odot} \bigg)
 \end{equation}
-\begin{equation}
-    \Omega_* = \Omega_i \cdot e^{-t/\tau_{\rm sat}}
-\end{equation}
-for a rotation period of $\Omega_*$, and the threshold for saturation at $\Omega_{\rm sat}$. The two $\tau$ factors, $\tau_{\rm sat}$ and $\tau_{\rm unsat}$, are the spin-down timescales in the saturated and unsaturated regimes, and $\tau_{\rm sat} \ll \tau_{\rm unsat}$.
 
 The authors take observations of two clusters, the $\sim 5$ Myr old ONC cluster and the $\sim 580$ Myr old Praesepe cluster, and use the first as initial conditions and the second as target distribution to reproduce. Figure~\ref{fig:introduction:Matt 2015 figure 2} is taken from \citet{matt2015}, and compares the initial and final conditions of their synthetic cluster model compared to these two boundary conditions. During the first few tens of Myrs of this model, the stars in the synthetic cluster are spun up as they contract, lowering their periods by factors of $\sim 5-10$. After this initial phase, which is much shorter than the spin down timescales, the more long-term spin evolution begins.
-
 \begin{figure}[!tbp]
     \centering
     \begin{minipage}[b]{\textwidth}
@@ -487,24 +488,25 @@ The authors take observations of two clusters, the $\sim 5$ Myr old ONC cluster 
 
 The agreement between the synthetic cluster and the Praesepe cluster at 574 Mrys is impressive. Above $\sim 0.8 M_\odot$, stars converge on a single narrow mass - period track just as is seen in the observations, and the large scatter below $\sim 0.8 M_\odot$ is also reproduced. Also, just as is seen in the cluster observations of Praesepe, the fastest rotators are those with the lowest masses. Both of these features arise from the transition from saturated braking, to unsaturated braking \citep{matt2015}. 
 
-At formation, almost all stars are experiencing saturated magnetic braking. The single narrow track arises from higher mass stars spinning down faster than lower mass stars, bringing them down to the much less efficient unsaturated braking regime sooner. The pile-up of systems then produces the narrow track. The mass dependancy of this track comes from the fact that $\tau_{unsat}$ is shorter for lower mass stars.
+At formation, almost all stars are experiencing saturated magnetic braking. The single narrow track arises from higher mass stars spinning down faster than lower mass stars, moving them off the much less efficient unsaturated braking regime sooner. The pile-up of systems then produces the narrow track. The mass dependancy of this track comes from the fact that spin-down timescale in the saturated regime is shorter for lower mass stars.
 The broad population of low mass rapid rotators is a direct result of the broad initial conditions, which span an order of magnitude themselves, and the longer spin-down time of lower mass stars in the saturated regime allowing them to remain at high rotation rates for longer. 
 
-However, this model does fail in a few key respects. In the right panel of Figure~\ref{fig:introduction:Matt 2015 figure 2}, a small population of very slow rotators can be seen at $\sim 0.4 M_\odot$. The slower rotation rates of these stars suggests an alternative spin-down mechanism. The inverse problem is seen at $\sim 0.7 M_\odot$, where a handful of stars are seen rotating {\it faster} than predicted by any of the synthetic cluster stars, suggesting that magnetic braking is not as effective in their case.
+However, this model does fail in a few key respects. In the bottom panel of Figure~\ref{fig:introduction:Matt 2015 figure 2}, a small population of very slow rotators can be seen at $\sim 0.4 M_\odot$. The slower rotation rates of these stars suggests an alternative spin-down mechanism. The inverse problem is seen at $\sim 0.7 M_\odot$, where a handful of stars are seen rotating {\it faster} than predicted by any of the synthetic cluster stars, suggesting that magnetic braking is not as effective in their case.
 More importantly for the CV field, the parameter space of CVs is completely uncovered, as CVs have rotation periods of $< 0.2$ days on the high end, and the systems that this work concerns have periods of $\lesssim 0.07$ days. While this would firmly place CVs in the saturated regime, there is evidence of a `supersaturated' regime at extreme rotation periods that may be relevant to CV donors \citep{James2000, Wright2011, Argiroffi2016}. This possibility is also noted by \citet{Gossage2021} when outlining best practice use of this prescription in the stellar evolution code MESA, though the subject is not a settled matter and competing evidence for the {\it lack} of supersaturation has been reported by \citet{jeffries2011}.
 
 
 \subsubsection{Garraffo prescription for magnetic torque}
-\label{sect:introduction:Garraffo MB prescription}
+\label{sect:introduction:Garraffo magnetic braking prescription}
 
-The \citet{garraffo2018a} model considers the morphology of the magnetic field to also be important the the strength of magnetic braking, based on the work by \citet{garraffo2015}. The primary justification for this inclusion is observations of open clusters of a known age, where a bimodality is seen in the rotation rates of stars of similar masses\todo{Cite skumanich gap}. Some stars appear to be fast rotators, and some are slow rotators, and there is a dearth of systems between the two. 
-Previous attempts to model this bimodality have relied on a random, unexplained transition between an efficient braking state, and an inefficient braking state \citep{spada2011,reiners2012, gallet2013}, and \citet{garraffo2018a} expand on this by offering a shift in magnetic field morphology as the underlying trigger.
+The \citet{garraffo2018a} model considers the morphology of the magnetic field to also be important to the strength of magnetic braking, based on the work by \citet{garraffo2015}. The primary justification for this inclusion is observations of open clusters of a known age, where a bimodality is seen in the rotation rates of stars of similar masses. Some stars appear to be fast rotators, and some are slow rotators, and there is a dearth of systems between the two. 
+Previous attempts to model this bimodality have relied on an unexplained transition between an efficient braking state, and an inefficient braking state \citep{spada2011,reiners2012, gallet2013}, and \citet{garraffo2018a} expand on this by offering a shift in magnetic field morphology as the underlying trigger.
 
-Their formalisation of this is based on two assumptions. They assume that stars with the dipolar component of the magnetic field dominating  follow a known spin-down law, with a mass dependence reflecting $\tau_{\rm cz}$\todo{cite Skumanich}. Second, they assume that there is some relationship between field morphology and stellar spin rate. Specifically, that stars rotating more rapidly have more complex magnetic fields. This is formalised via an AML rate, $\dot J$,
+Their formalisation of this is based on two assumptions. They assume that stars with the dipolar component of the magnetic field dominating  follow a known spin-down law, with a mass dependence reflecting $\tau_{\rm cz}$ \citep{skumanich1972}. Second, they assume that there is some relationship between field morphology and stellar spin rate. Specifically, that stars rotating more rapidly have more complex magnetic fields. This is formalised via an AML rate, $\dot J$,
 \begin{equation}
     \dot J = \dot J_{\rm dipole}Q_J(n)
 \end{equation}
-where $\dot J_{\rm dipole}$ is the dipole loss under the Skumanich law, $\dot J_{\rm dipole} \propto \Omega^3 \tau$. $Q_J$ is a modulating factor that encapsulates the field complexity at the stellar surface, and is controlled by the complexity factor, $n$, which has its own prescription. \citet{garraffo2016} derive an equation for $Q_J$, based on fitting the results of simulations with varying field complexities.\todo{Explain the model, and the origin of these numbers before reporting the relationship}
+where $\dot J_{\rm dipole}$ is the dipole loss under the Skumanich law, $\dot J_{\rm dipole} \propto \Omega^3 \tau_{\rm cz}$. $Q_J$ is a modulating factor that encapsulates the field complexity at the stellar surface, and is controlled by the complexity factor, $n$, which has its own prescription. \citet{garraffo2016} derive an equation for $Q_J$, based on fitting the results of simulations with varying field complexities.
+\todo{Explain the model, and the origin of these numbers before reporting the relationship}
 \begin{equation}
     \label{eqn:introduction:garraffo complexity modulation}
     Q_J(n) = 4.05 e^{-1.4n} + \frac{n-1}{60Bn}
@@ -516,15 +518,14 @@ Where $B$ is the magnetic field strength at the stellar surface. As the second t
     \label{eqn:introduction:garraffo field complexity}
     n = 1 + \frac{0.02}{\rm Ro} + 2 {\rm Ro}
 \end{equation}
-based on observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$. 
-This prescription means that the AML of a star is purely a function of its Rossby number, c.f. Equation~\ref{eqn:introduction:rossby number}.
+based on observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$ to explain the observed population of old rapid rotators that appear to have experienced minimal spin-down \citep{vanSaders2016}. 
+This prescription explains the AML of a star as purely a function of its Rossby number.
 
 Similarly to \citet{matt2015}, \citet{garraffo2018a} run a population synthesis model to compare to observations using initial conditions taken from the 13 Myr old h Persei cluster \citep{moraux2013}, but the authors show that differences between alternative initial conditions do not survive longer than 200 Myrs. Observations of stellar rotation periods and colour from several clusters with known ages are then compared to the synthetic population.
 
 The resulting distribution does recover the Skumanich bifurcation observed in open clusters, reproducing the fast and slow rotating populations and the gap between them, though the large uncertainty in the age of the cluster does introduce some discrepancy. 
-In addition, the synthetic cluster does not consider the effects of close binary stars, which will affect the spin-down rate through tidal effects. As the comparison to data is done with color, filtering out binaries is difficult. However, this effect is ignored by the author, as there is evidence that the binary fraction in open clusters is low \citep{meibom2007}.
+In addition, the synthetic cluster does not consider the effects of close binary stars, which will affect the spin-down rate through tidal effects. However, this effect is ignored by the author, as there is evidence that the binary fraction in open clusters is low \citep{meibom2007}.
 The mass dependency of this track is also reproduced by the model, and Figure~\ref{fig:introduction:garraffo 2018a fig 4}.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth, trim={0 5cm 0 5cm}]{figures/introduction/garraffo2018_M37_346_hPer.pdf}
@@ -532,7 +533,7 @@ The mass dependency of this track is also reproduced by the model, and Figure~\r
     \label{fig:introduction:garraffo 2018a fig 4}
 \end{figure}
 
-The \citet{garraffo2018a} prescription is simpler in concept than the \citet{matt2015} prescription, and both prescriptions perform well. However, neither formulation covers the parameter space of CV donors, and both are semi-empirical with some arbitrary decisions made in order to fit data. This makes both approaches highly vulnerable to extrapolation errors and difficult to trust in the context of CV evolution, especially in the short period regime.
+The \citet{garraffo2018a} prescription is simpler in concept than the \citet{matt2015} prescription, and both prescriptions perform well. However, neither formulation covers the parameter space of CV donors, and both are semi-empirical with some arbitrary decisions made in order to fit open cluster data. This makes both approaches highly vulnerable to extrapolation errors and difficult to trust in the context of CV evolution, especially in the short period regime.
 
 
 \subsubsection{Comparisons to the Rappaport, Verbundt and Joss model}
@@ -546,12 +547,12 @@ Note that in the specific case of CVs, period and radius are synonymous with one
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth, trim={1cm 0 0 0}]{figures/introduction/rappaport_matt_magbraking.png}
-    \caption{Showing the AML rates, $\dot J$, of three magnetic braking prescriptions, applied to the masses, radii, and spin periods of the `standard' CV donor track of \citet{knigge11}. The vertical black line shows the mass at which \citet{knigge11} enforces the period gap to occur. {\bf Green lines} show the \citet{rappaport1983} magnetic braking prescription, which is the default used in MESA \citep{Paxton_2015}. The {\bf red line} shows the \citet{matt2015} prescription.}
+    \includegraphics[width=\textwidth, trim={1cm 0 0 0}]{figures/introduction/rappaport_garraffo_matt_magbraking.png}
+    \caption{Showing the AML rates, $\dot J$, of three magnetic braking prescriptions, applied to the masses, radii, and spin periods of the `standard' CV donor track of \citet{knigge11}. The vertical black line shows the mass at which \citet{knigge11} enforces the period gap to occur. {\bf Green lines} show the \citet{rappaport1983} magnetic braking prescription, which is the default used in MESA \citep{Paxton_2015}. The {\bf red line} shows the \citet{matt2015} prescription, and the {\bf blue line} show the \citet{garraffo2018a} prescription.}
     \label{fig:introduction:rappaport garraffo matt magnetic braking}
 \end{figure}
 
-Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} shows how the \citet{matt2015} magnetic braking prescription compares to the default MESA mabgnetic braking prescription, from \citet{rappaport1983}. 
+Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} shows how the \citet{matt2015} magnetic braking prescription compares to the default MESA mabgnetic braking prescription, from \citet{rappaport1983}. The turning point in the \citet{garraffo2018a} at $\sim 0.15 M_\odot$ is due to the imposed limit of $n < 7$ being reached.
 
 The differences between the three prescriptions is clear in both the overall strength of the prescriptions, but also in how they evolve with mass. All the prescriptions shown decrease at lower masses, but at different rates. In the context of CV evolution, a different dropoff rates of magnetic braking would alter the shape of the donor mass-radius sequence, so observations of CV donors should be able to allow us to evaluate the effectiveness of different braking prescriptions.
 
@@ -559,3 +560,7 @@ The differences between the three prescriptions is clear in both the overall str
 
 \section{This work}
 \label{sect:introduction:this work}
+
+The primary focus of this work is in expanding the sample of well-characterised CV donors, which remains small (less than 40 systems in total). While this sample is augmented by the large number of donors characterised using the superhump excess technique (\S\ref{sect:introduction:SU UMa}), eclipse modelled systems are preferable due to the small number of robust assumptions that need to be made. The specific focus is on characterising systems with short periods, and therefore low mass donors, in attempt to increase the number of period bouncing systems.
+
+The secondary goal is then to take this larger sample, and begin to perform comparisons to CV evolutionary models below the period gap. By comparing observed data with the predicted donor masses and radii across the range of periods, the long-term baseline AML rate can be inferred for a given system. As these short-period systems are expected to only evolve under gravitational braking, but are known to experience some excess AML above this, various empirical prescriptions for excess AML as functions of the CV system parameters can be built and serve as a diagnostic for the physical motivation of the excess AML.
