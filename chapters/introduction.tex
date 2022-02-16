@@ -198,19 +198,15 @@ Above masses of $\sim 0.1 M_\odot$, the thermal timescale is much longer than th
 \subsection{The classical picture of CV evolution}
 \label{sect:introduction:AMLMechs}
 
-\todo{rewrite this section}
-When two bodies orbit each other in space, the periodic warping of space-time produces gravitational waves \citep{einstein1918} and these waves carry energy away from the system, robbing it of angular momentum and reducing the orbital radius \citep{Paczynski1967}. In CVs, the rate of momentum loss from gravitational waves is small, so long timescales (by human standards) are needed to significantly alter the orbital period, $P$.
+When two bodies orbit each other in space, the periodic warping of space-time produces gravitational waves \citep{einstein1918} and these waves carry energy away from the system, robbing it of angular momentum and reducing the orbital radius \citep{Paczynski1967}. In CVs, the rate of momentum loss from gravitational waves is small, so long timescales are needed to significantly alter the orbital period.
 Both population synthesis models and evolutionary models of CVs do not match the observed population distribution with gravitational braking alone, and magnetic braking is thought to make up the deficit (e.g. \citet{kolb1993a, kolb1993, Davis2008, garraffo2018}).
-
-If one of the stars has a strong magnetic field (often assumed to be the secondary, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}), any wind emanating from the system, which is made up of charged particles, and likely originating from the secondary, will couple with the magnetic field to some degree and carry some angular momentum away from the binary with it.
-In the case of a CV, the wind originates from the secondary star and the magnetic field is often assumed to be associated with the secondary also, though white dwarfs can have strong `frozen-in' magnetic fields \citep{TOUT2011}.
-A more detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}.
+A detailed description of the modern understanding of magnetic braking is given in \S\ref{sect:introduction:magnetic braking}. Before discussing the braking mechanisms in CVs, it is important to review the classical understanding of CV evolution
 
 
 \subsection{The effect of mass transfer on the binary}
 \label{sect:introduction:stability criterion}
 
-\todo{I added this section to explain the maximum stable $q$ value. Also helps the eCAML section, and the period minimum section.}
+
 When mass moves from the donor to the white dwarf primary, the redistribution of matter within the system must take place whilst conserving angular momentum. The total angular momentum of the binary, $J$, is given by,
 \begin{equation}
     J = M_1 a_1 v_1 + M_2 a_2 v_2 = M_1 a_1 \frac{2\pi a_1}{P_{orb}} + M_2 a_2 \frac{2\pi a_2}{P_{orb}}
@@ -373,10 +369,11 @@ The disagreement between theory and observation at short periods indicates that 
 
 The obvious solution to the problem of missing AML is that we simply do not understand magnetism well enough to say that it ceases below the period gap. The donor may retain a residual magnetic field strong enough to drive some weaker form of magnetic braking that remains after the bulk of magnetic braking ceases, a.k.a. residual magnetic braking. 
 
-The period gap is frequently attributed to the donor becoming fully convective, and this triggering a large reduction in magnetic field strength. However, observations of field M dwarfs of the same mass, with convective envelopes, are seen with key tracers of magnetism. Specifically, X-ray observations find that the coronal magnetic energy dissipation of fully convective stars is similar to non-convective stars \citep{wright2016}, and Zeeman-Doppler imaging of rapidly rotating M dwarfs indicate that the complexity of surface magnetic fields increases alongside rotation rate (e.g. \citealt{donati2003,donati2009,marsden2011,waite2011,waite2015}). Together, these observations strongly indicate that the disrupted magnetic braking model commonly accepted is ill-motivated, and may be more closely tied to field complexity than field strength \citep{garraffo2018}. If the gap is indeed driven by a sudden increase in field complexity, then it is reasonable to assume that magnetic braking remains significant after the system emerges from the period gap. However, magnetism is not the only possible explanation for excess AML, and another strong candidate is consequential AML. Both of these mechanisms are discussed below.
+The period gap is frequently attributed to the donor becoming fully convective, and this triggering a large reduction in magnetic field strength. However, observations of field M dwarfs of the same mass, with convective envelopes, are seen with key tracers of magnetism. Specifically, X-ray observations find that the coronal magnetic energy dissipation of fully convective stars is similar to non-convective stars \citep{wright2016}, and Zeeman-Doppler imaging of rapidly rotating M dwarfs indicate that the complexity of surface magnetic fields increases alongside rotation rate (e.g. \citealt{donati2003,donati2009,marsden2011,waite2011,waite2015}). 
+Together, these observations strongly indicate that the disrupted magnetic braking model commonly accepted is ill-motivated, and may be more closely tied to field complexity than field strength \citep{garraffo2018}. If the gap is indeed driven by a sudden increase in field complexity, then it is reasonable to assume that magnetic braking remains significant after the system emerges from the period gap. 
+Some evidence for AML suppression under strong magnetic fields, though not in the context of the period gap, has been found in binary population synthesis models that focus on magnetic CVs \citep{belloni2020}. The models that include magnetic wind suppression under a strong white dwarf magnetic field result in a better fit to key CV observables -- specifically the orbital period distribution, white dwarf temperature distribution, and space density. 
 
-% Cant think of a good place to put this, so I've cut it
-% Some evidence for AML suppression under strong magnetic fields, though not in the context of the period gap, has been found in binary population synthesis models that focus on magnetic CVs \citep{belloni2020}. The models that include magnetic wind suppression result in a better fit to key CV observables, specifically the orbital period distribution, white dwarf temperature distribution, and space density. 
+Magnetism is not the only possible explanation for excess AML, and another strong candidate is consequential AML. Both of these mechanisms are discussed below.
 
 
 \subsection{Consequential AML}
@@ -420,7 +417,24 @@ where $C$ is an arbitrary constant chosen to best reflect observations, and \cit
 % The inverse relationship of more CAML at lower white dwarf masses is motivated by lower mass systems being able to retain less nova material, so more can be ejected and so carry more angular momentum. 
 The inverse relationship of more CAML at lower white dwarf masses is motivated by lower mass systems ejecting material at a lower velocity, meaning the binary is immersed in a friction-generating medium for longer and imparting more energy into the ejecta. 
 
-With eCAML, the dynamically unstable region \todo{put in their fig 1+2} is expanded. This has the important effect of making CVs with low-mass white dwarfs prone to dynamically unstable mass transfer, removing them from the CV population -- this simultaneously answers the question of CV white dwarfs being more massive than expected, and also vastly lowers the space density \citep{belloni2018}. Finally, the majority of systems that are now dynamically unstable are short-period CVs, so the observed period distribution is significantly more well-reproduced\todo{point at the Schreiber fig 2 panel}. 
+With eCAML, the dynamically unstable region is expanded. This has the important effect of making CVs with low-mass white dwarfs prone to dynamically unstable mass transfer (see \S\ref{sect:introduction:stability criterion}), removing them from the CV population -- this simultaneously answers the question of CV white dwarfs being more massive than expected, and also vastly lowers the space density \citep{belloni2018}. Finally, the majority of systems that are now dynamically unstable are short-period CVs, so the observed period distribution is significantly more well-reproduced. Figure~\ref{fig:introduction:Schreiber 2016 figure 2} is reproduced from \citet{Schreiber2016}, and shows the three dynamically unstable regions graphically.
+\begin{figure}
+    \centering
+    \begin{minipage}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth,trim={22cm 12cm 0 0},clip]{figures/introduction/Schrieber_figure1.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth,trim={0 12cm 22cm 0},clip]{figures/introduction/Schrieber_figure1.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth,trim={0 12cm 24cm 0},clip]{figures/introduction/Schrieber_figure2.pdf}
+    \end{minipage}
+    \caption{Reproduced from Figure~2 and Figure~3 of \citet{Schreiber2016}. {\bf Black squares} are observed CVs, and {\bf cyan dots} are predicted CV populations. {\bf Top left} is for a fully conservative CV model, {\bf top right} is for the classical non-conservative model, and {\bf bottom} is the eCAML results. The $M_{WD} > 1.44 M_\odot$ regions are forbidden, as these white dwarfs exceed the Chandrasekhar limit.}
+    \label{fig:introduction:Schreiber 2016 figure 2}
+\end{figure}
 
 Some observational evidence for eCAML has recently been uncovered by \citet{Pala2021}, where an inverse correlation between white dwarf mass and mass loss rate was observed. This is in line with Equation~\ref{eqn:introduction:eCAML nu}. 
 Also, low mass ($< 0.5 M_\odot$) helium-core white dwarfs are expected to be formed in binaries, but are frequently observed as singletons. The merger scenario under eCAML provides a neat explanation for this \citep{zorotovic2017}
@@ -440,9 +454,8 @@ The close proximity of the binary means that tidal effects are strong, and the d
 
 As an aside, \citet{wickramasinghe1996} presented theoretical motivation that CVs can have too strong a magnetic field to allow magnetic braking. Open field lines are necessary for wind to escape the system, so too strong a white dwarf magnetic field can trap the ionised gas in-system, suppressing the wind of the secondary. Magnetic CVs are briefly described in \S\ref{sect:introduction:magnetic CVs}.
 
-\todo{Rewrite}As the magnetic braking mechanism is a direct consequence of the donor star spinning down, the CV community is able to borrow insights from adjacent fields of study. The majority of M dwarfs experience some form of spin-down under magnetic braking \todo{cite this}, so observations of the magnetic field strengths of singletons should inform the efficacy of magnetic braking in CV binaries\todo{cite this}. Unfortunately, the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day\todo{cite this}. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
-
-
+When building a magnetic braking model, assumptions must be made about the effects of the magnetic field strength and field geometry, as well as how the wind speed scales with the donor's mass, radius, and rotation rate. The adopted values for these free parameters are tuned to match open cluster data, as open clusters can have their ages determined, and the masses, radii, and rotation rates of the stars contained in them observed (e.g. \citealt{matt2015,garraffo2018a}). The CV community is able to use these findings to inform CV models.
+However, the parameter space covered by open cluster data does not cover the parameter space occupied by CVs. Rotation rate is a key variable in magnetic braking prescriptions, but the typical CV rotational period is on the order of a few hours, and singleton M dwarfs are considered extremely fast rotators with periods of a day. Observations of singletons simply do not reach to the extremely low mass, rapid rotations that are frequently seen in CVs, so we are forced to rely on extrapolation and theory.
 
 This carries with it some major practical issues. One is that while the broad effects of magnetic fields is relatively easy to intuit, quantitative physical understanding the mechanics and origins of magnetic fields is difficult, involving fluid dynamics, considering interactions with the accretion disc, and magnetism acting on large systems, which quickly become prohibitive to model and is usually handled with one of a variety of recipes. \citealt{knigge11} contains a detailed compilation of some older approaches, but the decade since has seen a few newer methodologies emerge. Here, two recent magnetic braking prescriptions are described in moderate detail: the \citet{matt2015} prescription, and the \citet{garraffo2018a} prescription. For a more complete, detailed summary of the modern understanding of M dwarf magnetic fields refer to \citet{kochukhov2021}. 
 
@@ -473,7 +486,7 @@ The rotation rates of the donor and the sun are $\Omega_{*,\odot}$, and $T_0$ is
 \end{equation}
 
 The authors take observations of two clusters, the $\sim 5$ Myr old ONC cluster and the $\sim 580$ Myr old Praesepe cluster, and use the first as initial conditions and the second as target distribution to reproduce. Figure~\ref{fig:introduction:Matt 2015 figure 2} is taken from \citet{matt2015}, and compares the initial and final conditions of their synthetic cluster model compared to these two boundary conditions. During the first few tens of Myrs of this model, the stars in the synthetic cluster are spun up as they contract, lowering their periods by factors of $\sim 5-10$. After this initial phase, which is much shorter than the spin down timescales, the more long-term spin evolution begins.
-\begin{figure}[!tbp]
+\begin{figure}
     \centering
     \begin{minipage}[b]{\textwidth}
         \centering
