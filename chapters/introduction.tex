@@ -252,18 +252,18 @@ However, this reveals a flaw in assuming fully conservative mass transfer ($\dot
 Finally, we can also approximate the stability criteria for mass transfer using the equations above. 
 The maximum stable value of $q$ can be found by considering the mass-radius exponent of the donor ($\xi$), and its Roche lobe ($\xi_{\rm L}$). For the donor, $\xi$ can be found by simply differentiating the general equation $R \propto M^\xi$.
 \begin{equation}
-    \xi = \frac{{\rm d\ ln\ }R}{{\rm d\ ln\ }M}
+    \xi = \frac{{\rm d\ ln\ }R_2}{{\rm d\ ln\ }M_2}
 \end{equation}
 Similarly, by using Equation~\ref{eqn:introduction:Roche lobe in response to mass loss} we find
 \begin{equation}
-    \xi_{\rm L} = \frac{{\rm d\ ln\ }R}{{\rm d\ ln\ }M_1} = 2q - \frac{5}{3}
+    \xi_{\rm L} = \frac{{\rm d\ ln\ }R_L}{{\rm d\ ln\ }M_2} = 2q - \frac{5}{3}
 \end{equation}
 
 For stable mass transfer, the response of the Roche lobe must be less than the response of the donor, $\xi > \xi_{\rm L}$. This ensures that mass loss causes the star to contract faster than the Roche lobe contracts, and gives the following stability criterion,
 \begin{equation}
     q < \frac{1}{2}\xi + \frac{5}{6}
 \end{equation}
-for which we can substitute in a theoretical value of $\xi$ to find the maximum $q$. For a low mass, main sequence star ($M < 0.8M_\odot$), $xi \simeq 0.8$ \citep{knigge11} and we find $q < 1.23$. Below $M_2 \lesssim 0.43 M_\odot$, the star becomes deeply convective and $\xi$ falls sharply to $\xi = -1/3$ \citep{paczynski1965,rappaport1982}, and $q \lesssim 2/3$. 
+for which we can substitute in a theoretical value of $\xi$ to find the maximum $q$. For a low mass, main sequence star ($M < 0.8M_\odot$), $\xi \simeq 0.8$ \citep{knigge11} and we find $q < 1.23$. Below $M_2 \lesssim 0.43 M_\odot$, the star becomes deeply convective and $\xi$ falls sharply to $\xi = -1/3$ \citep{paczynski1965,rappaport1982}, and $q \lesssim 2/3$. 
 
 
 \subsection{Period evolution and key population features}
@@ -391,7 +391,7 @@ At its core, consequential AML (CAML) is a simple concept. It's known that the a
 \end{enumerate} 
 The introduction of a modified, empirically calibrated CAML can account for these issues, making a compelling case for its validity. 
 
-The maximum dynamically stable mass transfer rate of a CV is a function of $q$, related via the adiabatic mass-radius exponent, $\alpha_{ad}$, and the mass-radius exponent of the Roche radius, $\alpha_{L}$. Where the two intersect forms a threshold beyond which runaway mass transfer (much like the pre-CV common envelope phase) is triggered, and most likely results in a merger between the two bodies.
+The maximum dynamically stable mass transfer rate of a CV is a function of $q$, related via the adiabatic mass-radius exponent, $\alpha_{ad}$, and the mass-radius exponent of the Roche radius, $\alpha_{L}$. Where the two intersect forms a threshold beyond which runaway mass transfer (much like the pre-CV common envelope phase) is triggered, and most likely results in a merger between the two bodies.\todo{massage this section to match with the effect of mass transfer on the donor section}
 \begin{equation}
     \label{eqn:introduction:CAML stability threshold}
     \alpha_{ad} = \frac{{\rm d} ln(R_2)}{{\rm d} ln(M_2)}_{ad} = \frac{{\rm d} ln(R_L)}{{\rm d} ln(M_2)} = \alpha_L
@@ -517,9 +517,9 @@ Where $B$ is the magnetic field strength at the stellar surface. As the second t
 \citet{garraffo2018a} suggest the following relation between $\rm Ro$ and $n$,
 \begin{equation}
     \label{eqn:introduction:garraffo field complexity}
-    n = 1 + \frac{0.02}{\rm Ro} + 2 {\rm Ro}
+    n = 1 + \frac{x}{\rm Ro} + y {\rm Ro}
 \end{equation}
-based on observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$ to explain the observed population of old rapid rotators that appear to have experienced minimal spin-down \citep{vanSaders2016}. 
+where $x$ and $y$ are free parameters, chosen to fit observations of open clusters. The three terms reflect three aspects of the magnetic braking model - the minimum complexity is defined as $n \equiv 1$, the first factor encodes stars with small $\rm Ro$ having large $n$ (e.g. young, fast rotators), and the third term gives stars with large $\rm Ro$ similarly large $n$ to explain the observed population of old rapid rotators that appear to have experienced minimal spin-down \citep{vanSaders2016}. 
 This prescription explains the AML of a star as purely a function of its Rossby number.
 
 Similarly to \citet{matt2015}, \citet{garraffo2018a} run a population synthesis model to compare to observations using initial conditions taken from the 13 Myr old h Persei cluster \citep{moraux2013}, but the authors show that differences between alternative initial conditions do not survive longer than 200 Myrs. Observations of stellar rotation periods and colour from several clusters with known ages are then compared to the synthetic population.
@@ -541,10 +541,10 @@ The \citet{garraffo2018a} prescription is simpler in concept than the \citet{mat
 
 We can examine the differences between these prescriptions in the case of CV evolution by applying them to a donor evolutionary track, and \citet{knigge11} has constructed a donor sequence using their own models that reasonably accurately reproduces observations. The masses, radii, and periods along the sequence are given, so the would-be effects of the magnetic braking prescriptions described above can be calculated. In addition to the two previously discussed prescriptions, the default MESA \citep{Paxton_2015} magnetic braking prescription \citep{rappaport1983} is included. This prescription includes a magnetic braking index, $\gamma$,
 \begin{equation}
-    \dot J = -3.8\times10^{-30} M R_\odot^4 \bigg( \frac{R}{R_\odot} \bigg) \omega^3
+    \dot J = -3.8\times10^{-30} M R_\odot^4 \bigg( \frac{R}{R_\odot} \bigg)^{\gamma} \omega^3
 \end{equation}
 
-Note that in the specific case of CVs, period and radius are synonymous with one another, due to the requirement that the donor is in contact with the Roche lobe, and is tidally locked. 
+Note that in the specific case of CVs, period and radius are synonymous with one another due to the requirement that the donor is in contact with the Roche lobe, and is tidally locked. 
 
 \begin{figure}
     \centering
@@ -553,7 +553,7 @@ Note that in the specific case of CVs, period and radius are synonymous with one
     \label{fig:introduction:rappaport garraffo matt magnetic braking}
 \end{figure}
 
-Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} shows how the \citet{matt2015} magnetic braking prescription compares to the default MESA mabgnetic braking prescription, from \citet{rappaport1983}. The turning point in the \citet{garraffo2018a} at $\sim 0.15 M_\odot$ is due to the imposed limit of $n < 7$ being reached.
+Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking}\todo{Make this period instead?} shows how the \citet{matt2015} magnetic braking prescription compares to the default MESA magnetic braking prescription, from \citet{rappaport1983}. All prescriptions see a discontinuity at $0.2M_\odot$, where \citet{knigge11} imposes the magnetic braking cutoff and the donor contracts to its equilibrium radius.
 
 The differences between the three prescriptions is clear in both the overall strength of the prescriptions, but also in how they evolve with mass. All the prescriptions shown decrease at lower masses, but at different rates. In the context of CV evolution, a different dropoff rates of magnetic braking would alter the shape of the donor mass-radius sequence, so observations of CV donors should be able to allow us to evaluate the effectiveness of different braking prescriptions.
 
