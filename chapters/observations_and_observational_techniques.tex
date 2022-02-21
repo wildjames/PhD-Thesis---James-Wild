@@ -56,20 +56,31 @@ To extract photometric information from the raw image files, the HiPERCAM data r
 % The cameras store data for a series of images as FITS `cubes', from which the sources are characterised and extracted.
 Bias and flat field corrections are done for each observation, with calibration frames taken nightly as standard procedure.
 
+
 \subsubsection{Bias frames}
-The readout electronics of a CCD are not perfect, and contribute a small amount of gaussian noise to each pixel called readout noise. The ADC is only capable of recording {\it positive integer values}, and functionally discards negative pixel counts. To illustrate why this is an issue, take the exaggerated example of a readout noise of $7 e^-/{\rm px}$ on a region of the CCD that is stimulated by $5 e^-/{\rm px}$. If negative values are limited to 0, the effect is to increase the average. This will have a small corrupting effect on low-signal areas of the CCD, and Figure\ref{fig:observations:bias frame histogram} illustrates this graphically.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/observations/bias_frame_histogram.pdf}
     \caption{Illustrating the effect of omitting negative values on the average of a distribution. The black line is a Gaussian distribution with an average of 5 and a standard deviation of 7. The vertical dashed line shows the `true' average of 5 ADU, and the vertical red line shows the average given by an ADC that reports negative electron counts as 0.}
     \label{fig:observations:bias frame histogram}
 \end{figure}
+The readout electronics of a CCD are not perfect, and contribute a small amount of gaussian noise to each pixel called readout noise. The ADC is only capable of recording {\it positive integer values}, and functionally discards negative pixel counts. To illustrate why this is an issue, take the exaggerated example of a readout noise of $7 e^-/{\rm px}$ on a region of the CCD that is stimulated by $5 e^-/{\rm px}$. If negative values are limited to 0, the effect is to increase the average, and Figure~\ref{fig:observations:bias frame histogram} illustrates the effect of discarding negative counts.
+This will have a small corrupting effect on low-signal areas of the CCD, specifically the sky background which theoretically should be exactly zero.
+
 
 \subsubsection{Flat fielding}
-The response of each pixel to photons is similar, but is not exactly equal. Further, the optics of the telescope is not perfect, and throughput can vary across the field of view. These effects mean that \todo{I'm done for the day. Pick back up here.}
+
+The response of each pixel to photons is similar, but is not exactly equal. In addition, the optics of the telescope is not perfect, and throughput can vary across the field of view. These effects mean that a constant pattern is imprinted on every exposure the instrument takes. 
+In order to characterise this pattern, an exposure is taken of a known uniform brightness, for example a specialised light box with a high degree of uniformity. 
+However, a simpler approach is to observe the sky during sunset, when the sky is still bright and the contribution of light from stars is largely negligible. 
+The residual stellar light should still be removed, so to completely eliminate stars from the flat field observation, many exposures are taken and the telescope is nudged by a small amount every few seconds. Then, since the stars move between each exposure, calculating the median frame will effectively remove stars from the image, leaving behind only the pixel response pattern. 
+Now, by dividing each exposure by the flat image, we can remove this pattern from future images. 
+
 
 \subsubsection{Aperture photometry}
 \todo{Here is where I should talk about normal and optimal reduction methods}
+
 
 \section{Photometric calibration}
 \label{sect:photometric extraction and calibration}
