@@ -152,8 +152,8 @@ ULTRACAM and HiPERCAM use an SDSS-\emph{like} filter system with higher efficien
 \item HiPERCAM/ULTRACAM Super SDSS, $u_{\rm sup}, g_{\rm sup}, r_{\rm sup}, i_{\rm sup}, z_{\rm sup}$.
 \end{itemize}
 
-We aim to place our photometery in the SDSS $u'g'r'i'z'$ system, as this is the system later used by the white dwarf atmospheric models. The $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}$\ filters were sufficiently similar to standard SDSS filters that the uncorrected magnitudes of standard reference stars from \citet{smith2002} could be used to calibrate absolute photometery without issue. However, with the new filters, there was concern that the different shape of the sensitivity curve, particularly in the $u'$\ band, differ enough from the standard filters to cause issues with our photometric calibration. Figure~\ref{fig:sdss vs super filters}\todo{Make a version of this for HiPERCAM and ULTRASPEC? I dont think it's worth it} illustrates the change in throughput between the SDSS photometric system, and the Super SDSS filters, on ULTRACAM on the NTT. 
-
+Note that we have no $z$ band observations, so the $z$ band is omitted hereafter.
+We aim to place our photometery in the SDSS $u'g'r'i'$ system, as this is the system later used by the white dwarf atmospheric models. The $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}$\ filters were sufficiently similar to standard SDSS filters that the uncorrected magnitudes of standard reference stars from \citet{smith2002} could be used to calibrate absolute photometery without issue. However, with the new filters, there was concern that the different shape of the sensitivity curve, particularly in the $u'$\ band, differ enough from the standard filters to cause issues with our photometric calibration. Figure~\ref{fig:sdss vs super filters}illustrates the change in throughput between the SDSS photometric system, and the Super SDSS filters, on ULTRACAM on the NTT. 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/three_cvs_with_weird_colours/GeneralFigs/bandpass_diffs_SDSS_dots_UCAMNTT_solid.pdf}
@@ -161,15 +161,13 @@ We aim to place our photometery in the SDSS $u'g'r'i'z'$ system, as this is the 
     \label{fig:sdss vs super filters}
 \end{figure}
 
-% As the difference in magnitude between photometric systems will be dependent on the shape of a stars spectrum, calculating the colour terms between the three systems is important.
-
 To perform the colour corrections, the following equation for the magnitude of a star was used, using the $g'$\ band as an example:
 \begin{equation}
     \label{eqn:gen magnitudes}
     g' = g_{\rm inst} + \chi k_{\rm ext} + g_{\rm zp} + c_{\rm g, sup}(g'-r') 
 \end{equation}
 where $g_{\rm zp}$\ is the zero point, $g_{\rm inst} = -2.5 \rm log(ADU/{\it t}_{\rm exp})$
-for an exposure time of $t_{\rm exp}$, and $c_{\rm g, sup}$\ is the colour term correction gradient. In theory, the atmospheric extinction term also has some colour dependency, as extinction varies with wavelength. However, the effect is negligible in this case so it is omitted.
+for an exposure time of $t_{\rm exp}$, and $c_{\rm g, sup}$\ is the colour term correction gradient. In theory, the atmospheric extinction term also has some colour dependency, as extinction varies with wavelength. However, the effect is negligible between these photometric systems, so it is omitted.
 
 The optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM and HiPERCAM components in the optical path. Models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the \teff\ and \logg\ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$, spanning from \logg $= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which was then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with \logg$=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to asses the impact of the different spectral shape on the resulting colour terms.
 
@@ -178,65 +176,65 @@ We synthesised the colour terms between the SDSS and Super SDSS systems, e.g., $
     g' &= g_{\rm sup} + g_{\rm zp} + c_{\rm g, sup}(g'-r') \\
     % g' - g_{\rm sup} &= g_{\rm zp} + c_{\rm g, sup}(g'-r')
 \end{align*}
-These relationships are shown for HiPERCAM in Figure~\ref{fig:ULTRACAM colour corrections} for all four Super SDSS filters used to observe these CVs, and Table~\ref{table:all ULTRACAM colour corrections} and Table~\ref{table:all HiPERCAM colour corrections}\todo{Fetch the HiPERCAM coefficients} contain the coefficients of each colour term for both HiPERCAM and ULTRACAM.
+These relationships are shown for HiPERCAM in Figure~\ref{fig:observations:ULTRACAM colour corrections} for all four Super SDSS filters used to observe these CVs, and Table~\ref{table:observations:all ULTRACAM colour corrections} and Table~\ref{table:observations:all HiPERCAM colour corrections} contain the coefficients of each colour term correction for both HiPERCAM and ULTRACAM.
 $(u'-g')$\ was used to correct $u$\ magnitudes, $(g'-r')$\ was used to correct $g$\ and $r$\ magnitudes, $(g'-i')$\ was used to correct the $i$\ band.
 These colour corrections are not generally the same for main sequence stars and white dwarfs, though the colours of the white dwarfs presented in this work are all such that the discrepancy is on the order of a few percent, and is considered negligible.
 
 \noindent\begin{minipage}{\linewidth}
     \centering
     
-    \captionof{table}{ULTRACAM colour term best fit lines from Figure~\ref{fig:ULTRACAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
-    \label{table:all ULTRACAM colour corrections}
+    \captionof{table}{ULTRACAM colour term best fit lines from Figure~\ref{fig:observations:ULTRACAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
+    \label{table:observations:all ULTRACAM colour corrections}
     \begin{tabular}{cccc}
-        Correction & Diagnostic &   $\phi$\   & $c$ \\
+        Correction          & Diagnostic    & $\phi$    & $c$ \\
         \hline
         \hline
-        $(u'-u_{\rm sup})$ &  $(u'-g')$   & 0.003 & 0.036 \\
-                    &  $(g'-r')$   & 0.033 & 0.063 \\
-                    &  $(g'-i')$   & 0.038 & 0.044 \\
+        $(u'-u_{\rm sup})$  &  $(u'-g')$    & 0.003     & 0.036 \\
+                            &  $(g'-r')$    & 0.033     & 0.063 \\
+                            &  $(g'-i')$    & 0.038     & 0.044 \\
         \hline
-        $(g'-g_{\rm sup})$ &  $(u'-g')$   & -0.001 & 0.014 \\
-                    &  $(g'-r')$   & 0.010  & 0.027 \\
-                    &  $(g'-i')$   & 0.012  & 0.018 \\
+        $(g'-g_{\rm sup})$  &  $(u'-g')$    & -0.001    & 0.014 \\
+                            &  $(g'-r')$    & 0.010     & 0.027 \\
+                            &  $(g'-i')$    & 0.012     & 0.018 \\
         \hline
-        $(r'-r_{\rm sup})$ &  $(u'-g')$   & -0.017 & 0.016 \\
-                    &  $(g'-r')$   & -0.004 & 0.032 \\
-                    &  $(g'-i')$   & -0.002 & 0.022 \\
+        $(r'-r_{\rm sup})$  &  $(u'-g')$    & -0.017    & 0.016 \\
+                            &  $(g'-r')$    & -0.004    & 0.032 \\
+                            &  $(g'-i')$    & -0.002    & 0.022 \\
         \hline
-        $(i'-i_{\rm sup})$ &  $(u'-g')$   & -0.031 & 0.020 \\
-                    &  $(g'-r')$   & -0.015 & 0.040 \\
-                    &  $(g'-i')$   & -0.012 & 0.028 \\
+        $(i'-i_{\rm sup})$  &  $(u'-g')$    & -0.031    & 0.020 \\
+                            &  $(g'-r')$    & -0.015    & 0.040 \\
+                            &  $(g'-i')$    & -0.012    & 0.028 \\
         \hline
         \hline
     \end{tabular}
 
     \includegraphics[width=\textwidth]{figures/observations/colour_term_tracks_UCAM.pdf}
     \captionof{figure}{The difference between the classic SDSS photometric system, and the ULTRACAM SuperSDSS filters on the NTT, as a function of SDSS colours, are calculated for model atmospheres. Red points are Koester white dwarf models, black points are Phoenix main sequence model atmospheres, and the blue line is the best fit straight line to both datasets. When applying colour corrections, the highlighted relations were used.}
-    \label{fig:ULTRACAM colour corrections}
+    \label{fig:observations:ULTRACAM colour corrections}
 \end{minipage}
 
 \noindent\begin{minipage}{\linewidth}
     \centering
     
-    \captionof{table}{HiPERCAM colour term best fit lines from Figure~\ref{fig:HiPERCAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
-    \label{table:all HiPERCAM colour corrections}
+    \captionof{table}{HiPERCAM colour term best fit lines from Figure~\ref{fig:observations:HiPERCAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
+    \label{table:observations:all HiPERCAM colour corrections}
     \begin{tabular}{cccc}
             Correction          & Diagnostic & $\phi$   & $c$ \\
             \hline
             \hline
-            $u'-u_{\rm sup}$     & $(u'-g')$   &   0.096   & 0.054\\
+            $u'-u_{\rm sup}$    & $(u'-g')$   &   0.096   & 0.054\\
                                 & $(g'-r')$   &   0.150   & 0.029\\
                                 & $(g'-i')$   &   0.152   & 0.022\\
             \hline
-            $g'-g_{\rm sup}$     & $(u'-g')$   &   0.008   & 0.023\\
+            $g'-g_{\rm sup}$    & $(u'-g')$   &   0.008   & 0.023\\
                                 & $(g'-r')$   &   0.010   & 0.045\\
                                 & $(g'-i')$   &   0.014   & 0.031\\
             \hline
-            $r'-r_{\rm sup}$     & $(u'-g')$   &   0.000   & 0.001\\
+            $r'-r_{\rm sup}$    & $(u'-g')$   &   0.000   & 0.001\\
                                 & $(g'-r')$   &   0.001   & 0.003\\
                                 & $(g'-i')$   &   0.001   & 0.002\\
             \hline
-            $i'-i_{\rm sup}$     & $(u'-g')$   &   0.033   & 0.022\\
+            $i'-i_{\rm sup}$    & $(u'-g')$   &   0.033   & 0.022\\
                                 & $(g'-r')$   &   0.016   & 0.044\\
                                 & $(g'-i')$   &   0.012   & 0.030\\
             \hline
@@ -244,8 +242,8 @@ These colour corrections are not generally the same for main sequence stars and 
     \end{tabular}
     
     \includegraphics[width=\textwidth]{figures/observations/colour_term_tracks_HCAM.pdf}
-    \captionof{figure}{The difference between the classic SDSS photometric system, and the HiPERCAM SuperSDSS filters on the GTC, as a function of SDSS colours, are calculated for model atmospheres. Red points are Koester white dwarf models, black points are Phoenix main sequence model atmospheres, and the blue line is the best fit straight line to both datasets. When applying colour corrections, the highlighted relations were used.}
-    \label{fig:HiPERCAM colour corrections}
+    \captionof{figure}{As Figure~\ref{fig:observations:ULTRACAM colour corrections}}
+    \label{fig:observations:HiPERCAM colour corrections}
 \end{minipage}
 
 
@@ -257,9 +255,10 @@ The comparison star SDSS magnitudes are then determined. As the colour term corr
 \begin{align*}
     u' =& u_{\rm inst,0} + u_{\rm zp} + c_{\rm u, sup}(u' - g') \\
     g' =& g_{\rm inst,0} + g_{\rm zp} + c_{\rm g, sup}(g' - r') \\
-    r' =& r_{\rm inst,0} + r_{\rm zp} + c_{\rm r, sup}(g' - r')
+    r' =& r_{\rm inst,0} + r_{\rm zp} + c_{\rm r, sup}(g' - r') \\
+    i' =& i_{\rm inst,0} + i_{\rm zp} + c_{\rm i, sup}(g' - i') \\
 \end{align*}
-Initially, $u',g',r'$\ magnitudes are set equal to the instrumental magnitudes, and a new set of $u',g',r'$\ magnitudes are calculated. The new values are then used to repeat the calculation until a new iteration produces no change, typically after $\sim$4 loops. For the data taken with $u_{\rm sup},g_{\rm sup},i_{\rm sup}$\ filters, the process is identical but replaces $r$ with $i$.
+Initially, $u',g',r',i'$\ magnitudes are set equal to the instrumental magnitudes, and a new set of $u',g',r',i'$\ magnitudes are calculated. The new values are then used to repeat the calculation until a new iteration produces no change, typically after $\sim$4 loops.
 
 
 \subsection{Producing a flux-calibrated target lightcurve}
@@ -282,18 +281,17 @@ we can write
     \frac{F^t}{F^c} =& \frac{ADU^t}{ADU^c}\cdot K^{t,c} \\
 \end{align*}
 where $K^{t,c} = 10^{-0.4c_{\rm g, sup}\big((g'-r')^t - (g'-r')^c\big)}$.
-This accounts for differences in wavelength response between the two systems when calculating the flux ratio, and is applied to each frame. The $(g'-r')^t$\ magnitudes are calculated using a sigma-clipped mean instrumental magnitudes computed from all frames in the observation. In practice, the factor $K^{t,c}$\ varies from $\sim 1.0 - 1.1$\ across the three systems. 
+This accounts for differences in wavelength response between the two systems when calculating the flux ratio, and is applied to each frame. The $(g'-r')^t$\ magnitudes are calculated using a sigma-clipped mean instrumental magnitudes computed from all frames in the observation. In practice, the factor $K^{t,c}$\ varies from $\sim 1.0 - 1.1$\ for our observations. 
 
+While developing this correction method, some verification tests were performed.
 ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. In all cases, the flux-calibrated lightcurves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
 
-To account for residual error in flux calibration, we add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature.
+We add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature. This is a practice established by \citet{McAllister2019}, to account for possible systematic error in flux calibration and modelling.
 
 
 \section{Catalogue of observations}
 
-The observations analysed in this work span the full decade from 2011, through to 2021, and have been taken from multiple sites as the instruments move from telescope to telescope. To aid with the readability, a key is provided in Table~\ref{tab:observation acronyms} of the acronyms used for instruments and telescopes. 
-
-
+\todo{Make a Table of observations.}The observations analysed in this work span the full decade from 2011, through to 2021, and have been taken from multiple sites as the instruments move from telescope to telescope. To aid with the readability, a key is provided in Table~\ref{tab:observation acronyms} of the acronyms used for instruments and telescopes. 
 
 \begin{table}
     \centering
