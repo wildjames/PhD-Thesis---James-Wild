@@ -78,9 +78,10 @@ To prevent corruption, a small bias voltage is applied to each pixel, raising th
 
 \subsubsection{Flat fielding}
 
-The response of each pixel to photons is similar, but not exactly equal. In addition, the optics of the telescope are not perfect and throughput varies across the field of view, a.k.a vignetting. Dust and imperfections in the optics can also introduce variation across the image. These effects mean that each exposure the instrument takes is convolved with a flat-field response pattern.
+The response of each pixel to photons is similar, but not exactly equal. In addition, the optics of the telescope are not perfect and throughput varies across the field of view, a.k.a vignetting. Dust and imperfections in the optics can also introduce variation across the image. Finally, as filters are not manufactured with infinitesimal tolerances, each filter also makes a contribution to variations across an image.
+These effects mean that each exposure the instrument takes is convolved with a constant flat-field response pattern.
 
-In order to characterise the flat-field pattern, an exposure is taken of a known uniform brightness, for example a specialised light box with a high degree of uniformity. 
+In order to characterise and remove the flat-field pattern, an exposure is taken of a known uniform brightness, for example a specialised light box with a high degree of uniformity. 
 However, a simpler approach is to observe the sky during sunset, when the sky is still bright and the contribution of light from stars is largely negligible. In the absence of cloud, the twilight sky forms a highly uniform field.
 Residual stellar light should still be removed though, so to completely eliminate stars from the flat field observation many exposures are taken while the telescope is nudged by a small amount every few seconds. Then, since the stars move between each exposure, calculating the median frame will effectively remove stars from the image, leaving behind only the uniform sky observation imprinted with the flat-field response pattern. The flat field images are bias corrected to give the final flat image.
 Now, by dividing each subsequent exposure by the flat image, we can remove this pattern from future images. 
