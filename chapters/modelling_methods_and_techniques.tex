@@ -6,80 +6,163 @@
 % Also bring up that, because a CV is so compact, the population of eclipsers is actually fairly high.
 % Talk about the state of stellar modelling, and say that we can apply it to CVs. Talk about how we can use this to convert eclipse modelling characterisation directly to an empirical mass loss rate, slash AML rate.
 
-The primary goal of this thesis is to characterise as many CVs as possible. In this work, I am primarily interested in finding independant measures of the donor mass and radius, measurements of the white dwarf mass and radius, and the orbital separation between the two. These metrics provide valuable probes of CV evolution \citep{knigge2006}, which is explored more thoroughly in \S\ref{sect:method:evolutionary modelling}. 
+The primary goal of this thesis is to characterise as many CVs as possible, meaning to find the donor mass and radius, measurements of the white dwarf mass and radius, and the orbital separation between the two bodies. These metrics provide valuable probes of CV evolution \citep{knigge2006}, which is explored more thoroughly in \S\ref{sect:method:evolutionary modelling}. 
 This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and inferring the long-term mass loss rate of a system from its donor properties.
 
 
-\section{Calculating orbital ephemerides}
-\label{sect:modelling:calculating ephemeris}
+\section{Finding an orbital ephemeris}
+\label{sect:modelling:getting ephemeris}
 
 Crucial to both observing and modelling an eclipse is a good knowledge of the orbital ephemeris. This is described by the equation
 \begin{equation}
     \label{eqn:modelling:general ephemeris equation}
     T_{\rm ecl} = T_0 + P_{\rm orb} E
 \end{equation}
-where $T_{\rm ecl}$ is the time of mid-eclipse, $T_0$ is the mid-eclipse time of the zeroth eclipse, and $E$ is the eclipse number. Accurately calculating $T_{\rm ecl}$ is important to scheduling observations of a system, and $P_{\rm orb}$ is a crucial input to the eclipse modelling that I later conduct. 
+where $T_{\rm ecl}$ is the time of mid-eclipse, $T_0$ is the mid-eclipse time of the zeroth eclipse, and $E$ is the eclipse number. Accurately calculating $T_{\rm ecl}$ is important to scheduling observations of a system, and $P_{\rm orb}$ is a crucial to the eclipse modelling. 
 
-A very high accuracy in $P_{\rm orb}$ is important, as observations are often separated by several months or even years, and an error of even $\sim 0.1$ seconds can accumulate to give incorrect predicted eclipse times. This need for accuracy and precision also requires the definition of {\it where} a time is recorded from. All eclipse times presented in this thesis are given in the Barycentric Modified Julian Date (BMJD), which is the time of eclipse as measured from the centre of mass of the solar system. Note that this is different to the heliocentric MJD often seen in the literature, as the location of the sun deviates from the centre of mass. Where heliocentric literature values are used, they are first converted to BMJD. 
+As observations are often separated by several months or even years, an error in $P_{\rm orb}$ of even $\sim 0.1$ seconds can accumulate to give significantly inaccurate predicted eclipse times. This need for precision also requires the definition of {\it where} a time is recorded from. All eclipse times presented in this thesis are given in the Barycentric Modified Julian Date (BMJD), which is the time of eclipse as measured from the centre of mass of the solar system. Note that this is different to the heliocentric MJD often seen in the literature, and where heliocentric literature values are used, they are first converted to BMJD. 
 
-Simply taking a time of minimum light is insufficient for the systems in this work, as it is common for these eclipses to have very flat eclipse minima. A somewhat more sophisticated method is necessary.
+\subsection{Finding eclipse times}
+\label{sect:modelling:finding eclipse times}
 
-Finding the mid-eclipse time was done by looking at the numerical derivative of an eclipse. 
-First, an eclipse is smoothed to remove short term fluctuations, mostly those due to noise but also to partly mitigate the short term flickering often seen in CVs. This initial smoothing was done by applying a median filter to the data. Then, the numerical derivative is calculated and smoothed again, this time with a `boxcar' convolution. Properly filtered, the dominant remaining features of the numerical derivative are the ingresses and egresses of the white dwarf and bright spot. 
-The white dwarf ingress and egress are, in theory, mirror images of one another. The ingress should be a sharp, negative spike, and egress should be a sharp, positive spike. As the two should be the same shape, a double-gaussian is fit to the derivative, using manually chosen initial conditions. In this model, the two gaussians share a width, $\sigma$, and have their mid-points described by
+When finding an eclipse time, simply taking a time of minimum light is insufficient for the systems in this work. This is because it is common for CV eclipses to have very flat eclipse minima, and because CV eclipses have a fairly complex structure. 
+A somewhat more sophisticated method is necessary, and finding the mid-eclipse time is done by looking at the numerical derivative of an eclipse. 
+First, an eclipse is smoothed to remove short term fluctuations, partly those due to noise but also to mitigate the short term flickering often seen in CVs. This initial smoothing is done by applying a median filter to the data. Then, the numerical derivative is calculated and smoothed again, this time with a `boxcar' convolution. Properly filtered, the dominant remaining features of the numerical derivative are the ingresses and egresses of the white dwarf and bright spot. 
+The white dwarf ingress and egress are, in theory, symmetrical -- the ingress should be a sharp, negative spike, and egress should be a sharp, positive spike. As the two should be the same shape, a double-gaussian is fit to the derivative, using manually chosen initial conditions. In this model, the two gaussians share a width, $\sigma$, and have their mid-points described by
 \begin{align*}
-    T_{\rm 1,2} = T_{\rm ecl} \pm \Delta T
+    T_{\rm 1,2} = T_{\rm ecl} \pm \Delta T \\
     h_{\rm 1,2} = \pm h
 \end{align*}
-where $T_{1,2}$ are the midpoints of the two gaussians, $h_{1,2}$ are their heights, and $2\Delta T$ is the width of the white dwarf eclipse. Four important free parameters are then fitted to the data, $T_{\rm ecl}$, $\sigma$, $h$, and $\Delta T$. 
+where $T_{1,2}$ are the respective midpoints of the two gaussians, $h_{1,2}$ are their respective heights, and $2\Delta T$ is the distance between the two gaussians. 
+The derivative is then fit with these free parameters using an MCMC, to give the $T_{\rm ecl}$.
+
+\subsection{Computing period}
+\label{sect:modelling:Computing ephemeris}
 
 To find a rough initial ephemeris of a system, at least two eclipse observations with known $E$ are necessary. Given no prior knowledge of $P_{\rm orb}$ and $T_0$, this can be done by simply observing the system for several hours, until two consecutive eclipses are seen. This gives a rough measure of $P_{\rm orb}$, but can be significantly refined with longer baseline observations. 
 For each observed $T_\mathrm{ecl}$, $E$ could unambiguously be determined, either from observing consecutive eclipses or from previously reported literature values.
 An MCMC algorithm was used to fit a straight line model to the independent variable $E$\ and dependent variable $T_\mathrm{ecl}$, with a gradient $P$\ and intercept $T_0$. 
 The model also accounts for potential systematic differences in timing accuracy between instruments by also having variable error scale factors applied to all eclipses observed with a specific instrument, e.g. the timing reported for eclipses observed with ULTRACAM may be systematically offset from reality, and the errors associated with those observations might need to be larger than reported to be consistent with data from other instruments. The prior distribution assumed for these error factors was log-uniform ranging from 0.01 to 100, which favours the smallest factor consistent with the data. 
 
-The values of $E$ for each system were chosen to minimise the covariance between $T_0$ and $P$. 
-\todo{Should I explain the covariance minimisation algebra?}
-If we consider the result of fitting  $T_0, P_{\rm orb}$ as a multivariate normal, $N(\mu, \Sigma)$, we can write
-\begin{align}
-    \mu =& 
-    \begin{pmatrix}
-        T_0 \\
-        P_{\rm orb}
-    \end{pmatrix}
-    \\
-    \label{eqn:modelling:ephemeris multivariate normal}
-    \Sigma =& 
-    \begin{pmatrix}
-        \sigma_{\rm T0}^2 & \sigma_{\rm T0} \sigma_{\rm P} \\
-        \sigma_{\rm P} \sigma_{\rm T0} & \sigma_{\rm P}^2  \\
-    \end{pmatrix}
-\end{align}
-Now, consider a predicted eclipse time for $E$. The uncertainty in Equation~\ref{eqn:modelling:general ephemeris equation} can be written as,
+The value of $E$ for each eclipse were chosen to minimise the covariance between $T_0$ and $P$. 
+% If we consider the result of fitting  $T_0, P_{\rm orb}$ as a multivariate normal, $N(\mu, \Sigma)$, we can write
+% \begin{align}
+%     \mu =& 
+%     \begin{pmatrix}
+%         T_0 \\
+%         P_{\rm orb}
+%     \end{pmatrix}
+%     \\
+%     \label{eqn:modelling:ephemeris multivariate normal}
+%     \Sigma =& 
+%     \begin{pmatrix}
+%         \sigma_{\rm T0}^2 & \sigma_{\rm T0} \sigma_{\rm P} \\
+%         \sigma_{\rm P} \sigma_{\rm T0} & \sigma_{\rm P}^2  \\
+%     \end{pmatrix}
+% \end{align}
+Consider a predicted eclipse time for $E$. The uncertainty on $T_{\rm ecl}$ in Equation~\ref{eqn:modelling:general ephemeris equation} can be written as,
 \begin{equation}
-    \sigma_T^2 = \sigma_{\rm T0}^2 + 2\sigma_{\rm T0} \sigma_{\rm P}E + \sigma_{\rm P}^2 E^2
+    \sigma_{T{\rm ecl}}^2 = \sigma_{\rm T0}^2 + 2\sigma_{\rm T0} \sigma_{\rm P}E + \sigma_{\rm P}^2 E^2
 \end{equation}
 from the standard error propagation formula.
-$E$ can be offset by some integer, $N$, as $E' = E - N$. Then, by expanding out the brackets and consolidating some terms, $\sigma_T^2$ becomes
+To evaluate an alternative set of $E$, $E$ can be offset by some integer, $N$, with $E' = E - N$. Then, by expanding out the brackets and consolidating some terms, $\sigma_{T{\rm ecl}}^2$ becomes
 \begin{align*}
-    \sigma_T^2 =& \sigma_{\rm T0}^2 + 2\sigma_{\rm T0} \sigma_{\rm P}(E'+N) + \sigma_{\rm P}^2 (E'+N)^2 \\
+    \sigma_{T{\rm ecl}}^2 =& \sigma_{\rm T0}^2 + 2\sigma_{\rm T0} \sigma_{\rm P}(E'+N) + \sigma_{\rm P}^2 (E'+N)^2 \\
     =& (\sigma_{\rm T0}^2 + \sigma_{\rm P}^2 N^2 + 2\sigma_{\rm T0} \sigma_{\rm P} N) + 2(\sigma_{\rm T0} \sigma_{\rm P} + \sigma_{\rm P}^2 N)E' + \sigma_{\rm P}^2 E'^2
 \end{align*}
-Since we want to minimise the $\sigma_T^2$ term, we can choose a value of $N$ to do so, $N = -(\sigma_{\rm T0}\sigma_{\rm P})/(\sigma_{\rm P}^2)$ rounded to the nearest integer.
+Since we want to minimise the $\sigma_{T{\rm ecl}}^2$ term, we can choose a value of $N$ to do so, $N = -(\sigma_{\rm T0}\sigma_{\rm P})/(\sigma_{\rm P}^2)$ rounded to the nearest integer.
 
 
-\section{Eclipse modelling of a CV}
+\section{Characterising a CV}
 \label{sect:method:lightcurve modelling}
 
 To determine the system parameters for the three CVs in this study, the eclipse lightcurves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require precise alignment of the system and so is not possible for a large fraction of CVs.
 
-CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, McAllister2017, McAllister2019}. This method relies of four assumptions: the bright spot originates where a ballistic trajectory from the donor meets the outer edge of the accretion disc, the white dwarf obeys a theoretical mass-radius relationship, the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and the donor exactly fills its Roche lobe. Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
+CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, McAllister2017, McAllister2019}. This method relies of four assumptions: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe. Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
 
-Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy.
-The anatomy of a CV lightcurve as the donor star eclipses the other components in the system is comprised of XX events, that occur in the following order:
+Assuming that the secondary star completely fills its Roche lobe (which is required for mass transfer) ensures that the donor radius is solely a function of $q$. The white dwarf eclipse width is set by the width of the donor, the separation between the two stars, and $q$. The width of the white dwarf eclipse, therefore, is solely a function of $q$, $P_{\rm orb}$, and inclination, $i$ \citep{bailey1979}. 
+
+Assuming that the mass stream between the two stars follows a ballistic trajectory, the location of the bright spot can be fixed in space as the point at which the ballistic stream intersect the outer edge of the accretion disc. Therefore, the phase of the bright spot ingress and egress is a function of $q$, and the disc radius. 
+
+Assuming that the white dwarf is unobscured allows us to directly relate the inclination, and the duration of ingress and egress to the white dwarf's radius. Because the white dwarf is assumed to follow a known mass-radius relationship, by fitting the observed white dwarf colours with a temperature, gravity, distance and interstellar extinction, the temperature and radius of the white dwarf yield a mass. The donor mass is then a simple product of the white dwarf mass, and $q$.
+
+The final result of modelling is the following parameters,
+\begin{itemize}
+    \item white dwarf and donor masses
+    \item white dwarf and donor radii
+    \item disc radius
+    \item orbital separation
+    \item orbital velocity of the white dwarf and donor
+    \item inclination
+    \item white dwarf effective temperature and surface gravity
+    \item distance
+\end{itemize}
+
+The modelling actually takes place in two phases, which are each described in detail - first the phase-folded eclipse is modelled, then the resulting proxy variables are converted to physical parameters. 
+
+\subsection{Phase-folded eclipse modelling}
+\label{sect:modelling:eclipse modelling}
+
+Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy. Notably the bright spot emits flux directionally, so 
+The anatomy of a CV eclipse lightcurve is a sequence of five events, that occur in the following order:
 \begin{enumerate}
-    \item a 
+    \item a pre-eclipse hump is often seen as the bright spot rotates into view
+    \item The white dwarf becomes obscured by the donor
+    \item The bright spot becomes obscured by the donor
+    \item The white dwarf emerges from behind the donor
+    \item The bright spot emerges from behind the donor
 \end{enumerate}
+Figure\todo{Make a figure for this} shows a typical lightcurve, with these events marked. 
+
+The model schematic of a CV in \lstinline{lfit} is shown in Figure\todo{make a schematic for this -- labelled!}. At this stage, parameters are not yet in SI units, which is done to make the modelling software more efficient. Rather, the phase-folded lightcurve is generated, causing parameters to be scaled, i.e. $q$ is fit rather than masses directly, and distances are scaled to the orbital separation, $a$.
+A single eclipse is described by 18 parameters:
+\begin{itemize}
+    \item White dwarf, donor star, disc, and bright spot fluxes, $F_{\rm wd,\ donor,\ disc, bs}$
+    \item Mass ratio, $q$
+    \item White dwarf eclipse width in units of phase, $\Delta \phi$
+    \item Scaled white dwarf radius, $R_{\rm wd} / a$
+    \item White dwarf limb darkening coefficient, $u_{\rm ld}$
+    \item Scaled outer disc radius, $R_{\rm disc}/a$
+    \item Disc surface profile exponent, $b$
+    \item Seven parameters describing the bright spot
+    \item An eclipse phase offset, $\phi_0$
+\end{itemize}
+The seven bright spot parameters are not physically motivated, but relate to the bright spot model. 
+
+\subsubsection{The white dwarf model}
+
+The white dwarf is modelled as a disc, with a total surface brightness $F_{\rm wd}$ and a radius of $R_{\rm wd} / a$. It is subject to limb darkening, using a linear prescription:
+\begin{equation}
+    \frac{I_l}{I_0} = 1 - u_{\rm ld}(1 - {\rm cos}\beta)
+\end{equation}
+where $I_0$ is the intensity at the centre of the disc, and $I_l$ is the intensity at a limb. $\beta$ is the angle between the line normal to the surface of the white dwarf, and the observer's line of sight. 
+
+\subsubsection{The donor star}
+The secondary star does not become obscured during an eclipse, but there is some variation in its brightness. The donor is not spherical, so a small ellipsoidal variation is seen as it rotates to expose more or less of its surface to the observer.
+
+\subsubsection{The accretion disc}
+The accretion disc is modelled as a series of annular rings about the white dwarf, extending out to $R_{\rm disc}$. The intensity of each annulus decreases with distance from the white dwarf, following an exponential formula, $I_i \propto R^{-b}$ for ring $i$ at distance $R$ from the white dwarf. As $b$ is a free parameter in the model, discs can be made more or less centrally concentrated to match observations. As the bright spot location is determined by $q$ and $R_{\rm disc}$, the phases of bright spot ingress and egress provide a valuable diagnostic for $R_{\rm disc}$.
+
+\subsubsection{The bright spot}
+The bright spot model is not physically motivated, but rather is chosen to be able to reproduce a large range of bright spot eclipses. 
+It is modelled as a strip of flux extending in both directions tangentially from the edge of the disc, with a defined brightness profile and overall flux. The strip intensity falls off exponentially, described by the equation
+\begin{equation}
+    I_{\rm X} \propto \bigg ( \frac{X}{S} \bigg )^Y \cdot {\rm exp} \bigg [ - \bigg (\frac{X}{S} \bigg )^Z \bigg]    
+\end{equation}
+where $I_{\rm X}$ is the intensity of the strip a distance $X$ along it, and $S$ is the scale of the bright spot. $Y$ and $Z$ are the profile exponents. 
+
+The bright spot is known to emit light directionally, at a beaming angle, $\theta_{\rm yaw}$, from the normal to the strip in the plane of the disc, and an angle $\theta_{\rm tilt}$ from the plane of the disc. 
+Some fraction of the light is beamed, and the rest, $f_{\rm is}$, is emitted isotropically from the strip. 
+
+Lower values of $q$ will cause the ballistic stream to take a wider arc towards the white dwarf, moving the intersection point with the disc. The location of the bright spot on the disc edge is defined by $\theta_{\rm az}$, the angle between the strip and the line of sight of the observer.
+
+As the bright spot is the most complex component of the model, there is an option to simplify it in software for systems with faint bright spot features that cannot be properly resolved.
+This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}$ at $90\deg$, $\theta_{\rm yaw}$ at $0\deg$, and the strip exponents $X$ and $Y$ to 1 and 2, respectively. By removing these four degrees of freedom, better characterisation of the eclipse is possible.
+
+\subsection{Conversion to physical parameters}
+
+
+
 
 
 
