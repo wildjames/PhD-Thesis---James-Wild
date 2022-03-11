@@ -1,13 +1,48 @@
 \label{chpt:modelling and techniques} % for referencing this chapter elsewhere, use 
 \lhead{\emph{Modelling, techniques, and methods}} % This is for the header on each page - perhaps a shortened title
 
-
-% In the preamble, give the short version of "we can extract a lot of data from eclipsing CVs" etc.
-% Also bring up that, because a CV is so compact, the population of eclipsers is actually fairly high.
-% Talk about the state of stellar modelling, and say that we can apply it to CVs. Talk about how we can use this to convert eclipse modelling characterisation directly to an empirical mass loss rate, slash AML rate.
-
 The primary goal of this thesis is to characterise as many CVs as possible, meaning to find the donor mass and radius, measurements of the white dwarf mass and radius, and the orbital separation between the two bodies. These metrics provide valuable probes of CV evolution \citep{knigge2006}, which is explored more thoroughly in \S\ref{sect:method:evolutionary modelling}. 
-This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and inferring the long-term mass loss rate of a system from its donor properties.
+This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and inferring the long-term mass loss rate of a system from its donor properties. 
+When fitting models to observations, the choice of algorithm is important. The majority of the parameter optimisation done in this work uses a type of Markhov Chain Monte Carlo (MCMC) technique, and this is also described in detail.
+
+
+\section{Parameter optimisation}
+Frequently in this work, a model must have its input parameters fit to observed or synthesised data. For models with few input parameters and well-behaved evaluation metrics, simple optimisation is possible, but often models have many parameters; for example the eclipse modelling portion of this work (\S\ref{sect:modelling:eclipse modelling}) has 18 parameters for a single eclipse, and fitting a full dataset frequently involves fitting 100 or more parameters. To make matters worse, the eclipse model is fairly expensive to compute in large numbers, making simple methods, like downhill simplex, untenable. Rather, we use MCMC.
+
+The MCMC method is now a well-established tool in astronomy. It is robust, efficient, and yields the probability distribution of the variables being optimised even when not well-described by simple distributions. This has led to MCMC often being the method of choice when fitting models. 
+This section provides a working knowledge of MCMC, but for an in-depth introduction and review of the technique and its various sub-types see \citet{sharma2017}. 
+
+\subsection{Bayesian analysis}
+Bayesian inference uses known, `prior' knowledge combined with new information to derive a better understanding - the `posterior' knowledge of a model. This somewhat self-evident intuition was formalised by Bayes with Bayes' Theorem, which calculates the probability, $p(H | D, I)$ a model, $H$, given some observed data, $D$, and background information, $I$. 
+\begin{equation}
+    \label{eqn:modelling:bayes symbolic}
+    p(H | D,I) = \frac{p(D | H, I) \cdot p(H | I)}{p(D|I)}
+\end{equation}
+Here, $p(D | M, I)$ is the probability of the observed data, given a model and prior information, so is called the Likelihood, $\mathcal{L}$, of the data. 
+$p(M|I)$ is the probability of the model being valid, given some prior information, so is called the prior distribution. $p(D | I)$, or the probability of observing the data, given the previously known information, is also called the the `Evidence', and acts as a normalisation factor. Using this vocabulary, Equation~\ref{eqn:modelling:bayes symbolic} can be written as:
+\begin{equation}
+    \label{eqn:modelling:bayes english}
+    \rm Posterior = \frac{Likelihood \times Prior}{Evidence}
+\end{equation}
+
+\subsection{MCMC optimisation}
+The MCMC is a tool developed to approximate the distributions in Equation~\ref{eqn:modelling:bayes symbolic}, without the need to process them analytically -- a process that quickly becomes prohibitively difficult as the number of variables increases. 
+An MCMC, as the name suggests, is a combination of a Monte Carlo method, a class of algorithms that rely on random sampling to find a result, and a Markov chain, a mathematical system that transitions between states according to probabilistic rules. An MCMC randomly draws samples from the prior distributions of the model variables (the Monte Carlo half of the algorithm), evaluates their $\mathcal{L}$, and either accepts them onto its chain of sampled points or not, depending on if they meet a set of conditions. As the number of samples increases, the distribution of samples on the MCMC chain approaches the `true' distribution of the model variables, given a set of observations. 
+
+When optimising parameters for a model, different sampling methods are used for different situations. 
+The most basic of these sampling methods is the Metropolis-Hastings (M-H) algorithm \citep{metropolis1953,hastings1970}. 
+
+For each step in the chain, a parameter vector, $\theta_i$, is chosen at random from a proposal distribution $q(\theta_i | \theta_{i-1})$. The likelihood of observing data $D$, $\mathcal{L}_i(D | \theta_i)$ is evaluated; conveniently, $\mathcal{L}$ is related to the $\chi^2$ metric by $\mathcal{L} \propto \mathrm{exp}(-\chi^2/2)$, so the change in $\mathcal{L}$ is relatively easy to compute.
+
+Then, $\theta_i$ is either accepted or rejected from the chain depending on the current state of the chain. If the $\mathcal{L}_i > \mathcal{L}_{i-1}$, i.e. the $\mathcal{L}$ has improved, the sample is accepted. However, if $\mathcal{L}_i < \mathcal{L}_{i-1}$, the acceptance is determined by the transition probability, $P(\theta_i | \theta_{i-1})$, defined as 
+\begin{equation}
+    P(\theta_i | \theta_{i-1}) = \alpha(\theta_i | \theta_{i-1}) \cdot q(\theta_i | \theta_{i-1})
+\end{equation}
+where $\alpha(\theta_i | \theta_{i-1})$ is the acceptance probability, 
+\begin{equation}
+    \alpha(\theta_i | \theta_{i-1}) = \frac{P(\theta_i | D)} {P(\theta_{i-1} | D)} \cdot \frac{q(\theta_{i-1} | \theta_i)} {q (\theta_i | \theta_{i-1})}
+\end{equation}
+In other words, the larger the drop in probability, the \textit{less likely} it is to accept $\theta_i$ onto the chain. This finite chance to accept a new point, even if it is less likely to describe the data, makes the chain \textit{reversible}, and allows the algorithm to explore the full alloable parameter space (given an infinite number of steps) even if doing so first requires moving to a less preferred $\theta$. 
 
 
 \section{Finding an orbital ephemeris}
@@ -82,7 +117,7 @@ CV eclipse modelling was first developed by \citet{wood1986}, and has been refin
 
 Assuming that the secondary star completely fills its Roche lobe (which is required for mass transfer) ensures that the donor radius is solely a function of $q$. The white dwarf eclipse width is set by the width of the donor, the separation between the two stars, and $q$. The width of the white dwarf eclipse, therefore, is solely a function of $q$, $P_{\rm orb}$, and inclination, $i$ \citep{bailey1979}. 
 
-Assuming that the mass stream between the two stars follows a ballistic trajectory, the location of the bright spot can be fixed in space as the point at which the ballistic stream intersect the outer edge of the accretion disc. Therefore, the phase of the bright spot ingress and egress is a function of $q$, and the disc radius. 
+Assuming that the mass stream between the two stars follows a ballistic trajectory that follows a path determined by $q$ \citep{Lubow1975}, the location of the bright spot can be fixed in space as the point at which the ballistic stream intersect the outer edge of the accretion disc. Therefore, the phase of the bright spot ingress and egress is a function of $q$, and the disc radius. 
 
 Assuming that the white dwarf is unobscured allows us to directly relate the inclination, and the duration of ingress and egress to the white dwarf's radius. Because the white dwarf is assumed to follow a known mass-radius relationship, by fitting the observed white dwarf colours with a temperature, gravity, distance and interstellar extinction, the temperature and radius of the white dwarf yield a mass. The donor mass is then a simple product of the white dwarf mass, and $q$.
 
@@ -90,7 +125,6 @@ The final result of modelling is the following parameters,
 \begin{itemize}
     \item white dwarf and donor masses
     \item white dwarf and donor radii
-    \item disc radius
     \item orbital separation
     \item orbital velocity of the white dwarf and donor
     \item inclination
@@ -98,7 +132,7 @@ The final result of modelling is the following parameters,
     \item distance
 \end{itemize}
 
-The modelling actually takes place in two phases, which are each described in detail - first the phase-folded eclipse is modelled, then the resulting proxy variables are converted to physical parameters. 
+The modelling actually takes place in two phases, which are each described in detail - first the phase-folded eclipse is modelled, then the resulting proxy variables are converted to physical parameters. \todo{Put in some history here -- old versions using the derivative, comparison with other methods, past analysis with this method.}
 
 \subsection{Phase-folded eclipse modelling}
 \label{sect:modelling:eclipse modelling}
@@ -114,15 +148,15 @@ The anatomy of a CV eclipse lightcurve is a sequence of five events, that occur 
 \end{enumerate}
 Figure\todo{Make a figure for this} shows a typical lightcurve, with these events marked. 
 
-The model schematic of a CV in \lstinline{lfit} is shown in Figure\todo{make a schematic for this -- labelled!}. At this stage, parameters are not yet in SI units, which is done to make the modelling software more efficient. Rather, the phase-folded lightcurve is generated, causing parameters to be scaled, i.e. $q$ is fit rather than masses directly, and distances are scaled to the orbital separation, $a$.
+The model schematic of a CV in \lstinline{lfit} is shown in Figure\todo{make a schematic for this -- labelled!}. At this stage, parameters are not yet in SI units, which is done to make the modelling software more efficient. Rather, the phase-folded lightcurve is generated, causing parameters to be scaled, i.e. $q$ is fit rather than masses directly, and distances are scaled to the distance from the white dwarf primary to the $L_1$ point, $x_{l1}$
 A single eclipse is described by 18 parameters:
 \begin{itemize}
     \item White dwarf, donor star, disc, and bright spot fluxes, $F_{\rm wd,\ donor,\ disc, bs}$
     \item Mass ratio, $q$
     \item White dwarf eclipse width in units of phase, $\Delta \phi$
-    \item Scaled white dwarf radius, $R_{\rm wd} / a$
+    \item Scaled white dwarf radius, $R_{\rm wd} / x_{l1}$
     \item White dwarf limb darkening coefficient, $u_{\rm ld}$
-    \item Scaled outer disc radius, $R_{\rm disc}/a$
+    \item Scaled outer disc radius, $R_{\rm disc} / x_{l1}$
     \item Disc surface profile exponent, $b$
     \item Seven parameters describing the bright spot
     \item An eclipse phase offset, $\phi_0$
@@ -131,7 +165,7 @@ The seven bright spot parameters are not physically motivated, but relate to the
 
 \subsubsection{The white dwarf model}
 
-The white dwarf is modelled as a disc, with a total surface brightness $F_{\rm wd}$ and a radius of $R_{\rm wd} / a$. It is subject to limb darkening, using a linear prescription:
+The white dwarf is modelled as a disc, with a total surface brightness $F_{\rm wd}$ and a radius of $R_{\rm wd} / x_{l1}$. It is subject to limb darkening, using a linear prescription:
 \begin{equation}
     \frac{I_l}{I_0} = 1 - u_{\rm ld}(1 - {\rm cos}\beta)
 \end{equation}
@@ -141,7 +175,7 @@ where $I_0$ is the intensity at the centre of the disc, and $I_l$ is the intensi
 The secondary star does not become obscured during an eclipse, but there is some variation in its brightness. The donor is not spherical, so a small ellipsoidal variation is seen as it rotates to expose more or less of its surface to the observer.
 
 \subsubsection{The accretion disc}
-The accretion disc is modelled as a series of annular rings about the white dwarf, extending out to $R_{\rm disc}$. The intensity of each annulus decreases with distance from the white dwarf, following an exponential formula, $I_i \propto R^{-b}$ for ring $i$ at distance $R$ from the white dwarf. As $b$ is a free parameter in the model, discs can be made more or less centrally concentrated to match observations. As the bright spot location is determined by $q$ and $R_{\rm disc}$, the phases of bright spot ingress and egress provide a valuable diagnostic for $R_{\rm disc}$.
+The accretion disc is modelled as a series of annular rings about the white dwarf, extending out to $R_{\rm disc} / x_{l1}$. The intensity of each annulus decreases with distance from the white dwarf, following an exponential formula, $I_i \propto R^{-b}$ for ring $i$ at distance $R$ from the white dwarf. As $b$ is a free parameter in the model, discs can be made more or less centrally concentrated to match observations. As the bright spot location is determined by $q$ and $R_{\rm disc} / x_{l1}$, the phases of bright spot ingress and egress provide a valuable diagnostic for $R_{\rm disc} / x_{l1}$.
 
 \subsubsection{The bright spot}
 The bright spot model is not physically motivated, but rather is chosen to be able to reproduce a large range of bright spot eclipses. 
@@ -152,26 +186,65 @@ It is modelled as a strip of flux extending in both directions tangentially from
 where $I_{\rm X}$ is the intensity of the strip a distance $X$ along it, and $S$ is the scale of the bright spot. $Y$ and $Z$ are the profile exponents. 
 
 The bright spot is known to emit light directionally, at a beaming angle, $\theta_{\rm yaw}$, from the normal to the strip in the plane of the disc, and an angle $\theta_{\rm tilt}$ from the plane of the disc. 
-Some fraction of the light is beamed, and the rest, $f_{\rm is}$, is emitted isotropically from the strip. 
+Some fraction of the light is beamed, and the rest, $f_{\rm is}$, is emitted isotropically from the strip. This geometry is shown in Figure~\ref{fig:modelling:bright spot schematic}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/modelling/bright_spot_schematic.pdf}
+    \caption{Showing a schematic of the bright spot model. The lower dashed line joins the centres of the white dwarf and donor stars, and the upper dashed line runs parallel to it, intersecting the bright spot location. The thick red line is the flux-emitting strip, and the arrow shows the direction of light emission, at an angle $\theta_{\rm yaw}$ from the normal.}
+    \label{fig:modelling:bright spot schematic}
+\end{figure}
 
 Lower values of $q$ will cause the ballistic stream to take a wider arc towards the white dwarf, moving the intersection point with the disc. The location of the bright spot on the disc edge is defined by $\theta_{\rm az}$, the angle between the strip and the line of sight of the observer.
 
 As the bright spot is the most complex component of the model, there is an option to simplify it in software for systems with faint bright spot features that cannot be properly resolved.
 This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}$ at $90\deg$, $\theta_{\rm yaw}$ at $0\deg$, and the strip exponents $X$ and $Y$ to 1 and 2, respectively. By removing these four degrees of freedom, better characterisation of the eclipse is possible.
 
-\subsection{Conversion to physical parameters}
+\subsection{Post-processing the eclipse model}
+\label{sect:modelling:post processing the eclipse model}
+
+The eclipse modelling uses proxy variables, so some processing must be done to convert them to `real' values. This is done in two steps. First, the white dwarf colours are fit to find a white dwarf temperature and surface gravity. Then, the white dwarf temperature and orbital period are combined with the best-fit eclipse model parameters to convert the scaled distances to metres, and mass ratio to kilograms. 
+
+\subsubsection{Fitting white dwarf colours}
+\label{sect:modelling:fitting white dwarf colours}
+By modelling the eclipse in multiple bands, at least three observations of white dwarf flux are available. These fluxes are fit to the DA white dwarf cooling model from \citet{Bergeron1995}\footnote{Available from \href{http://www.astro.umontreal.ca/~bergeron/CoolingModels}{http://www.astro.umontreal.ca/~bergeron/CoolingModels}}, from which the absolute magnitude of the white dwarf in each band, $M$, can be retrieved from pre-calculated cooling tracks for a given effective temperature, $T_{\rm eff}$ and surface gravity, $\mathrm{log(g)}$. This absolute magnitude is then easily translated to an apparent magnitude, $m$, given a system parallax, $\pi$, and interstellar extinction coefficient, $\rm E(B-V)$,
+\begin{equation}
+    m = M - 5\mathrm{log}(\pi\mathrm{,\ arcsec}) - 5
+\end{equation}
+
+To optimise these four parameters, an affine-invariant MCMC with three levels of parallel tempering was used, c.f. \S\ref{sect:modelling:ensemble MCMC}. For the priors, uniform $T_{\rm eff}$ and log($g$) distributions were used that span the range set by the model cooling tracks. $\rm E(B-V)$ used a uniform distribution between 0, and the maximum IRSA measurement for the relevant coordinates\footnote{Available \href{https://irsa.ipac.caltech.edu/applications/DUST/}{https://irsa.ipac.caltech.edu/applications/DUST/}}, and the parallax prior was chosen to match the Gaia measurement \citep{lindegren2018, Luri2018, Gaia2016, Gaia2018} of the system. 
+
+\subsubsection{Conversion of proxy variables to physical parameters}
+\label{sect:modelling:conversion to physical parameters}
+The eclipse model proxy variables are then converted to real values. This is done using the white dwarf as a known quantity, based on white dwarf model atmospheres. Five input variables are needed: $T_{\rm eff}$, $P_{\rm orb}$, $q$, $\Delta \phi$, and $R_{\rm wd} / x_{l1}$.
 
 
+A measure of the white dwarf radius, $R_{\rm wd}$, can be found using Kepler's 3rd law and making the substitutions $r = R_{\rm wd} / a$ and $q = M_{\rm wd} / M_{\rm donor}$. 
+\begin{align}
+    P_{\rm orb}^2 &= \frac{4 \pi^2 a^3}{G (M_{\rm wd} + M_{\rm donor})} \\[8pt]
+    &= \frac{4 \pi^2 R_{\rm wd}^3}{G M_{\rm wd} (1 + q) r^3} \\[8pt]
+    R_{\rm wd}^3 &= \frac{P_{\rm orb}^2 r^3 G M_{\rm wd} (1 + q) }{4 \pi^2}
+    \label{eqn:modelling:geometric radius}
+\end{align}
+$r$ can be found from $R_{\rm wd} / x_{l1}$ by calculating $x_{l1} / a$, which itself is a function only of $q$. 
 
+This value of $R_{\rm wd}$ is geometric mass-radius relationship, and requires the white dwarf mass. Fortunately, for a given $T_{\rm eff}$ (which is known from the colour fits, \S\ref{sect:modelling:fitting white dwarf colours}), white dwarfs follow tight theoretical mass-radius relationships, that can be employed to find the unique $M_{\rm wd},\ R_{\rm wd}$ pair that satisfies both Equation~\ref{eqn:modelling:geometric radius} and the theoretical mass-radius relationship. 
+Specifically, a proposed theoretical mass-radius pair is chosen from a model relationship and a value of $R_{\rm wd, calc}$ is calculated from Equation~\ref{eqn:modelling:geometric radius}. If this matches the theoretical value, the mass is valid. Otherwise, the proposed mass is altered accordingly and a new mass-radius pair is checked. 
 
+Three white dwarf mass-radius relations were used. First, a solution was searched for using the \citet{wood1995} models, spanning masses of $0.4 - 1.0 M_\odot$. 
+If no solution could be found, the \citet{panei2000} models were searched, spanning masses from $0.4 - 1.2 M_\odot$. 
+Both of these mass-radius relationships account for the white dwarf $T_{\rm eff}$. However, if no solution has been found, the \citet{hamada1961} 0 Kelvin mass-radius relation is checked for solutions. This track spans the largest range in mass, from $0.14 - 1.44 M_\odot$. If no solution is found with the \citet{hamada1961} tracks, the model is considered invalid, though this did not occur for any system in this thesis.
+
+Then, the inclination is calculated. $\Delta \phi$ is solely a function of $q$, and $i$. Therefore, we can use the known values of $\Delta\phi$ and $q$ to calculate the system inclination - this is done by proposing candidate values of $i$, and comparing the calculated $\Delta \phi_{\rm calc}$ with the target $\Delta \phi$, and adjusting as needed until the two agree.  
+
+Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previously mentioned, $R_{\rm donor}$ is assumed to be the Roche radius, from Equation~\ref{eqn:introduction:eggleton approximation}, and $M_{\rm donor}$ is found simply by $(q \cdot M_{\rm wd})$. Finally, the orbital velocities, $K_{\rm wd,\ donor}$ respectively, of the two stars are calculated using Kepler's laws.
+\begin{align}
+    K_{\rm wd} &= \frac{2\pi a \mathrm{sin}i}{P_{\rm orb}} \frac{q}{1+q} \\
+    K_{\rm donor} &= K_{\rm wd} \cdot \frac{M_{\rm wd}}{R_{\rm wd}}
+\end{align}
 
 
 \subsection{Capturing flickering with Gaussian Processes}
 Explain GPs from scratch, and get into detail about which kernels you're using. 
-
-
-\section{The optimisation problem}
-Here I should discuss the problem of searching 15 dimensions for the best solution - then point out how much worse it is with 100+ dimensions. Here, I should put in some illustrative model fitting - perhaps a graph with steps vs. ln(like) for 1D, 5D, 10D, 15D? Dunno yet. Think about it. Alternatively, just make "MCMC Fitting" the section heading, and get straight into it. Mention binning eclipse lightcurves here as a primary mitigation strategy for the highly complex parameter space
 
 
 \subsection{Hierarchical model structure}
@@ -181,7 +254,7 @@ Also, I need to come up with a way to demonstrate the potential to break degener
 
 I extend the lightcurve fitting model used by \citet{McAllister2019}, adopting a hierarchical approach to slightly reduce model complexity. 
 
-Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{McAllister2017} share $q,\ R_{\rm WD}/a$, and $\Delta\phi$ between eclipses, and we extend that concept by organising the model into a hierarchical tree structure, a schematic of which is shown in Figure~\ref{fig:method:hierarchical_model}. 
+Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{McAllister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we extend that concept by organising the model into a hierarchical tree structure, a schematic of which is shown in Figure~\ref{fig:method:hierarchical_model}. 
 
 \begin{figure}
     \centering
@@ -198,9 +271,11 @@ As more eclipses are added, the number of dimensions in parameter space that mus
 
 
 \subsection{MCMC Fitting}
+\label{sect:modelling:ensemble MCMC}
+
 I need to talk about the MCMC aspect of the fitting. Obviously explain MCMC fitting from scratch, but also make sure you explain the stretch move thing, ensemble sampling, 
 
-\subsection{Parallel Tempering}
+\subsubsection{Parallel Tempering}
 Make sure you point out the downfall of PT - it's not suitable for more than 5 parameters! We seem to get away with it by using a lot of walkers, perhaps?
 
 
