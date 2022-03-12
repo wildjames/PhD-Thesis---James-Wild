@@ -1,5 +1,5 @@
-\label{chpt:modelling and techniques} % for referencing this chapter elsewhere, use
 \lhead{\emph{Modelling, techniques, and methods}} % This is for the header on each page - perhaps a shortened title
+\label{chpt:modelling and techniques}
 
 The primary goal of this thesis is to characterise as many CVs as possible, meaning to find the donor mass and radius, measurements of the white dwarf mass and radius, and the orbital separation between the two bodies. These metrics provide valuable probes of CV evolution \citep{knigge2006}, which is explored more thoroughly in \S\ref{sect:method:evolutionary modelling}.
 This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and inferring the long-term mass loss rate of a system from its donor properties.
@@ -11,6 +11,7 @@ Frequently in this work, a model must have its input parameters fit to observed 
 
 The MCMC method is now a well-established tool in astronomy. It is robust, efficient, and yields the probability distribution of the variables being optimised even when not well-described by simple distributions. This has led to MCMC often being the method of choice when fitting models.
 This section provides a working knowledge of MCMC, but for an in-depth introduction and review of the technique and its various sub-types see \citet{sharma2017}.
+
 
 \subsection{Bayesian analysis}
 Bayesian inference uses known, `prior' knowledge combined with new information to derive a better understanding - the `posterior' knowledge of a model. This somewhat self-evident intuition was formalised by Bayes with Bayes' Theorem, which calculates the probability, $p(H | D, I)$ a model, $H$, given some observed data, $D$, and background information, $I$.
@@ -24,35 +25,70 @@ $p(M|I)$ is the probability of the model being valid, given some prior informati
     \label{eqn:modelling:bayes english}
     \rm Posterior = \frac{Likelihood \times Prior}{Evidence}
 \end{equation}
+In Bayesian inference, the goal is to find the posterior distribution of the parameters of a model, given some data and, if possible, prior information.
+
 
 \subsection{MCMC optimisation}
-The MCMC is a tool developed to approximate the distributions in Equation~\ref{eqn:modelling:bayes symbolic}, without the need to process them analytically -- a process that quickly becomes prohibitively difficult as the number of variables increases.
-An MCMC, as the name suggests, is a combination of a Monte Carlo method, a class of algorithms that rely on random sampling to find a result, and a Markov chain, a mathematical system that transitions between states according to probabilistic rules. An MCMC randomly draws samples from the prior distributions of the model variables (the Monte Carlo half of the algorithm), evaluates their $\mathcal{L}$, and either accepts them onto its chain of sampled points or not, depending on if they meet a set of conditions. As the number of samples increases, the distribution of samples on the MCMC chain approaches the `true' distribution of the model variables, given a set of observations.
+The MCMC is a tool developed to approximate the distributions in Equation~\ref{eqn:modelling:bayes symbolic}, without the need to process them analytically - a process that quickly becomes prohibitively difficult as the number of variables increases.
+An MCMC, as the name suggests, is a combination of a Monte Carlo method, a class of algorithms that rely on random sampling to find a result, and a Markov chain, a mathematical system that transitions between states according to probabilistic rules. An MCMC randomly draws samples from the prior distributions of the model variables (the Monte Carlo half of the algorithm), evaluates their $\mathcal{L}$, and either accepts them onto its chain of sampled points or not, depending on if they meet a set of conditions. If the $\mathcal{L}$ of the proposed set of variables is higher than the $\mathcal{L}$ of the last set on the chain, the proposed set of variables is accepted. If $\mathcal{L}$ is lower, the algorithm randomly accepts or rejects the proposed step. By giving a finite chance to accept a `worse' set of parameters, the chain is, in theory, allowed to explore the possible parameter space without being trapped in local minima, given an infinitely long chain.
+As the number of samples increases, the distribution of samples on the MCMC chain approaches the `true' distribution of the model variables, given a set of observations.
+The method by which acceptance is decided is the sampling method, and many choices exist for different types of problems. The sampling method used here is the affine invariant sampling method with parallel tempering, described below.
 
-When optimising parameters for a model, different sampling methods are used for different situations.
-The most basic of these sampling methods is the Metropolis-Hastings (M-H) algorithm \citep{metropolis1953,hastings1970}.
+\todo{Talking about MH seems pointless. I dont use it - so cut that chunk.}
+% The most basic of these sampling methods is the Metropolis-Hastings (M-H) algorithm \citep{metropolis1953,hastings1970}.
 
-For each step in the chain, a parameter vector, $\theta_i$, is chosen at random from a prior distribution $q(\theta_i | \theta_{i-1})$. The likelihood of then observing data $D$, $\mathcal{L}_i(D | \theta_i)$ is evaluated. Note that the choice of prior distributions are important, but in the case of no prior knowledge it is common to choose a uniform prior between an upper and lower limit.
+% For each step in the chain, a parameter vector, $\theta_i$, is chosen at random from a prior distribution $q(\theta_i | \theta_{i-1})$. The likelihood of then observing data $D$, $\mathcal{L}_i(D | \theta_i)$ is evaluated. Note that the choice of prior distributions are important, but in the case of no prior knowledge it is common to choose a uniform prior between an upper and lower limit.
 
-Then, $\theta_i$ is either accepted or rejected from the chain depending on the current state of the chain. If the $\mathcal{L}_i > \mathcal{L}_{i-1}$, i.e. the $\mathcal{L}$ has improved, the sample is accepted. However, if $\mathcal{L}_i < \mathcal{L}_{i-1}$, the acceptance is determined by the transition probability, $P(\theta_i | \theta_{i-1})$, defined as
-\begin{equation}
-    P(\theta_i | \theta_{i-1}) = \alpha(\theta_i | \theta_{i-1}) \cdot q(\theta_i | \theta_{i-1})
-\end{equation}
-where $\alpha(\theta_i | \theta_{i-1})$ is the acceptance probability,
-\begin{equation}
-    \alpha(\theta_i | \theta_{i-1}) = \frac{P(\theta_i | D)} {P(\theta_{i-1} | D)} \cdot \frac{q(\theta_{i-1} | \theta_i)} {q (\theta_i | \theta_{i-1})}
-\end{equation}
-In other words, the larger the drop in the probability that a new $\theta$ describes observation, the \textit{less likely} the algorithm is to accept $\theta_i$ onto the chain.
-Conveniently, $\mathcal{L}$ is related to the $\chi^2$ metric by $\mathcal{L} \propto \mathrm{exp}(-\chi^2/2)$, so the change in $\mathcal{L}$ is relatively easy to compute.
-This finite chance to accept a new point, even if it is less likely to describe the data, makes the chain \textit{reversible} and allows the algorithm to explore the full alloable parameter space (given an infinite number of steps) even if doing so first requires moving to a less preferred $\theta$. As the chain grows, the distribution of $\theta$ converges on an approximation of the posterior distribution of Equation~\ref{eqn:modelling:bayes english}.
+% Then, $\theta_i$ is either accepted or rejected from the chain depending on the current state of the chain. If the $\mathcal{L}_i > \mathcal{L}_{i-1}$, i.e. the $\mathcal{L}$ has improved, the sample is accepted. However, if $\mathcal{L}_i < \mathcal{L}_{i-1}$, the acceptance is determined by the transition probability, $P(\theta_i | \theta_{i-1})$, defined as
+% \begin{equation}
+%     P(\theta_i | \theta_{i-1}) = \alpha(\theta_i | \theta_{i-1}) \cdot q(\theta_i | \theta_{i-1})
+% \end{equation}
+% where $\alpha(\theta_i | \theta_{i-1})$ is the acceptance probability,
+% \begin{equation}
+%     \alpha(\theta_i | \theta_{i-1}) = \frac{P(\theta_i | D)} {P(\theta_{i-1} | D)} \cdot \frac{q(\theta_{i-1} | \theta_i)} {q (\theta_i | \theta_{i-1})}
+% \end{equation}
+% In other words, the larger the drop in the probability that a new $\theta$ describes observation, the \textit{less likely} the algorithm is to accept $\theta_i$ onto the chain.
+% Conveniently, $\mathcal{L}$ is related to the $\chi^2$ metric by $\mathcal{L} \propto \mathrm{exp}(-\chi^2/2)$, so the change in $\mathcal{L}$ is relatively easy to compute.
+% This finite chance to accept a new point, even if it is less likely to describe the data, makes the chain \textit{reversible} and allows the algorithm to explore the full allowable parameter space (given an infinite number of steps) even if doing so first requires moving to a less preferred $\theta$. As the chain grows, the distribution of $\theta$ converges on an approximation of the posterior distribution of Equation~\ref{eqn:modelling:bayes english}.
 
-The M-H algorithm is a common starting point for MCMC, but is rarely the best choice. The main problem with M-H is its inability to scale well with the number of input parameters, or with the complexity of $\mathcal{L}$. While the algorithm should theoretically converge for any number of parameters and any degree of complexity, the number of steps this practically requires becomes unreasonable. Alternatives must be used.
+% The M-H algorithm is a common starting point for MCMC, but is rarely the best choice. The main problem with M-H is its inability to scale well with the number of input parameters, or with the complexity of $\mathcal{L}$. While the algorithm should theoretically converge for any number of parameters and any degree of complexity, the number of steps this practically requires becomes unreasonable. Alternatives must be used.
 
 
 \subsubsection{Affine invariant ensemble sampling}
+\label{sect:modelling:Affine invariant ensemble sampling}
 The affine invariant ensemble method of sampling was developed by \citet{goodman2010}, and makes use of many `walkers' sampling the parameter space in tandem.
-Each walker is conceptually an individial MCMC chain, where proposed steps are chosen based on the positions of all other walkers. This is done by proposing a `stretch move',
+Each walker is conceptually an individual MCMC chain, where proposed steps are chosen based on the positions of all other walkers. To propose a new parameter vector for walker $k$, the algorithm proposes a `stretch move'. Another walker, $l$ is chosen at random, and the last positions on each chain, $X_{j,k}$ respectively, are used to propose a new position, $Y$, that lies somewhere on the line connecting the two position vectors.
+\begin{equation}
+    Y = X_j + z \cdot (X_k - X_j)
+\end{equation}
+The variable, $z$, determines the location on the line of the new vector, and is randomly drawn from a probability distribution $g(z)$,
+\begin{equation}
+    g(z) \propto
+    \begin{cases}
+        \frac{1}{\sqrt{z}} & \frac{1}{2} \le z \le 2 \\
+        0 & Otherwise
+    \end{cases}
+\end{equation}
+\begin{figure}
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/modelling/stretch_move.png}
+    \caption{Reproduced from \citet{goodman2010}, showing the concept of a stretch move proposal.}
+    \label{fig:modelling:stretch move}
+\end{figure}
+A schematic of this stretch move concept is shown in Figure~\ref{fig:modelling:stretch move}. The probability of accepting the new position is the $\alpha(Y|X_k)$,
+\begin{equation}
+    \alpha(Y|X_k) = \mathrm{min}\bigg( 1,\ z^{n-1}\frac{\mathcal{L}(Y)}{\mathcal{L}(X_k)} \bigg)
+\end{equation}
+for a model with $n$ dimensions. A random number, $u$, is drawn from a uniform distribution from 0 to 1, and if $u < \alpha(Y|X_k)$, the proposed position is accepted. Note that a proposal that improves $\mathcal{L}$ is always accepted, and new positions with a larger deterioration in $\mathcal{L}$ are less likely to be accepted. At each step in the MCMC, every walker has a new position proposed this way.
 
+\todo{check this makes sense}A useful aspect of the sampling algorithm is the ability to parallelise the proposal of new steps in every chain \textit{simultaneously}, significantly improving computation time.
+A typical rule-of-thumb is to use $2n$ walkers, and since the number of walkers is almost always larger than the number of available threads, increased evaluation time scales well with more threaded computing machines.
+
+By having the walkers in the ensemble interact as such, they can communicate to other walkers regions of high $\mathcal{L}$, even between walkers in different local minima. This improves the ensemble's ability to both locate the global minimum, and to sample non-spherical probability distributions (a task that is very difficult for simpler sampling techniques).
+
+
+\subsection{Parallel tempering}
+\label{sect:modelling:parallel tempering}
 
 
 \section{Finding an orbital ephemeris}
