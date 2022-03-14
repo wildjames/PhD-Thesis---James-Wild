@@ -80,7 +80,7 @@ This improves the ensemble's ability to both locate the global minimum, and to s
 Further, this algorithm is able to have the proposal of new steps in every chain performed \textit{simultaneously}, significantly improving computation time; a typical rule-of-thumb is to use $2n$ walkers, and since the number of walkers is almost always larger than the number of available threads, increased evaluation time scales well with more threaded computation.
 
 
-\subsection{Parallel tempering}\label{sect:modelling:parallel tempering}
+\subsubsection{Parallel tempering}\label{sect:modelling:parallel tempering}
 
 In metallurgy, tempering is a way to increase the toughness of a metal by first heating it to a high temperature, then slowly cooling it, a process that relieves internal stresses.
 While the metal is at a high temerature, carbon is able to diffuse throughout the crystal structure of the metal and explore possible crystalisation locations. As the metal slowly cools, carbon atoms are gradually more and more attracted to areas of the crystal that exert less stress on the material, until the metal is fully cooled and the majority of carbon atoms have found areas of local minima in stress potential.
@@ -92,7 +92,7 @@ The parallel tempered ensemble MCMC can take analogy from this `hot' exploration
 At $T \rightarrow \infty$, the chain samples the prior with no respect to how well $\Theta$ describes the data. This `hot' chain is analagous the the diffusive carbon atoms, and is free to randomly explore available parameter space, potentially finding regions of high likelihood far from the initial conditions and communicating these regions back to cooler ensembles. Cooler temperatures between are analagous to the cooling metal -- drawn increasingly strongly towards regions of high likelihood.
 The `cold' case of $T \equiv 1$ behaves exactly as a normal ensemble sampler.
 
-Note that because hotter walkers are less sensitive to $\mathcal{L}$, the posterior no longer accurately reflects the `true' values. If a parameter is described by a Gaussian distribution with a standard deviation, $\sigma$, the tempered $\mathcal{L}$ will have a standard deviation of $\sigma \sqrt(T)$.
+Note that because hotter walkers are less sensitive to $\mathcal{L}$, the posterior no longer accurately reflects the `true' values. If a parameter is described by a Gaussian distribution with a standard deviation, $\sigma$, the tempered $\mathcal{L}$ will have a standard deviation of $\sigma \sqrt{T}$.
 
 When running a parallel tempered MCMC, the values used in the software are $\beta = 1/T$, for which we choose between 3 and 5 evenly spaced values of $\beta$ between 0 and 1.
 The number of temperatures used depended on the evaluation time. Since parallel tempering runs multiple full ensembles in tandem, for models with very large numbers of parameters it becomes highly desirable to use as few temperatures as possible. However, this penalty in computation time per step comes with the benefit of a dramatically improved ability to locate the global minimum, especially in complex parameter space.
@@ -131,21 +131,6 @@ An MCMC algorithm was used to fit a straight line model to the independent varia
 The model also accounts for potential systematic differences in timing accuracy between instruments by also having variable error scale factors applied to all eclipses observed with a specific instrument, e.g. the timing reported for eclipses observed with ULTRACAM may be systematically offset from reality, and the errors associated with those observations might need to be larger than reported to be consistent with data from other instruments. The prior distribution assumed for these error factors was log-uniform ranging from 0.01 to 100, which favours the smallest factor consistent with the data.
 
 The value of $E$ for each eclipse were chosen to minimise the covariance between $T_0$ and $P$.
-% If we consider the result of fitting  $T_0, P_{\rm orb}$ as a multivariate normal, $N(\mu, \Sigma)$, we can write
-% \begin{align}
-%     \mu =&
-%     \begin{pmatrix}
-%         T_0 \\
-%         P_{\rm orb}
-%     \end{pmatrix}
-%     \\
-%     \label{eqn:modelling:ephemeris multivariate normal}
-%     \Sigma =&
-%     \begin{pmatrix}
-%         \sigma_{\rm T0}^2 & \sigma_{\rm T0} \sigma_{\rm P} \\
-%         \sigma_{\rm P} \sigma_{\rm T0} & \sigma_{\rm P}^2  \\
-%     \end{pmatrix}
-% \end{align}
 Consider a predicted eclipse time for $E$. The uncertainty on $T_{\rm ecl}$ in Equation~\ref{eqn:modelling:general ephemeris equation} can be written as,
 \begin{equation}
     \sigma_{T{\rm ecl}}^2 = \sigma_{\rm T0}^2 + 2\sigma_{\rm T0} \sigma_{\rm P}E + \sigma_{\rm P}^2 E^2
@@ -159,8 +144,7 @@ To evaluate an alternative set of $E$, $E$ can be offset by some integer, $N$, w
 Since we want to minimise the $\sigma_{T{\rm ecl}}^2$ term, we can choose a value of $N$ to do so, $N = -(\sigma_{\rm T0}\sigma_{\rm P})/(\sigma_{\rm P}^2)$ rounded to the nearest integer.
 
 
-\section{Characterising a CV}
-\label{sect:method:lightcurve modelling}
+\section{Characterising a CV}\label{sect:method:lightcurve modelling}
 
 To determine the system parameters for the three CVs in this study, the eclipse lightcurves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require precise alignment of the system and so is not possible for a large fraction of CVs.
 
@@ -183,10 +167,9 @@ The final result of modelling is the following parameters,
     \item distance
 \end{itemize}
 
-The modelling actually takes place in two phases, which are each described in detail - first the phase-folded eclipse is modelled, then the resulting proxy variables are converted to physical parameters. \todo{Put in some history here -- old versions using the derivative, comparison with other methods, past analysis with this method.}
+The modelling actually takes place in two phases, which are each described in detail - first the phase-folded eclipse is modelled, then the resulting proxy variables are converted to physical parameters. Finding the best-fitting parameters to observed data is complex, and is described in \S\ref{sect:modelling:optimising eclipse model parameters} \todo{Put in some history here -- old versions using the derivative, comparison with other methods, past analysis with this method.}
 
-\subsection{Phase-folded eclipse modelling}
-\label{sect:modelling:eclipse modelling}
+\subsection{Phase-folded eclipse modelling}\label{sect:modelling:eclipse modelling}
 
 Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy. Notably the bright spot emits flux directionally, so
 The anatomy of a CV eclipse lightcurve is a sequence of five events, that occur in the following order:
@@ -214,7 +197,7 @@ A single eclipse is described by 18 parameters:
 \end{itemize}
 The seven bright spot parameters are not physically motivated, but relate to the bright spot model.
 
-\subsubsection{The white dwarf model}
+\subsubsection{The white dwarf}
 
 The white dwarf is modelled as a disc, with a total surface brightness $F_{\rm wd}$ and a radius of $R_{\rm wd} / x_{l1}$. It is subject to limb darkening, using a linear prescription:
 \begin{equation}
@@ -223,12 +206,15 @@ The white dwarf is modelled as a disc, with a total surface brightness $F_{\rm w
 where $I_0$ is the intensity at the centre of the disc, and $I_l$ is the intensity at a limb. $\beta$ is the angle between the line normal to the surface of the white dwarf, and the observer's line of sight.
 
 \subsubsection{The donor star}
+
 The secondary star does not become obscured during an eclipse, but there is some variation in its brightness. The donor is not spherical, so a small ellipsoidal variation is seen as it rotates to expose more or less of its surface to the observer.
 
 \subsubsection{The accretion disc}
+
 The accretion disc is modelled as a series of annular rings about the white dwarf, extending out to $R_{\rm disc} / x_{l1}$. The intensity of each annulus decreases with distance from the white dwarf, following an exponential formula, $I_i \propto R^{-b}$ for ring $i$ at distance $R$ from the white dwarf. As $b$ is a free parameter in the model, discs can be made more or less centrally concentrated to match observations. As the bright spot location is determined by $q$ and $R_{\rm disc} / x_{l1}$, the phases of bright spot ingress and egress provide a valuable diagnostic for $R_{\rm disc} / x_{l1}$.
 
 \subsubsection{The bright spot}
+
 The bright spot model is not physically motivated, but rather is chosen to be able to reproduce a large range of bright spot eclipses.
 It is modelled as a strip of flux extending in both directions tangentially from the edge of the disc, with a defined brightness profile and overall flux. The strip intensity falls off exponentially, described by the equation
 \begin{equation}
@@ -250,19 +236,17 @@ Lower values of $q$ will cause the ballistic stream to take a wider arc towards 
 As the bright spot is the most complex component of the model, there is an option to simplify it in software for systems with faint bright spot features that cannot be properly resolved.
 This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}$ at $90\deg$, $\theta_{\rm yaw}$ at $0\deg$, and the strip exponents $X$ and $Y$ to 1 and 2, respectively. By removing these four degrees of freedom, better characterisation of the eclipse is possible.
 
-\subsection{Post-processing the eclipse model}
-\label{sect:modelling:post processing the eclipse model}
+\subsection{Post-processing the eclipse model}\label{sect:modelling:post processing the eclipse model}
 
 The eclipse modelling uses proxy variables, so some processing must be done to convert them to `real' values. This is done in two steps. First, the white dwarf colours are fit to find a white dwarf temperature and surface gravity. Then, the white dwarf temperature and orbital period are combined with the best-fit eclipse model parameters to convert the scaled distances to metres, and mass ratio to kilograms.
 
-\subsubsection{Fitting white dwarf colours}
-\label{sect:modelling:fitting white dwarf colours}
-By modelling the eclipse in multiple bands, at least three observations of white dwarf flux are available. These fluxes are fit to the DA white dwarf cooling model from \citet{Bergeron1995}\footnote{Available from \href{http://www.astro.umontreal.ca/~bergeron/CoolingModels}{http://www.astro.umontreal.ca/~bergeron/CoolingModels}}, from which the absolute magnitude of the white dwarf in each band, $M$, can be retrieved from pre-calculated cooling tracks for a given effective temperature, $T_{\rm eff}$ and surface gravity, $\mathrm{log(g)}$. This absolute magnitude is then easily translated to an apparent magnitude, $m$, given a system parallax, $\pi$, and interstellar extinction coefficient, $\rm E(B-V)$,
+\subsubsection{Fitting white dwarf colours}\label{sect:modelling:fitting white dwarf colours}
+By modelling the eclipse in multiple bands, at least three observations of white dwarf flux are available. These fluxes are fit to the DA white dwarf cooling model from \citet{Bergeron1995}\footnote{Available from \href{http://www.astro.umontreal.ca/~bergeron/CoolingModels}{http://www.astro.umontreal.ca/~bergeron/CoolingModels}}, from which the absolute magnitude of the white dwarf in each band, $M$, can be retrieved from pre-calculated cooling tracks for a given effective temperature, $T_{\rm eff}$ and surface gravity, $\log (g)$. This absolute magnitude is then easily translated to an apparent magnitude, $m$, given a system parallax, $\pi$, and interstellar extinction coefficient, $\rm E(B-V)$,
 \begin{equation}
-    m = M - 5\mathrm{log}(\pi\mathrm{,\ arcsec}) - 5
+    m = M - 5\log (\pi\mathrm{,\ arcsec}) - 5
 \end{equation}
 
-To optimise these four parameters, an affine-invariant MCMC with three levels of parallel tempering was used, c.f. \S\ref{sect:modelling:ensemble MCMC}. For the priors, uniform $T_{\rm eff}$ and log($g$) distributions were used that span the range set by the model cooling tracks. $\rm E(B-V)$ used a uniform distribution between 0, and the maximum IRSA measurement for the relevant coordinates\footnote{Available \href{https://irsa.ipac.caltech.edu/applications/DUST/}{https://irsa.ipac.caltech.edu/applications/DUST/}}, and the parallax prior was chosen to match the Gaia measurement \citep{lindegren2018, Luri2018, Gaia2016, Gaia2018} of the system.
+To optimise these four parameters, an affine-invariant MCMC with three levels of parallel tempering was used, c.f. \S\ref{sect:modelling:ensemble MCMC}. For the priors, uniform $T_{\rm eff}$ and $\log (g)$ distributions were used that span the range set by the model cooling tracks. $\rm E(B-V)$ used a uniform distribution between 0, and the maximum IRSA measurement for the relevant coordinates\footnote{Available \href{https://irsa.ipac.caltech.edu/applications/DUST/}{https://irsa.ipac.caltech.edu/applications/DUST/}}, and the parallax prior was chosen to match the Gaia measurement \citep{lindegren2018, Luri2018, Gaia2016, Gaia2018} of the system.
 
 \subsubsection{Conversion of proxy variables to physical parameters}
 \label{sect:modelling:conversion to physical parameters}
@@ -298,10 +282,7 @@ Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previou
 Explain GPs from scratch, and get into detail about which kernels you're using.
 
 
-\subsection{Hierarchical model structure}
-{\bf This is going to take some work. Fit synthetic lightcurves with various amounts of noise, (5\%, 10\%, 20\%?), and compare convergence times and posterior widths as a function of noise. Do this with one eclipse, then with three eclipses of the same band, then with three eclipses in each of three bands.
-I should see an improvement in final probability distribution with more eclipses, since they can communicate.
-Also, I need to come up with a way to demonstrate the potential to break degeneracies. Some lightcurves might be produced by two different parameter vectors, e.g. disc and donor might look similar to each other. }
+\subsection{Hierarchical model structure}\label{sect:modelling:optimising eclipse model parameters}
 
 I extend the lightcurve fitting model used by \citet{McAllister2019}, adopting a hierarchical approach to slightly reduce model complexity.
 
@@ -316,19 +297,27 @@ Changes in the disc radius and brightness profile, and bright spot parameters ca
 
 The top level of the model provides the core parameters, which are unchanging between all observing bands and constant across our observations: $q,\ R_\mathrm{WD}/a$, and $\Delta\phi$. We assume the white dwarf and donor fluxes do not change on the timescale of our observations, and so these variables, along with the limb darkening coefficient of the white dwarf, are shared between all eclipses observed with the same filters. The bottom level holds parameters that can vary quickly enough to change between eclipses, i.e. parameters describing the accretion disc and bright spot. By handling parameters this way, we maximise the amount of data informing important variables, for example, white dwarf fluxes and $q$. We also somewhat reduce the number of free parameters, which aids slightly in model fitting, but the chief justification for the hierarchical approach is that it ensures consistency between eclipses - something not guaranteed when fitting eclipses individually.
 
-As more eclipses are added, the number of dimensions in parameter space that must be explored increases. For illustration, the model for ASASSN-17jf has 3 eclipses across 3 bands, plus 3 Gaussian process parameters, resulting in 87 free parameters that must be optimised simultaneously. To find the most likely set of lightcurve parameters in this very large space, an ensemble MCMC fitting code was used. The MCMC uses the \texttt{emcee} implementation of an ensemble sampler and parallel tempering \citep{foreman2012} to aid convergence to a global minimum despite the large parameter space, as described in \citet{McAllister2019}.
+As more eclipses are added, the number of dimensions in parameter space that must be explored increases. For illustration, the model for ASASSN-17jf has 3 eclipses across 3 bands, plus 3 Gaussian process parameters, resulting in 87 free parameters that must be optimised simultaneously. To find the most likely set of lightcurve parameters in this very large space, an ensemble MCMC fitting code was used. The MCMC uses the \texttt{emcee} implementation of an ensemble sampler and parallel tempering \citep{foreman2012}, c.f. \S\ref{sect:modelling:affine invariant MCMC}.
 
 
 
+\section{Evolutionary modelling}\label{sect:method:evolutionary modelling}
 
-\subsection{MCMC Fitting}
-\label{sect:modelling:ensemble MCMC}
+Once armed with a robust, somewhat sizable sample of characterised CVs, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
+If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor reproduced by stellar strucutre models by the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-I need to talk about the MCMC aspect of the fitting. Obviously explain MCMC fitting from scratch, but also make sure you explain the stretch move thing, ensemble sampling,
+The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary.
+Firstly, I demonstrate how the precise radius of a model of a given mass can be be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
+Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for mass loss rate.
+Then, I outline the method by which I search for mass loss rates that produce stellar models matching observations.
 
-\subsubsection{Parallel Tempering}
-Make sure you point out the downfall of PT - it's not suitable for more than 5 parameters! We seem to get away with it by using a lot of walkers, perhaps?
+\subsection{Modelling star spots in MESA}\label{sect:modelling:starspots in MESA}
 
 
-\section{Evolutionary modelling}
-\label{sect:method:evolutionary modelling}
+\subsection{Tuning star spot parameters to observations}\label{sect:modelling:tuning star spots to observations}
+
+
+\subsection{What range of masses can we extract mass loss rates from?}
+
+
+\subsection{Optimising mass loss rate to donor observations}
