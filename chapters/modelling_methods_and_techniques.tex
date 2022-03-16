@@ -306,18 +306,84 @@ As more eclipses are added, the number of dimensions in parameter space that mus
 Once armed with a robust, somewhat sizable sample of characterised CVs, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
 If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor reproduced by stellar strucutre models by the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary.
-Firstly, I demonstrate how the precise radius of a model of a given mass can be be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
+The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary. However, there is cause for confidence; MESA is capable of reproducing the canonical \citep{knigge11} donor tracks with impressive accuracy, even reproducing the period gap by a shut down of magnetic braking \citep{Paxton_2015} with very little adjustment from default parameters.
+First, I demonstrate that MESA can reproduce the two \citet{knigge11} donor tracks -- recall from \S\ref{sect:introduction:the missing aml problem} that two tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by $2.47\times$.
+By default, MESA shuts off magnetic braking when the donor becomes fully convective, a practice which I motivate in \S\ref{sect:introduction:the missing aml problem} to be spurious. Instead, MESA is altered for a fixed magnetic braking cutoff at $0.2 M_\odot$, effectively arbitrarily fixing the donor mass of the period gap.
+In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the amplification of gravitational braking below the period gap. This was used to reproduce the `optimal' track. Figure~\ref{fig:modelling:MESA can reproduce the K11 tracks} shows how well this augmented MESA model can reproduce the \citet{knigge11} tracks.
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{figures/modelling/compare_K11_withspot_normb_and_1xrmb_fixedcutoff.png}
+    \caption{Showing how well MESA can reproduce the canonical \citet{knigge11} donor tracks. {\bf Solid lines} are MESA tracks, and {\bf dotted lines} are the \citet{knigge11} tracks. {\bf Black} lines have only gravitational braking below the period gap, and {\bf red} lines gave gravitational braking at $2.47\times$ strength.}
+    \label{fig:modelling:MESA can reproduce the K11 tracks}
+\end{figure}
+
+To extract mass loss rates, I will go through three steps.
+Firstly, I demonstrate how the radius of a singleton model of a given mass can be be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
 Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for mass loss rate.
-Then, I outline the method by which I search for mass loss rates that produce stellar models matching observations.
+Then, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
+Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
+
+
+\subsection{For what range of masses can we extract mass loss rates?}
+\label{sect:modelling:MESA massloss allowable mass range}
+
+It is worth evaluating the feasibility of using the radius to extract mass loss rates. Recall from \S\ref{sect:introduction:period minimum and bouncers} the two timescales that govern the response of the donor to mass loss: $\tau_{\rm KH}$ and $\tau_{\dot M}$. These timescales are calculated by
+\begin{align}
+    \tau_{\rm KH} \sim& \frac{G M_{\rm donor}^2}{L_{\rm donor} R_{\rm donor}} \\[8pt]
+    \tau_{\dot M} \sim& \frac{\dot M}{M_{\rm donor}}
+\end{align}
+
+While $\tau_{\rm KH} \ll \tau_{\dot M}$, the donor is able to maintain thermal equilibrium and is indistinguishable from a singleton star of the same mass.
+If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium; mass loss is fast and adiabatic. The donor is inflated by mass loss, but because the star cannot adjust on thermal timescales, the degree of inflation is dependant on the mass loss \textit{history} of the donor.
+However, calculating the two timescales for CVs reveals that $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
+Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star is still almost able to ajdust on thermal timescales, the degree of inflation does \textit{not} depend on the mass loss history. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the long term baseline mass loss rate.
+
+Which regime the donor falls into is a function of $M_{\rm donor}$. As $M_{\rm donor}$ falls, $\tau_{\rm KH}$ begins to rise faster than $\tau_{\dot M}$; Figure~\ref{fig:modelling:how does tauKH and tauMdot vary with donor mass} shows this trend, produced by a MESA model of a CV c.f. \citep{Paxton_2015,Pala2017a}.
+The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ begins to become significant at $\sim 0.1 M_\odot$, around the mass the donor enters the fast, adiabatic $\tau_{\rm KH} \gg \tau_{\dot M}$ period bouncer phase c.f. \S\ref{sect:introduction:period minimum and bouncers}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/tau_both_vs_donor_mass_AML000.pdf}
+    \caption{Showing how the two timescales, $\tau_{\rm KH}$ and $\tau_{\dot M}$ vary with donor mass below the period gap in CV donors, as modelled by MESA \citep{Paxton_2015,Pala2017a}.}
+    \label{fig:modelling:how does tauKH and tauMdot vary with donor mass}
+\end{figure}
+
+It would be better to know exactly how much error is introduced by the donor moving out of the $\tau_{\rm KH} \sim \tau_{\dot M}$ regime to draw a more informed mass limit, and this too can be extracted from modelling.
+First, I ran a series of donor-like singleton models with varying degrees of mass loss rates, uniformly spaced between $\log (\dot M, M_\odot \mathrm{yr}^-1) = -9.5 \rightarrow -11$.
+Then, a series of MESA CV models were run with gravitational losses amplified by $x = 1 \rightarrow 6$.
+Then, each model has its radius, $R$, and $\dot M$ extracted at $0.1 M_\odot$. Since the CV models have varying $M_\odot$ and the singleton models do not, if $\dot M$ history does not affect radius inflation, the radii between the two sets of models will match. Figure~\ref{fig:modelling:comparing radii at 0.1Msun} shows this, and little divergence between the two sets of radii is visible.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/compare_0.1Msun_with_CV_track_K11_fig1.pdf}
+    \caption{Showing the radius and mass loss extracted from MESA models at $0.1 M_\odot$. The {\bf black} line is a series of singleton models with constant mass loss, and the {\bf red} line is a series of CV models with gravitational AML amplified by $x = 1 \rightarrow 6$.}
+    \label{fig:modelling:comparing radii at 0.1Msun}
+\end{figure}
+
+By plotting the difference between the two sets of models, and repeating the same process for a range of masses, Figure~\ref{fig:modelling:comparing radii over a range of masses} is produced. Now, by looking at what level of divergence historical changes in $\dot M$ induces, we can evaluate what mass range is acceptable. The upper limit on mass must be $0.2 M_\odot$, as this is the enforced mass of the period gap, and for a lower limit I impose an acceptable level of disagreement of $3\%$. It can be seen that the minimum acceptable mass is then $0.08 M_\odot$.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/compare_multiple_mass_with_CV_K11_fig1a.pdf}
+    \caption{The inflation of CV model radii, $R_{CV}$, over singleton model radii, $R_S$, from Figure~\ref{fig:modelling:comparing radii at 0.1Msun}, for a range of masses.}
+    \label{fig:modelling:comparing radii over a range of masses}
+\end{figure}
+
 
 \subsection{Modelling star spots in MESA}\label{sect:modelling:starspots in MESA}
 
+A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, Brown et. al. (2022)\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detatched binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+\begin{figure}
+    \centering
+    \includegraphics[]{figures/modelling/MESA_inflation_over_brown.pdf}
+    \caption{Showing the radius inflation of MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models.}
+    \label{fig:modelling:MESA inflation over Brown relation}
+\end{figure}
+The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly.
+CV donors are filling their Roche lobes, so are non-spherical. To account for this, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
+
+To achieve this inflation, I introduce star spots into MESA. As MESA is a one-dimensional code, this is done with the model formulation given by \citet{sommers2015}.
+
+
 
 \subsection{Tuning star spot parameters to observations}\label{sect:modelling:tuning star spots to observations}
-
-
-\subsection{What range of masses can we extract mass loss rates from?}
 
 
 \subsection{Optimising mass loss rate to donor observations}
