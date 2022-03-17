@@ -304,9 +304,9 @@ As more eclipses are added, the number of dimensions in parameter space that mus
 \section{Evolutionary modelling}\label{sect:method:evolutionary modelling}
 
 Once armed with a robust, somewhat sizable sample of characterised CVs, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
-If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor reproduced by stellar strucutre models by the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
+If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor reproduced by stellar structure models by the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary. However, there is cause for confidence; MESA is capable of reproducing the canonical \citep{knigge11} donor tracks with impressive accuracy, even reproducing the period gap by a shut down of magnetic braking \citep{Paxton_2015} with very little adjustment from default parameters.
+The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary. However, there is cause for confidence; MESA is capable of reproducing the canonical \citep{knigge11} donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking \citep{Paxton_2015} with very little adjustment from default parameters.
 First, I demonstrate that MESA can reproduce the two \citet{knigge11} donor tracks -- recall from \S\ref{sect:introduction:the missing aml problem} that two tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by $2.47\times$.
 By default, MESA shuts off magnetic braking when the donor becomes fully convective, a practice which I motivate in \S\ref{sect:introduction:the missing aml problem} to be spurious. Instead, MESA is altered for a fixed magnetic braking cutoff at $0.2 M_\odot$, effectively arbitrarily fixing the donor mass of the period gap.
 In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the amplification of gravitational braking below the period gap. This was used to reproduce the `optimal' track. Figure~\ref{fig:modelling:MESA can reproduce the K11 tracks} shows how well this augmented MESA model can reproduce the \citet{knigge11} tracks.
@@ -318,7 +318,7 @@ In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the am
 \end{figure}
 
 To extract mass loss rates, I will go through three steps.
-Firstly, I demonstrate how the radius of a singleton model of a given mass can be be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
+Firstly, I demonstrate how the radius of a singleton model of a given mass can be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
 Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for mass loss rate.
 Then, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
 Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
@@ -334,9 +334,9 @@ It is worth evaluating the feasibility of using the radius to extract mass loss 
 \end{align}
 
 While $\tau_{\rm KH} \ll \tau_{\dot M}$, the donor is able to maintain thermal equilibrium and is indistinguishable from a singleton star of the same mass.
-If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium; mass loss is fast and adiabatic. The donor is inflated by mass loss, but because the star cannot adjust on thermal timescales, the degree of inflation is dependant on the mass loss \textit{history} of the donor.
+If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium; mass loss is fast and adiabatic. The donor is inflated by mass loss, but because the star cannot adjust on thermal timescales, the degree of inflation is dependent on the mass loss \textit{history} of the donor.
 However, calculating the two timescales for CVs reveals that $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
-Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star is still almost able to ajdust on thermal timescales, the degree of inflation does \textit{not} depend on the mass loss history. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the long term baseline mass loss rate.
+Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star is still almost able to adjust on thermal timescales, the degree of inflation does \textit{not} depend on the mass loss history. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the long term baseline mass loss rate.
 
 Which regime the donor falls into is a function of $M_{\rm donor}$. As $M_{\rm donor}$ falls, $\tau_{\rm KH}$ begins to rise faster than $\tau_{\dot M}$; Figure~\ref{fig:modelling:how does tauKH and tauMdot vary with donor mass} shows this trend, produced by a MESA model of a CV c.f. \citep{Paxton_2015,Pala2017a}.
 The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ begins to become significant at $\sim 0.1 M_\odot$, around the mass the donor enters the fast, adiabatic $\tau_{\rm KH} \gg \tau_{\dot M}$ period bouncer phase c.f. \S\ref{sect:introduction:period minimum and bouncers}.
@@ -369,21 +369,98 @@ By plotting the difference between the two sets of models, and repeating the sam
 
 \subsection{Modelling star spots in MESA}\label{sect:modelling:starspots in MESA}
 
-A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, Brown et. al. (2022)\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detatched binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, Brown et. al. (2022)\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
 \begin{figure}
     \centering
-    \includegraphics[]{figures/modelling/MESA_inflation_over_brown.pdf}
+    \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
     \caption{Showing the radius inflation of MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models.}
     \label{fig:modelling:MESA inflation over Brown relation}
 \end{figure}
 The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly.
 CV donors are filling their Roche lobes, so are non-spherical. To account for this, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
 
-To achieve this inflation, I introduce star spots into MESA. As MESA is a one-dimensional code, this is done with the model formulation given by \citet{sommers2015}.
+To achieve this inflation, I introduce star spots into MESA. Star spots are magnetic phenomena, where the magnetic pressure from concentrations of magnetic field lines provides partial pressure support to the photospheric material, and since spots must remain in pressure equilibrium with the spotted surface, the temperature in a spotted region is reduced by ideal gas laws. As a consequence, the cooler spotted regions emit less black body radiation, inhibiting energy flux out of the stellar interior, and inflating the star.
 
+As MESA is a one-dimensional code and star spots are a two-dimensional phenomenon, spots are implemented with the model formulation given by \citet{sommers2015}, based on work by \citet{spruit1986}.
+Under this spot treatment, two effects are implemented: the photosphere is made inhomogeneous by the presence of spots, and convection is inhibited by the presence of a strong magnetic field.
+In the \citet{sommers2015} formulation, the former effect is enforced by altering the effective temperature to a surface-weighted average of the spotted and unspotted surface, and the latter by augmenting the radiative gradient of the star.
+
+The spots have a coverage fraction of $f_{\rm spot}$, and a temperature contrast of $x_{\rm spot} = T_{\rm  spot} / T_{\rm amb}$, where the effective temperature of the spotted surface is $T_{\rm spot}$, and the effective temperature of the ambient, unspotted surface is $T_{\rm amb}$. The surface-weighted average, $T_{\rm av}$ is then,
+\begin{equation}
+    \label{eqn:modelling:surface weighted average temp}
+    T_{\rm av}^4 = (1-f) T_{\rm amb}^4 + f_{\rm spot} T_{\rm spot}^4
+\end{equation}
+And the altered luminosity, $L_{\rm av}$, becomes
+\begin{align}
+    L_{\rm av} =& 4\pi R^2 \sigma_{boltz} T_{\rm amb}^4 (1 - f_{\rm spot} + f_{\rm spot} \cdot x_{\rm spot}^4) \\
+    L_{\rm av} =& 4\pi R^2 \sigma_{boltz} T_{\rm amb}^4 \alpha_{\rm spot} \\
+    L_{\rm av} =& L_{\rm amb} \alpha_{\rm spot} \\
+\end{align}
+$\alpha_{\rm spot}$, the redistribution parameter, is thus what actually alters the structure of the star, and is analogous to the blocking area of totally black spots, or spots that are completely supported by magnetic pressure.
+
+MESA performs a lookup for the surface pressure from $T_{\rm eff}$ using precalculated boundary condition tables (see \citet{paxton2010,paxton2011} for details). I modify the MESA code to perform this lookup with $T_{\rm av}$.
+
+However, in MESA $T_{\rm eff}$ is not used in the stellar model interior - rather, it uses energies and pressures to calculate structure. Therefore, I alter the above equation to use pressure instead.
+Recall the ideal gas equation, for gas in the ambient, unspotted surface. This gas will have pressure and temperature $P_{\rm gas, amb}, T_{\rm gas, amb}$, density $\rho$, and mean molecular weight $\mu$, and the gas constant $R$.
+\begin{equation}
+    P_{\rm gas, amb} = \frac{\rho R}{\mu} T_{\rm gas, amb}
+\end{equation}
+The spotted and unspotted surfaces are under pressure (and therefore also density) equilibrium, but the spotted surface pressure has a contribution from gas pressure, $P_{\rm gas, spot}$, and some contribution from magnetic pressure, $P_{\rm mag, spot}$. Therefore, we can write\todo{This proof is a bit extra if I'm honest with myself, but I think I'd rather be clear?}
+\begin{align}
+    P = P_{\rm gas, amb} =& P_{\rm gas, spot} + P_{\rm mag, spot} \\
+    \frac{\rho R}{\mu} T_{\rm amb} =& \frac{\rho R}{\mu} T_{\rm spot} + P_{\rm mag, spot} \\[12pt]
+    P_{\rm mag, spot} =& \frac{\rho R}{\mu} (T_{\rm amb} - T_{\rm spot}) \\
+    % P_{\rm mag, spot} =& \frac{\rho R}{\mu} (1 - x_{\rm spot}) T_{\rm amb} \\
+    P_{\rm mag, spot} =& (1-x_{\rm spot}) P_{\rm gas, amb} \\[12pt]
+    P_{\rm gas, spot} =& P_{\rm gas, amb} - P_{\rm mag, spot}\\
+    % P_{\rm gas, spot} =& P_{\rm gas, amb} - (1-x_{\rm spot}) P_{\rm gas, amb} \\
+    P_{\rm gas, spot} =& x_{\rm spot} P_{\rm gas, amb}
+\end{align}
+However, star spots do not penetrate to the core of the star. To quantify this, rather than fixing $x_{\rm spot}$ and calculating the new pressure at each depth of the star, I calculate the pressure differential at the surface of the star, and fix this pressure difference for interior layers. As the pressure rises with depth, a significant pressure difference at the surface quickly becomes insignificant. For each depth of the star, $x_{\rm spot}$ is calculated from its total pressure before any alteration is made, $P_i$, and the surface pressure, $P_{\rm surf, amb}$,
+\begin{align}
+    P_{\rm gas, amb} - P_{\rm mag, spot} =& x_{\rm spot} P_{\rm gas, amb} \\
+    x_{\rm spot, i} =& \frac{P_i - P_{\rm surf, amb}}{P_i}
+\end{align}
+Rather than directly altering the pressure profile of the star, the radiative gradient, $\nabla_r$, at each depth is modified. MESA then uses $\nabla_r$ to compute a self-consistent pressure profile for the star.
+\begin{align}
+    \alpha_{\rm spot, i} =& 1 - f_{\rm spot} + f_{\rm spot} \cdot x_{\rm spot, i}^4 \\
+    \nabla_{r,i}' =& \frac{\nabla_{r,i}}{\alpha_{\rm spot, i}}
+\end{align}
+Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-configured parameters. Figure~\ref{fig:modelling:spotted model radii at 2Gyrs} shows the radii of main sequence stellar models at 2~Gyrs, and $0.15 M_\odot$ with progressively more spots.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/spotted_model_radii_at_2gyrs.pdf}
+    \caption{Showing how model radius varies as a function of spot coverage. Here, spots are perfectly black ($x_{\rm spot} \equiv 0$), and the radius is extracted at 2~Gyrs.}
+    \label{fig:modelling:spotted model radii at 2Gyrs}
+\end{figure}
 
 
 \subsection{Tuning star spot parameters to observations}\label{sect:modelling:tuning star spots to observations}
+With star spots implemented in MESA, the Brown relation can now be reproduced.
+$x_{\rm spot}$ is fixed at 0 and $f_{\rm spot}$ is varied.
+Since radius increases monotonically with $f_{\rm spot}$, a binary chop is performed, optimising for $\Delta R = R_{\rm MESA} - R_{\rm Brown} = 0$ at a stellar age of 2~Gyrs.
+
+To find the appropriate $f_{\rm spot}$ for a given mass, the following steps are followed.
+First, MESA models using the upper and lower bounds of $f_{\rm spot}$ ($f_{\rm up}$ and $f_{\rm low}$ respectively) are evaluated, and $\Delta R$ calculated for each.
+The lower bound will have $\Delta R < 0$, and the upper bound will have $\Delta R > 0$, and since $\Delta R$ is a smooth function of $f_{\rm spot}$, $\Delta R \equiv 0$ must lie between them.
+Then, $\Delta R$ at the midpoint, $f_{\rm mid} = (f_{\rm up} + f_{\rm low})/2$, is evaluated, and accepted as either the new $f_{\rm up}$ (if $\Delta R$ is positive) or $f_{\rm low}$ (if $\Delta R$ is negative).
+A new $f_{\rm mid}$ is then calculated from the new range, and the cycle repeats until $\Delta R$ is within tolerance; set to $0.1\%$.
+The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fspot mass relationship}\todo{This figure matches the wrong inflation over observations!!!! running a new grid, replace this figure.}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_3.5.pdf}
+    \caption{The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry.}
+    \label{fig:modelling:fspot mass relationship}
+\end{figure}
+
+Below masses of $\sim 0.13 M_\odot$, the required $f_{\rm spot}$ becomes negative, i.e. default MESA models are larger than observations. As this is unphysical, negative values of $f_{\rm spot}$ are set equal to 0, and we note that derived mass loss rates become unreliable below this mass.
+
+There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is \todo{GET THIS} between 0.1 and 0.2 $M_\odot$, which...
+However, while this may skew an individual system, on average the inferred mass loss from model radius should be accurate. Therefore, I ignore this effect. \todo{wow. This sounds awful. write it better.}
 
 
 \subsection{Optimising mass loss rate to donor observations}
+\label{sect:modelling:optimising mass loss rate to observations}
+
+Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to optimise mass loss, similarly to optimising $f_{\rm spot}$.
+To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
