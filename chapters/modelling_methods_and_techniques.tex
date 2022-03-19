@@ -58,7 +58,7 @@ A schematic of this stretch move concept is shown in Figure~\ref{fig:modelling:s
 \begin{figure}
     \centering
     \includegraphics[width=.7\textwidth]{figures/modelling/stretch_move.png}
-    \caption{Reproduced from \citet{goodman2010}, showing the concept of a stretch move proposal.}\label{fig:modelling:stretch move}
+    \caption{Reproduced from \citet{goodman2010}, showing the concept of a stretch move proposal. The proposed next step for $j$ is given by choosing a random position on the line joining the last step on chain $j$, $X_j$, and the last chain on another walker chosen at random, $X_k$. The proposed step is shown by the star, $Y$. Grey dots with no outlines illustrate the other walkers in the ensemble, but are unused.}\label{fig:modelling:stretch move}
 \end{figure}
 
 Then, $\Theta_k$ is either accepted or rejected from the chain depending on the current state of the chain. Recall that if the proposed $\mathcal{L}_{N+1} > \mathcal{L}_{N}$, i.e. the likelihood has improved, the sample is accepted. However, if $\mathcal{L}_{N+1} < \mathcal{L}_{N}$, the acceptance is determined by the transition probability, $P(\Theta_k | \theta_{k,N})$, defined as
@@ -227,7 +227,7 @@ Some fraction of the light is beamed, and the rest, $f_{\rm is}$, is emitted iso
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figures/modelling/bright_spot_schematic.pdf}
-    \caption{Showing a schematic of the bright spot model. The lower dashed line joins the centres of the white dwarf and donor stars, and the upper dashed line runs parallel to it, intersecting the bright spot location. The thick red line is the flux-emitting strip, and the arrow shows the direction of light emission, at an angle $\theta_{\rm yaw}$ from the normal.}
+    \caption{Showing a schematic of the bright spot model. The {\bf lower dashed line} joins the centres of the white dwarf and donor stars, and the {\bf upper dashed line} runs parallel to it, intersecting the bright spot location. The {\bf thick red line} is the flux-emitting strip, and the {\bf arrow} shows the direction of light emission, at an angle $\theta_{\rm yaw}$ from the normal.}
     \label{fig:modelling:bright spot schematic}
 \end{figure}
 
@@ -362,18 +362,18 @@ By plotting the difference between the two sets of models, and repeating the sam
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/compare_multiple_mass_with_CV_K11_fig1a.pdf}
-    \caption{The inflation of CV model radii, $R_{CV}$, over singleton model radii, $R_S$, from Figure~\ref{fig:modelling:comparing radii at 0.1Msun}, for a range of masses.}
+    \caption{The inflation of CV model radii, $R_{CV}$, over singleton model radii, $R_S$, from Figure~\ref{fig:modelling:comparing radii at 0.1Msun}, for a range of masses. The {\bf red dashed line} shows the upper limit for acceptable disagreement, and the {\bf black dashed line} shows perfect agreement.}
     \label{fig:modelling:comparing radii over a range of masses}
 \end{figure}
 
 
 \subsection{Modelling star spots in MESA}\label{sect:modelling:starspots in MESA}
 
-A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, Brown et. al. (2022)\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, \citet{BrownPrep}\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
-    \caption{Showing the radius inflation of MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models.}
+    \caption{Showing the radius inflation of MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models. Crosses correspond to MESA models at an age of 2~Gyrs.}
     \label{fig:modelling:MESA inflation over Brown relation}
 \end{figure}
 The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly.
@@ -445,17 +445,19 @@ First, MESA models using the upper and lower bounds of $f_{\rm spot}$ ($f_{\rm u
 The lower bound will have $\Delta R < 0$, and the upper bound will have $\Delta R > 0$, and since $\Delta R$ is a smooth function of $f_{\rm spot}$, $\Delta R \equiv 0$ must lie between them.
 Then, $\Delta R$ at the midpoint, $f_{\rm mid} = (f_{\rm up} + f_{\rm low})/2$, is evaluated, and accepted as either the new $f_{\rm up}$ (if $\Delta R$ is positive) or $f_{\rm low}$ (if $\Delta R$ is negative).
 A new $f_{\rm mid}$ is then calculated from the new range, and the cycle repeats until $\Delta R$ is within tolerance; set to $0.1\%$.
-The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fspot mass relationship}\todo{This figure matches the wrong inflation over observations!!!! running a new grid, replace this figure.}.
+The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fspot mass relationship}.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_3.5.pdf}
-    \caption{The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry.}
+    \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_4.5.pdf}
+    \caption{The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation, negative values of $f_{\rm spot}$ were allowed. However, is all subsequent modelling, negative $f_{\rm spot}$ were set to 0.}
     \label{fig:modelling:fspot mass relationship}
 \end{figure}
 
-Below masses of $\sim 0.13 M_\odot$, the required $f_{\rm spot}$ becomes negative, i.e. default MESA models are larger than observations. As this is unphysical, negative values of $f_{\rm spot}$ are set equal to 0, and we note that derived mass loss rates become unreliable below this mass.
+Below masses of $\sim 0.13 M_\odot$, the required $f_{\rm spot}$ becomes slightly negative, i.e. default MESA models are larger than observations plus the $4.5\%$ non-spherical correction.
+Since a negative coverage fraction is unphysical, negative values of $f_{\rm spot}$ are set equal to 0, and we note that derived mass loss rates become unreliable below this mass.
+However, the severity of this unreliability is not catastrophic, as the minimum value of $f_{\rm spot}$ is still reasonably close to 0.
 
-There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is \todo{GET THIS} between 0.1 and 0.2 $M_\odot$, which...
+There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is \todo{GET THIS} between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate.
 However, while this may skew an individual system, on average the inferred mass loss from model radius should be accurate. Therefore, I ignore this effect. \todo{wow. This sounds awful. write it better.}
 
 
