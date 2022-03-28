@@ -1,3 +1,5 @@
 HiPERCAM
 ULTRACAM
 ULTRASPEC
+lightcurve
+GPs

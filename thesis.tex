@@ -61,9 +61,9 @@
 \usepackage[
 %\hypersetup{
 	pdfauthor={J. F. Wild},
-	pdftitle={AML in cv stars}, 
-%	pdfkeywords={}, 
-	breaklinks=true, 
+	pdftitle={AML in cv stars},
+%	pdfkeywords={},
+	breaklinks=true,
 	colorlinks   = true, %Colours links instead of ugly boxes
 	urlcolor     = blue, %Colour for external hyperlinks
 	linkcolor    = black, %Colour of internal links
@@ -160,7 +160,7 @@
 \newcommand\aspc{ASP Conf. Ser.}     % ASP Conference Series
 \newcommand\azh{Azh}                 % Astronomicheskii Zhurnal
 \newcommand\baas{BAAS}               % Bulletin of the American Astronomical Society
-\newcommand\bac{Bull. Astron. Inst. Czechoslovakia} % Bulletin of the Astronomical Institutes of Czechoslovakia 
+\newcommand\bac{Bull. Astron. Inst. Czechoslovakia} % Bulletin of the Astronomical Institutes of Czechoslovakia
 \newcommand\bain{Bull. Astron. Inst. Netherlands} % Bulletin Astronomical Institute of the Netherlands
 \newcommand\caa{Chinese Astron. Astrophys.} % Chinese Astronomy and Astrophysics
 \newcommand\cjaa{Chinese J.~Astron. Astrophys.} % Chinese Journal of Astronomy and Astrophysics
@@ -238,7 +238,7 @@
 \newcommand{\about} {$\sim$}
 \newcommand{\metal}{12 + log(O/H) }
 %\newcommand\ion[2]{#1$\;${\small\rmfamily\@Roman{#2}}}
-%\newcommand\ion[2]{#1$\;${\scshape{#2}}}% 
+%\newcommand\ion[2]{#1$\;${\scshape{#2}}}%
 \newcommand{\electron} {$\mathrm{e^{-}}$}
 \def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$<$}}}}
 \def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$>$}}}}
@@ -255,7 +255,7 @@
 %\newcommand{\heI7065} {HeI $\lambda 7065$}
 
 \long\def\symbolfootnote[#1]#2{\begingroup%
-\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup} 
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
 
 %\captionsetup{width=1.0\textwidth}
 
@@ -301,7 +301,7 @@
 
 \setlength{\columnsep}{10pt}
 \setlength{\columnseprule}{0pt}
-\setlength{\LTcapwidth}{8in} 
+\setlength{\LTcapwidth}{8in}
 
 
 % \title{\textsc{Observations, fitting, and analysis of cataclysmic variable stars}}
@@ -383,7 +383,7 @@
 %==================================================
 
 
-\normalsize 
+\normalsize
 
 %%%%%%%%%%%%%%% DECLARATION ACKNOWLEDGEMENTS AND SUMMARY %%%%%%%%%%%%%%
 
@@ -396,7 +396,7 @@
 %candidate in consultation with the supervisor) should not exceed 300
 %words. Each bound copy of the thesis must contain a summary/abstract
 %within it, and a further loose copy should be submitted with the
-%thesis to the Graduate Research Office. 
+%thesis to the Graduate Research Office.
 
 
 \onehalfspacing
@@ -404,7 +404,7 @@
 %%%%%%%%%%%% THIS DEFINES A NEW GEOMETRY FOR THE QUOTE PAGE TO LOOK PRETTY %%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FEEL FREE TO DELETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newgeometry{top=12cm, left=5cm, right=4cm}  
+\newgeometry{top=12cm, left=5cm, right=4cm}
 \vspace{4cm}
 \begin{center}
 {\Huge \noindent \textbf{\textcolor{sections}{``}}}\\
@@ -433,7 +433,7 @@
 
 \rightline{\large --- Nick Bostrom}
 
-\restoregeometry 
+\restoregeometry
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \listoftodos[My Shitlist]
 \tableofcontents \clearpage
@@ -456,8 +456,8 @@
 %______________________________________________________________________________
 
 \pagenumbering{arabic} \setcounter{page}{1}
-\renewcommand{\chaptermark}[1]{\markboth{\bf{ #1}}{}} 
-\renewcommand{\sectionmark}[1]{\markright{\thesection\emph{ #1}}{}} 
+\renewcommand{\chaptermark}[1]{\markboth{\bf{ #1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\emph{ #1}}{}}
 
  \pagestyle{fancy}			 % Sets fancy header and footer
  \fancyfoot{}				 % Delete current footer settings
@@ -482,7 +482,7 @@
 %\renewcommand{\chaptermark}[1]{          %
 %  \markright{\thechapter.\ #1}}
 %\renewcommand{\sectionmark}[1]{	         % Lower case Section marker style
-%   \markright{\thesection.\ #1}}	 
+%   \markright{\thesection.\ #1}}
 
 
 %\renewcommand{\chaptermark}[1]{          % Lower Case Chapter marker style in Italics
@@ -491,13 +491,13 @@
 
 %\fancyhead[RE,RO]{\bfseries\thepage}	 % Page number (boldface) in left on even
 %\fancyhead[LE,LO]{\thechaptername}
-%\include{subtraction}\clearpage 
+%\include{subtraction}\clearpage
 
 
 %%%% MAIN TEXT MAIN TEXT MAIN TEXT %%%%%%%
 
 
-\begin{onehalfspace}                                         
+\begin{onehalfspace}
 % \begin{doublespace}
 
 
@@ -510,11 +510,8 @@
 \chapter{Modelling techniques and methodology}
 \include{chapters/modelling_methods_and_techniques}
 
-\chapter{The case of three strange white dwarfs}
-\include{chapters/Three_cvs_with_weird_colours}
-
-\chapter{Characterisation of 11 cataclysmic variables}
-\include{chapters/characterisation_of_eclipsing_cvs}
+\chapter{Three CVs with peculiar white dwarf colours}
+\include{chapters/three_white_dwarfs}
 
 \end{onehalfspace}
 %\end{doublespace}
@@ -525,9 +522,9 @@
 \bibliographystyle{mn2e} %requires mn2e.bst file in same directory
 
 % YOUR PATH %
-\bibliography{thesis} 
+\bibliography{thesis}
 
-\end{singlespace}  
+\end{singlespace}
 
 %%%%%%%%%%%%%%%% APPENDIX APPENDIX APPENDIX APPENDIX %%%%%%%%%%%%%55
 \onehalfspacing
