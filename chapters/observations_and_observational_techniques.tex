@@ -3,12 +3,12 @@
 \label{chpt:observations and observational techniques} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Observations, and observational techniques}} % This is for the header on each page - perhaps a shortened title
 
-In CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor star will eclipse the white dwarf, accretion disc, and bright spot in quick succession once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can yield a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature, mass, and radius from modelled white dwarf colours and the Gaia-reported system parallax, then combining the white dwarf mass and radius with the timing of various eclipse features to find the key parameters of donor mass, donor radius, and orbital separation.
+In CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor star will eclipse the white dwarf, accretion disc, and bright spot in quick succession once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can yield a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature, mass, and radius from modelled white dwarf colours and the Gaia-reported system parallax, then combining the white dwarf mass and radius with the timing of various eclipse features to find the key parameters of donor mass, donor radius, and orbital separation.\todo{Stu marked this as duplication, but I dont think it is... And I think its necessary setup for the chapter.}
 Since the important observables are colours and the timing of events, to properly characterise a CV we need flux-calibrated, high time resolution, multi-colour photometry of a target.
 
 The work of this thesis has made use of three instruments: ULTRASPEC, ULTRACAM, and HiPERCAM.
 These are time-series photometric imaging cameras, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively.
-The eclipses we observe typically span around 30 minutes and need to measure flux changes on timescales of a few seconds to be useful for analysis.
+The observed eclipses typically span around 30 minutes and observations need to measure flux changes on timescales of a few seconds to resolve the eclipse.
 Crucially, HiPERCAM and ULTRACAM make their multi-colour images simultaneously, which removes the possibility of changes in brightness in the disc or bright spot polluting the white dwarf colour measurement, making them ideal instruments for this analysis.
 
 
@@ -21,11 +21,11 @@ The cameras used were mounted on several telescopes across the decade of our obs
 \subsection{HiPERCAM}
 \label{sect:observations:hipercam}
 
-HiPERCAM is a quintuple-beam optical imaging camera, that saw first light on the GTC in 2018 and is sensitive to wavelengths from $320 - 1060 \rm nm$ \citep{dhillon2021}.
+HiPERCAM is a quintuple-beam optical imaging camera that saw first light on the WHT in 2017, and is sensitive to wavelengths from $320 - 1060 \rm nm$ \citep{dhillon2021}.
 HiPERCAM uses a system of `Super SDSS' filters ($u_{\rm sup}, g_{\rm sup}, r_{\rm sup}, i_{\rm sup}, z_{\rm sup}$), designed to match the classic SDSS band cutoff wavelengths \citep{fukugita1996}, but allow a higher throughput and so give a more sensitive instrument.
-This camera has a series of dichroic beam-splitters, that sequentially pick off the $u_{\rm sup}, g_{\rm sup}, r_{\rm sup}, i_{\rm sup}, z_{\rm sup}$ bands and funnel each into dedicated cameras that use highly sensitive, low readout noise, electron-multiplying Charge-Coupled Devices (CCDs).
+This instrument has a series of dichroic beam-splitters, that sequentially pick off the $u_{\rm sup}, g_{\rm sup}, r_{\rm sup}, i_{\rm sup}, z_{\rm sup}$ bands and funnel each into dedicated cameras that use highly sensitive, low readout noise, Charge-Coupled Devices (CCDs) as detectors.
 However, this improvement in sensitivity is not constant across the bands, shown in Figure~\ref{fig:observations:superSDSS throughput comparison}, resulting in a small difference between colours observed with HiPERCAM and the SDSS.
-Unfortunately, as flux-calibrating standard stars are reported in the classic SDSS photometric system, some work was necessary to color-correct the HiPERCAM observations, which is described in detail in \S\ref{sect:observations:colour correction method}.
+Unfortunately, as magnitudes for standard stars are often reported in the classic SDSS photometric system, some work was necessary to color-correct the HiPERCAM observations, which is described in detail in \S\ref{sect:observations:colour correction method}.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/observations/plot_dichs_supersdss_asbuilt_v3.png}
@@ -34,30 +34,30 @@ Unfortunately, as flux-calibrating standard stars are reported in the classic SD
 \end{figure}
 
 On the GTC, HiPERCAM is capable of detecting sources down to $g_{\rm sup}~\sim~23$ in exposures of only a second, and can achieve $g_{\rm sup}~\sim~28$ with an hour of exposure. This allows observations of fainter CVs than previous studies (e.g. \citealt{McallisterThesis}), and helps target CVs at short periods with faint, low mass donors.
-Unfortunately, while HiPERCAM was used to observe eclipses for some systems, no HiPERCAM observations were usable for analysis, with observed systems either being in outburst, or not having observable bright spot features, which are essential for modelling.
+Unfortunately, while HiPERCAM was used to observe eclipses for some systems, no HiPERCAM observations were modelled for this thesis, with observed systems either being in outburst, or not having observable bright spot features, which are essential for modelling.
 
 HiPERCAM is capable of incredibly fast frame rates of up to $\sim 1000 \rm Hz$, though this capability was not used for this work.
 However, as part of the effort to achieve this frame rate by reducing dead-time between frames HiPERCAM is capable of exposing a frame while {\it simultaneously} reading out the previous image.
-This is achieved by splitting the photodetector in half, and masking one side. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ms) and can be read out during the next exposure time. To compensate up for masking half of a CCD, two CCDs side-by-side are used to emulate a single full-frame detector.
+This is achieved by masking half of a CCD, and only exposing with one side. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ ms) and can be read out during the next exposure time. To compensate up for masking half of a CCD, four CCDs side-by-side are used to make up the full exposing area. As a consequence, HiPERCAM has four sets of readout electronics that operate in tandem.
 This virtual elimination of dead-time is a significant benefit when resolving the large, rapid changes in flux during the ingresses and egresses of CV eclipses.
 
 
 
 \subsection{ULTRACAM}
 \label{sect:observations:ultracam}
-
+o
 ULTRACAM is a three-beam optical imager sensitive to wavelengths between $\sim 300 - 1100 \rm nm$, and is the direct predecessor to HiPERCAM \citep{dhillon2007}.
 It is similarly built for high-speed photometric studies, but is not capable of the extreme framerates of HiPERCAM, limited to framerates of $\lesssim 500 \rm Hz$.
-ULTRACAM uses the same split-frame readout technique to HiPERCAM, though uses more typical CCDs rather than HiPERCAM's electron-multiplying CCDs.
+ULTRACAM uses the same frame transfer readout technique to HiPERCAM, though uses only two CCDs.
 
-ULTRACAM was originally commissioned with SDSS-like $u',g',r',i',z'$ filters, that match the SDSS closely and did not necessitate colour-term corrections. However, in 2018 \todo{When did we move to super SDSS on ultracam? 2018?} ULTRACAM was upgraded to use the same Super SDSS photometric system used by HiPERCAM. When necessary, observations were translated to the classic SDSS system as described in \S\ref{sect:observations:colour correction method}.
+ULTRACAM was originally commissioned with SDSS-like $u',g',r',i',z'$ filters, that match the SDSS closely and did not necessitate colour-term corrections. However, in Fubruary 2019 ULTRACAM was upgraded to use the same Super SDSS photometric system used by HiPERCAM. When necessary, observations were translated to the classic SDSS system as described in \S\ref{sect:observations:colour correction method}.
 Observing an object with ULTRACAM in more than three bands requires multiple observing runs, and manually swapping filters.
 
 
 \subsection{ULTRASPEC}
 \label{sect:observations:ultraspec}
 
-Finally, the ULTRASPEC camera was occasionally used to supplement ULTRACAM and HiPERCAM observations. ULTRASPEC was originally commissioned as a spectrographic cousin of ULTRACAM, using again a split-frame design, with electron-multiplying CCDs \citep{dhillon2014}.
+ULTRASPEC was occasionally used to supplement ULTRACAM and HiPERCAM observations. ULTRASPEC was originally commissioned as a spectrographic cousin of ULTRACAM, using again a frame transfer design, with an electron-multiplying CCD \citep{dhillon2014}.
 After a brief proof-of-concept trial as a photometric imager in June 2009, ULTRASPEC was modified to a full-time imaging instrument and mounted on the 2.4m TNT in November 2013, and is now operated by the National Astronomical Research Institute of Thailand (NARIT).
 
 This is a single-colour instrument that uses the $u',g',r',i',z'$ filters, in addition to a wide-band KG5 filter that is approximately equivalent to $u' + g' + r'$. It is also the slowest of the three cameras, but is still capable of high framerates up to $\sim 200 \rm Hz$. However, as ULTRASPEC on the NTT is a somewhat less in-demand instrument than either HiPERCAM or ULTRACAM, it proved useful in two significant respects - to gauge the viability of CV systems before dedicating more valuable HiPERCAM and ULTRACAM observing time (e.g. testing the visibility of eclipse features, checking if a CV is undergoing an outburst), and in acquiring or refining measurements of orbital period.
@@ -70,7 +70,7 @@ All three cameras use CCD detectors, which are a staple of ground-based astronom
 CCDs are made up of a large grid of photosensitive pixels, which release electrons proportionally to the number of photons that fall on them. This signal is then moved pixel-by-pixel into the readout electronics, which is essentially a capacitor that has its voltage measured to determine the number of electrons that were released. This voltage is converted to electron counts with an Analog-to-Digital Converter (ADC), that outputs the corresponding integer number of electrons to the input charge, in Analog-to-Digital Units (ADU).
 To extract time-series photometric information from the raw image files, the HiPERCAM data reduction pipeline was used\footnote{Available https://cygnus.astro.warwick.ac.uk/phsaap/hipercam/docs/html/}.
 
-The analysis of this data uses flux-calibrated relative photometry, in which a reference star in the same image as the target is extracted and used as a known-constant flux source. Then, by using the ADU flux ratio between these two sources as the observable, effects from changes in weather, altitude, and seeing conditions are compensated for, since these variations affect both the target and reference star equally. By multiplying the ADU flux ratio between the target and reference stars by the flux in mJy of the reference star, we can calibrate our photometry and produce a lightcurve of the target star, in units of energy flux.
+The analysis of this data uses flux-calibrated relative photometry, in which a reference star in the same image as the target is extracted and used as a known-constant flux source. Then, by using the ADU flux ratio between these two sources as the observable, effects from changes in weather, altitude, and seeing conditions are compensated for, since these variations are assumed to affect both the target and reference star equally. By multiplying the ADU ratio between the target and reference stars by the flux in mJy of the reference star, we can calibrate our photometry and produce a lightcurve of the target star.
 % Bias and flat field corrections are done for each observation, with calibration frames taken nightly as standard procedure.
 
 
@@ -94,12 +94,12 @@ To then remove this bias voltage from observations, zero second exposures of a m
 \label{sect:observations:flat field frames}
 
 The response of each pixel to photons is similar, but not exactly equal. In addition, the optics of the telescope are not perfect and throughput varies across the field of view, a.k.a vignetting.
- Dust and imperfections in the telescope optics can also introduce variation across the image.
- Finally, as filters cannot be manufactured with perfect uniformity, each filter also makes a contribution to variations across an image\todo{Not 100\% sure on that last one...}.
+Dust and imperfections in the telescope optics can also introduce variation across the image, and must also be accounted for.
+
 These effects mean that each exposure the instrument takes is convolved with a constant flat-field response pattern.
 
-In order to characterise and remove the flat-field pattern, an exposure is taken of an image that is known to be uniform in brightness, for example a specialised light box with a high degree of uniformity, which will have the flat-field pattern imprinted on it.
-A simpler approach to a specialised light box is to observe the sky during sunset, when the sky is still bright and the contribution of light from stars is negligible; in the absence of cloud, the twilight sky forms a highly uniform field in optical bands.
+In order to characterise and remove the flat-field pattern, an exposure is taken of an image that is known to be uniform in brightness, which will have the flat-field pattern imprinted on it.
+The twilight sky forms a highly uniform field in optical bands, so was used as this flat source.
 
 Residual stellar light should still be removed, so to completely eliminate stars from the flat field observation, many exposures are taken while the telescope is being nudged by a small amount every few seconds. Since the stars move pixels between each exposure, calculating the median frame will remove stars from the image, leaving behind only the uniform sky observation imprinted with the flat-field response pattern.
 The flat field images are bias corrected to give the final flat image.
@@ -112,13 +112,16 @@ Then, by dividing each subsequent exposure by the flat image, we can correct for
 While stars are theoretically point sources, we observe them through the atmosphere and the optics of the telescope, which act to spread the light from a star, usually by a few arcseconds even under the best conditions. This spreads light from a star over several pixels. As such, to find the total flux of a star we must sum the contributions from all pixels containing the stars' flux, and ideally subtracting all flux contributed by non-stellar sources.
 The HiPERCAM pipeline has two methods for this: `normal' extraction and `optimal' extraction.
 
-The sky background is not perfectly black and in both extraction methods must be removed from the extracted flux of a source. This is done by taking an annulus about each source, and assuming it is solely make up of sky background light (in the case of a nearby object, portions of the annulus can be masked in software and not counted in the sky background). The inner edge of the annulus is selected to be far enough from the source that none of the target's light is present, and the outer edge is limited by large annuli starting to become sensitive to sky variations across the image. The average sky signal per pixel is then calculated, and subtracted to isolate the source flux.
+The sky background is not perfectly black and in both extraction methods must be removed from the extracted flux of a source. This is done by taking an annulus about each source, and assuming it is solely make up of sky background light (in the case of a nearby object, portions of the annulus can be masked in software and not counted in the sky background).
+The inner edge of the annulus is selected to be far enough from the source that none of the target's light is present, and the outer edge is limited by the need to avoid contamination from other sources, and large annuli starting to become sensitive to sky variations across the image.
+The average sky signal per pixel is then calculated, and subtracted to isolate the source flux.
 
 Under normal extraction, the user specifies one or more `reference' stars, and one or more `target' stars. The pixel ADU counts around the reference stars as a function of their radial distance to the peak flux are characterised with a Gaussian or Moffat profile. The Full-Width at Half Maximum (FWHM) of this distribution fit is calculated, and all pixels within $x \times \mathrm{FWHM}$ of the peak flux are summed to give the extracted flux of a source, cutting off some fraction of the wings of the flux distribution. Here $x$ is a user-defined parameter, and while in theory a large value of $x$ would be desirable to capture all flux from a source, adding extra pixels increases the readout noise of the detection, and suffers from diminishing returns due to the small amounts of flux contained in the wings.
 Also, as the same fraction of light from each source should be lost from both the target sources and reference sources, cutting out these wings should not alter the flux ratio between sources, and the flux ratio is the relevant quantity under relative photometry (see \S\ref{sect:observations:photometric extraction and calibration}).
 
-In many cases, it is preferable to use the `optimal' extraction method, described by \citet{naylor1998}. Here, a weight is taken into account when summing the flux contributions of each pixel based on the {\it expected} contribution to the overall flux. This can give an improvement of $\sim 10\%$ to the signal-to-noise ratio, especially in faint sources as this approach is more robust against flux distributions that are not well described by Gaussian or Moffat distributions.
-Source flux distributions can diverge from the idealised Gaussian or Moffat profiles due to noise or inconsistencies in seeing conditions, and these effects are more pronounced in fainter sources.
+In many cases, it is preferable to use the `optimal' extraction method, described by \citet{naylor1998}. Here, a weight is taken into account when summing the flux contributions of each pixel based on the {\it expected} contribution to the overall flux.
+This can give an improvement of $\sim 10\%$ to the signal-to-noise ratio, especially in faint sources as less weight is given to pixels at the wings of the flux profile, where readout noise and error from the sky background are more significant.
+However, in brighter stars with an already high signal-to-noise ratio the improvement is offset by the potential systematic error introduced by any divergence from the model profile fit used. As such, the optimal extraction method is generally used for faint stars, and normal extraction is used for bright stars.
 
 
 
@@ -130,46 +133,46 @@ A comparison star in the same frame as the target is used to account for seeing 
     \label{eqn:observations:instrumental magnitude from scratch}
     m_{app} = m_{inst} + \chi k_{ext} + m_{zp} + C_{inst}c_{m}
 \end{equation}
-where $m_{inst}$ is the instrumental magnitude, $-2.5 \rm log(ADU flux)$, $\chi$ is the airmass of the observation and $k_{ext}$ is the atmospheric extinction coefficient in the relevant band. $m_{zp}$ is the zero point offset of the instrument, calculated from photometric standard stars, ideally taken on the night of an observation. $c_{m}$ is the colour term correction between the response curve of the instrument, and the target photometric system, and $C_{inst}$ is a diagnostic instrumental colour. Each of these terms must be properly handled, and are discussed in turn.
+where $m_{inst}$ is the instrumental magnitude, $-2.5 \rm log(ADU / {\rm time})$, $\chi$ is the airmass of the observation and $k_{ext}$ is the atmospheric extinction coefficient in the relevant band. $m_{zp}$ is the zero point offset of the instrument, calculated from photometric standard stars, ideally taken on the night of an observation. $c_{m}$ is the colour term correction between the response curve of the instrument, and the target photometric system, and $C_{inst}$ is a diagnostic instrumental colour. Each of these terms must be properly handled, and are discussed in turn.
 
 
 \subsection{Calculating atmospheric extinction coefficients}
-\label{sect:calcualting atmospheric extinction}
+\label{sectobservations:calculating atmospheric extinction}
 
 Atmospheric extinction was calculated using the longest continuous observation available within a reasonable time from target observations.
-The atmospheric extinction values are reported in Table~\ref{table:atmos_extinction}\todo{Currently, this is only for a very narrow range of the actual observations. Generalise this table to include all instruments and locations.}.
 
 To calculate the atmospheric extinction coefficients, aperture photometery was extracted for five sources in these long observations, and the instrumental magnitude, $m_{\rm inst}$, vs airmass, $\chi$, was fit with a straight line for each source.
 The gradients of these lines are the atmospheric extinction coefficients, $k_{\rm ext}$, for the relevant band, and the y-intercept is the instrumental magnitude of that object above the atmosphere, $m_{\rm inst,0}$:
-\begin{align*}
+\begin{align}
+    \label{eqn:observations:basic magnitude equation}
     m_{\rm inst} =& m_{\rm inst,0} + \chi k_{\rm ext}
-\end{align*}
+\end{align}
 
-\begin{table}
-    \centering
-    \caption{Typical atmospheric extinction coefficients for La Silla, derived from ULTRACAM/NTT observations.}
-    \label{table:atmos_extinction}
-    \begin{tabular}{cccc}
-        \hline
-        Date of Observation & Airmass Range & Band & $k_{ext}$ \\
-        \hline
-        \hline
-        14 Oct 2018   & 1.30-1.98 & $u_{\rm reg}$ & $0.4476$ \\
-                      &           & $g_{\rm reg}$ & $0.1776$ \\
-                      &           & $r_{\rm reg}$ & $0.0861$ \\
-        \hline
-        30 Sept 2019  & 1.03-1.63 & $u_{\rm sup}$ & $0.4867$ \\
-                      &           & $g_{\rm sup}$ & $0.1803$ \\
-                      &           & $r_{\rm sup}$ & $0.0713$ \\
-        \hline
-    \end{tabular}
-\end{table}
+% \begin{table}
+%     \centering
+%     \caption{Typical atmospheric extinction coefficients for La Silla, derived from ULTRACAM/NTT observations.}
+%     \label{table:atmos_extinction}
+%     \begin{tabular}{cccc}
+%         \hline
+%         Date of Observation & Airmass Range & Band & $k_{ext}$ \\
+%         \hline
+%         \hline
+%         14 Oct 2018   & 1.30-1.98 & $u_{\rm reg}$ & $0.4476$ \\
+%                       &           & $g_{\rm reg}$ & $0.1776$ \\
+%                       &           & $r_{\rm reg}$ & $0.0861$ \\
+%         \hline
+%         30 Sept 2019  & 1.03-1.63 & $u_{\rm sup}$ & $0.4867$ \\
+%                       &           & $g_{\rm sup}$ & $0.1803$ \\
+%                       &           & $r_{\rm sup}$ & $0.0713$ \\
+%         \hline
+%     \end{tabular}
+% \end{table}
 
 
 \subsection{Transformations between filter systems}
 \label{sect:observations:colour correction method}
 
-ULTRACAM and HiPERCAM use an SDSS-\emph{like} filter system with higher efficiency bandpasses, referred to as Super SDSS. There are three relevant photometric paths:
+ULTRACAM and HiPERCAM use an SDSS-\emph{like} filter system with higher efficiency bandpasses, referred to as Super SDSS. There are three relevant photometric systems:
 \begin{itemize}
 \item SDSS filters, $u', g', r', i', z'$;
 \item ULTRACAM/ULTRASPEC SDSS-like, $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}, z_{\rm reg}$;
@@ -177,7 +180,7 @@ ULTRACAM and HiPERCAM use an SDSS-\emph{like} filter system with higher efficien
 \end{itemize}
 
 Note that we have no $z$ band observations, so the $z$ band is omitted hereafter.
-We aim to place our photometery in the SDSS $u'g'r'i'$ system, as this is the system later used by the white dwarf atmospheric models. The $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}$\ filters were sufficiently similar to standard SDSS filters that the uncorrected magnitudes of standard reference stars from \citet{smith2002} could be used to calibrate absolute photometery without issue. However, with the new filters, there was concern that the different shape of the sensitivity curves, particularly in the $u'$\ band, differ enough from the standard filters to cause issues with our photometric calibration. Figure~\ref{fig:sdss vs super filters} illustrates the change in throughput between the SDSS photometric system, and the Super SDSS filters, on ULTRACAM on the NTT.
+We aim to place our photometery in the SDSS $u'g'r'i'$ system, as this is the system later used by the white dwarf atmospheric models, and allows data from different instruments to be either binned together, or modelled simultaneously c.f. \S\ref{sect:modelling:optimising eclipse model parameters}. The $u_{\rm reg}, g_{\rm reg}, r_{\rm reg}, i_{\rm reg}$\ filters were sufficiently similar to standard SDSS filters that the uncorrected magnitudes of standard reference stars from \citet{smith2002} could be used to calibrate absolute photometery without issue. However, with the new filters, there was concern that the different shape of the sensitivity curves, particularly in the $u'$\ band, differ enough from the SDSS filters to cause issues with our photometric calibration. Figure~\ref{fig:sdss vs super filters} illustrates the change in throughput between the SDSS photometric system, and the Super SDSS filters, on ULTRACAM on the NTT.
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/three_cvs_with_weird_colours/GeneralFigs/bandpass_diffs_SDSS_dots_UCAMNTT_solid.pdf}
@@ -185,24 +188,24 @@ We aim to place our photometery in the SDSS $u'g'r'i'$ system, as this is the sy
     \label{fig:sdss vs super filters}
 \end{figure}
 
-To perform the colour corrections, the following equation for the magnitude of a star was used, using the $g'$\ band as an example:
+To perform the colour corrections, Equation~\ref{eqn:observations:basic magnitude equation} for the magnitude of a star was used with the addition of a colour term. Using the $g'$\ band as an example:
 \begin{equation}
-    \label{eqn:gen magnitudes}
+    \label{eqn:observations:magnitude with colour term}
     g' = g_{\rm inst} + \chi k_{\rm ext} + g_{\rm zp} + c_{\rm g, sup}(g'-r')
 \end{equation}
 where $g_{\rm zp}$\ is the zero point, $g_{\rm inst} = -2.5 \rm log(ADU_{\rm exp}/{\it t}_{\rm exp})$
 for an exposure time of $t_{\rm exp}$, and $c_{\rm g, sup}$\ is the colour term correction gradient. In theory, the atmospheric extinction term also has some colour dependency, as extinction varies with wavelength. However, the effect is negligible between these photometric systems, so it is omitted.
 
-The optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM and HiPERCAM components in the optical path. Precomputed stellar models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the \teff\ and \logg\ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$, spanning from \logg $= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which was then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with \logg$=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to asses the impact of the different spectral shape on the resulting colour terms.
+The optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM and HiPERCAM components in the optical path. Precomputed stellar models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the \teff\ and \logg\ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$, spanning from \logg $= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which were then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with \logg$=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to assess the impact of the different spectral shape on the resulting colour terms.
 
-The colour terms between the SDSS and Super SDSS systems were then synthesised, e.g., $g'-g_{\rm sup}$, on ULTRACAM and HiPERCAM for each model atmosphere. These data were plotted against synthesised SDSS colours, i.e. $(u'-g')$, $(g'-r')$, $(g'-i')$, and a straight line was fit to the colour relationship. In the example case of $g'-g_{\rm sup}$, this would be
+The colour terms between the SDSS and Super SDSS systems were then synthesised, e.g., $g'-g_{\rm sup}$, on ULTRACAM and HiPERCAM for each model atmosphere. These data were plotted against synthesised SDSS colours, i.e. $(u'-g')$, $(g'-r')$, $(g'-i')$, and a straight line was fit to the colour relationship for the combined dataset of both white dwarf and main sequence stars. In the example case of $g'-g_{\rm sup}$, this would be
 \begin{align*}
     % g' &= g_{\rm sup} + g_{\rm zp} + c_{\rm g, sup}(g'-r') \\
     g' - g_{\rm sup} &= g_{\rm zp} + c_{\rm g, sup}(g'-r')
 \end{align*}
 These relationships are shown for HiPERCAM in Figure~\ref{fig:observations:ULTRACAM colour corrections} for all four Super SDSS filters used to observe these CVs, and Table~\ref{table:observations:all ULTRACAM colour corrections} and Table~\ref{table:observations:all HiPERCAM colour corrections} contain the coefficients of each colour term correction for both HiPERCAM and ULTRACAM.
-$(u'-g')$\ was used to correct $u$\ magnitudes, $(g'-r')$\ was used to correct $g$\ and $r$\ magnitudes, $(g'-i')$\ was used to correct the $i$\ band.
-These colour corrections are not generally the same for main sequence stars and white dwarfs, though the colours of the white dwarfs presented in this work are all such that the discrepancy is on the order of a few percent, and is considered negligible.
+When processing ULTRACAM data, $(u'-g')$\ was used to correct $u$\ magnitudes, $(g'-r')$\ was used to correct $g$\ and $r$\ magnitudes, $(g'-i')$\ was used to correct the $i$\ band.
+These colour corrections are not generally the same for main sequence stars and white dwarfs, though the colours of the CVs presented in this work are all such that the discrepancy is on the order of a few percent, and is considered negligible.
 
 \noindent\begin{minipage}{\linewidth}
     \centering
@@ -233,7 +236,7 @@ These colour corrections are not generally the same for main sequence stars and 
     \end{tabular}
 
     \includegraphics[width=\textwidth]{figures/observations/colour_term_tracks_UCAM.pdf}
-    \captionof{figure}{The difference between the classic SDSS photometric system, and the ULTRACAM SuperSDSS filters on the NTT, as a function of SDSS colours, are calculated for model atmospheres. {\bf Red points} are Koester white dwarf models, {\bf black points} are Phoenix main sequence model atmospheres, and the {\bf blue line} is the best fit straight line to both datasets. When applying colour corrections, the highlighted relations were used.}
+    \captionof{figure}{The difference between the classic SDSS photometric system, and the ULTRACAM SuperSDSS filters on the NTT, as a function of SDSS colours, are calculated for model atmospheres. {\bf Red points} are Koester white dwarf models, {\bf black points} are Phoenix main sequence model atmospheres, and the {\bf blue line} is the best fit straight line to the combination of both datasets. When applying colour corrections, the highlighted relations were used.}
     \label{fig:observations:ULTRACAM colour corrections}
 \end{minipage}
 
@@ -275,7 +278,7 @@ These colour corrections are not generally the same for main sequence stars and 
 \label{sect:comparison star mag calc}
 
 The stars in the target frame often do not have known brightnesses in the SDSS photometric system, and so this must be determined by observation. The network of SDSS photometric standards provided by \citet{smith2002} are used as calibrating objects, with robust, accurate known magnitudes. By observing a flux standard during clear conditions, the comparison stars' magnitude can then be calculated from a similarly clear observation.
-Equation \ref{eqn:gen magnitudes} was used to calculate the zero points of the telescope/instrument combination in each band from a standard star observation.
+Equation~\ref{eqn:observations:basic magnitude equation} was used to calculate the zero points of the telescope/instrument combination in each band from a standard star observation.
 
 The comparison star magnitudes were then calculated from observations.
 Since the colour term corrections are dependent on SDSS colours, an iterative approach was used to converge on these values.
@@ -290,7 +293,7 @@ Initially, $u',g',r',i'$\ magnitudes are set equal to the instrumental magnitude
 
 
 \subsection{Producing a flux-calibrated target lightcurve}
-\label{sect:flux calibrating the lightcurve}
+\label{sec:observations:flux calibrating the lightcurve}
 
 Finally, the target lightcurves can be calculated. Broadly, this encompasses two processes: the target star lightcurve must be corrected for transparency variations, and then converted from ADU counts to calibrated flux.
 As the aim is to produce a flux-calibrated lightcurve in the SDSS photometric system, from observations using a significantly different photometric system, the simple ADU ratio between the target and comparison is insufficient.
