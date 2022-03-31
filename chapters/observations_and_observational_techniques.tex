@@ -317,7 +317,7 @@ where $K^{t,c} = 10^{-0.4c_{\rm g, sup}\big((g'-r')^t - (g'-r')^c\big)}$.
 This accounts for differences in wavelength response between the two systems when calculating the flux ratio, and is applied to each frame. The $(g'-r')^t$\ magnitudes are calculated using a sigma-clipped mean instrumental magnitudes computed from all frames in the observation. In practice, the factor $K^{t,c}$\ varies from $\sim 1.0 - 1.1$\ for our observations.
 
 While developing this correction method, some verification tests were performed.
-ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. In all cases, the flux-calibrated lightcurves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
+ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. Finally, AY For provided a case where the SDSS magnitudes of the comparison stars were known {\it a priori}, as the field has been observed in the PANSTARRS survey. The calibrated comparison star magnitudes using the technique provided here are within ~2\% of the PANSTARRS magnitudes, indicating a reasonable calibration. In all cases, the flux-calibrated lightcurves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
 
 We add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature. This is a practice established by \citet{McAllister2019}, to account for possible systematic error in flux calibration and modelling.
 
@@ -325,7 +325,7 @@ We add a 3\% systematic error in quadrature to the white dwarf fluxes when fitti
 \section{Catalogue of observations}
 \label{sect:observing:observation catalogue}
 
-The observations analysed in this work span the full decade from 2011, through to 2021, and have been taken from multiple sites as the instruments move from telescope to telescope. To aid with the readability, a key is provided in Table~\ref{tab:observation acronyms} of the acronyms used for instruments and telescopes.
+The observations analysed in this work span the full decade from 2011, through to 2021, and have been taken from multiple sites as the instruments move from telescope to telescope. To aid with the readability, a key is provided in Table~\ref{tab:observation acronyms} of the acronyms used for instruments and telescopes.\todo{Add a binning key to the observations tables.}
 
 \begin{table}
     \centering
@@ -355,6 +355,7 @@ The observations analysed in this work span the full decade from 2011, through t
     \input{observing_log_tables/CSS090102.tex}
     \input{observing_log_tables/CSS090419.tex}
     \input{observing_log_tables/CSS090622.tex}
+    \input{observing_log_tables/MASOTJ0014.tex}
     \input{observing_log_tables/OGLE82.tex}
     \input{observing_log_tables/SDSS0748.tex}
     \input{observing_log_tables/SSSJ0522-3505.tex}
