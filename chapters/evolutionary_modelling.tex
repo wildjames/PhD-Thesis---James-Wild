@@ -1,0 +1,51 @@
+\label{chpt:results:evolutionary modelling} % for referencing this chapter elsewhere, use \ref{chpt:label}
+\lhead{\emph{Inferring mass loss rate from donor properties}} % This is for the header on each page - perhaps a shortened title
+
+\section{Results}
+Overall, there are 30 systems with eclipse-modelled characterisations available for use.
+However, not all are suitable; as detailed in \S\ref{sect:modelling:MESA massloss allowable mass range}, the donor mass range for which modelling is possible is $0.08 M_\odot < M_{\rm donor} < 0.20 M_\odot$.
+Applying this cut to the data leaves 20\todo{21 if SDSSJ1524 is usable - it probably is by the lightcurves?} systems.
+The properties of these donors, and their inferred $\dot M$, is given in Table~\ref{table:results:mdot modelling}. Note that no errors are given, as the inferred values of $\dot M$ are dominated by systematic uncertainty, rather than the statistical error arising from the uncertainty of the mass and radius.
+
+\begin{table*}
+    \centering
+    \caption{The inferred mass loss rates, $\dot M$, for eclipse-modelled CVs. For the Source column, `M' are systems modelled by \citet{McAllister2019}, and `W' are systems contained in Chapter~\ref{chpt:results:characterisation of 12 new CVs}.}
+    \label{table:results:mdot modelling}
+    \begin{tabular}{ccccc}
+        \hline \\
+        {\bf System Name:}  & \textbf{$M_{\rm donor}$}  & \textbf{$R_{\rm donor}$}  & \textbf{$\log_{10}(\dot M,\ M_\odot / {\rm yr})$} & Source\\
+        \hline \hline \\
+        CSS080623           & $0.081\pm0.005$           & $0.127\pm0.002$           & $ -10.342853$                                     & M \\
+        CSS110113           & $0.105\pm0.007$           & $0.149\pm0.003$           & $ -10.272049$                                     & M \\
+        OY Car              & $0.093\pm0.004$           & $0.138\pm0.001$           & $ -10.278228$                                     & M \\
+        SDSS 0901           & $0.138\pm0.007$           & $0.182\pm0.003$           & $ -10.528573$                                     & M \\
+        SDSS 1006           & $0.370\pm0.060$           & $0.457\pm0.026$           & $  -9.100121$                                     & M \\
+        SDSS 1152           & $0.094\pm0.016$           & $0.147\pm0.006$           & $ -10.066093$                                     & M \\
+        SSS100615           & $0.083\pm0.005$           & $0.127\pm0.002$           & $ -10.388200$                                     & M \\
+        ASASSN-15pb         & $0.147\pm0.008$           & $0.209\pm0.003$           & $  -9.997434$                                     & W \\
+        AY For              & $0.106\pm0.005$           & $0.161\pm0.002$           & $  -9.911606$                                     & W \\
+        MASTER OT J0014     & $0.122\pm0.006$           & $0.165\pm0.002$           & $ -10.273967$                                     & W \\
+        OGLE82              & $0.131\pm0.003$           & $0.169\pm0.001$           & $ -11.688480$                                     & W \\
+        SDSS J0748          & $0.085\pm0.010$           & $0.127\pm0.005$           & $ -10.439275$                                     & W \\
+        ASASSN-14hq         & $0.097\pm0.002$           & $0.156\pm0.001$           & $  -9.894745$                                     & W \\
+        CTCV 1300           & $0.166\pm0.006$           & $0.211\pm0.002$           & $-$                                               & M \\
+        DV UMa              & $0.187\pm0.012$           & $0.215\pm0.005$           & $-$                                               & M \\
+        IY UMa              & $0.141\pm0.007$           & $0.177\pm0.002$           & $-$                                               & M \\
+        SSS130413           & $0.140\pm0.012$           & $0.163\pm0.004$           & $-$                                               & M \\
+        V713 Cep            & $0.176\pm0.018$           & $0.208\pm0.005$           & $-$                                               & M \\
+        Z Cha               & $0.152\pm0.005$           & $0.182\pm0.002$           & $-$                                               & M \\
+        ASASSN-14kb         & $0.133\pm0.003$           & $0.164\pm0.001$           & $-$                                               & W \\
+        \hline
+    \end{tabular}
+\end{table*}
+
+
+\subsection{Negative inflations}
+
+Note that not all systems in Table~\ref{table:results:mdot modelling} are assigned a $\dot M$. This is due some donors being smaller than the Brown relation, adjusted for non-spherical geometry, resulting in negative inflation that cannot be achieved by the introduction of mass loss.
+This is likely a consequence of the significant scatter in the M dwarf $M - R$ relationship, which is unavoidable with this technique.
+
+\section{Mass loss from white dwarf effective temperatures}
+
+The characterised CVs also have the white dwarf temperature loosely constrained, allowing the short-term mass loss rate to also be inferred as suggested in \S\ref{}
+

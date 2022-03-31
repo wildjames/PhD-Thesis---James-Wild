@@ -1,4 +1,4 @@
-\lhead{\emph{Modelling, techniques, and methods}} % This is for the header on each page - perhaps a shortened title
+\lhead{\emph{Methodology}} % This is for the header on each page - perhaps a shortened title
 \label{chpt:modelling and techniques}
 
 The primary goal of this thesis is to characterise as many CVs as possible, meaning to find the donor mass and radius, white dwarf mass and radius, and the orbital separation between the two bodies. The composition of this model is described in \S\ref{sect:modelling:lightcurve modelling}.
@@ -453,6 +453,10 @@ Changes in the disc radius and brightness profile, and bright spot parameters ca
 
 The top level of the model provides the core parameters, which are unchanging between all observing bands and constant across our observations: $q,\ R_\mathrm{WD}/a$, and $\Delta\phi$. We assume the white dwarf and donor fluxes do not change on the timescale of our observations, and so these variables, along with the limb darkening coefficient of the white dwarf, are shared between all eclipses observed with the same filters. The bottom level holds parameters that can vary quickly enough to change between eclipses, i.e. parameters describing the accretion disc and bright spot. By handling parameters this way, we maximise the amount of data informing important variables. We also somewhat reduce the number of free parameters, which aids in model fitting, but the chief justification for the hierarchical approach is that it ensures consistency between eclipses - something not guaranteed when fitting eclipses individually.
 
+Where possible, data were also binned together. Ideally, this has three beneficial effects: the number of eclipses, and therefore the number of parameters, is reduced; binning increases the signal-to-noise ratio of the data; and as the flickering component is not consistent between eclipses, should reduce the degree of flickering present in the data. However, as CV eclipses often have variable bright spot and disc contributions, it is frequently not reasonable to combine eclipses. Varying bright spot and eclipse features will become smeared out when binned, corrupting crucial elements of the eclipse.
+This smearing effect is also subtly present, even in data that are consistent. As a bin width must be chosen that will not precisely align with the integration times of the photometric data, binning will always introduce a small blurring of timing data, and whilst this is a small effect, it can significantly alter the white dwarf ingress and egress features.
+Therefore, binning is only done when data are sufficiently similar, and is treated with caution.
+
 
 
 \section{Evolutionary modelling}
@@ -635,3 +639,27 @@ However, while this may skew an individual system, on average the inferred mass 
 
 Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to optimise mass loss, similarly to optimising $f_{\rm spot}$.
 To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
+
+\subsection{Mass loss from the white dwarf properties}
+\label{sect:modelling:mdot from WD temperature}
+
+The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more fully by \citet{townsley2009}.
+In brief, as this material strikes the surface of the white dwarf the kinetic energy is converted to thermal energy, heating the white dwarf. The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
+The short-term average mass loss rate, $<\dot M>$, is ultimately a function only of white dwarf mass, and temperature, given in Equation~\ref{eqn:modelling:Mdot from WD temperature}.
+\begin{equation}
+    \label{eqn:modelling:Mdot from WD temperature}
+    T_{\rm eff} = 1.7 \times 10^4 {\rm K} \bigg( \frac{<\dot M>}{10^{-10} M_\odot {\rm yr}^{-1}} \bigg)^{1/4} \bigg( \frac{M_{\rm wd}}{0.9 M_\odot} \bigg)
+\end{equation}
+
+However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$, as opposed to the $\rm \sim Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$.
+The white dwarf temperature approach does hold a major advantage, however, in that the `zero $\dot M$' $T_{\rm eff}$ is more well-known and commonly accepted than the `zero $\dot M$' $R_{\rm donor}$ required by this newer method.
+
+Recently, \citet{Pala2021} used spectroscopically measured $T_{\rm eff}$ and $M_{\rm wd}$ to infer the $\dot M$ of 65 CVs, the result of which is reproduced in Figure~\ref{fig:modelling:pala2022 fig13}.
+The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have AML rates, and thus lower $\dot M$.
+As the eclipse modelling of CVs produces a measure of $T_{\rm eff}$, the systems analysed for this thesis can be processed with {\it both} techniques, and have their results compared.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/pala_2022_fig13.png}
+    \caption{Reproduced from \citet{Pala2021}, Figure~13. The subset of modelled systems, with $P < 3{\rm hr}$ are shown. {\bf Circles} and {\bf stars} are pre- and post-period bounce systems derived by \citet{Pala2021}, and {\bf diamonds} and {\bf pentagons} are pre- and post-period bounce systems taken from the literature. {\it Left}: The $T_{\rm eff}$ is plotted against $M_{\rm wd}$, and no correlation can be seen. {\it Right}: $\log<\dot M>$ is plotted against $M_{\rm wd}$, though now the data are correlated along the white dwarf mass-radius relationship assumed by \citet{Pala2021}, $M_{\rm wd} \propto R_{\rm wd}^1.8$. The {\bf black line} shows the rough relationship, and guides the eye.}
+    \label{fig:modelling:pala2022 fig13}
+\end{figure}
