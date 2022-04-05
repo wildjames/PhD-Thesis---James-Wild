@@ -1,15 +1,13 @@
-\lhead{\emph{Methodology}} % This is for the header on each page - perhaps a shortened title
+\lhead{\emph{Methods}} % This is for the header on each page - perhaps a shortened title
 \label{chpt:modelling and techniques}
 
-The primary goal of this thesis is to characterise as many CVs as possible, meaning to find the donor mass and radius, white dwarf mass and radius, and the orbital separation between the two bodies. The composition of this model is described in \S\ref{sect:modelling:lightcurve modelling}.
-These metrics provide valuable probes of CV evolution \citep{knigge2006}, which is explored in \S\ref{sect:modelling:evolutionary modelling}, with a specific goal of inferring mass loss rates of donor stars from observations, which is a key element of CV evolution that is poorly understood below the period gap (as discussed in \S\ref{sect:introduction:modern AML}).
-This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and inferring the long-term mass loss rate of a system from its donor properties.
-In addition, since the models used in this analysis are computationally expensive and require large parameter spaces, the choice of fitting algorithm is important. The majority of the parameter optimisation done in this work uses a type of Markhov Chain Monte Carlo (MCMC) technique, and this is described in detail in \S\ref{sect:modelling:parameter optimisation of many variables}, before discussing the models themselves.
+This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and using MESA models to infer the long-term mass loss rate of a system from its donor properties.
+Since the models used in this analysis are computationally expensive and require large parameter spaces, the choice of fitting algorithm is important. The majority of the parameter optimisation done in this work uses a type of Markhov Chain Monte Carlo (MCMC) technique, and this is described in detail in \S\ref{sect:modelling:parameter optimisation of many variables}, before discussing the models themselves.
 
 
 \section{Parameter optimisation of many variables}
 \label{sect:modelling:parameter optimisation of many variables}
-Frequently in science, a model must have its input parameters fit to data. For models with few input parameters and well-behaved evaluation metrics (i.e. goodness-of-fit varies smoothly with input parameters), optimisation is relatively easy, but this is often not the case; for example the eclipse modelling portion of this work (\S\ref{sect:modelling:eclipse modelling}) has 18 parameters for a single eclipse, and fitting a full dataset frequently involves fitting  100+ parameters. To make matters worse, the eclipse model is fairly expensive to compute in large numbers, making a full exploration of the parameter space impractical. Rather, we use MCMC.
+Frequently in science, a model must have its input parameters fit to data. For models with few input parameters and well-behaved evaluation metrics (i.e. goodness-of-fit varies smoothly with input parameters), optimisation is relatively easy, but this is often not the case; for example the eclipse modelling portion of this work (\S\ref{sect:modelling:eclipse modelling}) has 18 parameters for a single eclipse, and fitting a full dataset frequently involves fitting  100+ parameters. To make matters worse, the eclipse model is fairly expensive to compute in large numbers, making a full exploration of the parameter space impractical.
 
 The MCMC method is now a well-established tool in astronomy. It is robust, efficient when used properly, and yields the probability distribution of the variables being optimised even when the distributions are not well-described by simple functions. This has led to MCMC often being the method of choice when fitting models.
 This section provides a working knowledge of MCMC, but for an in-depth introduction and review of the technique and its various sub-types see \citet{sharma2017}.
@@ -28,7 +26,7 @@ $q(\theta|I)$ is the probability of the model being valid, given some prior info
     \label{eqn:modelling:bayes english}
     \rm Posterior = \frac{Likelihood \times Prior}{Evidence}
 \end{equation}
-In Bayesian inference, the goal is to find the posterior distribution of the parameters of a model, given some data and, if possible, prior information.
+In Bayesian inference, the goal is to find the posterior distribution of the parameters of a model, given some data and any prior information.
 
 
 \subsection{MCMC optimisation}
@@ -91,10 +89,12 @@ a typical rule-of-thumb is to use $2n$ walkers for $n$ parameters being optimise
 \subsubsection{Parallel tempering}
 \label{sect:modelling:parallel tempering}
 
+Parallel tempering is an additional element of an MCMC sampler that helps in more fully exploring the parameter space in more complex models, while also being more capable of characterising posterior distributions in the case of complex correlations between parameters.
+
 In metallurgy, a metal can be toughened by relieving its internal stresses through tempering, a treatment in which a metal is first heated to a high temperature, then slowly cooled.
 While the metal is at a high temperature, impurities are able to diffuse throughout the crystal structure of the metal and explore possible crystallisation locations. As the metal slowly cools, impurity atoms are gradually more and more attracted to areas of the crystal that exert less stress on the material, until the metal is fully cooled and the majority of atoms have found areas of local minima in stress potential.
 
-The ensemble MCMC can take analogy from this `hot' exploration phase and `cool' settling phase \todo{I need a reference for parallel tempering...}. This is done by running several parallel ensembles, that each have a different `temperature' between 1 and $\infty$. Each ensemble samples a modified posterior, that follows $\pi_T(\Theta)$;
+The ensemble MCMC can take analogy from this `hot' exploration phase and `cool' settling phase\todo{I need a reference for parallel tempering...}. This is done by running several parallel ensembles, that each have a different `temperature' between 1 and $\infty$. Each ensemble samples a modified posterior, that follows $\pi_T(\Theta)$;
 \begin{equation}
     \pi_T(\Theta) = [\mathcal{L}(\Theta)^\frac{1}{T}] q(\Theta)
 \end{equation}
@@ -119,6 +119,7 @@ Crucial to both observing and modelling an eclipse is a good knowledge of the or
 where $T_{\rm ecl}$ is the time of mid-eclipse, $T_0$ is the mid-eclipse time of the zeroth eclipse, and $E$ is the eclipse number. Accurately calculating $T_{\rm ecl}$ is important to scheduling observations of a system, and $P_{\rm orb}$ is a crucial to the eclipse modelling.
 
 As observations are often separated by several months or even years, an error in $P_{\rm orb}$ of even $\sim 0.1$ seconds can accumulate to give significantly inaccurate predicted eclipse times. This need for precision also requires the definition of {\it where} a time is recorded from, as the delay introduced by the light travel time from one side of the earth's orbit to the other can significantly offset an observed time. All eclipse times presented in this thesis are given in the Barycentric Modified Julian Date (BMJD), which is the time of eclipse as measured from the centre of mass of the solar system. Note that this is different to the heliocentric MJD often seen in the literature, and where heliocentric literature values are used, they are converted to BMJD.
+Two timescales are relevant: UTC, in which a clock ticks at the rate of an earth-bound observer; and TDB, in which a clock ticks at the rate of an observer at the barycentre of the solar system. Literature values, and the clocks in the observing cameras, use UTC time. This is converted to TDB during photometric calibration, for consistency with the BMJD times used.
 
 \subsection{Finding eclipse times}
 \label{sect:modelling:finding eclipse times}
@@ -165,14 +166,14 @@ This is achieved by setting $N = -(\sigma_{\rm T0}\sigma_{\rm P})/(\sigma_{\rm P
 with no cross correlation, in theory. In practice, as $E$ must be rounded to an integer, some residual cross-correlation persists, but is minimised.
 
 \newpage
-\section{Characterising a CV}
+\section{Modelling CV eclipse lightcurves}
 \label{sect:modelling:lightcurve modelling}
 
 \begin{table}
     \centering
     \caption{The various symbols used in this chapter, and their meanings.}
     \label{table:modelling:parameter key}
-    \begin{tabular}{cc}
+    \begin{tabular}{cl}
         \hline
         Symbol & Parameter \\
         \hline
@@ -201,19 +202,19 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
     \end{tabular}
 \end{table}
 
-To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible, and compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
+To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
 
 CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, McAllister2017, McAllister2019}. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
 Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
 The white dwarf mass-radius relationship was recently tested by \citet{parsons2017}, and found to be a reasonable assumption.
 Assuming that the mass stream following a ballistic trajectory appears to be a reasonable assumption, as the thermal velocity of the donor surface is orders of magnitude lower than the orbital velocity of the two stars.
-However, the most convincing argument to the validity of these assumptions are comparative studies, showing good consistency between eclipse modelling and other techniques \citep{tulloch2009,copperwheat2012,savoury2012}.
+However, the most convincing argument to the validity of these assumptions are comparative studies, showing good consistency between eclipse modelling and other techniques \citep{tulloch2009,copperwheat2012,savoury2012,sion2022}.
 
-The rough outline of the modelling process is described here, but is detailed fully in \S\ref{sect:modelling:eclipse modelling}. Throughout, symbols are typically used when referring to model and system parameters, and a key is provided in Table~\ref{table:modelling:parameter key}
-Radii are found by assuming that the secondary star completely fills its Roche lobe, which is required for mass transfer and ensures that the donor radius is solely a function of mass ratio, $q$, and orbital separation, $a$, c.f.~Equation~\ref{eqn:introduction:eggleton approximation}. The white dwarf eclipse width is set by the width of the donor, $a$, inclination, $i$, and $q$ \citep{bailey1979}.
+The rough outline of the modelling process is described here, but is detailed fully in \S\ref{sect:modelling:eclipse modelling}. Throughout, symbols are typically used when referring to model and system parameters, and a key is provided in Table~\ref{table:modelling:parameter key}.
+Radii are found by assuming that the secondary star completely fills its Roche lobe, which is required for mass transfer and ensures that the donor radius is solely a function of mass ratio, $q$, and orbital separation, $a$, c.f.~Equation~\ref{eqn:introduction:eggleton approximation}.
+The white dwarf eclipse width is set by the width of the donor, $a$, inclination, $i$, and $q$ \citep{bailey1979}.
 
-Assuming that the mass stream between the two stars follows a ballistic trajectory puts the stream on a calculable path, determined by $q$ \citep{Lubow1975}. This allows the location of the bright spot to be fixed in space, as the point at which this path intersects the outer edge of the accretion disc. Therefore, the phase of the bright spot ingress and egress is a function of $q$, and disc radius.
-
+Assuming that the mass stream between the two stars follows a ballistic trajectory puts the stream on a calculable path, determined by $q$ \citep{Lubow1975}. This allows the location of the bright spot to be fixed in space, as the point at which this path intersects the outer edge of the accretion disc. Therefore, the phase of the bright spot ingress and egress is a function of $q$, $i$, $\Delta\phi$, and disc radius.
 By assuming that the white dwarf is unobscured, the duration of white dwarf ingress and egress are dependent on the white dwarf radius and inclination.
 
 Four components of the eclipse model are the four component fluxes, $F_{\rm wd}$, $F_{\rm donor}$, $F_{\rm disc}$, $F_{\rm bs}$.
@@ -238,7 +239,7 @@ Note that this model requires simultaneously fitting many variables simultaneous
 \label{sect:modelling:eclipse modelling}
 
 Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy. Notably the bright spot emits flux directionally, so beaming must also be accounted for in the model.
-The anatomy of a CV eclipse lightcurve is a sequence of five events, that occur in the following order:
+The anatomy of a CV eclipse lightcurve is a sequence of five events, that usually occur in the following order:
 \begin{enumerate}
     \setlength\itemsep{0em}
     \item a pre-eclipse hump is often seen as the bright spot rotates to point at the observer
@@ -249,8 +250,6 @@ The anatomy of a CV eclipse lightcurve is a sequence of five events, that occur 
 \end{enumerate}
 Figure\todo{Make a figure for this} shows a typical lightcurve, with these events marked.
 
-At this stage of modelling, parameters are not yet in SI units.
-Rather, the phase-folded lightcurve is generated, causing parameters to be scaled. $q$ is fit instead of masses, and distances are scaled to the distance from the white dwarf primary to the $L_1$ point, $x_{l1}$. Distance to the system is also not yet accounted for, so apparent flux is used rather than luminosity.
 A single eclipse is described by 18 parameters:
 \begin{itemize}
     \setlength\itemsep{0em}
@@ -273,11 +272,11 @@ The white dwarf is modelled as a luminous disc, with a total surface brightness 
     \frac{I_l}{I_0} = 1 - u_{\rm ld}(1 - {\rm cos}\beta)
 \end{equation}
 where $I_0$ is the intensity at the centre of the disc, and $I_l$ is the intensity at a limb. $\beta$ is the angle between the line normal to the surface of the white dwarf, and the observer's line of sight.
-However, the observations are not precise enough to constrain $u_{\rm ld}$, and this is functionally a free parameter.
+However, the observations are not precise enough to constrain $u_{\rm ld}$, so a Gaussian prior derived from the white dwarf $T_{\rm eff}$ and $\log(g)$ is used.
 
 \subsubsection{The donor star}
 
-The secondary star does not become obscured during an eclipse, but there is still some variation in its brightness. The donor is not spherical, so a small ellipsoidal variation is seen as it rotates to expose more or less of its surface to the observer. As a result, the donor is modelled as a uniformly bright disc with total surface brightness $F_{\rm donor}$, and a modulation to describe the changing observable surface area.
+The secondary star does not become obscured during an eclipse, but there is still some variation in its brightness. The donor is not spherical, so a small ellipsoidal variation is seen as it rotates to expose more or less of its surface to the observer. As a result, the donor is modelled as a limb darkened, and gravity darkened disc with total surface brightness $F_{\rm donor}$, and a modulation to describe the changing observable surface area.
 
 \subsubsection{The accretion disc}
 
@@ -285,8 +284,8 @@ The accretion disc is modelled as a series of annular rings about the white dwar
 
 \subsubsection{The bright spot}
 
-The bright spot model is not physically motivated, but rather is chosen to be able to reproduce a large range of bright spot eclipses. The only pertinent detail is its times of ingress and egress.
-It is modelled as a strip of flux extending in both directions tangentially from the edge of the disc, with a defined brightness profile and overall flux. The strip intensity falls off exponentially, described by the equation
+The bright spot model is not physically motivated, but rather is chosen to be able to reproduce a large range of bright spot eclipses.
+It is modelled as a strip of flux extending from the edge of the disc, with a defined brightness profile and overall flux. The strip intensity falls off exponentially, described by the equation
 \begin{equation}
     I_{\rm X} \propto \bigg ( \frac{X}{S} \bigg )^Y \cdot {\rm exp} \bigg [ - \bigg (\frac{X}{S} \bigg )^Z \bigg]
 \end{equation}
@@ -298,7 +297,7 @@ Some fraction of the light is beamed, and the rest, $f_{\rm is}$, is emitted iso
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/modelling/bright_spot_schematic.pdf}
-    \caption{Showing a schematic of the bright spot model. The {\bf lower dashed line} joins the centres of the white dwarf and donor stars, and the {\bf upper dashed line} runs parallel to it, intersecting the bright spot location. The {\bf straight red line} is one half of the flux-emitting strip and has a profile exponent $Y$, and the {\bf arrow} shows the direction of light emission, at an angle $\theta_{\rm yaw}$ from the normal. The {\bf blue line} shows the other half of the flux-emitting strip, and has the profile exponent $Z$}
+    \caption{Showing a schematic of the bright spot model. The {\bf lower dashed line} joins the centres of the white dwarf and donor stars, and the {\bf upper dashed line} runs parallel to it, intersecting the bright spot location. The {\bf straight red line} is one half of the flux-emitting strip and has a profile exponent $Y$, and the {\bf arrow} shows the direction of light emission, at an angle $\theta_{\rm yaw}$ from the normal.}
     \label{fig:modelling:bright spot schematic}
 \end{figure}
 
@@ -309,17 +308,17 @@ This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}
 
 \subsubsection{Choice of priors}
 
-The choice of prior is important in Bayesian inference, but this modelling has very little prior knowledge on a system. The prior distributions used were generally uniform and span the numerically allowed range\footnote{e.g.\ angles are limited to be between 0 and $2\pi$, and fluxes range from 0 to the peak flux of the eclipses.}, with a few exceptions.
+The choice of prior is important in Bayesian inference, but we have very little prior knowledge on a system. The prior distributions used were generally uniform and span the numerically allowed range\footnote{e.g.\ angles are limited to be between 0 and $2\pi$, and fluxes range from 0 to the peak flux of the eclipses.}, with a few exceptions.
 
-As it is unconstrained by data, $u_{\rm ld}$ uses a Gaussian prior centred on 0.3 with a width of 0.1.
+As it is unconstrained by data, $u_{\rm ld}$ initially uses a Gaussian prior centred on 0.3 with a width of 0.1.
 The bright spot scale draws from a log-uniform prior between 0 and 0.2, which favours smaller values, and $\theta_{\rm az}$ is forbidden from values that would cause the bright spot strip to deviate from a tangent to the disc by $>80^\circ$.
-In addition, some combinations of parameters are forbidden in the model. The values of $q$ and $\Delta\phi$ must be such that $i > 90^\circ$ for an eclipse to occur, and the disc radius constrained by the maximum radius before precession becomes a significant effect, $R_{\rm disc} / a < 0.46$.
+In addition, some combinations of parameters are forbidden in the model. The values of $q$ and $\Delta\phi$ must be such that $i \leq 90^\circ$ for an eclipse to occur, and the disc radius is constrained by the maximum radius before precession becomes a significant effect, $R_{\rm disc} / a < 0.46$.\todo{REF}
 
 
 \subsection{Post-processing the eclipse model}
 \label{sect:modelling:post processing the eclipse model}
 
-The eclipse modelling uses proxy variables, so some processing must be done to convert them to `real' values. This is done in two steps. First, a white dwarf temperature and surface gravity are fit to the white dwarf fluxes. Then, the white dwarf temperature and orbital period are combined with the best-fit eclipse model parameters to convert the scaled distances to metres, and mass ratio to the masses of each star, in kilograms.
+The eclipse modelling uses proxy variables, so some processing must be done to convert them to physical values. This is done in two steps. First, a white dwarf temperature and surface gravity are fit to the white dwarf fluxes. Then, the white dwarf temperature and orbital period are combined with the best-fit eclipse model parameters to convert the scaled distances to metres, and mass ratio to the masses of each star.
 
 \subsubsection{Fitting white dwarf colours}
 \label{sect:modelling:fitting white dwarf colours}
@@ -334,7 +333,8 @@ To optimise these four parameters, an affine-invariant MCMC with three levels of
 
 \subsubsection{Conversion of proxy variables to physical parameters}
 \label{sect:modelling:conversion to physical parameters}
-The eclipse model proxy variables are then converted to real values. This is done using the white dwarf as a known quantity, based on white dwarf model atmospheres. Five input variables are needed: $T_{\rm eff}$, $P_{\rm orb}$, $q$, $\Delta \phi$, and $R_{\rm wd} / x_{l1}$.
+The eclipse model proxy variables are then converted to real values.
+Five input variables are needed: $T_{\rm eff}$, $P_{\rm orb}$, $q$, $\Delta \phi$, and $R_{\rm wd} / x_{l1}$.
 
 
 A measure of the white dwarf radius, $R_{\rm wd}$, can be found using Kepler's 3rd law and making the substitutions $r = R_{\rm wd} / a$ and $q = M_{\rm donor} / M_{\rm wd}$.
@@ -349,7 +349,7 @@ $r$ can be found from $R_{\rm wd} / x_{l1}$ by calculating $x_{l1} / a$, which i
 Finding $R_{\rm wd}$ this way requires the white dwarf mass. Fortunately, for a given $T_{\rm eff}$ (which is known from the colour fits, \S\ref{sect:modelling:fitting white dwarf colours}), white dwarfs follow tight theoretical mass-radius relationships \citep{parsons2017}, that can be employed to find the unique $M_{\rm wd},\ R_{\rm wd}$ pair that satisfies both Equation~\ref{eqn:modelling:geometric radius} and the theoretical mass-radius relationship.
 Specifically, a proposed theoretical mass-radius pair is chosen from a model relationship and a value of $R_{\rm wd, calc}$ is calculated from Equation~\ref{eqn:modelling:geometric radius}. If this matches the theoretical value, the mass is valid. Otherwise, the proposed mass is altered accordingly and a new mass-radius pair is checked again until the two agree.
 
-Three white dwarf mass-radius relations were used. First, a solution was searched for using the \citet{wood1995} models, spanning masses of $0.4 - 1.0 M_\odot$.
+Three white dwarf mass-radius relations were used. First, a solution was searched for using the \citet{wood1995} models, spanning masses of $0.4 - 1.0 M_\odot$. The \citet{wood1995} models are preferred, as they use a thicker hydrogen layer that is more appropriate for the accreting CV white dwarfs.
 If no solution could be found, the \citet{panei2000} models were searched, spanning masses from $0.4 - 1.2 M_\odot$.
 Both of these mass-radius relationships account for the white dwarf $T_{\rm eff}$.
 If no solution has been found with these two tracks, the \citet{hamada1961} 0 Kelvin mass-radius relation is checked for solutions. This track spans the largest range in mass, from $0.14 - 1.44 M_\odot$. If no solution is found with the \citet{hamada1961} tracks, the model is considered invalid, though this did not occur for any system in this thesis.
@@ -367,7 +367,7 @@ Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previou
 
 CVs almost always display some amount of stochastic variability, known as flickering. Rather than attempting to model this physically, it is instead treated as correlated noise and characterised with a Gaussian process (GP).
 The application of GPs to capturing flickering was established by \citet{McAllister2017} based on work by \citet{roberts2012} and \citet{gibson2012}.
-The utility of this addition to the eclipse modelling step is a significant improvement in the precision of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key lightcurve features that modelling aims to reproduce, demonstrated by \citet{McAllister2017}.
+The utility of this addition to the eclipse modelling step is a significant improvement in the accuracy of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key lightcurve features that modelling aims to reproduce, demonstrated by \citet{McAllister2017}.
 
 This section is aimed at giving a working knowledge of GPs in the context of characterising flickering, and for more in-depth discussion the reader is directed towards these works. The mathematics below omits error in flux for legibility, but closely similar derivations are possible that include error when calculating the likelihood of a data set.
 
@@ -417,7 +417,7 @@ Here, $r^2$ is a pseudo-radius, and is a function of the distance between the tw
     r^2 = ({\bf t}_i - {\bf t}_j)^{\top} \cdot \Lambda^{-1} \cdot ({\bf t}_i - {\bf t}_j)
 \end{equation}
 Note that the choice of the matrix $\Lambda$ defines how other data in a set affect other data, and can be any square matrix of the same width as $\bf t$. For the GP used in this work, a simple $\Lambda$ is used which has $\lambda$ along the diagonal and 0 elsewhere, making $\lambda$ a kernel scale parameter.
-In this model each $t_i$ is a single time value, making $\Lambda$ a $1\times 1$ matrix with values of $\lambda$ along the `diagonal' -- functionally, in this GP, $r^2 = \lambda \cdot (t_i - t_j)^2$.
+In this model each $t_i$ is a single time value, making $\Lambda$ a $1\times 1$ matrix with values of $\lambda$ along the `diagonal' -- functionally, $r^2 = \lambda \cdot {(t_i - t_j)}^2$.
 
 \subsubsection{Evaluating a model fit with a Gaussian process}
 \label{sect:modelling:GP model evaluation}
@@ -440,9 +440,9 @@ The slightly more complex parameter space that must now be explored, and more co
 \subsection{Hierarchical model structure}
 \label{sect:modelling:optimising eclipse model parameters}
 
-I extend the lightcurve fitting model used by \citet{McAllister2019}, adopting a hierarchical approach to slightly reduce model complexity.
+In this thesis, the lightcurve fitting model used by \citet{McAllister2019} is extended, adopting a hierarchical approach to reduce model complexity.
 
-Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{McAllister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we extend that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
+Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{McAllister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
 
 \begin{figure}
     \centering
@@ -462,83 +462,105 @@ Therefore, binning is only done when data are sufficiently similar, and is treat
 \section{Evolutionary modelling}
 \label{sect:modelling:evolutionary modelling}
 
-Once armed with a robust sample of characterised CVs, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
-If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor reproduced by stellar structure models by the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
+Once armed with a robust sample of CVs donor masses and radii, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
+If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor can be reproduced by stellar structure models with the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-The stellar evolution code used is the MESA codebase, and in order to be confident in any mass loss rates derived this way, two key demonstrations of model accuracy are necessary. However, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of reproducing the canonical \citep{knigge11} donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking \citep{Paxton_2015}.
+The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}. MESA is a one-dimensional stellar evolution model. MESA is highly felxible, due to its use of various `modules', wherein each module supplies the code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics.
+Regarding to CV modelling in particular, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of modelling CV donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking triggered by the donor becoming fully convective \citep{Paxton_2015}.
+\S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and with some small modifications the agreement between MESA and \citet{knigge11} is improved.
 
-First, I demonstrate that MESA can closely reproduce the two \citet{knigge11} donor tracks -- recall from \S\ref{sect:introduction:the missing aml problem} that two such tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by $2.47\times$.
-By default, MESA shuts off magnetic braking when the donor becomes fully convective, a practice which I motivate in \S\ref{sect:introduction:the missing aml problem} to be spurious. Instead, MESA is altered for a fixed magnetic braking cutoff at $0.2 M_\odot$, arbitrarily fixing the donor mass of the period gap in line with \citet{knigge11}.
-In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the amplification of gravitational braking below the period gap. This was used to reproduce the `optimal' track. These two changes alone are enough to reproduce the \citet{knigge11} tracks; Figure~\ref{fig:modelling:MESA can reproduce the K11 tracks} shows how closely this MESA model matches. Note that the small deviation at $\sim 0.07 M_\odot$ is due to MESA switching do a different equation of state regime, and is expected.
-\begin{figure}
-    \centering
-    \includegraphics[width=.9\textwidth]{figures/modelling/compare_K11_withspot_normb_and_1xrmb_fixedcutoff.png}
-    \caption{Showing how well MESA can reproduce the canonical \citet{knigge11} donor tracks. {\bf Solid lines} are MESA tracks, and {\bf dotted lines} are the \citet{knigge11} tracks. {\bf Black} lines have only gravitational braking below the period gap, and {\bf red} lines gave gravitational braking at $2.47\times$ strength.}
-    \label{fig:modelling:MESA can reproduce the K11 tracks}
-\end{figure}
+Note that all MESA models for this thesis were run using version 21.12.1 of the MESA codebase, and M dwarfs use the configuration detailed in \S\ref{sect:modelling:MESA configs}, unless specified otherwise.
 
 To extract mass loss rates, I will go through three steps.
-Firstly, I demonstrate how the radius of a singleton model of a given mass can be tuned to match observations by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
-Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for mass loss rate.
+Firstly, I demonstrate how the radius of a singleton model of a given mass can be tuned to match the M dwarf mass-radius relationship given by \citet{BrownPrep} by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
+Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for present-day mass loss rate.
 Then, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
 % Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
 
 
-\subsection{For what range of masses can we extract mass loss rates?}
-\label{sect:modelling:MESA massloss allowable mass range}
+\subsection{MESA configuration for low-mass M dwarfs}
+\label{sect:modelling:MESA configs}
 
-It is worth evaluating the feasibility of using the radius to extract mass loss rates. Recall from \S\ref{sect:introduction:period minimum and bouncers} the two timescales that govern the response of the donor to mass loss: $\tau_{\rm KH}$ and $\tau_{\dot M}$. These timescales are calculated by
-\begin{align}
-    \tau_{\rm KH} \propto& \frac{M_{\rm donor}^2}{L_{\rm donor} R_{\rm donor}} \\[8pt]
-    \tau_{\dot M} =& \frac{\dot M}{M_{\rm donor}}
-\end{align}
+Broadly speaking, when computing a stellar evolution model one must simply input models of physical processes, describe some initial conditions, and allow the stellar model to evolve over time. However, the physics of stars in not completely understood, and the processes that strongly affect the evolution of a star differs depending on its conditions.
+Whilst some core physics is fixed, MESA provides many options for what physics to apply to a stellar model. MESA has default configuration vales that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
+As such, some tweaks must be made in order to produce accurate donor models.
+Parameters that are not given below are left as the MESA default.
 
-While $\tau_{\rm KH} \ll \tau_{\dot M}$, the donor is able to maintain thermal equilibrium and is indistinguishable from a singleton star of the same mass.
-If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium, and mass loss is fast and adiabatic. The donor is inflated by mass loss, but because the star cannot adjust on thermal timescales, the degree of inflation becomes sensitive to the mass loss \textit{history} of the donor.
-However, calculating the two timescales for CVs reveals that $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
-Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star is still almost able to adjust on thermal timescales, the degree of inflation does \textit{not} depend on the mass loss history. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the long term baseline mass loss rate.
+Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size, and as such, all MESA models presented here assume a solar initial metallicity.
 
-Which regime the donor falls into is mostly a function of $M_{\rm donor}$. As $M_{\rm donor}$ falls, $\tau_{\rm KH}$ begins to rise faster than $\tau_{\dot M}$; Figure~\ref{fig:modelling:how does tauKH and tauMdot vary with donor mass} shows this trend, produced by a MESA model of a CV c.f. \citep{Paxton_2015,Pala2017a}.
-The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ becomes significant at $\sim 0.1 M_\odot$, around the mass the donor enters the fast, adiabatic $\tau_{\rm KH} \gg \tau_{\dot M}$ period bouncer phase c.f. \S\ref{sect:introduction:period minimum and bouncers}.
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/modelling/tau_both_vs_donor_mass_AML000.pdf}
-    \caption{Showing how the two timescales, $\tau_{\rm KH}$ and $\tau_{\dot M}$ vary with donor mass below the period gap in CV donors, as modelled by MESA \citep{Paxton_2015,Pala2017a}.}
-    \label{fig:modelling:how does tauKH and tauMdot vary with donor mass}
-\end{figure}
 
-It would be better to know exactly how much error is introduced by the donor moving out of the $\tau_{\rm KH} \sim \tau_{\dot M}$ regime to draw a more informed mass limit, and this too can be extracted from modelling.
-First, a series of donor-like singleton models were evaluated with varying degrees of mass loss rates, uniformly spaced between $\log (\dot M, M_\odot \mathrm{yr}^-1) = -9.5 \rightarrow -11$.
-Then, a series of MESA CV models were run with gravitational losses amplified by $x = 1 \rightarrow 6$.
-Finally, each model has its radius, $R$, and $\dot M$ extracted at $0.1 M_\odot$. Since the CV models have varying $\dot M$ and the singleton models do not, if $\dot M$ history does not affect radius inflation, the radii between the two sets of models will match. Figure~\ref{fig:modelling:comparing radii at 0.1Msun} shows this, and little divergence between the two sets of radii is visible. However, note that higher rates of mass loss do show a small degree of divergence.
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\textwidth]{figures/modelling/compare_0.1Msun_with_CV_track_K11_fig1.pdf}
-    \caption{Showing the radius and mass loss extracted from MESA models at $0.1 M_\odot$. The {\bf black} line is a series of singleton models with constant mass loss, and the {\bf red} line is a series of CV models with gravitational AML amplified by $x = 1 \rightarrow 6$.}
-    \label{fig:modelling:comparing radii at 0.1Msun}
-\end{figure}
+\subsubsection{Model initialisation}
 
-By plotting the difference between the two sets of models, and repeating the same process for a range of masses, Figure~\ref{fig:modelling:comparing radii over a range of masses} is produced. Now, by looking at what level of divergence historical changes in $\dot M$ induces, we can evaluate what mass range is acceptable. The upper limit on mass must be $0.2 M_\odot$, as this is the enforced mass of the period gap, and for a lower limit I impose an acceptable level of disagreement of $3\%$. It can be seen that the minimum acceptable mass is then $0.08 M_\odot$.
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/modelling/compare_multiple_mass_with_CV_K11_fig1a.pdf}
-    \caption{The inflation of CV model radii, $R_{CV}$, over singleton model radii, $R_S$, from Figure~\ref{fig:modelling:comparing radii at 0.1Msun}, for a range of masses. The {\bf red dashed line} shows the upper limit for acceptable disagreement, and the {\bf black dashed line} shows perfect agreement.}
-    \label{fig:modelling:comparing radii over a range of masses}
-\end{figure}
+Whilst MESA allows for beginning a MESA run with a precomputed stellar model, the models in this analysis all generate their stars from a pre-main sequence cloud of gas before each run. This ensures that each model is computed from the very beginning with the correct physics, and is set by the command \lstinline{create_pre_main_sequence_model = .true.}
+
+
+\subsubsection{Nuclear processing}
+
+Computing the equilibrium reaction rates of nuclear burning in a star is complex, as the different species being consumed and produced form a complex network.
+The products of one reaction are often the reagents of another, and with many options for reaction paths and hard-to-calculate reaction rates, this is prohibitive (and often inaccurate) to compute on the fly. Rather, a pre-calculated reaction network is used.
+
+MESA has several options for the reaction network available in its core codebase. By default, the \lstinline{basic} network considers the reactions of the staple elements of most stellar cores: hydrogen, helium-3, carbon-12, nitrogen-14, oxygen-16, neon-20, and magnesium-24.
+However, we use the more complete reaction network given by \lstinline{pp_and_cno_extras}. This is a combination of two other networks, \lstinline{pp_extras} and \lstinline{cno_extras}.
+\lstinline{pp_extras} is preferred, as it more accurately represents nuclear reactions in young stars \citep{murphy2021}, and \lstinline{cno_extras} more fully considers the reaction chains the CNO cycle, specifically at high temperatures. To enable this, the lines \lstinline{change_net = .true., new_net_name= `pp_and_cno_extras.net'} are added to the configuration file.
+
+In addition, the JINA Reaclib reaction rate library \citep{cyburt2010} is used: \lstinline{set_rates_preference = .true., new_rates_preference = 2}
+
+
+\subsubsection{Surface boundary lookup tables}
+\label{sect:modelling:MESA surface boundary tables}
+
+When solving the four differential equations necessary to produce an internally consistent stellar model, i.e. how the radius, pressure, luminosity, and temperature vary with mass, some boundary conditions are required.
+The boundary conditions for radius and luminosity are self-evident: $R(M = 0) = 0$, and $L(M = 0) = 0$. Unfortunately, such simple fixed central values are not available for the temperature and pressure, so the boundary condition at the surface of the star is used instead.
+This requires defining the location of the surface of the star. This is done by setting a value of optical depth, $\tau$, to use as the base of the stellar atmosphere.
+
+A basic approach is to then set the pressure and temperature to 0 at the stellar surface, i.e. $P(M = M_\tau) = 0$, $T(M = M_\tau) = 0$, but this is a poor approximation.
+However, a more accurate approximation is to pre-calculate model stellar atmospheres, which then give values of $P, T$ at their base as a function of $\log(g)$ and luminosity.
+Different choices of atmosphere table results in different surface temperatures and pressures, which can alter the mass-radius relation for the resulting models.
+
+For these MESA models, the \lstinline{tau_10} grid was used, which interpolates the PHOENIX \citep{hauschildt1999, hauschildt2001} and \citet{castelli2003} stellar atmospheres (which assume solar metallicity) at $\tau = 10$ for the base of the atmosphere \citep{paxton2010,paxton2011}.
+Note that none of the atmosphere tables available in MESA accurately reproduce observations of M dwarfs across the range of donor masses required. In fact, of the available tables, the \lstinline{tau_10} gives some of the less accurate modelled mass-radius relations for low mass stars.
+However, this grid was chosen as it produces stars that are {\it consistently}\ smaller than observations suggest for stars with $M < 0.3 M_\odot$, a deficit that is compensated for in \S\ref{sect:modelling:tuning star spots to observations}. In this way, rather than relying on the atmosphere table to produce the correct stellar radii, the radius can be manually adjusted to match empirical results.
+
+
+\subsubsection{Mixing length theory}
+
+Convection is a difficult problem in stellar modelling\todo{REF}.
+Mixing length theory is concerned with the convective boundary, where rising material turns and begins to sink.
+Models that treat the convective layer as a hard boundary between convective and non-convective material, are less able to describe observations than models that allow for some degree of overshooting of rising material past the theoretical convective boundary, before dispersing its energy, justified physically by a rising packet of material having some momentum that must be dissipated before reversing direction \citep{prandtl1925,bradshaw1974}.
+
+By altering the degree of overshooting, the efficiency with which energy is transported from the inner regions of the star is changed, and decreasing the overshooting increases $R(L)$. We slightly decrease the default MESA overshooting of $2\times$ the pressure scale height of the convective boundary, to $1.95\times$ this scale height: \lstinline{mixing_length_alpha = 1.95}. In addition, we use the \citet{henyay1965} MLT formulation, and the following overshooting formalism new to MESA v21.12.1:
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item \lstinline{overshoot_scheme(:)    = 'exponential'}
+    \item \lstinline{overshoot_zone_type(:) = 'any'}
+    \item \lstinline{overshoot_zone_loc(:)  = 'any'}
+    \item \lstinline{overshoot_bdy_loc(:)   = 'any'}
+\end{itemize}
+% https://docs.mesastar.org/en/release-r21.12.1/reference/controls.html?highlight=overshoot_f#overshooting
+
+\subsubsection{Model convergence and grid fidelity}
+
+Finally, two numerical options were enabled.
+The first is the MESA `gold' tolerances, which enforces tight tolerances on energy conservation. If a model step has poor residuals, it is rejected and re-attempted, resulting in more accurate models \citep{paxton2019}.
+
+Second, we apply the \lstinline{okay_to_reduce_gradT_excess = .true.} flag, which enables the \lstinline{MLT++} treatment of convection of \S7.2 of \citet{paxton2013}.
+When the stellar envelope is superadiabatic and its atmosphere is radiation-dominated, the convective velocities can approach the speed of sound of the stellar envelope. This forces MESA to take extremely short time steps to try and resolve convection, and makes such envelopes prohibitive to model. The \lstinline{okay_to_reduce_gradT_excess} flag allows MESA to reduce the severity of the temperature gradient, making the star less superadiabatic, and less prone to small timesteps. This is important to the star spot corrections, as it allows them to be numerically stable for a larger range of spot parameters.
 
 
 \subsection{Modelling star spots in MESA}
 \label{sect:modelling:starspots in MESA}
 
-A general problem in the modelling of low mass stars is an under-estimation of their radii, and MESA is no exception. Recently, \citet{BrownPrep}\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries from \citet{parsons2018} with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+A general problem in the modelling of low mass stars is an under-estimation of their radii \citep{lopez2005}, and MESA is no exception.
+Recently, \citet{BrownPrep}\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+
+The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
+To account for this, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
-    \caption{Showing the radius inflation of default MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models. Crosses correspond to MESA models at an age of 2~Gyrs.}
+    \caption{Showing the radius inflation of default MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models, of 4.5\% over the Brown relation. Crosses correspond to MESA models at an age of 2~Gyrs.}
     \label{fig:modelling:MESA inflation over Brown relation}
 \end{figure}
-The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly.
-CV donors are filling their Roche lobes, so are non-spherical. To account for this, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
 
 To achieve this baseline inflation, I introduce star spots into MESA. Star spots are magnetic phenomena, where the magnetic pressure from concentrations of magnetic field lines provides partial pressure support to the photospheric material, and since spots must remain in pressure equilibrium with the spotted surface, the temperature in a spotted region is reduced by ideal gas laws. As a consequence, the cooler spotted regions emit less black body radiation, inhibiting energy flux out of the stellar interior, and inflating the star.
 
@@ -546,7 +568,9 @@ To achieve this baseline inflation, I introduce star spots into MESA. Star spots
 \label{setc:modelling:star spot model description}
 
 As MESA is a one-dimensional code and star spots are a two-dimensional phenomenon, spots are modelled using the formulation given by \citet{sommers2015}, based on work by \citet{spruit1986}.
-Under this spot treatment, two effects are implemented: the photosphere is made inhomogeneous by the presence of spots, and convection is inhibited by the presence of a strong magnetic field.
+This implementation was done as a collaboration with Meridith Joyce\footnote{Accreditation} and Marc Pinsonneault\footnote{Accreditation}.
+
+Under this spot treatment, two effects are considered: the photosphere is made inhomogeneous by the presence of spots, and convection is inhibited by the presence of a strong magnetic field.
 In the \citet{sommers2015} formulation, the former effect is enforced by altering the effective temperature to a surface-weighted average of the spotted and unspotted surface, and the latter by augmenting the radiative gradient of the star.
 
 The spots cover a fraction of the stellar surface, $f_{\rm spot}$, and a temperature contrast of $x_{\rm spot} = T_{\rm  spot} / T_{\rm amb}$, where the effective temperature of the spotted surface is $T_{\rm spot}$, and the effective temperature of the ambient, unspotted surface is $T_{\rm amb}$. The surface-weighted average of the star, $T_{\rm av}$ is then,
@@ -558,18 +582,18 @@ And the altered luminosity, $L_{\rm av}$, becomes
 \begin{align}
     L_{\rm av} =& 4\pi R^2 \sigma_{boltz} T_{\rm amb}^4 (1 - f_{\rm spot} + f_{\rm spot} \cdot x_{\rm spot}^4) \\
     L_{\rm av} =& 4\pi R^2 \sigma_{boltz} T_{\rm amb}^4 \alpha_{\rm spot} \\
-    L_{\rm av} =& L_{\rm amb} \alpha_{\rm spot} \\
+    L_{\rm av} =& L_{\rm amb} \alpha_{\rm spot}
 \end{align}
 $\alpha_{\rm spot}$, the redistribution parameter, and is what actually alters the structure of the star. $\alpha$ is analogous to the blocking area of perfectly black spots, or spots that are completely supported by magnetic pressure.
 
-MESA performs a lookup for the surface pressure from $T_{\rm eff}$ using precalculated boundary condition tables (see \citet{paxton2010,paxton2011} for details). I modify the MESA code to perform this lookup with $T_{\rm av}$.
+MESA performs a lookup for the surface pressure from $T_{\rm eff}$ using precalculated boundary condition tables (\S\ref{sect:modelling:MESA surface boundary tables}). I modify the MESA code to perform this lookup with $T_{\rm av}$.
 
-However, in MESA $T_{\rm eff}$ is not used in the stellar model interior - rather, it uses energies and pressures to calculate structure. Therefore, I alter the above equation to use pressure instead.
-Recall the ideal gas equation, for gas in the ambient, unspotted surface. This gas will have pressure and temperature $P_{\rm gas, amb}, T_{\rm gas, amb}$, density $\rho$, and mean molecular weight $\mu$. Here, $R$ denotes the gas constant.
+However, in MESA $T_{\rm eff}$ is not used in the stellar model interior - rather, it uses energies and pressures to calculate structure. Therefore, I alter Equation~\ref{eqn:modelling:surface weighted average temp} to use pressure instead.
+Recall the ideal gas equation, for gas in the ambient, unspotted surface, this gas will have pressure and temperature $P_{\rm gas, amb}, T_{\rm gas, amb}$, density $\rho$, and mean molecular weight $\mu$. Here, $R$ denotes the gas constant.
 \begin{equation}
     P_{\rm gas, amb} = \frac{\rho R}{\mu} T_{\rm gas, amb}
 \end{equation}
-The spotted and unspotted surfaces are under pressure (and therefore also density) equilibrium, but the spotted surface pressure has a contribution from gas pressure, $P_{\rm gas, spot}$, and some contribution from magnetic pressure, $P_{\rm mag, spot}$. Therefore, we can write
+The spotted and unspotted surfaces are under pressure (and therefore also density\todo{Stu disputes this - send him an email}) equilibrium, but the spotted surface pressure has a contribution from gas pressure, $P_{\rm gas, spot}$, and some contribution from magnetic pressure, $P_{\rm mag, spot}$. Therefore, we can write
 \begin{align}
     P = P_{\rm gas, amb} =& P_{\rm gas, spot} + P_{\rm mag, spot} \\
     \frac{\rho R}{\mu} T_{\rm amb} =& \frac{\rho R}{\mu} T_{\rm spot} + P_{\rm mag, spot} \\[12pt]
@@ -583,7 +607,9 @@ And therefore,
     P_{\rm gas, spot} =& P_{\rm gas, amb} - (1-x_{\rm spot}) P_{\rm gas, amb} \\
     P_{\rm gas, spot} =& x_{\rm spot} P_{\rm gas, amb}
 \end{align}
-However, star spots do not penetrate to the core of the star. To quantify this, rather than fixing $x_{\rm spot}$ and calculating the new pressure at each depth of the star, I calculate the pressure differential at the surface of the star, and fix this pressure difference for interior layers. As the pressure rises with depth, a significant pressure difference at the surface quickly becomes insignificant. For each depth of the star, $x_{\rm spot}$ is calculated from its total pressure before any alteration is made, $P_i$, and the surface pressure, $P_{\rm surf, amb}$,
+However, star spots do not penetrate to the core of the star. To quantify this, rather than fixing $x_{\rm spot}$ and calculating the new pressure at each depth of the star, I calculate the gas pressure differential at the surface of the star, and fix this gas pressure difference for interior layers.
+As gas pressure rises with depth, a significant difference at the surface quickly becomes insignificant.
+For each depth of the star, $x_{\rm spot}$ is calculated from its total pressure before any alteration is made, $P_i$, and the surface pressure, $P_{\rm surf, amb}$,
 \begin{align}
     P_{\rm gas, amb} - P_{\rm mag, spot} =& x_{\rm spot} P_{\rm gas, amb} \\
     x_{\rm spot, i} =& \frac{P_i - P_{\rm surf, amb}}{P_i}
@@ -597,48 +623,27 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/spotted_model_radii_at_2gyrs.pdf}
-    \caption{Showing how model radius varies as a function of spot coverage. Here, spots are perfectly black ($x_{\rm spot} \equiv 0$), and the radius is extracted at 2~Gyrs. Evaluated MESA models are shown as {\bf black crosses}, and joined by a {\bf black line} to guide the eye.}
+    \caption{Showing how model radius varies as a function of spot coverage for a $0.15 M_\odot$ star. Here, spots are perfectly black ($x_{\rm spot} \equiv 0$), and the radius is extracted at 2~Gyrs. Evaluated MESA models are shown as {\bf black crosses}, and joined by a {\bf black line} to guide the eye.}
     \label{fig:modelling:spotted model radii at 2Gyrs}
 \end{figure}
-
-
-\subsection{Tuning star spot parameters to observations}
-\label{sect:modelling:tuning star spots to observations}
-With star spots implemented in MESA, the Brown relation can now be reproduced.
-$x_{\rm spot}$ is fixed at 0 and $f_{\rm spot}$ is varied.
-Since radius increases monotonically with $f_{\rm spot}$, a binary chop is performed, optimising for $\Delta R = R_{\rm MESA} - R_{\rm Brown} = 0$ at a stellar age of 2~Gyrs.
-
-To find the appropriate $f_{\rm spot}$ for a given mass, the following binary chop steps are followed:
-\begin{enumerate}
-    \setlength\itemsep{0em}
-    \item First, MESA models using the upper and lower bounds of $f_{\rm spot}$ ($f_{\rm up}$ and $f_{\rm low}$ respectively) are evaluated, and $\Delta R$ calculated for each.
-    \begin{itemize}
-        \item The lower bound will have $\Delta R < 0$, and the upper bound will have $\Delta R > 0$, and since $\Delta R$ is a smooth function of $f_{\rm spot}$, $\Delta R \equiv 0$ must lie between them.
-    \end{itemize}
-    \item Then, $\Delta R$ at the midpoint, $f_{\rm mid} = (f_{\rm up} + f_{\rm low})/2$, is evaluated, and accepted as either the new $f_{\rm up}$ (if $\Delta R$ is positive) or $f_{\rm low}$ (if $\Delta R$ is negative).
-    \item A new $f_{\rm mid}$ is then calculated from the new range, and the cycle repeats until $\Delta R$ is within tolerance; set to $0.1\%$.
-\end{enumerate}
-The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fspot mass relationship}.
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_4.5.pdf}
-    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best fit value of $f_{\rm spot}$. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
-    \label{fig:modelling:fspot mass relationship}
-\end{figure}
-
-Below masses of $\sim 0.13 M_\odot$, the required $f_{\rm spot}$ becomes slightly negative, i.e. default MESA models are larger than observations plus the $4.5\%$ non-spherical correction.
-Since a negative coverage fraction is unphysical, negative values of $f_{\rm spot}$ are set equal to 0, and we note that derived mass loss rates become more unreliable below this mass.
-However, the severity of this unreliability is not catastrophic, as the minimum value of $f_{\rm spot}$ is still reasonably close to 0.
-
-There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is \todo{GET THIS} between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate.
-However, while this may skew an individual system, on average the inferred mass loss from model radius should be accurate. Therefore, this effect should not skew the results with a large enough sample size.
 
 
 \subsection{Optimising mass loss rate to donor observations}
 \label{sect:modelling:optimising mass loss rate to observations}
 
-Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to optimise mass loss, similarly to optimising $f_{\rm spot}$.
-To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
+Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss, similarly to optimising $f_{\rm spot}$.
+% To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
+
+An alternative approach to inferring $\dot M$ is to run a fixed grid of models, and interpolate within it.
+An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in\todo{Section where I describe the MESA configuration}.
+Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
+
+This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
+For a given $M_{\rm donor},\ R_{\rm donor}$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship in Figure~\ref{fig:modelling:fspot mass relationship}. Then, the grid cube can be interpolated for a value of $\dot M$.
+This approach is not as precise as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
+% The central value of the binary chop was consistent with the interpolation in all cases.
+
+
 
 \subsection{Mass loss from the white dwarf properties}
 \label{sect:modelling:mdot from WD temperature}
