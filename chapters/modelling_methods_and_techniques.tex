@@ -106,6 +106,19 @@ Note that because hotter walkers are less sensitive to $\mathcal{L}$, their post
 When running a parallel tempered MCMC, the values used in the software are $\beta = 1/T$, for which we choose between 3 and 5 evenly spaced values of $\beta$ between 0 and 1.
 The number of temperatures used depends on the evaluation time; since parallel tempering runs multiple full ensembles in tandem, in models with very large numbers of parameters it becomes highly desirable to use as few temperatures as possible. However, the penalty in computation time per step comes with the benefit of a dramatically improved ability to locate the global minimum, especially in complex parameter space.
 
+\subsection{The binary chop}
+
+When searching for the root of a simple model, i.e. one with a single input parameter, $x$, and a single output metric, $y$, that either monotonically increases or decreases with $x$, we use the binary chop algorithm.
+This requires relatively few evaluations to find the root of a function, i.e. $y(x_0) = 0$.
+If two values of $y$ are known to have opposite signs, e.g. $y_1(x_1)$ is positive and $y_2(x_2)$ is negative, it can be deduced that $x_0$ lies between $x_1$ and $x_2$. Then, by repeatedly evaluating midpoint between the two values of $x$ known to be closest to $x_0$, the algorithm will tend towards $x_1 \sim x_2 \sim x_0$. In practice, the optimisation terminates when $y(x_1) - y(x_2)$ is within some tolerance.
+Step-by-step, this proceeds as follows:
+\begin{enumerate}
+    \setlength\itemsep{0em}
+    \item First, evaluate the upper and lower limits of $x$, $x_{\rm low}$ and $x_{\rm high}$, to ensure that one returns a negative $y$, and one returns a positive $y$
+    \item Evaluate $y(x_{\rm mid})$, where $x_{\rm mid} = 0.5(x_{\rm low} + x_{\rm high})$.
+    \item If $x_{\rm low}$ has the same sign as $x_{\rm high}$, assign $x_{\rm high} = x_{\rm mid}$, or vice-versa for $x_{\rm low}$.
+    \item Check if the difference between $y(x_{\rm low})$ and $y(x_{\rm high})$ is within tolerance. If it is, terminate the optimisation. Otherwise, repeat the process again.
+\end{enumerate}
 
 
 \section{Finding an orbital ephemeris}
@@ -465,28 +478,29 @@ Therefore, binning is only done when data are sufficiently similar, and is treat
 Once armed with a robust sample of CVs donor masses and radii, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
 If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor can be reproduced by stellar structure models with the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}. MESA is a one-dimensional stellar evolution model. MESA is highly felxible, due to its use of various `modules', wherein each module supplies the code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics.
-Regarding to CV modelling in particular, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of modelling CV donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking triggered by the donor becoming fully convective \citep{Paxton_2015}.
-\S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and with some small modifications the agreement between MESA and \citet{knigge11} is improved.
+The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}, a one-dimensional stellar evolution model. MESA is highly flexible, due to its use of various `modules', wherein each module supplies the code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics not contained in the core codebase.
+Regarding CV modelling in particular, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of modelling CV donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking triggered by the donor becoming fully convective \citep{Paxton_2015}.
+\S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and shows that with some small modifications the agreement between MESA and \citet{knigge11} can be improved further.
 
-Note that all MESA models for this thesis were run using version 21.12.1 of the MESA codebase, and M dwarfs use the configuration detailed in \S\ref{sect:modelling:MESA configs}, unless specified otherwise.
+Note that all MESA models for this thesis were run using version 21.12.1 of the MESA codebase, and use the configuration detailed in \S\ref{sect:modelling:MESA configs}, unless specified otherwise.
 
 To extract mass loss rates, I will go through three steps.
 Firstly, I demonstrate how the radius of a singleton model of a given mass can be tuned to match the M dwarf mass-radius relationship given by \citet{BrownPrep} by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
 Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for present-day mass loss rate.
-Then, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
+Finally, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
 % Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
 
 
 \subsection{MESA configuration for low-mass M dwarfs}
 \label{sect:modelling:MESA configs}
 
-Broadly speaking, when computing a stellar evolution model one must simply input models of physical processes, describe some initial conditions, and allow the stellar model to evolve over time. However, the physics of stars in not completely understood, and the processes that strongly affect the evolution of a star differs depending on its conditions.
-Whilst some core physics is fixed, MESA provides many options for what physics to apply to a stellar model. MESA has default configuration vales that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
-As such, some tweaks must be made in order to produce accurate donor models.
-Parameters that are not given below are left as the MESA default.
+Broadly speaking, when computing a stellar evolution model one must simply input models of physical processes, describe some initial conditions, and allow the stellar model to evolve over time. Unfortunately, the physics of stars in not completely understood, and the processes that affect a star's evolution significantly differ depending on its conditions.
+Whilst some core physics is fixed, MESA provides many options for which prescriptions to use for a particular process, or even which processes to consider at all.
+MESA has default configuration vales that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
+As such, some tailoring of configuration files must be done in order to produce accurate donor models.
 
-Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size, and as such, all MESA models presented here assume a solar initial metallicity.
+Parameters that are not discussed below are left as the MESA default.
+Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here assume a solar initial metallicity.
 
 
 \subsubsection{Model initialisation}
@@ -496,12 +510,12 @@ Whilst MESA allows for beginning a MESA run with a precomputed stellar model, th
 
 \subsubsection{Nuclear processing}
 
-Computing the equilibrium reaction rates of nuclear burning in a star is complex, as the different species being consumed and produced form a complex network.
-The products of one reaction are often the reagents of another, and with many options for reaction paths and hard-to-calculate reaction rates, this is prohibitive (and often inaccurate) to compute on the fly. Rather, a pre-calculated reaction network is used.
+Computing the equilibrium reaction rates of nuclear burning in a star is non-trivial, as the different species being consumed and produced form a complex network of interactions.
+The products of one reaction are often the reagents of another, and with many options for reaction paths and hard-to-calculate reaction rates, this is prohibitive (and often inaccurate) to compute on the fly. Rather, a pre-calculated or empirical reaction network is used.
 
-MESA has several options for the reaction network available in its core codebase. By default, the \lstinline{basic} network considers the reactions of the staple elements of most stellar cores: hydrogen, helium-3, carbon-12, nitrogen-14, oxygen-16, neon-20, and magnesium-24.
+MESA has several options for the reaction network available in its core codebase. By default, the \lstinline{basic} network considers the reactions of the staple elements of most stellar cores: hydrogen-1, helium-3, carbon-12, nitrogen-14, oxygen-16, neon-20, and magnesium-24.
 However, we use the more complete reaction network given by \lstinline{pp_and_cno_extras}. This is a combination of two other networks, \lstinline{pp_extras} and \lstinline{cno_extras}.
-\lstinline{pp_extras} is preferred, as it more accurately represents nuclear reactions in young stars \citep{murphy2021}, and \lstinline{cno_extras} more fully considers the reaction chains the CNO cycle, specifically at high temperatures. To enable this, the lines \lstinline{change_net = .true., new_net_name= `pp_and_cno_extras.net'} are added to the configuration file.
+\lstinline{pp_extras} is preferred, as it more accurately represents nuclear reactions in young stars \citep{murphy2021}, and \lstinline{cno_extras} more fully considers the reaction chains the CNO cycle, specifically at high temperatures \citep{paxton2011}. To enable this, the lines \lstinline{change_net = .true., new_net_name= `pp_and_cno_extras.net'} are added to the configuration file.
 
 In addition, the JINA Reaclib reaction rate library \citep{cyburt2010} is used: \lstinline{set_rates_preference = .true., new_rates_preference = 2}
 
@@ -513,38 +527,40 @@ When solving the four differential equations necessary to produce an internally 
 The boundary conditions for radius and luminosity are self-evident: $R(M = 0) = 0$, and $L(M = 0) = 0$. Unfortunately, such simple fixed central values are not available for the temperature and pressure, so the boundary condition at the surface of the star is used instead.
 This requires defining the location of the surface of the star. This is done by setting a value of optical depth, $\tau$, to use as the base of the stellar atmosphere.
 
-A basic approach is to then set the pressure and temperature to 0 at the stellar surface, i.e. $P(M = M_\tau) = 0$, $T(M = M_\tau) = 0$, but this is a poor approximation.
-However, a more accurate approximation is to pre-calculate model stellar atmospheres, which then give values of $P, T$ at their base as a function of $\log(g)$ and luminosity.
+A basic approach is to set the pressure and temperature to 0 at the stellar surface, i.e. $P(M = M_\tau) = 0$, $T(M = M_\tau) = 0$, but this is a poor approximation.
+A far more accurate approximation is to pre-calculate model stellar atmospheres, which then give values of $P, T$ as a function of $\tau$, $\log(g)$, and luminosity.
 Different choices of atmosphere table results in different surface temperatures and pressures, which can alter the mass-radius relation for the resulting models.
 
 For these MESA models, the \lstinline{tau_10} grid was used, which interpolates the PHOENIX \citep{hauschildt1999, hauschildt2001} and \citet{castelli2003} stellar atmospheres (which assume solar metallicity) at $\tau = 10$ for the base of the atmosphere \citep{paxton2010,paxton2011}.
 Note that none of the atmosphere tables available in MESA accurately reproduce observations of M dwarfs across the range of donor masses required. In fact, of the available tables, the \lstinline{tau_10} gives some of the less accurate modelled mass-radius relations for low mass stars.
-However, this grid was chosen as it produces stars that are {\it consistently}\ smaller than observations suggest for stars with $M < 0.3 M_\odot$, a deficit that is compensated for in \S\ref{sect:modelling:tuning star spots to observations}. In this way, rather than relying on the atmosphere table to produce the correct stellar radii, the radius can be manually adjusted to match empirical results.
+However, this atmosphere grid was chosen as it produces stars that are {\it consistently}\ smaller than required for stars with $M < 0.3 M_\odot$, a deficit that is compensated for in \S\ref{sect:modelling:tuning star spots to observations}, using the method described in \S\ref{setc:modelling:star spot model description}. In this way, rather than relying on the atmosphere table to produce the correct stellar radii, the radius can be manually adjusted to match empirical results.
 
 
 \subsubsection{Mixing length theory}
 
-Convection is a difficult problem in stellar modelling\todo{REF}.
-Mixing length theory is concerned with the convective boundary, where rising material turns and begins to sink.
-Models that treat the convective layer as a hard boundary between convective and non-convective material, are less able to describe observations than models that allow for some degree of overshooting of rising material past the theoretical convective boundary, before dispersing its energy, justified physically by a rising packet of material having some momentum that must be dissipated before reversing direction \citep{prandtl1925,bradshaw1974}.
+Mixing length theory is concerned with the convective boundary, where rising material dissipates its heat, reverses trajectory, and begins to sink.
+Models that treat a convective layer as a hard boundary between convective and non-convective material are less able to describe observations than models that allow for some degree of overshooting of rising material past the theoretical convective boundary, before dispersing its energy \citep{prandtl1925}. This is often justified physically by a rising packet of material having some momentum that must be dissipated before reversing direction \citep{bradshaw1974}.
 
-By altering the degree of overshooting, the efficiency with which energy is transported from the inner regions of the star is changed, and decreasing the overshooting increases $R(L)$. We slightly decrease the default MESA overshooting of $2\times$ the pressure scale height of the convective boundary, to $1.95\times$ this scale height: \lstinline{mixing_length_alpha = 1.95}. In addition, we use the \citet{henyay1965} MLT formulation, and the following overshooting formalism new to MESA v21.12.1:
+By reducing the degree of overshooting, the efficiency with which energy is transported from the inner regions of the star is similarly reduced, increasing $R(L)$. We decrease the default MESA overshooting of $2\times$ the pressure scale height of the convective boundary, to $1.95\times$ this scale height: \lstinline{mixing_length_alpha = 1.95}. In addition, we use the \citet{henyay1965} MLT formulation, and the following overshooting formalism new to MESA v21.12.1:
 \begin{itemize}
     \setlength\itemsep{0em}
-    \item \lstinline{overshoot_scheme(:)    = 'exponential'}
-    \item \lstinline{overshoot_zone_type(:) = 'any'}
-    \item \lstinline{overshoot_zone_loc(:)  = 'any'}
-    \item \lstinline{overshoot_bdy_loc(:)   = 'any'}
+    \item \lstinline{overshoot_scheme(:)    = `exponential'}
+    \item \lstinline{overshoot_zone_type(:) = `any'}
+    \item \lstinline{overshoot_zone_loc(:)  = `any'}
+    \item \lstinline{overshoot_bdy_loc(:)   = `any'}
 \end{itemize}
 % https://docs.mesastar.org/en/release-r21.12.1/reference/controls.html?highlight=overshoot_f#overshooting
+
 
 \subsubsection{Model convergence and grid fidelity}
 
 Finally, two numerical options were enabled.
-The first is the MESA `gold' tolerances, which enforces tight tolerances on energy conservation. If a model step has poor residuals, it is rejected and re-attempted, resulting in more accurate models \citep{paxton2019}.
+The first is the MESA `gold' tolerances, which enforces tight tolerances on energy conservation.
+If, after computing a time step, the sum of the energies of each model cell does not closely match the known total energy of the star, the step is rejected and re-attempted, resulting in more accurate models \citep{paxton2019}.
+% If a model step has poor residuals, it is rejected and re-attempted, resulting in more accurate models \citep{paxton2019}.
 
 Second, we apply the \lstinline{okay_to_reduce_gradT_excess = .true.} flag, which enables the \lstinline{MLT++} treatment of convection of \S7.2 of \citet{paxton2013}.
-When the stellar envelope is superadiabatic and its atmosphere is radiation-dominated, the convective velocities can approach the speed of sound of the stellar envelope. This forces MESA to take extremely short time steps to try and resolve convection, and makes such envelopes prohibitive to model. The \lstinline{okay_to_reduce_gradT_excess} flag allows MESA to reduce the severity of the temperature gradient, making the star less superadiabatic, and less prone to small timesteps. This is important to the star spot corrections, as it allows them to be numerically stable for a larger range of spot parameters.
+When the stellar envelope is superadiabatic and its atmosphere is radiation-dominated, the convective velocities can approach the speed of sound of the stellar envelope. This forces MESA to take extremely short time steps to try and resolve convection, and makes such envelopes prohibitive to model. The \lstinline{okay_to_reduce_gradT_excess} flag allows MESA to reduce the severity of the temperature gradient, making the star less superadiabatic, and less prone to small time steps. This is important to the star spot corrections, as it allows them to be numerically stable for a larger range of spot parameters.
 
 
 \subsection{Modelling star spots in MESA}
@@ -554,7 +570,7 @@ A general problem in the modelling of low mass stars is an under-estimation of t
 Recently, \citet{BrownPrep}\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
 
 The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
-To account for this, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
+To account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
@@ -593,7 +609,9 @@ Recall the ideal gas equation, for gas in the ambient, unspotted surface, this g
 \begin{equation}
     P_{\rm gas, amb} = \frac{\rho R}{\mu} T_{\rm gas, amb}
 \end{equation}
-The spotted and unspotted surfaces are under pressure (and therefore also density\todo{Stu disputes this - send him an email}) equilibrium, but the spotted surface pressure has a contribution from gas pressure, $P_{\rm gas, spot}$, and some contribution from magnetic pressure, $P_{\rm mag, spot}$. Therefore, we can write
+The spotted and unspotted surfaces are under pressure
+% (and therefore also density\todo{Stu disputes this - send him an email})
+equilibrium, but the spotted surface pressure has a contribution from gas pressure, $P_{\rm gas, spot}$, and some contribution from magnetic pressure, $P_{\rm mag, spot}$. Therefore, we can write
 \begin{align}
     P = P_{\rm gas, amb} =& P_{\rm gas, spot} + P_{\rm mag, spot} \\
     \frac{\rho R}{\mu} T_{\rm amb} =& \frac{\rho R}{\mu} T_{\rm spot} + P_{\rm mag, spot} \\[12pt]
@@ -619,7 +637,7 @@ Rather than directly altering the pressure profile of the star, the radiative gr
     \alpha_{\rm spot, i} =& 1 - f_{\rm spot} + f_{\rm spot} \cdot x_{\rm spot, i}^4 \\
     \nabla_{r,i}' =& \frac{\nabla_{r,i}}{\alpha_{\rm spot, i}}
 \end{align}
-Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-configured parameters to define the degree of spotting. Figure~\ref{fig:modelling:spotted model radii at 2Gyrs} shows the radii of main sequence stellar models at 2~Gyrs, and $0.15 M_\odot$ with progressively more spots.
+Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-configured parameters to define the degree of spotting. Figure~\ref{fig:modelling:spotted model radii at 2Gyrs} shows the radii of main sequence stellar models at 2~Gyrs, and $0.15 M_\odot$ with progressively more spots. The mass-$f_{\rm spot}$ relation required to match the 4.5\% inflation over the Brown relation is searched for in \S\ref{sect:modelling:tuning star spots to observations}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/spotted_model_radii_at_2gyrs.pdf}
@@ -631,18 +649,27 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 \subsection{Optimising mass loss rate to donor observations}
 \label{sect:modelling:optimising mass loss rate to observations}
 
-Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss, similarly to optimising $f_{\rm spot}$.
+Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
 % To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
 
 An alternative approach to inferring $\dot M$ is to run a fixed grid of models, and interpolate within it.
-An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in\todo{Section where I describe the MESA configuration}.
+An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}.
 Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
 
 This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
-For a given $M_{\rm donor},\ R_{\rm donor}$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship in Figure~\ref{fig:modelling:fspot mass relationship}. Then, the grid cube can be interpolated for a value of $\dot M$.
-This approach is not as precise as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
+For a given $M_{\rm donor},\ R_{\rm donor}$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship derived in \S\ref{sect:modelling:tuning star spots to observations}. Then, the grid cube can be interpolated for a value of $\dot M$.
+This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
 % The central value of the binary chop was consistent with the interpolation in all cases.
 
+This mass loss can also be converted to an angular momentum loss rate, assuming none of the mass is retained by the white dwarf. The angular momentum of a binary is given by $J$,
+\begin{equation}
+    J = M_{\rm wd} M_{\rm donor} \sqrt{\frac{Ga}{M_{\rm wd} + M_{\rm donor}}}
+\end{equation}
+By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$).
+\begin{align}
+    \frac{dJ}{dM_{\rm donor}} = M_{\rm wd} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \\
+    \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \label{eqn:modelling:Jdot from Mdot}
+\end{align}
 
 
 \subsection{Mass loss from the white dwarf properties}
@@ -656,11 +683,11 @@ The short-term average mass loss rate, $<\dot M>$, is ultimately a function only
     T_{\rm eff} = 1.7 \times 10^4 {\rm K} \bigg( \frac{<\dot M>}{10^{-10} M_\odot {\rm yr}^{-1}} \bigg)^{1/4} \bigg( \frac{M_{\rm wd}}{0.9 M_\odot} \bigg)
 \end{equation}
 
-However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$, as opposed to the $\rm \sim Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$.
+However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$, as opposed to the $\rm \sim Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
 The white dwarf temperature approach does hold a major advantage, however, in that the `zero $\dot M$' $T_{\rm eff}$ is more well-known and commonly accepted than the `zero $\dot M$' $R_{\rm donor}$ required by this newer method.
 
 Recently, \citet{Pala2021} used spectroscopically measured $T_{\rm eff}$ and $M_{\rm wd}$ to infer the $\dot M$ of 65 CVs, the result of which is reproduced in Figure~\ref{fig:modelling:pala2022 fig13}.
-The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have AML rates, and thus lower $\dot M$.
+The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have lower AML rates, driving lower $\dot M$.
 As the eclipse modelling of CVs produces a measure of $T_{\rm eff}$, the systems analysed for this thesis can be processed with {\it both} techniques, and have their results compared.
 \begin{figure}
     \centering
