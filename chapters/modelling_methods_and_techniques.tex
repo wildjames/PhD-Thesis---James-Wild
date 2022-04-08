@@ -89,12 +89,12 @@ a typical rule-of-thumb is to use $2n$ walkers for $n$ parameters being optimise
 \subsubsection{Parallel tempering}
 \label{sect:modelling:parallel tempering}
 
-Parallel tempering is an additional element of an MCMC sampler that helps in more fully exploring the parameter space in more complex models, while also being more capable of characterising posterior distributions in the case of complex correlations between parameters.
+Parallel tempering is an additional element of an MCMC sampler that helps in more fully exploring the parameter space in more complex models, while also being more capable of characterising posterior distributions in the case of complex correlations between parameters \citep{earl2005}.
 
 In metallurgy, a metal can be toughened by relieving its internal stresses through tempering, a treatment in which a metal is first heated to a high temperature, then slowly cooled.
 While the metal is at a high temperature, impurities are able to diffuse throughout the crystal structure of the metal and explore possible crystallisation locations. As the metal slowly cools, impurity atoms are gradually more and more attracted to areas of the crystal that exert less stress on the material, until the metal is fully cooled and the majority of atoms have found areas of local minima in stress potential.
 
-The ensemble MCMC can take analogy from this `hot' exploration phase and `cool' settling phase\todo{I need a reference for parallel tempering...}. This is done by running several parallel ensembles, that each have a different `temperature' between 1 and $\infty$. Each ensemble samples a modified posterior, that follows $\pi_T(\Theta)$;
+The ensemble MCMC can take analogy from this `hot' exploration phase and `cool' settling phase \citep{earl2005}. This is done by running several parallel ensembles, that each have a different `temperature' between 1 and $\infty$. Each ensemble samples a modified posterior, that follows $\pi_T(\Theta)$;
 \begin{equation}
     \pi_T(\Theta) = [\mathcal{L}(\Theta)^\frac{1}{T}] q(\Theta)
 \end{equation}
@@ -682,8 +682,9 @@ The degree of this heating is related to the rate at which material falls to the
 Since, in general, we can assume that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a diagnostic of the donor $\dot M$.
 Simulations demonstrate that even through successive Nova eruptions, the core temperature of the white dwarf is stable over timescales of $\sim 10^8$ \citep{epelstain2007}, so if the accretion rate falls, the white dwarf $T_{\rm eff}$ is able to cool to the appropriate, lower temperature and remain accurate to the present-day accretion rate.
 
-The white dwarf temperature approach holds two major advantages over using the donor properties. Measurements of white dwarf temperatures are easier to gather for large sample sizes, and the `zero $\dot M$' $T_{\rm eff}$ is more well-known and more commonly accepted than the `zero $\dot M$' $R_{\rm donor}$ required by the donor properties method.
+The white dwarf temperature approach holds a major advantage over using the donor properties. Measurements of white dwarf temperatures are easier to gather for large sample sizes.
 However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$ \citep{townsley2009}, as opposed to the $\rm \sim~Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
+% In addition, the method assumes that the white dwarf is not a helium-core white dwarf, which is not always the case in the CV population and introduces significant unmodelled scatter to the results.
 
 The short-term average mass loss rate, $<\dot M>$, is ultimately a function only of white dwarf mass, and temperature, given in Equation~\ref{eqn:modelling:Mdot from WD temperature}.
 \begin{equation}

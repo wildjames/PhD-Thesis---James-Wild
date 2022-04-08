@@ -3,3 +3,4 @@ ULTRACAM
 ULTRASPEC
 lightcurve
 GPs
+CAML
