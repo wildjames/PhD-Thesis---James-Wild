@@ -574,7 +574,7 @@ To account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflati
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
-    \caption{Showing the radius inflation of default MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The horizontal dashed line is the target radius inflation for MESA models, of 4.5\% over the Brown relation. Crosses correspond to MESA models at an age of 2~Gyrs.}
+    \caption{Showing the radius inflation of default MESA models over the Brown relation, i.e. $(R_{\rm MESA} - R_{\rm brown}) / R_{\rm brown}$. The {\bf horizontal dashed line} is the target radius inflation for MESA models, of 4.5\% over the Brown relation. {\bf Crosses} correspond to MESA models at an age of 2~Gyrs.}
     \label{fig:modelling:MESA inflation over Brown relation}
 \end{figure}
 
@@ -652,12 +652,13 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
 % To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
 
-An alternative approach to inferring $\dot M$ is to run a fixed grid of models, and interpolate within it.
-An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}.
+A faster alternative is to run a fixed grid of models, and interpolate within it.
+An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}. These models were run with fixed values of $f_{\rm spot}$, since varying $f_{\rm spot}$ with mass introduces a time lag between a change in $f_{\rm spot}$, and $R_{\rm donor}$ adjusting that is on a similar timescale to $\tau_{\dot M}$. This effect is demonstrated quantitatively in \S\ref{sect:modelling:tuning star spots to observations}.
+
 Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
 
 This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
-For a given $M_{\rm donor},\ R_{\rm donor}$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship derived in \S\ref{sect:modelling:tuning star spots to observations}. Then, the grid cube can be interpolated for a value of $\dot M$.
+For a given $(M_{\rm donor},\ R_{\rm donor})$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship later derived in \S\ref{sect:modelling:tuning star spots to observations} to choose the correct $f_{\rm spot}$ track, and the model grid can be interpolated for a value of $\dot M$.
 This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
 % The central value of the binary chop was consistent with the interpolation in all cases.
 
@@ -665,7 +666,7 @@ This mass loss can also be converted to an angular momentum loss rate, assuming 
 \begin{equation}
     J = M_{\rm wd} M_{\rm donor} \sqrt{\frac{Ga}{M_{\rm wd} + M_{\rm donor}}}
 \end{equation}
-By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$).
+By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$). Thus, a relation between $\dot M$ and $\dot J$ can be found:
 \begin{align}
     \frac{dJ}{dM_{\rm donor}} = M_{\rm wd} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \\
     \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \label{eqn:modelling:Jdot from Mdot}
@@ -675,16 +676,20 @@ By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can fi
 \subsection{Mass loss from the white dwarf properties}
 \label{sect:modelling:mdot from WD temperature}
 
-The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more fully by \citet{townsley2009}.
-In brief, as this material strikes the surface of the white dwarf the kinetic energy is converted to thermal energy, heating the white dwarf. The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
+The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more quantitatively by \citet{townsley2009}.
+In brief, as accreted material strikes the surface of the white dwarf its kinetic energy is converted to thermal energy, heating the white dwarf surface.
+The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
+Since, in general, we can assume that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a diagnostic of the donor $\dot M$.
+Simulations demonstrate that even through successive Nova eruptions, the core temperature of the white dwarf is stable over timescales of $\sim 10^8$ \citep{epelstain2007}, so if the accretion rate falls, the white dwarf $T_{\rm eff}$ is able to cool to the appropriate, lower temperature and remain accurate to the present-day accretion rate.
+
+The white dwarf temperature approach holds two major advantages over using the donor properties. Measurements of white dwarf temperatures are easier to gather for large sample sizes, and the `zero $\dot M$' $T_{\rm eff}$ is more well-known and more commonly accepted than the `zero $\dot M$' $R_{\rm donor}$ required by the donor properties method.
+However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$ \citep{townsley2009}, as opposed to the $\rm \sim~Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
+
 The short-term average mass loss rate, $<\dot M>$, is ultimately a function only of white dwarf mass, and temperature, given in Equation~\ref{eqn:modelling:Mdot from WD temperature}.
 \begin{equation}
     \label{eqn:modelling:Mdot from WD temperature}
     T_{\rm eff} = 1.7 \times 10^4 {\rm K} \bigg( \frac{<\dot M>}{10^{-10} M_\odot {\rm yr}^{-1}} \bigg)^{1/4} \bigg( \frac{M_{\rm wd}}{0.9 M_\odot} \bigg)
 \end{equation}
-
-However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$, as opposed to the $\rm \sim Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
-The white dwarf temperature approach does hold a major advantage, however, in that the `zero $\dot M$' $T_{\rm eff}$ is more well-known and commonly accepted than the `zero $\dot M$' $R_{\rm donor}$ required by this newer method.
 
 Recently, \citet{Pala2021} used spectroscopically measured $T_{\rm eff}$ and $M_{\rm wd}$ to infer the $\dot M$ of 65 CVs, the result of which is reproduced in Figure~\ref{fig:modelling:pala2022 fig13}.
 The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have lower AML rates, driving lower $\dot M$.
