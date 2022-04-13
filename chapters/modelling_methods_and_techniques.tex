@@ -217,7 +217,7 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
 
 To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
 
-CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, McAllister2017, McAllister2019}. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
+CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, mcallister2017, McAllister2019}. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
 Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
 The white dwarf mass-radius relationship was recently tested by \citet{parsons2017}, and found to be a reasonable assumption.
 Assuming that the mass stream following a ballistic trajectory appears to be a reasonable assumption, as the thermal velocity of the donor surface is orders of magnitude lower than the orbital velocity of the two stars.
@@ -385,8 +385,8 @@ Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previou
 \subsection{Capturing flickering with Gaussian Processes}
 
 CVs almost always display some amount of stochastic variability, known as flickering. Rather than attempting to model this physically, it is instead treated as correlated noise and characterised with a Gaussian process (GP).
-The application of GPs to capturing flickering was established by \citet{McAllister2017} based on work by \citet{roberts2012} and \citet{gibson2012}.
-The utility of this addition to the eclipse modelling step is a significant improvement in the accuracy of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key lightcurve features that modelling aims to reproduce, demonstrated by \citet{McAllister2017}.
+The application of GPs to capturing flickering was established by \citet{mcallister2017} based on work by \citet{roberts2012} and \citet{gibson2012}.
+The utility of this addition to the eclipse modelling step is a significant improvement in the accuracy of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key lightcurve features that modelling aims to reproduce, demonstrated by \citet{mcallister2017}.
 
 This section is aimed at giving a working knowledge of GPs in the context of characterising flickering, and for more in-depth discussion the reader is directed towards these works. The mathematics below omits error in flux for legibility, but closely similar derivations are possible that include error when calculating the likelihood of a data set.
 
@@ -448,11 +448,11 @@ When evaluating a proposed $\Theta$ in the MCMC, rather than using $\mathcal{L} 
     \mathcal{L} = P({\bf y}_{res} | {\bf t}, \alpha, \lambda) = \frac{1}{(2\pi)^{n/2} |{\bf K}|^{1/2}} \exp \bigg(- \frac{1}{2} {\bf y}_{res}^{\top} {\bf K}^{-1} {\bf y}_{\rm res} \bigg)
 \end{equation}
 
-One final factor must be accounted for. Flickering appears to be localised to the region of space near the white dwarf, and often reduces in amplitude substantially during the white dwarf eclipse \citep{McAllister2017}.
+One final factor must be accounted for. Flickering appears to be localised to the region of space near the white dwarf, and often reduces in amplitude substantially during the white dwarf eclipse \citep{mcallister2017}.
 To capture this in the GP, two kernels are used: one external to the white dwarf eclipse, and one internal to the white dwarf eclipse. Each shares a value of $\lambda$, but has its own freely variable $\alpha$, $\alpha_{\rm out}$ and $\alpha_{\rm in}$.
 
 Overall, the GP adds three new parameters to the eclipse model: $\alpha_{\rm out, in}$ and $\lambda$, which are optimised alongside the eclipse parameters themselves. $\alpha_{\rm out, in}$ use wide, log-uniform priors to prioritise smaller amplitudes. $\lambda$ uses a narrower log-uniform prior, chosen to prevent the timescale from either exceeding the duration of the eclipse, or becoming shorter than the time resolution between data points.
-The slightly more complex parameter space that must now be explored, and more computationally expensive evaluation of $\mathcal{L}$, is made up for in a significantly better characterisation of lower quality eclipses \citep{McAllister2017}.
+The slightly more complex parameter space that must now be explored, and more computationally expensive evaluation of $\mathcal{L}$, is made up for in a significantly better characterisation of lower quality eclipses \citep{mcallister2017}.
 
 
 
@@ -461,7 +461,7 @@ The slightly more complex parameter space that must now be explored, and more co
 
 In this thesis, the lightcurve fitting model used by \citet{McAllister2019} is extended, adopting a hierarchical approach to reduce model complexity.
 
-Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{McAllister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
+Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{mcallister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
 
 \begin{figure}
     \centering
