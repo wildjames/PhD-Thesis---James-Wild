@@ -1,21 +1,20 @@
 \label{chpt:discussion} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Discussion}} % This is for the header on each page - perhaps a shortened title
 
-The analysis of this section includes eclipse modelled data from several sources: the 15 systems contained in this thesis, the 15 CVs characterised by \citet{McAllister2019}, and the 14 CVs modelled by \citet{Savoury2011}. A catalogue of all these data is given in Appendix~\ref{appendix:eclipse modelled CV data tables}. Note that there is some overlap between the data of \citet{McAllister2019} and \citet{Savoury2011}, and where this is the case the more recent findings of \citet{McAllister2019} are preferred.
+The analysis of this section includes eclipse modelled data from several sources: the 15 systems contained in this thesis, the 15 CVs characterised by \citet{McAllister2019}, and the 14 CVs modelled by \citet{Savoury2011}. An additional 4 systems from \citet{mcallister2015,mcallister2017, mcallister2017b}; and \citet{copperwheat2010} were used, detailed in Table~\ref{table:supplementary systems}. A full catalogue of all these data is given in Appendix~\ref{appendix:eclipse modelled CV data tables}.
+There is some overlap between the data of \citet{McAllister2019} and \citet{Savoury2011}, and where this is the case the more recent findings of \citet{McAllister2019} are preferred.
 
 
-\section{Three CVs with peculiar white dwarf colours}
+\section{Three CVs with odd white dwarf colours}
 \label{sect:discussion:three CVs with peculiar white dwarf colours}
 
-All three systems were candidate post-period minimum systems based on their periods and preliminary eclipse data; none show a prominent bright spot (indicative of a low mass transfer rate), or significant donor flux (implying a dim donor).
+All three systems of Chapter~\ref{chpt:results:three peculiar white dwarfs} were candidate post-period minimum systems based on their periods and preliminary eclipse data; none show a prominent bright spot (indicative of a low mass transfer rate), or significant donor flux (implying a dim donor).
 As a result of this work, ASASSN-16kr and SSSJ0522-3505 are confirmed as having evolved through the period minimum and now have sub-stellar donors, and ASASSN-17jf lies in the period minimum region of Figure~\ref{fig:M2_vs_P}.
 Additionally, all three white dwarf masses derived in this analysis fall within the range of CV white dwarf masses observed by \citet{pala2020}, of $\langle M_{\rm WD}\rangle = 0.83 \pm 0.17 M_\odot$, significantly higher than the pre-CV DA white dwarf mass of only $0.66 \pm 0.15 {\rm M_\odot}$ \citep{mccleery2020}.
-
-
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{figures/results/three_cvs_with_weird_colours/GeneralFigs/M2_vs_P_withhumpers.pdf}
-    \caption{Donor evolution tracks, from MESA modelling. The }
+    \caption{Donor evolution tracks, from MESA, compared with observations. The observational sample presented here is the same as in \citet{wild2021}.}
     \label{fig:M2_vs_P}
 \end{figure*}
 
@@ -55,7 +54,7 @@ Whilst high, a mass accretion rate of $10^{-10} M_\odot {\rm yr^{-1}}$ is not in
 \section{Eclipse modelling of 12 CVs}
 \label{sect:discussion:eclipse modelling of 12 CVs}
 
-None of these systems presented the issues with their characterisations that was seen in \S\ref{sect:discussion:three CVs with peculiar white dwarf colours}. The modelled white dwarf colours were described by cooling tracks well in most cases, with the two exceptions mentioned in \S\ref{sect:results:12 new CVs:results}. Spectroscopic follow-up of CSS090419 and CSS090622 is desirable to probe these systems more deeply. In addition, AY For was previously suspected to be a pre-period minimum system \citep{mason2005}. My analysis confirms this, as I find a donor mass of $0.106\pm0.006 M_\odot$, confidently greater than the turnaround mass of $\sim0.06 M_\odot$.
+None of these systems presented the issues with their characterisations that was seen in \S\ref{sect:discussion:three CVs with peculiar white dwarf colours}. The modelled white dwarf colours were described by cooling tracks well in most cases, with the two exceptions mentioned in \S\ref{sect:results:12 new CVs:results}. Spectroscopic follow-up of CSS090419 and CSS090622 is desirable to probe these systems more deeply. In addition, AY For was previously suspected to be a pre-period minimum system \citep{mason2005}. My analysis confirms this, as I find a donor mass of $0.106\pm0.006 M_\odot$, confidently greater than the period minimum mass of $\sim0.06 M_\odot$.
 
 Some results, however, are good demonstrations of the ability of the hierarchical GP modelling approach to usefully model poorer quality light curves in tandem with higher quality ones.
 An example of this is seen in the case of MAS0014, where the high-quality binned data help a subtle bright spot egress to be confidently constrained in the eclipse of 2016/11/07 even in the presence of significant flickering.
@@ -63,16 +62,15 @@ An example of this is seen in the case of MAS0014, where the high-quality binned
 A more extreme example is that of SDSS J0748, which has the white dwarf and bright spot ingresses blended together for the majority of observations, but clearly distinct ingresses on the night of 2018/02/05 and somewhat distinct ingresses on 2018/02/07.
 Using the hierarchical structure to share information between observations makes characterisation possible in a system that would be extremely difficult to model otherwise.
 
-The observed donor properties can be compared to the \citet{knigge11}-like MESA donor tracks. Figure~\ref{fig:discussion:donor model with eclipsers plotted} shows the full sample of short-period eclipse modelled CVs plotted with the `standard' donor track that includes only gravitational braking below the gap and the disagreement between model and data indeed persists. The data lie systematically right of the `standard' model track, and the need for extra AML continues to be supported by observations.\todo{Update this plot with supplementary systems.}
+The observed donor properties can be compared to the \citet{knigge11}-like MESA donor tracks. Figure~\ref{fig:discussion:donor model with eclipsers plotted} shows the full sample of short-period eclipse modelled CVs plotted with the `standard' donor track that includes only gravitational braking below the gap and the disagreement between model and data indeed persists. Whilst there is a large scatter present, new data continue to lie systematically to the right of the `standard' model track, and the need for extra AML continues to be supported by observations.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/K11_donor_track_with_eclipse_modelled_data.pdf}
-    \caption{Showing how eclipse modelled observations compare with evolutionary models. The {\bf solid blue line} is the `standard' MESA CV donor track, and the {\bf solid green line} is the `optimal' track, described in \S\ref{sect:results:reproducing K11 tracks}. The {\bf black data with errors} are observations: {\bf circles} are the 3 CVs with peculiar colours from Chapter~\ref{chpt:results:three peculiar white dwarfs}, {\bf crosses} are the 12 systems of Chapter~\ref{chpt:results:characterisation of 12 new CVs}, and {\bf triangles} are data from \citet{McAllister2019}, and {\bf squares} are from \citet{Savoury2011}.}
+    \caption{Showing how eclipse modelled observations compare with evolutionary models in the short period regime. The {\bf solid blue line} is the `standard' MESA CV donor track, and the {\bf solid green line} is the `optimal' track, described in \S\ref{sect:results:reproducing K11 tracks}. The {\bf black data with errors} are observations: {\bf crosses} are the 3 CVs with peculiar colours from Chapter~\ref{chpt:results:three peculiar white dwarfs}, {\bf circles} are the 12 systems of Chapter~\ref{chpt:results:characterisation of 12 new CVs}, {\bf upright triangles} are data from \citet{McAllister2019}, {\bf squares} are from \citet{Savoury2011}, and the {\bf inverted triangle} is from \citet{mcallister2017b}.}
     \label{fig:discussion:donor model with eclipsers plotted}
 \end{figure}
 
-\todo{eCAML instability plot could be made, with the new data added to it}
-\todo{The K11 mass-radius relation can be updated? Not really worth it...}
+\todo{The K11 mass-radius relation can be updated? Not really worth it, not my focus and not that many new systems.}
 
 
 
@@ -86,14 +84,16 @@ In order to qualitatively evaluate missing AML, the period \textit{excess} was e
 To determine $P_{\rm ex}$ from an estimate of $P_{\rm obs}, M_{\rm donor}$, mass samples are drawn from a Gaussian distribution based on the observed mean and standard deviation of $M_{\rm donor}$, and period is interpolated from the evolutionary tracks to give a corresponding $P_{\rm model}$ distribution. As $P_{\rm model}$ is very sensitive to $M_{\rm donor}$, the $P_{\rm model}$ error dominates the uncertainty in $P_{\rm ex}$.
 A positive $P_{\rm ex}$ indicates that the model is missing AML, and a negative $P_{\rm ex}$ indicates a model that has too much AML, relative to an observation.
 
-The validity of $P_{\rm ex}$ is vulnerable on two key systematic biases; the validity of $P_{\rm model}$, and the inherent physical variation of the CV population. This is the secondary motivation for the development of the more rigorous methodology of \S\ref{sect:modelling:optimising mass loss rate to observations}, with the primary motivation being the qualitative nature of this approach.
+The validity of $P_{\rm ex}$ is vulnerable on two key systematic biases; the validity of $P_{\rm model}$, and the inherent physical variation of the CV population. This is the secondary motivation for the development of the more rigorous methodology of \S\ref{sect:modelling:optimising mass loss rate to observations}, with the primary motivation being to avoid the qualitative nature of the $P_{\rm ex}$ approach.
 
 CVs may follow inherently different evolutionary tracks due to differences in donor metallicity \citep{stehle1997, harrison2016}, white dwarf mass \citep{knigge2006}, and the age of the donor when it first contacts the Roche lobe \citep{howell2001}. A population-wide scatter in this parameter space is not captured in the \citet{knigge11} model, which uses fixed values for these variables, but justification for the adopted values are given \citep{knigge11, knigge2006}.
 If any individual system deviates from the adopted values in the models of \citet{knigge11} then $P_{\rm ex}$ for that system will be influenced by these differences as well as any extra AML. However, conclusions about $P_{\rm ex}$ drawn from the population at large should remain robust, as long as the population doesn't differ systematically from the values adopted in the models. The white dwarf mass used by \citet{knigge11} is somewhat lower than more recent observations suggest, using $M_{\rm WD} = 0.75 M_\odot$ versus the more recent value of $M_{\rm WD} = 0.83 \pm 0.17 M_\odot$ \citep{pala2020}. Modelling will be necessary to properly characterise the effect of this change on the donor evolutionary tracks, as this will affect both the size of the Roche lobes, and the rate of gravitational wave AML. However, other CV models suggest that the effect will be small; at most around 2 minutes \citep{goliasch2015}.
 
 More seriously, $P_{\rm ex}$ is only an accurate proxy of additional AML if the underlying donor physics in the model are correct. For example, if the models incorrectly predict the mass of systems in the period gap, this can have a large effect on $P_{\rm ex}$. In the models of \citet{knigge11} this mass is fixed at the empirically derived value of $0.2 M_\odot$, as observations of superhumping and eclipsing CVs suggest that period gap occurs at donor masses of $0.20 \pm 0.02 M_\odot$ \citep{knigge2006}. Using model tracks with lower or higher masses for the donor mass of the period gap would alter $P_{\rm ex}$, though in this case the broad trend in $P_{\rm ex}$ will again be unchanged.
 
-The result is plotted in Figure~\ref{fig:period excess}. These data are fit with a straight line, and as the data have significant uncertainty in both axes, the sum orthogonal distance from the data is minimised to find the best fit \citep{hogg2010}. The best-fit lines to the two data sets are $P_{\rm ex} = -(2.97\pm0.99) M_{\rm donor} + (0.34\pm0.09)$ and $P_{\rm ex} = -(1.66\pm0.32) M_{\rm wd} + (1.30\pm0.24)$.
+The result is plotted in Figure~\ref{fig:period excess}. These data are fit with a straight line, and as the data have significant uncertainty in both axes, the sum orthogonal distance (weighted by uncertainty) from the data is minimised to find the best fit \citep{hogg2010}. Python's \lstinline{SciPy} package, \lstinline{ODR} was used to perform this fitting.
+
+ The best-fit lines to the two data sets are $P_{\rm ex} = -(2.97\pm0.99) M_{\rm donor} + (0.34\pm0.09)$ and $P_{\rm ex} = -(1.66\pm0.32) M_{\rm wd} + (1.30\pm0.24)$.
 I find that the best-fit to $P_{\rm ex}$ as a function of both $M_{\rm donor}$ and $M_{\rm wd}$ to be significant: $\sim 5\sigma$ from the null hypothesis of 0 in the case of $M_{\rm wd}$, and $\sim 3\sigma$ for $M_{\rm donor}$.
  However, note that the best-fit line for $M_{\rm donor}$ does \textit{not} pass through $P_{\rm ex} = 0$ at $M_{\rm donor} = 0.20 M_\odot$ as expected, unless the $3\sigma$ confidence on the gradient and intercept are considered.
 
@@ -130,7 +130,7 @@ There are then three cases to describe the trend in $P_{\rm ex}$: the excess AML
 First, I compare the mass loss rates of the donor inferred from donor properties, with the mass loss rates inferred from the white dwarf properties. Figure~\ref{fig:discussion:compare Mdot from donor and WD} plots the $\dot M$ from each method, and two differences between the data are immediately obvious: the white dwarf properties consistently indicate a higher $\dot M$, and using the donor properties results in significantly larger uncertainties.
 
 The white dwarf indicating a higher mass loss rate is expected, as recent dwarf novae (a.k.a periods of intense accretion onto the white dwarf) cause the surface to heat up, but after a dwarf nova has subsided the white dwarf will take hundreds to tens of thousands of years to adjust to the lower accretion rate.
-Several of the CVs in this sample were identified for eclipse modelling follow-up \textit{specifically} based on observations of recent outbursts, so it is unsurprising that the white dwarf can indicate $\dot M$ an order of magnitude higher than the donor does. As the white dwarf is subject to inflation by these short-term variations, the donor-based method is considered more reliable for the long-term $\dot M$ baseline and hereafter when values of $\dot M$ are used, they are the values derived from the donor properties.
+Several of the CVs in this sample were identified for eclipse modelling follow-up \textit{explicitly} based on observations of recent outbursts, so it is unsurprising that the white dwarf can indicate $\dot M$ an order of magnitude higher than the donor suggests. As the white dwarf is subject to inflation by these short-term variations, the donor-based method is considered more reliable for the long-term $\dot M$ baseline and hereafter when values of $\dot M$ are used, they are the values derived from the donor properties.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/compare_mdot_from_donor_vs_wd_vs_period.pdf}
@@ -138,31 +138,30 @@ Several of the CVs in this sample were identified for eclipse modelling follow-u
     \label{fig:discussion:compare Mdot from donor and WD}
 \end{figure}
 
-It is interesting to compare the correlation between the mass loss rate and the masses of the two bodies in a CV.
 
-Recall from the discussion in \S\ref{sect:introduction:magnetic braking} that, if the missing AML from CV models is rooted in residual magnetic braking, {\it and these prescriptions for magnetism are accurate}, we would expect to see a correlation between $M_{\rm donor}$ and $\dot M$.
-This is because both prescriptions are dependent on the Rossby number, a function of the rotational period, which itself is a function of donor mass in this mass range.
-If, however, the CAML model is correct and the source of the missing AML is the white dwarf's ejecta carrying momentum with it from the system (refer to \S\ref{sect:introduction:CAML}), we would expect a correlation between $M_{\rm wd}$ and $\dot M$, as a lower total system mass would allow material to leave with a higher velocity, and the white dwarf dominates the total mass of a CV.
+\subsection{Mass loss rate correlations}
+
+Recall from the discussion in \S\ref{sect:introduction:magnetic braking} that, if the missing AML from CV models is rooted in residual magnetic braking, {\it and these prescriptions for magnetism are accurate}, we would expect to see a correlation between $M_{\rm donor}$ and $\dot M$. No such correlation is expected with $M_{\rm wd}$.
+This is because both prescriptions are dependent on the Rossby number, a function of the rotational period, which itself is a function of donor mass for short period CVs.
+If, however, the eCAML model is correct and the source of the missing AML is the white dwarf's ejecta carrying momentum with it from the system (refer to \S\ref{sect:introduction:CAML}), we would expect a correlation between $M_{\rm wd}$ and $\dot M$.
 Of course, the two sources of extra AML are not mutually exclusive, and may co-exist.
 
-To probe for these correlations the $\chi^2$ test is insufficient, since both axes have significant errors.
-Rather, the minimised quantity is the sum of the squared orthogonal distances between the observations and a proposed best-fit line, weighted by error. Python's \lstinline{scipy} package, \lstinline{ODR} was used to perform this fitting.
+To probe for these correlations the $\chi^2$ test is insufficient, since both axes have significant uncertainty. The orthogonal distance between the line and data is again minimised, similar to the previous section.
 
 Figure~\ref{fig:discussion:donor mass vs Mdot fit} shows the best fit line for $\dot M(M_{\rm donor})$, and Figure~\ref{fig:discussion:white dwarf mass vs Mdot fit} is the fit for $\dot M(M_{\rm wd})$.
 
-These figures show a correlation in each case. Lower $M_{\rm wd}$ appear to correlate with \textit{higher} $\dot M$, and lower $M_{\rm donor}$ appear to correlate with \textit{lower} $\dot M$.
-The correlation between $M_{\rm wd}$ and $\dot M$, is reasonably confident -- the est-fit gradient is $4.5\sigma$ from the null-hypothesis of 0.
-However, the $M_{\rm donor}$ case is comparable, with a best-fit gradient $4.4 \sigma$ from 0.
-% Therefore, we can consider these findings as preliminary evidence for a co-existence between a small degree of residual magnetic braking below the period gap, \textit{and} an excess AML over gravitational wave braking that is due to CAML.
+The correlation between $M_{\rm wd}$ and $\dot M$, is reasonably confident -- the best-fit gradient is $4.5\sigma$ from the null-hypothesis of 0.
+However, no correlation is found between $\dot M$ and $M_{\rm donor}$, and Figure~\ref{fig:discussion:donor mass vs Mdot fit} clearly shows an incredibly wide range of gradients to be consistent with the data.
+Based on these results, it is unlikely that residual magnetic braking is responsible for the excess AML in CVs, but still possible that the drag imposed by nova material is the cause.
 
-There are a few factors to consider when deciding how convincing these findings are.
-The sample size is still small, only 25 systems, and the errors on $\dot M$ are large. Further, there may be a problem with systematic error -- it may that this sample is biased towards CVs with more excess AML, as these would be more inflated and thus less likely to be smaller than the Brown relation suggests for a zero-$\dot M$ star.
-A more robust understanding of the low-mass main sequence mass-radius relation is crucial to a more confident re-analysis of these results.
+However, there are a few factors to consider when deciding how convincing these findings are.
+The sample size is still small, only 25 systems, and the uncertainty in $\dot M$ are large. In addition, there may be a problem with systematic error -- it may that this sample is biased towards CVs with more excess AML, as these would be more inflated and thus less likely to be smaller than the Brown relation suggests for a zero-$\dot M$ star.
+A significant source of unreliability is likely to be the mass-radius relationship used to calibrate the donor models. A more robust understanding of the low-mass main sequence mass-radius relation is crucial to a more confident re-analysis of these results.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mr_Mdot.pdf}
-    \caption{Showing the correlation between the donor mass and mass loss rate. The {\bf black crosses with error bars} show the observations, and the {\bf red line} shows the best fit to the data, with the {\bf shaded red region} showing the coverage of the uncertainty in the line parameters. The darkest region is $1\sigma$, the middle region is $2\sigma$, and the lightest region shows $3\sigma$. The {\bf dashed blue line} shows the value predicted by the `standard' MESA CV model, and the {\bf dashed green line} is the `optimal' MESA CV track. The best fit line has the form $\log (\dot M,\ M_\odot\ {\rm yr}^{-1}) = (19.61\pm4.50) (M_{\rm donor}, M_\odot) - (12.02\pm0.42)$. }
+    \caption{Showing the correlation between the donor mass and mass loss rate. The {\bf black crosses with error bars} show the observations, and the {\bf red line} shows the best fit to the data, with the {\bf shaded red region} showing the coverage of the uncertainty in the line parameters. The darkest region is $1\sigma$, the middle region is $2\sigma$, and the lightest region shows $3\sigma$. The {\bf dashed blue line} shows the value predicted by the `standard' MESA CV model, and the {\bf dashed green line} is the `optimal' MESA CV track. The best fit line has the form $\log (\dot M,\ M_\odot\ {\rm yr}^{-1}) = (-79\pm48) (M_{\rm donor}, M_\odot) - (2.3\pm4.9)$. }
     \label{fig:discussion:donor mass vs Mdot fit}
 \end{figure}
 % \begin{figure}
@@ -174,7 +173,7 @@ A more robust understanding of the low-mass main sequence mass-radius relation i
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mwd_Mdot.pdf}
-    \caption{Showing the correlation between the white dwarf mass and mass loss rate. Symbols are similar to Figure~\ref{fig:discussion:donor mass vs Mdot fit}, though here the range of values predicted by the `standard' and `optimal' MESA CV models are shown as the {\bf blue shaded region} and {\bf green shaded region}, respectively. The best fit line has the form $\log ( \dot M,\ M_\odot\ {\rm yr}^{-1}) = (-2.27 \pm 0.50) (M_{\rm donor}, M_\odot) - (8.48 \pm 0.36)$}
+    \caption{Showing the correlation between the white dwarf mass and mass loss rate. Symbols are similar to Figure~\ref{fig:discussion:donor mass vs Mdot fit}, though here the range of values predicted by the `standard' and `optimal' MESA CV models are shown as the {\bf blue shaded region} and {\bf green shaded region}, respectively. The best fit line has the form $\log ( \dot M,\ M_\odot\ {\rm yr}^{-1}) = (-2.62 \pm 0.60) (M_{\rm wd}, M_\odot) - (8.18 \pm 0.44)$}
     \label{fig:discussion:white dwarf mass vs Mdot fit}
 \end{figure}
 % \begin{figure}
@@ -185,13 +184,15 @@ A more robust understanding of the low-mass main sequence mass-radius relation i
 % \end{figure}
 
 
+\subsection{Measured excess angular momentum loss}
+
 It is possible to more directly probe the AML of the CVs -- Equation~\ref{eqn:modelling:Jdot from Mdot} shows how the AML can be calculated from $M_{\rm wd},\ M_{\rm donor},\ \dot M$, and $a$.
 Figures~\ref{fig:discussion:donor mass vs Jdot fit}~and~\ref{fig:discussion:white dwarf mass vs Jdot fit} show the best-fit to the $\dot J$ \textit{excess}, which has had the $\dot J_{\rm GR}$ predicted by MESA at the appropriate donor mass ($\dot J_{\rm MESA}$) subtracted.
-Again, the correlation with $M_{\rm wd}$ is reasonably significant at $4.1\sigma$ from a gradient of 0, but here the donor correlation is less significant at $3.4\sigma$, though this is more significant than in the case of $\dot M$.
+Again, the correlation with $M_{\rm wd}$ is reasonably significant at $4.3\sigma$ from a gradient of 0, and the donor shows no correlation.\todo{Set the y limits so these don't look absurd}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mr_Jdot_ex.pdf}
-    \caption{Showing the correlation between the donor mass and angular momentum loss rate, $\dot J$. Symbols are similar to Figure~\ref{fig:discussion:donor mass vs Mdot fit}, though here the {\bf dashed blue line} shows perfect agreement between observations and gravitational angular momentum loss. Note that the two data with vertical errors spanning the full height of the plot extend by approximately an order of magnitude in each direction, but are truncated for clarity. The line of best fit has the form $(\dot J_{\rm obs} - \dot J_{\rm MESA}), J = (2.68\pm0.79) \times 10^{28}(M_{\rm donor}, M_\odot) - (2.17\pm0.71)\times10^{27}$}
+    \caption{Showing the correlation between the donor mass and angular momentum loss rate, $\dot J$. Symbols are similar to Figure~\ref{fig:discussion:donor mass vs Mdot fit}, though here the {\bf dashed blue line} shows perfect agreement between observations and gravitational angular momentum loss. Note that the datum with vertical errors spanning the full height of the plot extend by approximately an order of magnitude in each direction, but are truncated for clarity. The line of best fit has the form $(\dot J_{\rm obs} - \dot J_{\rm MESA}), J = (5\pm10) \times 10^{29}(M_{\rm donor}, M_\odot) - (5\pm10)\times10^{28}$}
     \label{fig:discussion:donor mass vs Jdot fit}
 \end{figure}
 % \begin{figure}
@@ -204,7 +205,7 @@ Again, the correlation with $M_{\rm wd}$ is reasonably significant at $4.1\sigma
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mwd_Jdot_ex.pdf}
-    \caption{Showing the correlation between the white dwarf mass and angular momentum loss rate, $\dot J$. Symbols are similar to Figure~\ref{fig:discussion:white dwarf mass vs Jdot fit}, and the best fit line has the form $(\dot J_{\rm obs} - \dot J_{\rm MESA}), J = -(3.62\pm0.89) \times 10^{27}(M_{\rm donor}, M_\odot) - (2.98\pm0.67)\times10^{27}$}
+    \caption{Showing the correlation between the white dwarf mass and angular momentum loss rate, $\dot J$. Symbols are similar to Figure~\ref{fig:discussion:white dwarf mass vs Jdot fit}, and the best fit line has the form $(\dot J_{\rm obs} - \dot J_{\rm MESA}), J = -5.7\pm1.3) \times 10^{27}(M_{\rm wd}, M_\odot) - (4.6\pm0.96)\times10^{26}$}
     \label{fig:discussion:white dwarf mass vs Jdot fit}
 \end{figure}
 % \begin{figure}
@@ -216,15 +217,43 @@ Again, the correlation with $M_{\rm wd}$ is reasonably significant at $4.1\sigma
 
 
 Three possibilities for the form of excess AML were suggested in \S\ref{sect:discussion AML}: the excess AML also declines in strength but more slowly than gravitational losses; excess AML is roughly constant across the range of $M_{\rm donor}$ or $M_{\rm donor}$; or excess AML increases in strength towards lower $M_{\rm donor}$ or $M_{\rm wd}$.
-We can now see that the excess AML appears to increase in strength towards lower component masses.
+We can now see that the excess AML appears to increase in strength towards lower $M_{\rm wd}$.
 
-Based on the analysis above, it appears that both residual magnetic braking and eCAML have some influence on the evolution of a short period CV, with there being consistent signs of increasing excess AML towards both lower donor masses, and lower white dwarf masses.
+% Based on the analysis above, it appears that eCAML is the better model for the excess AML of a short period CV, with there being consistent signs of increasing excess AML towards both lower donor masses, and lower white dwarf masses.
 % We can now discriminate between these with the quantitative analysis given here, and see that the degree of excess AML is most likely to be a negative correlation with $M_{\rm wd}$, in line with the CAML model of CVs.
-As a final test of eCAML, the stability plot given in Figure~\ref{fig:introduction:Schreiber 2016 figure 2} can be augmented to include the new CVs of this work, from which we can see that no CVs exist outside of the stability region.
-\todo{Make the eCAML plot with the new data.}
+
+
+Recall from \S\ref{sect:introduction:CAML} that under eCAML, the efficiency parameter $\nu$, is given by $C/M_{\rm wd}$, and typical values of $C$ are roughly chosen to be $0.3 - 0.4$, to reproduce the observed CV population distribution.
+\begin{equation}
+    \label{eqn:ecaml general}
+    \frac{\dot J_{CAML}}{J} = \nu \frac{\dot M_{\rm donor}}{M_{\rm donor}}
+\end{equation}
+Assuming that eCAML is the sole source of excess AML, we can now measure a value of $\nu$. To do this, I use a slightly modified version of Equation~\ref{eqn:ecaml general}, which accounts for the choice of the form of $\nu$;
+\begin{equation}
+    \frac{\dot J_{CAML}}{J} = C \frac{\dot M_{\rm donor}}{M_{\rm donor} M_{\rm wd}}
+\end{equation}
+$C$ can then be fit to data, again minimising the orthogonal distance to the data, though this fit is limited to the subset of the observations for which $\dot M$ could be determined.
+Doing so finds a best-fit $C = 0.32 \pm0.05$, with impressively good agreement between the model and data. This value of $C$ is also remarkably close to that estimated by \citet{Schreiber2016}. \todo{This is the wrong one! I need the one with no y-intercept.}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/Mdot/eCAML_nu_grey_large_error_fit.pdf}
+    \caption{DO THIS CAPTION}
+    \label{fig:discussion:calibrating ecaml relationship}
+\end{figure}
+
+As a final test of eCAML, the stability plot given in Figure~\ref{fig:introduction:Schreiber 2016 figure 2} can be augmented to include the new CVs of this work, and the best-fit value of $\nu$.\todo{Fix the label!}
+This is shown in Figure~\ref{fig:discussion:calibrated eCAML}, from which we can see that no low $M_{\rm donor}$ CVs exist outside the stability region demanded by the newly calibrated eCAML.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/results/Mdot/ecaml_nointercept.pdf}
+    \caption{Showing the distribution of eclipse modelled, low $M_{\rm donor}$ CVs compared to the region of stability demanded by eCAML. The {\bf shaded grey regions} are forbidden, either because the white dwarf exceeds the Chandrasekhar limit (lower region), or because mass transfer becomes dynamically unstable (upper region). The {\bf dashed line} shows the mass ratio that a CV would have with $M_{\rm wd} = 0.81 M_\odot$. Data symbology is similar to Figure~\ref{fig:discussion:donor model with eclipsers plotted}}
+    \label{fig:discussion:calibrated eCAML}
+\end{figure}
+These findings underline the success of eCAML in describing CV evolution, but must still be treated with caution. It cannot be ignored that whilst this form of $\nu$ is loosely physically motivated, a less empirical model is highly desirable.
+Further, the data clearly suggest that $\frac{\dot J_{CAML}}{J} \neq 0$ at $\dot M = 0$, in direct contradiction with the original formulation. \todo{Talk to Stu about this when he's back. I reckon some algebra is needed to re-derive the stability criterion to allow for this... But it's not physical! How cuold CAML inhibit AML???}
 
 Further work is needed to grow the population of eclipse modelled low-$M_{\rm donor}$ CVs and improve these statistics, and continued eclipse modelling targeting short period CVs will be valuable to determining the probable source of excess AML.
 Specific effort should be targeted towards confident characterisation of CVs at higher $M_{\rm donor}$ of $\sim0.15$, where existing data have large error bars. The clustering of confident data at lower masses leaves the current sample prone to poor extrapolation beyond $\sim 0.11 M_\odot$.
 However, lending credence to these results is the consistency with findings of \citet{Pala2021}, who used the white dwarf properties to arrive at a similar conclusion.
 
-\todo{Augment MESA to include my new AML prescription, and run it!}
+\todo{Augment MESA to include my new AML prescription, and run it?}

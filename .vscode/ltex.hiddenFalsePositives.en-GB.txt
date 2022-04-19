@@ -1,0 +1,1 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThis subroutine uses the sThis was used to reproduce the `optimal' track.\\E$"}

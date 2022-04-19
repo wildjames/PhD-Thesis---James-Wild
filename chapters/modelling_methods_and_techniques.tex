@@ -484,14 +484,14 @@ Therefore, binning is only done when data are sufficiently similar, and is treat
 Once armed with a robust sample of CVs donor masses and radii, evolutionary modelling is able to refine our understanding even further. In \S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}, I motivated how the donor star inflates in response to mass loss, and how the degree of this inflation is related to the severity of the mass loss.
 If the radius of an equivalent star in the absence of mass loss is known, and the observed radius of a CV donor can be reproduced by stellar structure models with the introduction of some amount of mass loss, the long-term average mass loss rate can be inferred.
 
-The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}, a one-dimensional stellar evolution model. MESA is highly flexible, due to its use of various `modules', wherein each module supplies the code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics not contained in the core codebase.
+The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}, a one-dimensional stellar evolution model. MESA is highly flexible, due to its use of various `modules', wherein each module supplies code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics not contained in the core codebase.
 Regarding CV modelling in particular, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of modelling CV donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking triggered by the donor becoming fully convective \citep{Paxton_2015}.
 \S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and shows that with some small modifications the agreement between MESA and \citet{knigge11} can be improved further.
 
 Note that all MESA models for this thesis were run using version 21.12.1 of the MESA codebase, and use the configuration detailed in \S\ref{sect:modelling:MESA configs}, unless specified otherwise.
 
 To extract mass loss rates, I will go through three steps.
-Firstly, I demonstrate how the radius of a singleton model of a given mass can be tuned to match the M dwarf mass-radius relationship given by \citet{BrownPrep} by introducing star spots, and produce a set of M dwarf models that reproduce observations of stars across the CV donor mass range that \textit{aren't} losing mass.
+Firstly, I demonstrate how the radius of a zero-$\dot M$ singleton model of a given mass can be tuned to match the M dwarf mass-radius relationship given by \citet{brown2022} by introducing star spots.
 Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for present-day mass loss rate.
 Finally, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
 % Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
@@ -503,10 +503,10 @@ Finally, I outline the method by which I search for mass loss rates that produce
 Broadly speaking, when computing a stellar evolution model one must simply input models of physical processes, describe some initial conditions, and allow the stellar model to evolve over time. Unfortunately, the physics of stars in not completely understood, and the processes that affect a star's evolution significantly differ depending on its conditions.
 Whilst some core physics is fixed, MESA provides many options for which prescriptions to use for a particular process, or even which processes to consider at all.
 MESA has default configuration vales that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
-As such, some tailoring of configuration files must be done in order to produce accurate donor models.
+As such, some tailoring of configuration files must be done in order to produce accurate donor models. The configuration files of this work are available online at the MESA project database\footnote{Cococubed}\todo{Upload this when you can.}.
 
 Parameters that are not discussed below are left as the MESA default.
-Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here assume a solar initial metallicity.
+Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here use the default MESA metallicity, $Z = 0.02$ (\lstinline{initial_z = 0.02d0}), $Y = 0.28$(\lstinline{initial_z = 0.28d0}).
 
 
 \subsubsection{Model initialisation}
@@ -573,10 +573,12 @@ When the stellar envelope is superadiabatic and its atmosphere is radiation-domi
 \label{sect:modelling:starspots in MESA}
 
 A general problem in the modelling of low mass stars is an under-estimation of their radii \citep{lopez2005}, and MESA is no exception.
-Recently, \citet{BrownPrep}\todo{Get this reference. Can't be long now!} characterised a sample of $\sim 15000$ M dwarfs in detached binaries with a 5th order polynomial, referred to as the Brown relation. We use this empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
+Recently, \citet{brown2022} characterised a sample of $\sim 15000$ M dwarfs with Gaia parallaxes, radii, and 2MASS $K_S$ measurements from \citet{morrell2019} with a 5th order polynomial, $R(M)$, referred to as the Brown relation. Notably, this relation shifts to the theoretical \citet{baraffe2015} tracks at $M < 0.121 M_\odot$, as the data become increasingly sparse at such low masses.
+We use this semi-empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
 
 The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
-To account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
+To partially account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
+However, it must be emphasised that the non-spherical Roche geometry is not solely a geometric effect -- the breakdown of spherical symmetry fundamentally alters the structure of the star near the surface, the effects of which are not captured by this radius correction. However, for the purposes of this work, these effects can be considered negligible.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
@@ -631,19 +633,21 @@ And therefore,
     P_{\rm gas, spot} =& P_{\rm gas, amb} - (1-x_{\rm spot}) P_{\rm gas, amb} \\
     P_{\rm gas, spot} =& x_{\rm spot} P_{\rm gas, amb}
 \end{align}
-However, star spots do not penetrate to the core of the star. To quantify this, rather than fixing $x_{\rm spot}$ and calculating the new pressure at each depth of the star, I calculate the gas pressure differential at the surface of the star, and fix this gas pressure difference for interior layers.
+However, star spots do not penetrate to the core of the star. To quantify this, rather than fixing $x_{\rm spot}$ and calculating the new pressure at each depth of the star, I calculate the gas pressure difference at the surface of the star, and fix this gas pressure difference for interior layers.
 As gas pressure rises with depth, a significant difference at the surface quickly becomes insignificant.
-For each depth of the star, $x_{\rm spot}$ is calculated from its total pressure before any alteration is made, $P_i$, and the surface pressure, $P_{\rm surf, amb}$,
-\begin{align}
-    P_{\rm gas, amb} - P_{\rm mag, spot} =& x_{\rm spot} P_{\rm gas, amb} \\
-    x_{\rm spot, i} =& \frac{P_i - P_{\rm surf, amb}}{P_i}
-\end{align}
+% For each depth of the star, $x_{\rm spot}$ is calculated from its total pressure before any alteration is made, $P_i$, and the surface pressure, $P_{\rm surf, amb}$,
+% \begin{align}
+%     P_{\rm gas, amb} - P_{\rm mag, spot} =& x_{\rm spot} P_{\rm gas, amb} \\
+%     x_{\rm spot, i} =& \frac{P_i - P_{\rm surf, amb}}{P_i}
+% \end{align}
 Rather than directly altering the pressure profile of the star, the radiative gradient, $\nabla_r$, at each depth is modified. MESA then uses $\nabla_r$ to compute a self-consistent pressure profile for the star.
 \begin{align}
     \alpha_{\rm spot, i} =& 1 - f_{\rm spot} + f_{\rm spot} \cdot x_{\rm spot, i}^4 \\
     \nabla_{r,i}' =& \frac{\nabla_{r,i}}{\alpha_{\rm spot, i}}
 \end{align}
-Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-configured parameters to define the degree of spotting. Figure~\ref{fig:modelling:spotted model radii at 2Gyrs} shows the radii of main sequence stellar models at 2~Gyrs, and $0.15 M_\odot$ with progressively more spots. The mass-$f_{\rm spot}$ relation required to match the 4.5\% inflation over the Brown relation is searched for in \S\ref{sect:modelling:tuning star spots to observations}
+This is analagous to the method employed in \citet{sommers2015}.
+Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-configured parameters to define the degree of spotting. Figure~\ref{fig:modelling:spotted model radii at 2Gyrs} shows the radii of main sequence stellar models at 2~Gyrs, and $0.15 M_\odot$ with progressively more spots.
+% The mass-$f_{\rm spot}$ relation required to match the 4.5\% inflation over the Brown relation is searched for in \S\ref{sect:modelling:tuning star spots to observations}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/spotted_model_radii_at_2gyrs.pdf}
@@ -656,9 +660,11 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 \label{sect:modelling:optimising mass loss rate to observations}
 
 Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
-% To sample the error distribution of observed masses and radii, random samples were drawn from the mass and radius posterior distribution for each observation. The mean and standard deviation of the corresponding mass loss rates is reported.
+When evaluating a proposed $\dot M$, two other key model parameters must be set. First the mass loss over a period of 1 Gyr is calculated. The initial model mass is then this expected 1 Gyr mass, in addition to the target mass. Doing this allows for some lead time before the model reaches the desired stellar mass, and gives the star time to reach both the main sequence, and settle to its equilibrium radius.
+The appropriate $f_{\rm spot}$ for the target mass is also calculated, and the model fixes $f_{\rm spot}$ at this value. Fixing $f_{\rm spot}$ this way accounts for the donor having comparable $\tau_{\rm KH}$ and $\tau_{\dot M}$, which would not allow the star to properly adjust to variable spot parameters.
+Finally, to find the uncertainty in $\dot M$, two further combinations of donor mass and radius were evaluated for each system: ($M = \bar M + \sigma_M$, $R = \bar R + \sigma_R$), and ($M = \bar M - \sigma_M$, $R = \bar R - \sigma_R$). The donor mass and radius are highly correlated (typical cross-correlation coefficient values for the eclipse modelled systems later analysed for this work are $\sim 0.9995$), so this is reasonable approximation to make.
 
-A faster alternative is to run a fixed grid of models, and interpolate within it.
+{\it{\bf A faster alternative is to run a fixed grid of models, and interpolate within it.}\todo{I altered the code to get error straight from binary chopping, so this isn't true any more}
 An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}. These models were run with fixed values of $f_{\rm spot}$, since varying $f_{\rm spot}$ with mass introduces a time lag between a change in $f_{\rm spot}$, and $R_{\rm donor}$ adjusting that is on a similar timescale to $\tau_{\dot M}$. This effect is demonstrated quantitatively in \S\ref{sect:modelling:tuning star spots to observations}.
 
 Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
@@ -666,44 +672,17 @@ Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments
 This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
 For a given $(M_{\rm donor},\ R_{\rm donor})$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship later derived in \S\ref{sect:modelling:tuning star spots to observations} to choose the correct $f_{\rm spot}$ track, and the model grid can be interpolated for a value of $\dot M$.
 This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
-% The central value of the binary chop was consistent with the interpolation in all cases.
+The central value of the binary chop was consistent with the interpolation in all cases.
+}
 
-This mass loss can also be converted to an angular momentum loss rate, assuming none of the mass is retained by the white dwarf. The angular momentum of a binary is given by $J$,
+Finally, the mass loss can be converted to an angular momentum loss rate. The angular momentum of a binary is given by $J$,
 \begin{equation}
     J = M_{\rm wd} M_{\rm donor} \sqrt{\frac{Ga}{M_{\rm wd} + M_{\rm donor}}}
 \end{equation}
-By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$). Thus, a relation between $\dot M$ and $\dot J$ can be found:
+By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$ in the short period CV regime). Thus, a relation between $\dot M$ and $\dot J$ can be found:
 \begin{align}
     \frac{dJ}{dM_{\rm donor}} = M_{\rm wd} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \\
     \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \label{eqn:modelling:Jdot from Mdot}
 \end{align}
 
 
-\subsection{Mass loss from the white dwarf properties}
-\label{sect:modelling:mdot from WD temperature}
-
-The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more quantitatively by \citet{townsley2009}.
-In brief, as accreted material strikes the surface of the white dwarf its kinetic energy is converted to thermal energy, heating the white dwarf surface.
-The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
-Since, in general, we can assume that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a diagnostic of the donor $\dot M$.
-Simulations demonstrate that even through successive Nova eruptions, the core temperature of the white dwarf is stable over timescales of $\sim 10^8$ \citep{epelstain2007}, so if the accretion rate falls, the white dwarf $T_{\rm eff}$ is able to cool to the appropriate, lower temperature and remain accurate to the present-day accretion rate.
-
-The white dwarf temperature approach holds a major advantage over using the donor properties. Measurements of white dwarf temperatures are easier to gather for large sample sizes.
-However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$ \citep{townsley2009}, as opposed to the $\rm \sim~Gyr$ timescales of the evolutionary modelling-based method described above, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
-% In addition, the method assumes that the white dwarf is not a helium-core white dwarf, which is not always the case in the CV population and introduces significant unmodelled scatter to the results.
-
-The short-term average mass loss rate, $<\dot M>$, is ultimately a function only of white dwarf mass, and temperature, given in Equation~\ref{eqn:modelling:Mdot from WD temperature}.
-\begin{equation}
-    \label{eqn:modelling:Mdot from WD temperature}
-    T_{\rm eff} = 1.7 \times 10^4 {\rm K} \bigg( \frac{<\dot M>}{10^{-10} M_\odot {\rm yr}^{-1}} \bigg)^{1/4} \bigg( \frac{M_{\rm wd}}{0.9 M_\odot} \bigg)
-\end{equation}
-
-Recently, \citet{Pala2021} used spectroscopically measured $T_{\rm eff}$ and $M_{\rm wd}$ to infer the $\dot M$ of 65 CVs, the result of which is reproduced in Figure~\ref{fig:modelling:pala2022 fig13}.
-The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have lower AML rates, driving lower $\dot M$.
-As the eclipse modelling of CVs produces a measure of $T_{\rm eff}$, the systems analysed for this thesis can be processed with {\it both} techniques, and have their results compared.
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/modelling/pala_2022_fig13.png}
-    \caption{Reproduced from \citet{Pala2021}, Figure~13. The subset of modelled systems, with $P < 3{\rm hr}$ are shown. {\bf Circles} and {\bf stars} are pre- and post-period bounce systems derived by \citet{Pala2021}, and {\bf diamonds} and {\bf pentagons} are pre- and post-period bounce systems taken from the literature. {\it Left}: The $T_{\rm eff}$ is plotted against $M_{\rm wd}$, and no correlation can be seen. {\it Right}: $\log<\dot M>$ is plotted against $M_{\rm wd}$, though now the data are correlated along the white dwarf mass-radius relationship assumed by \citet{Pala2021}, $M_{\rm wd} \propto R_{\rm wd}^1.8$. The {\bf black line} shows the rough relationship, and guides the eye.}
-    \label{fig:modelling:pala2022 fig13}
-\end{figure}

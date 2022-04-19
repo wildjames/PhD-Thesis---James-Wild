@@ -6,7 +6,10 @@
 
 First, I demonstrate that MESA can closely reproduce the two \citet{knigge11} donor tracks -- recall from \S\ref{sect:introduction:the missing aml problem} that two such tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by $2.47\times$.
 By default, MESA shuts off magnetic braking when the donor becomes fully convective, a practice which I motivate in \S\ref{sect:introduction:the missing aml problem} to be spurious. Instead, MESA is altered for a fixed magnetic braking cutoff at $0.2 M_\odot$, arbitrarily fixing the donor mass of the period gap in line with \citet{knigge11}.
-In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the amplification of gravitational braking below the period gap. This was used to reproduce the `optimal' track. Note that the donor physics was configured as described in \S\ref{sect:modelling:MESA configs}, and the model is initialised with some additional binary configuration:
+
+In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the amplification of gravitational braking below the period gap.
+This subroutine uses the \lstinline{s% other_jdot_mb} MESA hook, and simply scales the calculated gravitational braking by a user-defined parameter, though this was previously hard-coded in the subroutine and small changes were made to allow this scaling to be defined in the MESA configuration inlist.
+This was used to reproduce the `optimal' track. The donor physics was configured as described in \S\ref{sect:modelling:MESA configs}, and the model is initialised with some additional binary configuration:
 \begin{itemize}
     \item The two objects begin as $M_{\rm donor} = 0.65 M_\odot$, $M_{\rm wd} = 0.82$, at an orbital period of 12 hours.
     \item The white dwarf is not allowed to retain any accreted material,
@@ -17,17 +20,18 @@ In addition, \citet{Pala2017a} added a subroutine to MESA that allows for the am
     \begin{itemize}
         \item \lstinline{evolve_both_stars = .false.}
     \end{itemize}
+    \item The donor star has a fixed spot coverage fraction of $0.10$, chosen to match the period at which the donor emerges from the period gap.
 \end{itemize}
 
 These changes are enough to reproduce the \citet{knigge11} tracks to a reasonable degree; Figure~\ref{fig:results:MESA can reproduce the K11 tracks} shows the four model tracks in the short period regime.
 Note that the small humps at $\sim 0.13 M_\odot$ in the MESA models are due to MESA switching do a different equation of state, and is expected.
-The small difference in gradient between the MESA models and the \citet{knigge11} models is due to the donor having a differing mass-radius relationship, as this model does not yet include the star spot physics described in \S\ref{sect:modelling:starspots in MESA} for reasons given in the next section.
+The small difference in gradient between the MESA models and the \citet{knigge11} models is due to the donor having a differing mass-radius relationship, as this model does not use variable star spot physics as the donor mass falls, described in \S\ref{sect:modelling:starspots in MESA} for reasons given in the next section.
 With a more tailored donor configuration this could likely be improved without introducing the star spot physics at all, but this is not the focus of this study and the agreement is considered acceptable even with the suboptimal settings.
 
 \begin{figure}
     \centering
-    \includegraphics[width=.9\textwidth]{figures/modelling/reproducing_K11_tracks_fspot0.000.pdf}
-    \caption{Showing how well MESA can reproduce the canonical \citet{knigge11} donor tracks. {\bf Solid lines} are MESA tracks, and {\bf dotted lines} are the \citet{knigge11} tracks. {\bf Black} lines have only gravitational braking below the period gap, and {\bf red} lines gave gravitational braking at $2.47\times$ strength.}
+    \includegraphics[width=.9\textwidth]{figures/modelling/reproducing_K11_tracks_fspot0.100.pdf}
+    \caption{Showing how well MESA can reproduce the canonical \citet{knigge11} donor tracks. {\bf Solid lines} are MESA tracks, and {\bf dotted lines} are the \citet{knigge11} tracks. {\bf Black} lines have only gravitational braking below the period gap, and {\bf red} lines gave gravitational braking at $2.47\times$ strength. Here, MESA models have $f_{\rm spot} = 0.1$}
     \label{fig:results:MESA can reproduce the K11 tracks}
 \end{figure}
 
@@ -38,22 +42,23 @@ With a more tailored donor configuration this could likely be improved without i
 
 This section evaluates the feasibility of using the radius of a star to extract present-day mass loss rates.
 The analysis of this section does not include any star spots, i.e. $f_{\rm spot} = 0$ for these models.
-
 Recall from \S\ref{sect:introduction:period minimum and bouncers} the two timescales that govern the response of the donor to mass loss: $\tau_{\rm KH}$ and $\tau_{\dot M}$. These timescales are calculated by
 \begin{align}
-    \tau_{\rm KH} \propto& \frac{M_{\rm donor}^2}{L_{\rm donor} R_{\rm donor}} \\[8pt]
+    \tau_{\rm KH} =& \frac{G M_{\rm donor}^2}{L_{\rm donor} R_{\rm donor}} \\[8pt]
     \tau_{\dot M} =& \frac{\dot M}{M_{\rm donor}}
 \end{align}
 
 If $\tau_{\rm KH} \ll \tau_{\dot M}$, the donor is able to maintain thermal equilibrium and is indistinguishable from a singleton star of the same mass.
-If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium, and mass loss is fast and adiabatic. The donor is inflated by mass loss, but because the star cannot adjust on thermal timescales, the degree of inflation becomes sensitive to the mass loss \textit{history} of the donor.
-However, calculating the two timescales for CVs reveals that $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
-Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star still adjusts on thermal timescales, the degree of inflation only depends on the present-day average $\dot M$. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the baseline mass loss rate.
-This is also the justification for the CV tracks in \S\ref{sect:results:reproducing K11 tracks} to not include the star spot radius correction. As the donor decreases in mass, the necessary spot parameters to correct its radius will change (refer to \S\ref{sect:modelling:tuning star spots to observations}). However, the donor structure would only react to a change in spot parameters on the $\tau_{\rm KH}$ timescale, causing a CV donor model to effectively have the `wrong' spot parameters for its mass, due to the time lag between parameters changing and the donor radius responding to that change.
+If $\tau_{\rm KH} \gg \tau_{\dot M}$, the donor is \textit{not} able to maintain equilibrium, and mass loss is fast and adiabatic.
+The donor is inflated by mass loss, but as the stellar structure reacts slowly to changes in mass loss, the movement of the structure towards equilibrium is interrupted by changes in mass loss rate. This makes the degree of inflation of the donor sensitive to the mass loss \textit{history} of the donor.
+% The donor is inflated by mass loss, but because the stellar structure as a whole reacts relatively slowly, the effect of past mass loss is retained and the degree of inflation becomes sensitive to the mass loss \textit{history} of the donor.
+However, calculating the two timescales for CVs reveals that for much of their lives, $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
+Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star adjusts on timescales comparable to $\tau_{\dot M}$, the degree of inflation only depends on the present-day average $\dot M$. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the baseline mass loss rate.
+% This is also the justification for the CV tracks in \S\ref{sect:results:reproducing K11 tracks} to not include the star spot radius correction. As the donor decreases in mass, the necessary spot parameters to correct its radius will change (refer to \S\ref{sect:modelling:tuning star spots to observations}). However, the donor structure would only react to a change in spot parameters on the $\tau_{\rm KH}$ timescale, causing a CV donor model to effectively have the `wrong' spot parameters for its mass, due to the time lag between parameters changing and the donor radius responding to that change.
 
 
 Whether a donor radius is sensitive to its $\dot M$ history can be considered as a function of $M_{\rm donor}$. As $M_{\rm donor}$ falls, $\tau_{\rm KH}$ begins to rise faster than $\tau_{\dot M}$; Figure~\ref{fig:results:how does tauKH and tauMdot vary with donor mass} shows this trend, produced by a MESA model of a CV using the configuration provided in \citet{Paxton_2015}.
-The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ becomes significant at $\sim 0.1 M_\odot$, around the mass the donor enters the fast, adiabatic $\tau_{\rm KH} \gg \tau_{\dot M}$ period bouncer phase c.f.~\S\ref{sect:introduction:period minimum and bouncers}.
+The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ becomes significant at $\sim 0.1 M_\odot$, around the mass the donor enters the adiabatic $\tau_{\rm KH} \gg \tau_{\dot M}$ period bouncer phase c.f.~\S\ref{sect:introduction:period minimum and bouncers}.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/tau_both_vs_donor_mass_AML000.pdf}
@@ -101,7 +106,7 @@ Whilst this may skew an individual system, on average the inferred mass loss fro
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_4.5.pdf}
-    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best fit value of $f_{\rm spot}$. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
+    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best fit value of $f_{\rm spot}$. The {\bf dotted lines} show the acceptable deviation from perfect agreement in order to terminate the binary chop, and the {\bf dashed line} shows the target inflation. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
     \label{fig:modelling:fspot mass relationship}
 \end{figure}
 
@@ -110,146 +115,175 @@ Whilst this may skew an individual system, on average the inferred mass loss fro
 \section{Inferred mass loss rates of CV donors}
 \label{sect:modelling:donor mass loss rates}
 
-Overall, there are 30 systems with eclipse-modelled characterisations available for use.
-However, not all are suitable; as shown in \S\ref{sect:results:MESA massloss allowable mass range}, the donor mass range for which modelling is possible is $0.08 M_\odot < M_{\rm donor} < 0.20 M_\odot$.
-Applying this cut to the data leaves 22 systems, 12 from \citet{McAllister2019} and 10 from this thesis.
-SDSS J1524 is included despite having a donor mass below the lower limit of $0.08 M_\odot$, as the measurement is within $1\sigma$ of this limit.
-The properties of these donors, and their inferred $\dot M$, is given in Table~\ref{table:results:mdot modelling}.
+Overall, there are 34 systems with eclipse-modelled characterisations available with donors in the correct mass range of $0.08 M_\odot < M_{\rm donor} < 0.20 M_\odot$, catalogued in Table~\ref{table:results:mdot modelling}.
+The special case of SDSS J1524 is included despite having a donor mass of $0.074\pm0.008$, slightly below $0.08 M_\odot$, as the measurement is within $1\sigma$ of this limit.
+% The properties of these donors, and their inferred $\dot M$, is given in Table~\ref{table:results:mdot modelling}.
 
-The reported central values were optimised with a binary chop algorithm, but uncertainties were characterised by interpolation. This is considered a valid uncertainty, as the interpolation produced a central value within $1\sigma$ of the binary chop value in all cases.
-Note that there was a single exception to this; in the case of ASASN-17fo, whilst the interpolator was unable to find an appropriate $\dot M$, the binary chop approach converged on a reasonable value of $\log (\dot M,\ M_{\odot}\ {\rm yr}^{-1} = -10.86$. This leaves this value with no characterised error, so an arbitrary error of $\pm 0.5$ dex was used during later analysis.
+% {\bf The reported central values were optimised with a binary chop algorithm, but uncertainties were characterised by interpolation. This is considered a valid uncertainty, as the interpolation produced a central value within $1\sigma$ of the binary chop value in all cases.
+% Note that there was a single exception to this; in the case of ASASN-17fo, whilst the interpolator was unable to find an appropriate $\dot M$, the binary chop approach converged on a reasonable value of $\log (\dot M,\ M_{\odot}\ {\rm yr}^{-1} = -10.86$. This leaves this value with no characterised error, so an arbitrary error of $\pm 0.5$ dex was used during later analysis.}
+% {\it\bf The reported central values were optimised using a binary chop algorithm. To find the uncertainty in $\dot M$, two further combinations of donor mass and radius were evaluated for each system: ($M = \bar M + \sigma_M$, $R = \bar R + \sigma_R$), and ($M = \bar M - \sigma_M$, $R = \bar R - \sigma_R$). The donor mass and radius are highly correlated (typical cross-correlation coefficient values for the eclipse modelled systems analysed for this work are $\sim 0.9995$), so this is reasonable approximation to make.
+% }
+
 Note that not all systems in Table~\ref{table:results:mdot modelling} are assigned a $\dot M$.
-This is due some donors being smaller than the Brown relation adjusted for non-spherical geometry, resulting in negative inflation that cannot be achieved by the introduction of mass loss.
+This is due some donors being smaller than the Brown relation adjusted for non-spherical geometry, resulting in negative inflation that cannot be achieved by the introduction of mass loss. Future studies should make an attempt to marginalise over this scatter, but using the current technique this is prohibitively computationally expensive to do.
 
 Table~\ref{table:results:Jdot results} shows the AML rates calculated using Equation~\ref{eqn:modelling:Jdot from Mdot} for the systems for which $\dot M$ could be calculated from donor properties. Also shown is the ratio between the observed AML, and the AML predicted by the `standard' MESA donor track for a CV donor of the same mass.
 
 \begin{table*}
     \centering
-    \caption{The inferred $\dot M$ for eclipse-modelled CVs. For the Source column, `W20' are from Chapter~\ref{chpt:results:three peculiar white dwarfs}, `W22' are from Chapter~\ref{chpt:results:characterisation of 12 new CVs}, `M19' are systems modelled by \citet{McAllister2019}, `M17a' is from \citet{mcallister2017}, `M17b' is from \citet{mcallister2017b}, `M15' is from \citet{mcallister2015}, `S11' are from \citet{Savoury2011}, and `C10' is from \citet{copperwheat2010}.}
+    \caption{The inferred $\dot M$ for eclipse-modelled CVs. For the Source column, `W22' are from Chapter~\ref{chpt:results:characterisation of 12 new CVs}, `M19' are systems modelled by \citet{McAllister2019}, `M17b' is from \citet{mcallister2017b}, `S11' are from \citet{Savoury2011}}
     \label{table:results:mdot modelling}
     \begin{tabular}{llccc}
         \hline \\
         {\bf System Name:} & \textbf{Source} & \textbf{$M_{\rm donor}, M_\odot$}  & \textbf{$R_{\rm donor}, R_\odot$}  & \textbf{$\log_{10}(\dot M,\ M_\odot / {\rm yr})$} \\
         \hline \hline \\
-        ASASSN-14hq      & W22  &  $0.097 \pm 0.002$    & $0.157 \pm 0.001$     & $  -9.89 \pm 0.01$    \\
-        ASASSN-15pb      & W22  &  $0.148 \pm 0.008$    & $0.209 \pm 0.004$     & $  -9.99 \pm 0.43$    \\
-        ASASSN-17fo      & W22  &  $0.109 \pm 0.002$    & $0.1436 \pm 0.0007$   & $ -10.86$             \\
-        AY For           & W22  &  $0.106 \pm 0.006$    & $0.162 \pm 0.003$     & $  -9.91 \pm 0.51$    \\
-        CSS090419        & W22  &  $0.087 \pm 0.012$    & $0.152 \pm 0.007$     & $  -9.85 \pm 0.16$    \\
-        CSS090622        & W22  &  $0.105 \pm 0.010$    & $0.155 \pm 0.005$     & $ -10.04 \pm 0.77$    \\
-        MAST0014         & W22  &  $0.123 \pm 0.006$    & $0.165 \pm 0.003$     & $ -10.27 \pm 0.58$    \\
-        OGLE82           & W22  &  $0.132 \pm 0.004$    & $0.170 \pm 0.002$     & $ -11.68 \pm 0.54$    \\
-        SDSS J0748       & W22  &  $0.085 \pm 0.010$    & $0.128 \pm 0.005$     & $ -10.43 \pm 0.28$    \\
-        SDSS J1524       & W22  &  $0.074 \pm 0.008$    & $0.132 \pm 0.005$     & $ -10.11 \pm 0.17$    \\
-        CSS080623        & M19  &  $0.081 \pm 0.005$    & $0.128 \pm 0.002$     & $ -10.34 \pm 0.13$    \\
-        CSS110113        & M19  &  $0.105 \pm 0.007$    & $0.149 \pm 0.003$     & $ -10.27 \pm 0.73$    \\
-        OY Car           & M19  &  $0.093 \pm 0.004$    & $0.139 \pm 0.002$     & $ -10.27 \pm 0.06$    \\
-        SDSS 0901        & M19  &  $0.138 \pm 0.007$    & $0.182 \pm 0.003$     & $ -10.54 \pm 0.71$    \\
-        SDSS 1152        & M19  &  $0.094 \pm 0.016$    & $0.147 \pm 0.006$     & $ -10.06 \pm 0.38$    \\
-        SSS100615        & M19  &  $0.083 \pm 0.005$    & $0.128 \pm 0.003$     & $ -10.38 \pm 0.16$    \\
-        CTCV J2354-4700  & S11  &  $0.101 \pm 0.003$    & $0.146 \pm 0.002$     & $ -10.24 \pm 0.01$    \\
-        SDSS J1152+4049  & S11  &  $0.087 \pm 0.006$    & $0.142 \pm 0.003$     & $ -10.06 \pm 0.08$    \\
-        OU Vir           & S11  &  $0.116 \pm 0.002$    & $0.164 \pm 0.001$     & $ -10.06 \pm 0.10$    \\
-        XZ Eri           & S11  &  $0.091 \pm 0.004$    & $0.135 \pm 0.002$     & $ -10.35 \pm 0.08$    \\
-        SDSS 0903        & S11  &  $0.099 \pm 0.004$    & $0.136 \pm 0.002$     & $ -10.67 \pm 0.07$    \\
-        SDSS 1227        & S11  &  $0.088 \pm 0.003$    & $0.137 \pm 0.001$     & $ -10.24 \pm 0.05$    \\
-        SDSS 1502        & S11  &  $0.0781 \pm 0.0008$  & $0.1241 \pm 0.0003$   & $ -10.37 \pm 0.04$    \\
-        SDSS 1501        & S11  &  $0.077 \pm 0.010$    & $0.122 \pm 0.005$     & $ -10.42 \pm 0.38$    \\
-        ASASSN-14ag      & M17b &  $0.093 \pm 0.013$    & $0.135 \pm 0.007$     & $ -10.41 \pm 0.27$    \\
-        ASASSN-14kb      & W22  &  $0.134 \pm 0.004$    & $0.164 \pm 0.001$     & -                     \\
-        CTCV 1300-3052   & M19  &  $0.166 \pm 0.006$    & $0.211 \pm 0.003$     & -                     \\
-        DV UMa           & M19  &  $0.187 \pm 0.012$    & $0.215 \pm 0.005$     & -                     \\
-        IY UMa           & M19  &  $0.141 \pm 0.007$    & $0.177 \pm 0.003$     & -                     \\
-        SSS130413        & M19  &  $0.140 \pm 0.012$    & $0.163 \pm 0.004$     & -                     \\
-        V713 Cep         & M19  &  $0.176 \pm 0.018$    & $0.208 \pm 0.005$     & -                     \\
-        Z Cha            & M19  &  $0.152 \pm 0.005$    & $0.182 \pm 0.002$     & -                     \\
-        CTCV J1300-3052  & S11  &  $0.177 \pm 0.021$    & $0.215 \pm 0.008$     & -                     \\
-        DV UMa           & S11  &  $0.196 \pm 0.005$    & $0.218 \pm 0.002$     & -                     \\
-        % ASASSN-16kr      & W20  &  $0.042 \pm 0.003$    & $0.106 \pm 0.003$     & $ -10.7 \pm 0.5$      \\
-        % SSS111126        & W20  &  $0.0424 \pm 0.004$   & $0.107 \pm 0.003$     & $ -10.64 \pm 0.50$    \\
-        % CSS090102        & W22  &  $0.059 \pm 0.003$    & $0.119 \pm 0.002$     & $ -10.25 \pm 0.50$    \\
-        % SDSS 1501        & M19  &  $0.061 \pm 0.004$    & $0.113 \pm 0.003$     & $ -10.45 \pm 0.50$    \\
-        % SDSS 1035        & S11  &  $0.048 \pm 0.001$    & $0.105 \pm 0.001$     & $ -10.74 \pm 0.50$    \\
-        % PHL 1445         & M15  &  $0.064 \pm 0.005$    & $0.109 \pm 0.004$     & $ -10.66 \pm 0.50$    \\
-        % SDSS J1057+2759  & M17a &  $0.044 \pm 0.002$    & $0.108 \pm 0.002$     & $ -10.51 \pm 0.50$    \\
-        % ASASSN-17jf      & W20  &  $0.060 \pm 0.009$    & $0.112 \pm 0.005$     & -                     \\
-        % GY Cnc           & M19  &  $0.394 \pm 0.022$    & $0.446 \pm 0.009$     & -                     \\
-        % SDSS 1006        & M19  &  $0.37 \pm 0.06$      & $0.457 \pm 0.026$     & -                     \\
-        % SDSS 1702        & S11  &  $0.223 \pm 0.010$    & $0.252 \pm 0.004$     & -                     \\
-        % SDSS 1507        & S11  &  $0.058 \pm 0.002$    & $0.097 \pm 0.001$     & -                     \\
-        % SDSS 1433        & S11  &  $0.0571 \pm 0.0007$  & $0.1074 \pm 0.0004$   & -                     \\
-        % IP Peg           & C10  &  $0.55 \pm 0.02$      & $0.466 \pm 0.006$     & -                     \\
+        ASASSN-14hq         &  W22      & $0.097 \pm 0.002$ & $0.157 \pm 0.001$ & $ -9.897 \pm 0.008$ \\
+        ASASSN-15pb         &  W22      & $0.148 \pm 0.008$ & $0.209 \pm 0.003$ & $ -9.997 \pm 0.164$ \\
+        ASASSN-17fo         &  W22      & $0.109 \pm 0.001$ & $0.144 \pm 0.001$ & $-10.859 \pm 0.137$ \\
+        AY For              &  W22      & $0.106 \pm 0.005$ & $0.162 \pm 0.002$ & $ -9.918 \pm 0.024$ \\
+        CSS090419           &  W22      & $0.087 \pm 0.016$ & $0.152 \pm 0.006$ & $ -9.859 \pm 0.003$ \\
+        CSS090622           &  W22      & $0.105 \pm 0.009$ & $0.155 \pm 0.004$ & $-10.046 \pm 0.074$ \\
+        MASTER OT J0014     &  W22      & $0.123 \pm 0.006$ & $0.165 \pm 0.002$ & $-10.279 \pm 0.328$ \\
+        OGLE82              &  W22      & $0.132 \pm 0.003$ & $0.170 \pm 0.001$ & $-11.686 \pm 1.078$ \\
+        SDSS J0748          &  W22      & $0.085 \pm 0.010$ & $0.128 \pm 0.005$ & $-10.438 \pm 0.152$ \\
+        SDSS J1524          &  W22      & $0.074 \pm 0.007$ & $0.132 \pm 0.004$ & $-10.111 \pm 0.000$ \\
+        CSS080623           &  M19      & $0.081 \pm 0.005$ & $0.128 \pm 0.002$ & $-10.343 \pm 0.041$ \\
+        CSS110113           &  M19      & $0.105 \pm 0.007$ & $0.149 \pm 0.003$ & $-10.272 \pm 0.129$ \\
+        OY Car              &  M19      & $0.093 \pm 0.004$ & $0.139 \pm 0.001$ & $-10.278 \pm 0.046$ \\
+        SDSS J0901          &  M19      & $0.138 \pm 0.007$ & $0.182 \pm 0.003$ & $-10.547 \pm 0.368$ \\
+        SDSS J1152          &  M19      & $0.094 \pm 0.016$ & $0.147 \pm 0.006$ & $-10.062 \pm 0.156$ \\
+        SSS100615           &  M19      & $0.083 \pm 0.005$ & $0.128 \pm 0.002$ & $-10.384 \pm 0.038$ \\
+        ASASSN-14ag         &  M17b     & $0.093 \pm 0.010$ & $0.135 \pm 0.007$ & $-10.416 \pm 0.211$ \\
+        CTCV J2354-4700     &  S11      & $0.101 \pm 0.003$ & $0.146 \pm 0.001$ & $-10.245 \pm 0.030$ \\
+        SDSS J1152          &  S11      & $0.087 \pm 0.006$ & $0.142 \pm 0.003$ & $-10.068 \pm 0.025$ \\
+        OU Vir              &  S11      & $0.116 \pm 0.002$ & $0.163 \pm 0.001$ & $-10.067 \pm 0.026$ \\
+        XZ Eri              &  S11      & $0.091 \pm 0.004$ & $0.135 \pm 0.001$ & $-10.352 \pm 0.054$ \\
+        SDSS J0903          &  S11      & $0.099 \pm 0.004$ & $0.136 \pm 0.002$ & $-10.677 \pm 0.155$ \\
+        SDSS J1227          &  S11      & $0.089 \pm 0.002$ & $0.137 \pm 0.001$ & $-10.243 \pm 0.017$ \\
+        SDSS J1502          &  S11      & $0.078 \pm 0.001$ & $0.124 \pm 0.001$ & $-10.377 \pm 0.008$ \\
+        ASASSN-14kb         &  W22      & $0.134 \pm 0.003$ & $0.164 \pm 0.001$ & $    NaN \pm   NaN$ \\
+        CTCV 1300-3052      &  M19      & $0.166 \pm 0.006$ & $0.211 \pm 0.002$ & $    NaN \pm   NaN$ \\
+        DV UMa              &  M19      & $0.187 \pm 0.012$ & $0.215 \pm 0.005$ & $    NaN \pm   NaN$ \\
+        IY UMa              &  M19      & $0.141 \pm 0.007$ & $0.177 \pm 0.002$ & $    NaN \pm   NaN$ \\
+        SSS130413           &  M19      & $0.140 \pm 0.012$ & $0.163 \pm 0.004$ & $    NaN \pm   NaN$ \\
+        V713 Cep            &  M19      & $0.176 \pm 0.018$ & $0.208 \pm 0.005$ & $    NaN \pm   NaN$ \\
+        Z Cha               &  M19      & $0.152 \pm 0.005$ & $0.182 \pm 0.002$ & $    NaN \pm   NaN$ \\
+        CTCV J1300-3052     &  S11      & $0.177 \pm 0.021$ & $0.215 \pm 0.008$ & $    NaN \pm   NaN$ \\
+        DV UMa              &  S11      & $0.196 \pm 0.005$ & $0.218 \pm 0.001$ & $    NaN \pm   NaN$ \\
+        % CSS090102           &  W22      & $0.059 \pm 0.003$ & $0.119 \pm 0.002$ & $-10.255 \pm 0.024$ \\
+        % ASASSN-16kr         &  W20      & $0.042 \pm 0.003$ & $0.106 \pm 0.002$ & $-10.672 \pm 0.274$ \\
+        % SSS111126           &  W20      & $0.042 \pm 0.003$ & $0.106 \pm 0.003$ & $-10.648 \pm 0.206$ \\
+        % SDSS 1501           &  M19      & $0.061 \pm 0.004$ & $0.113 \pm 0.002$ & $-10.456 \pm 0.034$ \\
+        % SDSS J1057+2759     &  M17a     & $0.044 \pm 0.002$ & $0.109 \pm 0.001$ & $-10.514 \pm 0.102$ \\
+        % PHL 1445            &  M15      & $0.064 \pm 0.005$ & $0.109 \pm 0.004$ & $-10.660 \pm 0.101$ \\
+        % SDSS 1035           &  S11      & $0.048 \pm 0.001$ & $0.105 \pm 0.001$ & $-10.742 \pm 0.011$ \\
+        % SDSS J1501          &  S11      & $0.077 \pm 0.010$ & $0.122 \pm 0.005$ & $-10.429 \pm 0.066$ \\
+        % ASASSN-17jf         &  W20      & $0.060 \pm 0.008$ & $0.112 \pm 0.004$ & $    NaN \pm   NaN$ \\
+        % GY Cnc              &  M19      & $0.394 \pm 0.022$ & $0.446 \pm 0.009$ & $    NaN \pm   NaN$ \\
+        % SDSS 1006           &  M19      & $0.370 \pm 0.060$ & $0.457 \pm 0.026$ & $    NaN \pm   NaN$ \\
+        % SDSS 1702           &  S11      & $0.223 \pm 0.010$ & $0.252 \pm 0.004$ & $    NaN \pm   NaN$ \\
+        % SDSS 1507           &  S11      & $0.058 \pm 0.002$ & $0.097 \pm 0.001$ & $    NaN \pm   NaN$ \\
+        % SDSS 1433           &  S11      & $0.057 \pm 0.001$ & $0.107 \pm 0.001$ & $    NaN \pm   NaN$ \\
+        % IP Peg              &  C10      & $0.550 \pm 0.020$ & $0.466 \pm 0.006$ & $    NaN \pm   NaN$ \\
         \hline
     \end{tabular}
 \end{table*}
 
 \begin{table*}
     \centering
-    \caption{The inferred AML rates for the CVs in this sample. $\dot J_{\rm total}$ is calculated from the inferred $\dot M$, and $\dot J_{\rm GR}$ is interpolated from the `standard' MESA track in Figure~\ref{fig:results:MESA can reproduce the K11 tracks}, at the relevant donor mass. Sources are keyed the same as Table~\ref{table:results:mdot modelling}.}
+    \caption{The inferred AML rates for the CVs in this sample. $\dot J_{\rm total}$ is calculated from the inferred $\dot M$, and $\dot J_{\rm GR}$ is interpolated by mass from the `standard' MESA track in Figure~\ref{fig:results:MESA can reproduce the K11 tracks}, marginalised over donor mass uncertainty. Sources are keyed the same as Table~\ref{table:results:mdot modelling}.}
     \label{table:results:Jdot results}
     \begin{tabular}{llccc}
         \hline
-        {\bf System Name:} & \textbf{Source}  & \textbf{$\log(\dot J_{\rm total})$} & \textbf{$\log(\dot J_{\rm GR})$} & \textbf{$\dot J_{\rm total} / \dot J_{\rm GR}$} \\
+        {\bf System Name:} & \textbf{Source}  & \textbf{$\log(\dot J_{\rm total}, J)$} & \textbf{$\log(\dot J_{\rm GR}, J)$} & \textbf{$\dot J_{\rm total} / \dot J_{\rm GR}$} \\
         \hline \hline
-        ASASSN-16kr      &  W20                 & $26.49 \pm 0.48$                  & $26.06$                          &  $2.66$ \\
-        SSS111126        &  W20                 & $26.45 \pm 0.51$                  & $26.08$                          &  $2.34$ \\
-        ASASSN-14hq      &  W22                 & $27.16 \pm 0.02$                  & $26.68$                          &  $2.99$ \\
-        ASASSN-15pb      &  W22                 & $27.09 \pm 0.42$                  & $26.80$                          &  $1.96$ \\
-        ASASSN-17fo      &  W22                 & $26.24 \pm 0.50$                  & $26.71$                          &  $0.34$ \\
-        AY For           &  W22                 & $27.18 \pm 0.50$                  & $26.71$                          &  $3.01$ \\
-        CSS090102        &  W22                 & $26.77 \pm 0.51$                  & $26.43$                          &  $2.20$ \\
-        CSS090419        &  W22                 & $27.16 \pm 0.16$                  & $26.65$                          &  $3.28$ \\
-        CSS090622        &  W22                 & $27.00 \pm 0.77$                  & $26.70$                          &  $1.98$ \\
-        MAS0014          &  W22                 & $26.84 \pm 0.61$                  & $26.75$                          &  $1.25$ \\
-        OGLE82           &  W22                 & $25.42 \pm 0.52$                  & $26.77$                          &  $0.05$ \\
-        SDSS J0748       &  W22                 & $26.64 \pm 0.28$                  & $26.64$                          &  $1.02$ \\
-        SDSS J1524       &  W22                 & $26.99 \pm 0.18$                  & $26.58$                          &  $2.59$ \\
-        CSS080623        &  M19                 & $26.71 \pm 0.14$                  & $26.62$                          &  $1.22$ \\
-        CSS110113        &  M19                 & $26.90 \pm 0.72$                  & $26.70$                          &  $1.55$ \\
-        OY Car           &  M19                 & $26.84 \pm 0.06$                  & $26.67$                          &  $1.50$ \\
-        SDSS 0901        &  M19                 & $26.54 \pm 0.70$                  & $26.78$                          &  $0.57$ \\
-        SDSS 1152        &  M19                 & $26.95 \pm 0.38$                  & $26.67$                          &  $1.92$ \\
-        SDSS 1501        &  M19                 & $26.60 \pm 0.50$                  & $26.45$                          &  $1.40$ \\
-        SSS100615        &  M19                 & $26.73 \pm 0.17$                  & $26.63$                          &  $1.27$ \\
-        SDSS J1057+2759  &  M17a                & $26.60 \pm 0.52$                  & $26.11$                          &  $3.05$ \\
-        ASASSN-14ag      &  M17b                & $26.59 \pm 0.28$                  & $26.67$                          &  $0.84$ \\
-        PHL 1445         &  M15                 & $26.39 \pm 0.50$                  & $26.49$                          &  $0.79$ \\
-        CTCV J2354-4700  &  S11                 & $26.90 \pm 0.02$                  & $26.69$                          &  $1.61$ \\
-        SDSS J1152+4049  &  S11                 & $26.92 \pm 0.08$                  & $26.64$                          &  $1.87$ \\
-        OU Vir           &  S11                 & $27.00 \pm 0.11$                  & $26.73$                          &  $1.83$ \\
-        XZ Eri           &  S11                 & $26.67 \pm 0.08$                  & $26.66$                          &  $1.03$ \\
-        SDSS 1035        &  S11                 & $26.37 \pm 0.53$                  & $26.21$                          &  $1.42$ \\
-        SDSS 0903        &  S11                 & $26.43 \pm 0.07$                  & $26.69$                          &  $0.55$ \\
-        SDSS 1227        &  S11                 & $26.85 \pm 0.06$                  & $26.65$                          &  $1.57$ \\
-        SDSS 1502        &  S11                 & $26.67 \pm 0.05$                  & $26.60$                          &  $1.17$ \\
-        SDSS 1501        &  S11                 & $26.64 \pm 0.39$                  & $26.60$                          &  $1.10$ \\
-        % ASASSN-17jf      &  W20  & $      NaN \pm      NaN$ & $26.438957 \pm          NaN $ &  $     NaN$ \\
-        % ASASSN-14kb      &  W22  & $      NaN \pm      NaN$ & $26.771382 \pm          NaN $ &  $     NaN$ \\
-        % CTCV 1300-3052   &  M19  & $      NaN \pm      NaN$ & $26.821457 \pm          NaN $ &  $     NaN$ \\
-        % DV UMa           &  M19  & $      NaN \pm      NaN$ & $26.847761 \pm          NaN $ &  $     NaN$ \\
-        % GY Cnc           &  M19  & $      NaN \pm      NaN$ & $28.717578 \pm          NaN $ &  $     NaN$ \\
-        % IY UMa           &  M19  & $      NaN \pm      NaN$ & $26.787612 \pm          NaN $ &  $     NaN$ \\
-        % SDSS 1006        &  M19  & $      NaN \pm      NaN$ & $28.658590 \pm          NaN $ &  $     NaN$ \\
-        % SSS130413        &  M19  & $      NaN \pm      NaN$ & $26.786238 \pm          NaN $ &  $     NaN$ \\
-        % V713 Cep         &  M19  & $      NaN \pm      NaN$ & $26.834171 \pm          NaN $ &  $     NaN$ \\
-        % Z Cha            &  M19  & $      NaN \pm      NaN$ & $26.802830 \pm          NaN $ &  $     NaN$ \\
-        % CTCV J1300-3052  &  S11  & $      NaN \pm      NaN$ & $26.835421 \pm          NaN $ &  $     NaN$ \\
-        % DV UMa           &  S11  & $      NaN \pm      NaN$ & $26.867454 \pm          NaN $ &  $     NaN$ \\
-        % SDSS 1702        &  S11  & $      NaN \pm      NaN$ & $28.231211 \pm          NaN $ &  $     NaN$ \\
-        % SDSS 1507        &  S11  & $      NaN \pm      NaN$ & $26.404859 \pm          NaN $ &  $     NaN$ \\
-        % SDSS 1433        &  S11  & $      NaN \pm      NaN$ & $26.398756 \pm          NaN $ &  $     NaN$ \\
-        % IP Peg           &  C10  & $      NaN \pm      NaN$ & $29.062496 \pm          NaN $ &  $     NaN$ \\
+        ASASSN-14hq     &  W22      & $27.157 \pm 0.009$    & $26.681 \pm 0.007$    & $2.996 \pm 0.081$ \\
+        ASASSN-15pb     &  W22      & $27.091 \pm 0.162$    & $26.796 \pm 0.013$    & $2.115 \pm 0.818$ \\
+        ASASSN-17fo     &  W22      & $26.240 \pm 0.137$    & $26.711 \pm 0.004$    & $0.355 \pm 0.114$ \\
+        AY For          &  W22      & $27.184 \pm 0.026$    & $26.705 \pm 0.015$    & $3.021 \pm 0.204$ \\
+        CSS090419       &  W22      & $27.158 \pm 0.039$    & $26.634 \pm 0.058$    & $3.381 \pm 0.548$ \\
+        CSS090622       &  W22      & $26.994 \pm 0.078$    & $26.699 \pm 0.028$    & $2.011 \pm 0.388$ \\
+        MASTER OT J0014 &  W22      & $26.842 \pm 0.325$    & $26.745 \pm 0.014$    & $1.661 \pm 1.488$ \\
+        OGLE82          &  W22      & $25.428 \pm 1.083$    & $26.767 \pm 0.009$    & $0.980 \pm 8.280$ \\
+        SDSS J0748      &  W22      & $26.645 \pm 0.156$    & $26.629 \pm 0.053$    & $1.116 \pm 0.442$ \\
+        SDSS J1524      &  W22      & $26.990 \pm 0.015$    & $26.568 \pm 0.061$    & $2.672 \pm 0.390$ \\
+        CSS080623       &  M19      & $26.705 \pm 0.042$    & $26.615 \pm 0.026$    & $1.238 \pm 0.141$ \\
+        CSS110113       &  M19      & $26.895 \pm 0.128$    & $26.701 \pm 0.019$    & $1.633 \pm 0.502$ \\
+        OY Car          &  M19      & $26.844 \pm 0.046$    & $26.666 \pm 0.014$    & $1.517 \pm 0.168$ \\
+        SDSS J0901      &  M19      & $26.536 \pm 0.368$    & $26.780 \pm 0.014$    & $0.815 \pm 0.870$ \\
+        SDSS J1152      &  M19      & $26.954 \pm 0.157$    & $26.656 \pm 0.073$    & $2.149 \pm 0.894$ \\
+        SSS100615       &  M19      & $26.730 \pm 0.039$    & $26.625 \pm 0.024$    & $1.282 \pm 0.138$ \\
+        ASASSN-14ag     &  M17b     & $26.587 \pm 0.215$    & $26.657 \pm 0.056$    & $0.968 \pm 0.526$ \\
+        CTCV J2354-4700 &  S11      & $26.899 \pm 0.032$    & $26.691 \pm 0.008$    & $1.616 \pm 0.122$ \\
+        SDSS J1152      &  S11      & $26.917 \pm 0.030$    & $26.642 \pm 0.026$    & $1.893 \pm 0.172$ \\
+        OU Vir          &  S11      & $26.992 \pm 0.027$    & $26.729 \pm 0.005$    & $1.837 \pm 0.117$ \\
+        XZ Eri          &  S11      & $26.721 \pm 0.054$    & $26.659 \pm 0.015$    & $1.164 \pm 0.151$ \\
+        SDSS J0903      &  S11      & $26.427 \pm 0.154$    & $26.685 \pm 0.012$    & $0.587 \pm 0.217$ \\
+        SDSS J1227      &  S11      & $26.848 \pm 0.018$    & $26.652 \pm 0.010$    & $1.572 \pm 0.075$ \\
+        SDSS J1502      &  S11      & $26.669 \pm 0.009$    & $26.602 \pm 0.005$    & $1.169 \pm 0.026$ \\
+        % CSS090102       &  W22      & $26.768 \pm 0.027$    & $26.422 \pm 0.046$    & $2.235 \pm 0.273$ \\
+        % ASASSN-16kr     &  W20      & $26.490 \pm 0.276$    & $26.059 \pm 0.093$    & $3.375 \pm 2.522$ \\
+        % SSS111126       &  W20      & $26.446 \pm 0.209$    & $26.070 \pm 0.103$    & $2.737 \pm 1.564$ \\
+        % SDSS 1501       &  M19      & $26.600 \pm 0.035$    & $26.448 \pm 0.052$    & $1.435 \pm 0.210$ \\
+        % SDSS J1057      &  M17a     & $26.598 \pm 0.103$    & $26.109 \pm 0.056$    & $3.203 \pm 0.874$ \\
+        % PHL 1445        &  M15      & $26.386 \pm 0.101$    & $26.482 \pm 0.057$    & $0.830 \pm 0.226$ \\
+        % SDSS 1035       &  S11      & $26.365 \pm 0.011$    & $26.212 \pm 0.029$    & $1.426 \pm 0.101$ \\
+        % SDSS 1501       &  S11      & $26.639 \pm 0.067$    & $26.581 \pm 0.072$    & $1.169 \pm 0.271$ \\
+        % ASASSN-14kb     &  W22      & $   NaN \pm   NaN$    & $26.772 \pm 0.009$    & $  NaN \pm   NaN$ \\
+        % ASASSN-17jf     &  W20      & $   NaN \pm   NaN$    & $26.416 \pm 0.127$    & $  NaN \pm   NaN$ \\
+        % CTCV 1300-3052  &  M19      & $   NaN \pm   NaN$    & $26.821 \pm 0.008$    & $  NaN \pm   NaN$ \\
+        % DV UMa          &  M19      & $   NaN \pm   NaN$    & $27.036 \pm 0.463$    & $  NaN \pm   NaN$ \\
+        % GY Cnc          &  M19      & $   NaN \pm   NaN$    & $28.717 \pm 0.053$    & $  NaN \pm   NaN$ \\
+        % IY UMa          &  M19      & $   NaN \pm   NaN$    & $26.785 \pm 0.013$    & $  NaN \pm   NaN$ \\
+        % SDSS 1006       &  M19      & $   NaN \pm   NaN$    & $28.647 \pm 0.179$    & $  NaN \pm   NaN$ \\
+        % SSS130413       &  M19      & $   NaN \pm   NaN$    & $26.781 \pm 0.023$    & $  NaN \pm   NaN$ \\
+        % V713 Cep        &  M19      & $   NaN \pm   NaN$    & $26.953 \pm 0.388$    & $  NaN \pm   NaN$ \\
+        % Z Cha           &  M19      & $   NaN \pm   NaN$    & $26.803 \pm 0.007$    & $  NaN \pm   NaN$ \\
+        % CTCV J1300-3052 &  S11      & $   NaN \pm   NaN$    & $27.023 \pm 0.476$    & $  NaN \pm   NaN$ \\
+        % DV UMa          &  S11      & $   NaN \pm   NaN$    & $27.142 \pm 0.530$    & $  NaN \pm   NaN$ \\
+        % SDSS 1702       &  S11      & $   NaN \pm   NaN$    & $28.218 \pm 0.140$    & $  NaN \pm   NaN$ \\
+        % SDSS 1507       &  S11      & $   NaN \pm   NaN$    & $26.402 \pm 0.030$    & $  NaN \pm   NaN$ \\
+        % SDSS 1433       &  S11      & $   NaN \pm   NaN$    & $26.399 \pm 0.011$    & $  NaN \pm   NaN$ \\
+        % IP Peg          &  C10      & $   NaN \pm   NaN$    & $29.061 \pm 0.034$    & $  NaN \pm   NaN$ \\
         \hline
     \end{tabular}
 \end{table*}
 
 
-\section{Mass loss from white dwarf effective temperatures}
+\section{Mass loss from white dwarf properties}
 \label{sect:modelling:white dwarf mass loss rates}
 
-The characterised CVs also have the white dwarf temperature constrained to within $\sim 2000 \rm K$, allowing the short-term mass loss rate to also be inferred as suggested in \S\ref{sect:modelling:mdot from WD temperature}.
-Note that, despite the large uncertainty in $T_{\rm eff}$, the errors are smaller than those obtained with the donor properties.
+% The characterised CVs also have the white dwarf temperature constrained to within $\sim 2000 \rm K$, allowing the short-term mass loss rate to also be inferred as suggested in \S\ref{sect:modelling:mdot from WD temperature}.
+% Note that, despite the large uncertainty in $T_{\rm eff}$, the errors are smaller than those obtained with the donor properties.
 % Figure~\todo{Get this figure} compares the $\dot M$ found by each technique, plotted as a function of donor mass.
+
+
+The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more quantitatively by \citet{townsley2009}.
+In brief, as accreted material strikes the surface of the white dwarf its kinetic energy is converted to thermal energy, heating the white dwarf surface.
+The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
+Since, in general, we can assume that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a diagnostic of the donor $\dot M$.
+Simulations demonstrate that even through successive Nova eruptions, the core temperature of the white dwarf is stable over timescales of $\sim 10^8$ \citep{epelstain2007}, so if the accretion rate falls, the white dwarf $T_{\rm eff}$ is able to cool to the appropriate, lower temperature and remain accurate to the present-day accretion rate.
+
+The white dwarf temperature approach holds a major advantage over using the donor properties: measurements of white dwarf temperatures are easier to gather in large sample sizes.
+However, the white dwarf temperature is capable of responding to changes in $\dot M$ on $\tau_{\rm TWD} \sim 10^3 - 10^5\ {\rm yrs}$ \citep{townsley2009}, as opposed to the $\rm \sim~Gyr$ timescales of the donor-based method described in \S\ref{sect:modelling:donor mass loss rates}, so only provides a short-term snapshot of the $\dot M$ and is susceptible to corruption from outbursts.
+% In addition, the method assumes that the white dwarf is not a helium-core white dwarf, which is not always the case in the CV population and introduces significant unmodelled scatter to the results.
+
+The short-term average mass loss rate, $<\dot M>$, is ultimately a function only of white dwarf mass, and temperature, given in Equation~\ref{eqn:modelling:Mdot from WD temperature}.
+\begin{equation}
+    \label{eqn:modelling:Mdot from WD temperature}
+    T_{\rm eff} = 1.7 \times 10^4 {\rm K} \bigg( \frac{<\dot M>}{10^{-10} M_\odot {\rm yr}^{-1}} \bigg)^{1/4} \bigg( \frac{M_{\rm wd}}{0.9 M_\odot} \bigg)
+\end{equation}
+
+Recently, \citet{Pala2021} used spectroscopically measured $T_{\rm eff}$ and $M_{\rm wd}$ to infer the $\dot M$ of 65 CVs, the result of which is reproduced in Figure~\ref{fig:modelling:pala2022 fig13}.
+The key finding from this analysis was an inverse correlation between $M_{\rm wd}$ and $\dot M$, contrary to the prediction of gravitational wave braking that lower mass systems should have lower AML rates, driving lower $\dot M$.
+As the eclipse modelling of CVs produces a measure of $T_{\rm eff}$, the systems analysed for this thesis can be processed with {\it both} techniques, and have their results compared. Table~\ref{table:results:Mdot from white dwarf parameters} shows the resulting $\dot M$ from the white dwarf parameters.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/modelling/pala_2022_fig13.png}
+    \caption{Reproduced from \citet{Pala2021}, Figure~13. The subset of modelled systems, with $P < 3{\rm hr}$ are shown. {\bf Circles} and {\bf stars} are pre- and post-period bounce systems derived by \citet{Pala2021}, and {\bf diamonds} and {\bf pentagons} are pre- and post-period bounce systems taken from the literature. {\it Left}: The $T_{\rm eff}$ is plotted against $M_{\rm wd}$, and no correlation can be seen. {\it Right}: $\log<\dot M>$ is plotted against $M_{\rm wd}$, though now the data are correlated along the white dwarf mass-radius relationship assumed by \citet{Pala2021}, $M_{\rm wd} \propto R_{\rm wd}^1.8$. The {\bf black line} shows the rough relationship, and guides the eye.}
+    \label{fig:modelling:pala2022 fig13}
+\end{figure}
+
 
 \begin{table}
     \centering
@@ -289,9 +323,9 @@ Note that, despite the large uncertainty in $T_{\rm eff}$, the errors are smalle
         SSS130413        &  M19  & $0.84 \pm 0.03$ & $24000\pm  3000$ & $ -9.82 \pm 0.06$ \\
         V713 Cep         &  M19  & $0.70 \pm 0.02$ & $17000\pm  6000$ & $ -9.89 \pm 0.19$ \\
         Z Cha            &  M19  & $0.80 \pm 0.01$ & $16300\pm  1400$ & $ -9.97 \pm 0.04$ \\
-        PHL 1445         &  M15  & $0.73 \pm 0.03$ & $13200\pm   700$ & $-10.02 \pm 0.03$ \\
         SDSS J1057+2759  &  M17a & $0.80 \pm 0.02$ & $13300\pm  1100$ & $-10.06 \pm 0.04$ \\
         ASASSN-14ag      &  M17b & $0.63 \pm 0.04$ & $14000\pm  2100$ & $ -9.93 \pm 0.07$ \\
+        PHL 1445         &  M15  & $0.73 \pm 0.03$ & $13200\pm   700$ & $-10.02 \pm 0.03$ \\
         \hline
     \end{tabular}
 \end{table}
@@ -319,7 +353,6 @@ Note that, despite the large uncertainty in $T_{\rm eff}$, the errors are smalle
         SDSS 1502        &  S11  & $0.709\pm0.004$ & $11800\pm  1200$ & $-10.05 \pm 0.04$ \\
         SDSS 1501        &  S11  & $0.77 \pm 0.03$ & $10800\pm  1500$ & $-10.13 \pm 0.06$ \\
         IP Peg           &  C10  & $1.16 \pm 0.02$ & $12500\pm  2500$ & $-10.24 \pm 0.09$ \\
-
         \hline
     \end{tabular}
 \end{table}
