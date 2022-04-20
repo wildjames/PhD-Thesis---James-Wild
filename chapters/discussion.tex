@@ -151,9 +151,10 @@ To probe for these correlations the $\chi^2$ test is insufficient, since both ax
 Figure~\ref{fig:discussion:donor mass vs Mdot fit} shows the best fit line for $\dot M(M_{\rm donor})$, and Figure~\ref{fig:discussion:white dwarf mass vs Mdot fit} is the fit for $\dot M(M_{\rm wd})$.
 
 The correlation between $M_{\rm wd}$ and $\dot M$, is reasonably confident -- the best-fit gradient is $4.5\sigma$ from the null-hypothesis of 0.
-However, no correlation is found between $\dot M$ and $M_{\rm donor}$, and Figure~\ref{fig:discussion:donor mass vs Mdot fit} clearly shows an incredibly wide range of gradients to be consistent with the data.
-Based on these results, it is unlikely that residual magnetic braking is responsible for the excess AML in CVs, but still possible that the drag imposed by nova material is the cause.
 
+However, no correlation is found between $\dot M$ and $M_{\rm donor}$, and Figure~\ref{fig:discussion:donor mass vs Mdot fit} clearly shows an incredibly wide range of gradients to be consistent with the data. If errors are ignored, the data have a Pearson's rank correlation coefficient of
+
+Based on these results, it is unlikely that residual magnetic braking is responsible for the excess AML in CVs, but still possible that the drag imposed by nova material is the cause.
 However, there are a few factors to consider when deciding how convincing these findings are.
 The sample size is still small, only 25 systems, and the uncertainty in $\dot M$ are large. In addition, there may be a problem with systematic error -- it may that this sample is biased towards CVs with more excess AML, as these would be more inflated and thus less likely to be smaller than the Brown relation suggests for a zero-$\dot M$ star.
 A significant source of unreliability is likely to be the mass-radius relationship used to calibrate the donor models. A more robust understanding of the low-mass main sequence mass-radius relation is crucial to a more confident re-analysis of these results.
@@ -161,7 +162,7 @@ A significant source of unreliability is likely to be the mass-radius relationsh
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mr_Mdot.pdf}
-    \caption{Showing the correlation between the donor mass and mass loss rate. The {\bf black crosses with error bars} show the observations, and the {\bf red line} shows the best fit to the data, with the {\bf shaded red region} showing the coverage of the uncertainty in the line parameters. The darkest region is $1\sigma$, the middle region is $2\sigma$, and the lightest region shows $3\sigma$. The {\bf dashed blue line} shows the value predicted by the `standard' MESA CV model, and the {\bf dashed green line} is the `optimal' MESA CV track. The best fit line has the form $\log (\dot M,\ M_\odot\ {\rm yr}^{-1}) = (-79\pm48) (M_{\rm donor}, M_\odot) - (2.3\pm4.9)$. }
+    \caption{Showing the correlation between the donor mass and mass loss rate. The {\bf black crosses with error bars} show the observations, and the {\bf red line} shows the best fit to the data, with the {\bf shaded red region} showing the coverage of the uncertainty in the line parameters. The darkest region is $1\sigma$, the middle region is $2\sigma$, and the lightest region shows $3\sigma$, and the {\rm brown line} is the initial guess for fitting. The {\bf dashed blue line} shows the value predicted by the `standard' MESA CV model, and the {\bf dashed green line} is the `optimal' MESA CV track. The best fit line has the form $\log (\dot M,\ M_\odot\ {\rm yr}^{-1}) = (-79\pm48) (M_{\rm donor}, M_\odot) - (2.3\pm4.9)$. }
     \label{fig:discussion:donor mass vs Mdot fit}
 \end{figure}
 % \begin{figure}
@@ -188,7 +189,8 @@ A significant source of unreliability is likely to be the mass-radius relationsh
 
 It is possible to more directly probe the AML of the CVs -- Equation~\ref{eqn:modelling:Jdot from Mdot} shows how the AML can be calculated from $M_{\rm wd},\ M_{\rm donor},\ \dot M$, and $a$.
 Figures~\ref{fig:discussion:donor mass vs Jdot fit}~and~\ref{fig:discussion:white dwarf mass vs Jdot fit} show the best-fit to the $\dot J$ \textit{excess}, which has had the $\dot J_{\rm GR}$ predicted by MESA at the appropriate donor mass ($\dot J_{\rm MESA}$) subtracted.
-Again, the correlation with $M_{\rm wd}$ is reasonably significant at $4.3\sigma$ from a gradient of 0, and the donor shows no correlation.\todo{Set the y limits so these don't look absurd}
+Here, the white dwarf mass shows a reasonably confident correlation with the observed $\dot J$ excess, but with large scatter about the best-fit relationship. Similarly to the case of $\dot M$, fitting was unable to find a correlation between $M_{\rm donor}$ and $\dot J$ excess.
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/results/Mdot/Mr_Jdot_ex.pdf}
@@ -233,10 +235,10 @@ Assuming that eCAML is the sole source of excess AML, we can now measure a value
     \frac{\dot J_{CAML}}{J} = C \frac{\dot M_{\rm donor}}{M_{\rm donor} M_{\rm wd}}
 \end{equation}
 $C$ can then be fit to data, again minimising the orthogonal distance to the data, though this fit is limited to the subset of the observations for which $\dot M$ could be determined.
-Doing so finds a best-fit $C = 0.32 \pm0.05$, with impressively good agreement between the model and data. This value of $C$ is also remarkably close to that estimated by \citet{Schreiber2016}. \todo{This is the wrong one! I need the one with no y-intercept.}
+Doing so finds a best-fit $C = 0.32 \pm0.05$ with impressively good agreement between the model and data, shown in Figure~\ref{fig:discussion:calibrating ecaml relationship}. This value of $C$ is also remarkably close to that estimated by \citet{Schreiber2016}. \todo{This is the wrong one! I need the one with no y-intercept.}
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/results/Mdot/eCAML_nu_grey_large_error_fit.pdf}
+    \includegraphics[width=\textwidth]{figures/results/Mdot/eCAML_nu_no_intercept_fit.pdf}
     \caption{DO THIS CAPTION}
     \label{fig:discussion:calibrating ecaml relationship}
 \end{figure}
