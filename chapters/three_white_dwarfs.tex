@@ -6,12 +6,10 @@ The work presented in this chapter was published as \cite{wild2021}, in the Mont
 The following is my own work, unless otherwise cited.
 
 This chapter concerns the three systems, ASASSN-16kr, ASASSN-17jf, and CRTS SSSJ0522-3505 J052210-350530 (hereafter SSSJ0522-3505), which proved challenging to model.
-Phase-folded eclipse modelling gave good results in all three systems, each lightcurve being well-modelled with small residuals.
+Phase-folded eclipse modelling gave good results in all three systems, each lightcurve being well-modelled with small residuals; for a catalogue of the fits see Appendix~\ref{appendix:lightcurves}, though an example eclipse from the ASASSN-16kr observations is duplicated here in Figure~\ref{fig:three white dwarfs:ASASSN-16kr example lightcurves}.
 The Gaussian processes describing flickering in the systems were consistent with little to no variability, indicating that almost all the scatter in the flux residuals could be fully described by the uncertainty in flux measurement.
-For a catalogue of the fits, see Appendix~\ref{appendix:lightcurves}, though an example eclipse from the ASASSN-16kr observations is shown here in Figure~\ref{fig:three white dwarfs:ASASSN-16kr example lightcurves}.
-However, when fitting white dwarf model atmospheres to the observed white dwarf fluxes, the resulting fits were not satisfactory. The bulk of this chapter discusses this poor fit, and explores its implications.
+However, when fitting white dwarf model atmospheres to the observed white dwarf fluxes, the resulting fits were not satisfactory. The bulk of this chapter discusses this poor fit, its possible causes, and its implications.
 
-% Also included is a rudimentary attempt to examine the modern understanding of CV evolution, using the excess period as a rough diagnostic of excess AML. The implications of this early method is compared to the newer, more quantitative method described in \S\ref{sect:modelling:evolutionary modelling}.
 
 \begin{figure*}
     \centering
@@ -30,14 +28,33 @@ The second $\log (g)$, from lightcurve fitting, indicated values for each system
 When analysing ASASSN-16kr, flux fitting gave a more reasonable $\log(g)=8.21\pm0.13$, but the second $\log (g)$ still gave a significantly higher $\log(g)=8.59\pm0.03$, a difference of $\sim3\sigma$.
 
 This is concerning, as the two $\log (g)$\ should be consistent with one another for each system.
-Comparison of the measured white dwarf colours to the \citet{Bergeron1995} model grids in Figures \ref{fig:ASASSN-17jf colours}, \ref{fig:ASASSN-16kr colours}, and \ref{fig:SSSJ0522-3505 colours}, reveals that the measured colours of the white dwarfs lie outside the colour space of the models. This is the origin of the discrepancies in $\log (g)$\ obtained with the two methods for ASASSN-17jf and SSSJ0522-3505, but ASASSN-16kr is consistent with the rightmost cooling track. However, the observed flux of a white dwarf of this radius is too high for the observed Gaia parallax, pushing the model fits to smaller, higher gravity model atmospheres.
+Comparison of the measured white dwarf colours to the \citet{Bergeron1995} model grids in Figures \ref{fig:ASASSN-17jf colours}, \ref{fig:ASASSN-16kr colours}, and \ref{fig:SSSJ0522-3505 colours}, reveals that the measured colours of the white dwarfs lie outside the colour space of the models. This is the origin of the discrepancies in $\log (g)$\ obtained with the two methods for ASASSN-17jf and SSSJ0522-3505, but ASASSN-16kr is loosely consistent with the rightmost cooling track. However, the observed flux of a white dwarf of this radius is too high for the observed Gaia parallax, pushing the model fits to smaller, higher gravity model atmospheres.
 
-A likely cause for this issue would be an error in photometric calibration, causing a corresponding error in white dwarf fluxes. However, this is unlikely to be the source of the problem, for the reasons explained in \S\ref{sect:observations:flux calibrating the lightcurve}.
-Inspection of the figures in Appendix~\ref{appendix:lightcurves} also rules out poor lightcurve fits as the cause of this problem. The most plausible explanation for the fact that our measured white dwarf fluxes do not lie inside the model grids, is that the change in brightness during white dwarf ingress/egress is contaminated by an additional source of light, for example a boundary layer close to the white dwarf surface. The implications of this for our system parameters is explored in \S\ref{sect:impure white dwarf discussion}.
+A likely cause for this issue would be an error in photometric calibration, causing a corresponding error in white dwarf fluxes. However, this is unlikely to be the source of the problem, for the reasons explained in \S\ref{sect:observations:flux calibrating the lightcurve}, and inspection of the figures in Appendix~\ref{appendix:lightcurves} also rules out poor lightcurve fits as the cause of this problem.
+The most plausible explanation for the fact that our measured white dwarf fluxes do not lie inside the model grids, is that the change in brightness during white dwarf ingress/egress is contaminated by an additional source of light -- for example a boundary layer close to the white dwarf surface. The implications of this for our system parameters is explored in \S\ref{sect:impure white dwarf discussion}.
 
 That the white dwarf colours do not lie on the model grids also raises questions about the accuracy of the white dwarf temperatures. To try and quantify the impact on $T_{\rm eff}$, two additional optimisations of model parameters to the white dwarf fluxes were performed.
 In one approach, a Gaussian prior on $\log (g)$\ using the estimate from the lightcurve modelling was used, and all available flux measurements were fit simultaneously.
 In a second approach we fit the white dwarf flux in each band independently using the same prior on $\log (g)$\ and the Gaia prior on $\pi$. Since these independent fits use no colour information, E(B-V) is only constrained by the prior, but is retained as a nuisance parameter and $T_{\rm eff}$ is marginalised over E(B-V). Figure~\ref{fig:three white dwarfs:gamma fits} shows the $T_{\rm eff}$ posteriors from the individual fits for the three systems.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth, trim={0 0mm 0 0},clip]{figures/results/three_cvs_with_weird_colours/ASASSN-17jf/PhysicalParams/ASASSN-17jf_colourPlot_alpha_beta.pdf}
+    \caption{The white dwarf model atmosphere fits for ASASSN-17jf. {\bf Green circle}: Best fit with uniform prior on $\log (g)$. {\bf Red circle}: Best fit with the prior $\log(g)=8.10\pm0.04$. The observations are shown as the {\bf black point and error bars}. {\bf Solid black lines} are white dwarf model cooling tracks, increasing in $\log (g)$\ to the left. {\bf Red dashed lines} are isothermal tracks for different $\log (g)$.}
+    \label{fig:ASASSN-17jf colours}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth, trim={0 0mm 0 0},clip]{figures/results/three_cvs_with_weird_colours/ASASSN-16kr/PhysicalParams/ASASSN-16kr_colourPlot_alpha_beta.pdf}
+    \caption{The white dwarf model atmosphere fits for ASASSN-16kr. The {\bf red circle} is the best fit with a prior of $\log(g)=8.52\pm0.02$. Symbols are the same as Figure~\ref{fig:ASASSN-17jf colours}.}
+    \label{fig:ASASSN-16kr colours}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth, trim={0 0 0 0}, clip]{figures/results/three_cvs_with_weird_colours/SSS111126/PhysicalParams/SSS111126_colourPlot_alpha_beta.pdf}
+    \caption{The white dwarf model atmosphere fits for SSSJ0522-3505. The {\bf red circle} is the best fit with a prior of $\log(g)=8.28\pm0.04$. Symbols are the same as Figure~\ref{fig:ASASSN-17jf colours}.}
+    \label{fig:SSSJ0522-3505 colours}
+\end{figure}
 
 \begin{figure}
     \centering
@@ -70,24 +87,6 @@ The effect of the uncertain white dwarf temperatures on the system parameters, m
 
 ASASSN-16kr has a recorded superhump period, and now also a $q$ measurement. It can therefore be used to calibrate the superhump period excess, $\epsilon$ vs. $q$ relationship, as done in \citet{McAllister2019}, though with a more extreme mass ratio system than was previously available. The system was not confidently classed as exhibiting stage B or C stage superhumps, so the results for both stages are given. Assuming the CV was in stage B, $q_B = 0.059\pm0.007$; assuming stage C and using the relevant relation from \citet{McAllister2019}, $q_C = 0.068\pm0.012$. In both cases, the estimated $q_\mathrm{B,C}$ is $\sim 2 \sigma$ higher than the observed value of $q = 0.044\pm0.002$. While a $2 \sigma$ difference is not a highly significant discrepancy, this may be preliminary evidence that the $\epsilon - q$ relation may over estimate $q$ for CVs at short periods, which has been suspected for some time \citep{pearson2007, knigge11}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth, trim={0 0mm 0 0},clip]{figures/results/three_cvs_with_weird_colours/ASASSN-17jf/PhysicalParams/ASASSN-17jf_colourPlot_alpha_beta.pdf}
-    \caption{The white dwarf model atmosphere fits for ASASSN-17jf. {\bf Green circle}: Best fit with uniform prior on $\log (g)$. {\bf Red circle}: Best fit with the prior $\log(g)=8.10\pm0.04$. The observations are shown as the {\bf black point and error bars}. {\bf Solid black lines} are white dwarf model cooling tracks, increasing in $\log (g)$\ to the left. {\bf Red dashed lines} are isothermal tracks for different $\log (g)$.}
-    \label{fig:ASASSN-17jf colours}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth, trim={0 0mm 0 0},clip]{figures/results/three_cvs_with_weird_colours/ASASSN-16kr/PhysicalParams/ASASSN-16kr_colourPlot_alpha_beta.pdf}
-    \caption{The white dwarf model atmosphere fits for ASASSN-16kr. The {\bf red circle} is the best fit with a prior of $\log(g)=8.52\pm0.02$. Symbols are the same as Figure~\ref{fig:ASASSN-17jf colours}.}
-    \label{fig:ASASSN-16kr colours}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth, trim={0 0 0 0}, clip]{figures/results/three_cvs_with_weird_colours/SSS111126/PhysicalParams/SSS111126_colourPlot_alpha_beta.pdf}
-    \caption{The white dwarf model atmosphere fits for SSSJ0522-3505. The {\bf red circle} is the best fit with a prior of $\log(g)=8.28\pm0.04$. Symbols are the same as Figure~\ref{fig:ASASSN-17jf colours}.}
-    \label{fig:SSSJ0522-3505 colours}
-\end{figure}
 
 \begin{table*}
     \centering
@@ -122,18 +121,18 @@ ASASSN-16kr has a recorded superhump period, and now also a $q$ measurement. It 
 
 All three systems were candidate post-period minimum systems based on their periods and preliminary eclipse data; none show a prominent bright spot (indicative of a low mass transfer rate), or significant donor flux (implying a dim donor).
 As a result of this work, ASASSN-16kr and SSSJ0522-3505 are confirmed as having evolved through the period minimum and now have sub-stellar donors, and ASASSN-17jf lies in the period minimum region of Figure~\ref{fig:M2_vs_P}.
-Additionally, all three white dwarf masses derived in this analysis fall within the range of CV white dwarf masses observed by \citet{pala2020}, of $\langle M_{\rm WD}\rangle = 0.83 \pm 0.17 M_\odot$, significantly higher than the pre-CV DA white dwarf mass of only $0.66 \pm 0.15 {\rm M_\odot}$ \citep{mccleery2020}.
+Additionally, despite the difficulty in white dwarf modelling, all three white dwarf masses derived in this analysis fall within the range of CV white dwarf masses observed by \citet{pala2020}, of $\langle M_{\rm WD}\rangle = 0.83 \pm 0.17 M_\odot$, and are significantly higher than the pre-CV DA white dwarf mass of only $0.66 \pm 0.15 {\rm M_\odot}$ \citep{mccleery2020}.
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{figures/results/three_cvs_with_weird_colours/GeneralFigs/M2_vs_P_withhumpers.pdf}
-    \caption{Donor evolution tracks, from MESA, compared with observations. The observational sample presented here is the same as in \citet{wild2021}.}
+    \caption{Reproduced from \citet{wild2021}, showing donor evolution tracks compared with observations. The observational sample presented here is the same as in \citet{wild2021}. The {\bf red and black lines} show the \citet{knigge11} standard and optimal tracks, respectively. The {\bf vertical red line} shows the measured period minimum, as the mean of observations between 76 and 82 minutes, with the {\bf vertical shaded red region} showing the standard deviation of these data.}
     \label{fig:M2_vs_P}
 \end{figure*}
 
 \subsection{Is it correct to assume an unobscured white dwarf?}
 \label{sect:impure white dwarf discussion}
 
-As discussed in \S\ref{sect:three white dwarfs:method WD atmosphere fits}, the white dwarf colours may differ from model grids because the white dwarf ingress/egress is contaminated by an additional source of light, such as a boundary layer close to the surface.
+As mentioned in \S\ref{sect:three white dwarfs:method WD atmosphere fits}, the white dwarf colours may differ from model grids because the white dwarf ingress/egress is contaminated by an additional source of light, such as a boundary layer close to the surface.
 If the eclipse is polluted by some other feature, phase-folded eclipse modelling will be wrong in two key elements: comparing colours to model atmospheres will be inaccurate, and the ingress and egress durations that constrain the white dwarf radius will not be correct.
 \citet{Spark2015} conducted a study into the validity of assuming a pure white dwarf, comparing CV eclipse observations with white dwarfs with and without a few types of surface features such as boundary layers on the white dwarf, hot spots, or an optically thick or thin equatorial belt.
 These features are revealed by a departure from symmetry between the white dwarf ingress and egress, but care must be taken not to confuse the flickering component of the CV with the signature of surface features.
@@ -150,7 +149,7 @@ The effective temperature of white dwarfs in short period CVs is typically $\sim
 
 The measured effective temperature could be wrong, either as a result of poor flux calibration (see \S\ref{sect:observations:flux calibrating the lightcurve} for reasons this is unlikely) or because the ingress/egress fluxes do not represent the fluxes of the white dwarf photosphere, as discussed in section~\ref{sect:impure white dwarf discussion}. However, the measured temperature is  $\sim10000$\,K hotter than expected, and these effects are unlikely to have introduced an error of this magnitude. As support for this, note that \citet{Pala2017a} find that white dwarf temperatures from UV spectroscopy typically agree with those measured from eclipse lightcurves to within $\sim1000$\,K. Reasons why the white dwarf temperature in SSSJ0522-3505 might be unusually hot are explored here, but UV spectroscopy to confirm the white dwarf temperature is highly desirable.
 
-The white dwarf in a CV is thought to settle at an equilibrium temperature, where radiative heat loss is balanced with two energy sources: energy released by infalling material, and a low level of "simmering" nuclear fusion in the white dwarf envelope \citep{Townsley2003, Townsley2004}, but there are several reasons that this white dwarf may be temporarily out of equilibrium.
+The white dwarf in a CV is thought to settle at an equilibrium temperature, where radiative heat loss is balanced with two energy sources: energy released by infalling material, and a low level of ``simmering'' nuclear fusion in the white dwarf envelope \citep{Townsley2003, Townsley2004}, but there are several reasons that this white dwarf may be temporarily out of equilibrium.
 There is no reason, though it is unlikely, that a CV cannot form from a main sequence star with a brown dwarf companion, to produce a young CV with a low-mass donor and a white dwarf still cooling from its formation temperature.
 Once the donor has reconnected with its Roche lobe, it would rejoin the normal CV evolution track and otherwise behave as a normal CV, with a normal accretion rate but a younger, hotter white dwarf than is typical.
 

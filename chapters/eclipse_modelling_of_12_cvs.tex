@@ -2,7 +2,7 @@
 \lhead{\emph{Eclipse modelling of 12 CVs}} % This is for the header on each page - perhaps a shortened title
 
 % As previously mentioned, a primary focus of this thesis is to grow the population of eclipse modelled CVs.
-A modest backlog of observed data was reduced, calibrated, and modelled, and the results are presented here. All CVs were fit using the new hierarchical model structure described in \S\ref{sect:modelling:optimising eclipse model parameters}, with eclipses binned together where possible, to reduce the complexity of the parameter space. Which specific data were binned together for each system, if any, is given in the tables in \S\ref{sect:observing:observation catalogue}.
+A modest backlog of observed CV eclipse light curve data was reduced, calibrated, and modelled, and the results are presented here. All CVs were fit using the new hierarchical model structure described in \S\ref{sect:modelling:optimising eclipse model parameters}, with eclipses binned together where possible, to reduce the complexity of the parameter space. Which specific data were binned together for each system, if any, is given in the tables in \S\ref{sect:observing:observation catalogue}.
 
 
 \section{Systems chosen for modelling}
@@ -10,6 +10,7 @@ A modest backlog of observed data was reduced, calibrated, and modelled, and the
 The systems modelled here were largely chosen based on their short periods, in an effort to uncover more period-bouncer CVs, as this population is under-sampled in previous eclipse-modelled CVs.
 The systems chosen for modelling range in period from $1.4 - 2.2$ hours, and were drawn from a few sources.
 The All-Sky Automated Survey for Supernovae (ASASSN) \citep{shappee2014} is sensitive to transients, and is a valuable tool to identify CVs by their outbursts for follow-up once they re-enter quiescence. Such systems are recognised by their ASASSN moniker.
+Other candidate systems were gathered from a variety of sources, which are cited below.
 % The vsnet alert system also provided several systems, which are marked below with (v).
 The modelled systems in this thesis were:
 \begin{itemize}
@@ -23,29 +24,30 @@ The modelled systems in this thesis were:
     \item CSS090102 J132536+210037 (hereafter CSS090102) \citep{kato2012}
     \item CSS090419 J162620-125557 (hereafter CSS090419) \citep{kato2012}
     \item MASTER OT J001400.25-561735.0 (hereafter MAS0014) (Woudt, private communication)
-    \item OGLE BLG-ECL-000082 (a.k.a BLG510.16.126296, hereafter OGLE82)
+    \item OGLE BLG-ECL-000082 (a.k.a BLG510.16.126296, hereafter OGLE82)\todo{Not actually sure where this one came from...}
     \item SDSS J074859.6+312512.7 (hereafter SDSS J0748) \citep{kato2016}
     \item SDSS J152419.33+220920.0 (hereafter SDSS J1524) \citep{southworth2010,michel2013}
 \end{itemize}
 
-ASASSN-14hq and ASASSN-15pb were observed by \citet{paterson2019}, though the observations used in this thesis pre-date this publication. These two systems were noted to be in outburst in late 2014 in the case of ASASSN-14hq, and 2015 in the case of ASASSN-15pb.
+ASASSN-14hq and ASASSN-15pb were observed by \citet{paterson2019} and had their periods measured, though the observations used in this thesis pre-date this publication.
+These two systems were also noted to be in outburst in late 2014 in the case of ASASSN-14hq, and 2015 in the case of ASASSN-15pb.
 
 
 \section{Results}
 \label{sect:results:12 new CVs:results}
 
-All eclipses presented are well-described by their fits, with small residuals. The lightcurves are contained in Appendix~\ref{appendix:lightcurves}, along with the white dwarf flux distributions compared to the cooling tracks. The example system of ASASSN-14kb has the lightcurve and flux distribution is shown in Figure~\ref{fig:results:12 new CVs:ASASSN-14kb all lightcurves}, and Figure~\ref{fig:results:12 new CVs:ASASSN-14kb flux plot}, respectively.
+All eclipses presented are well-described by their fits, with small residuals. The light curves are contained in Appendix~\ref{appendix:lightcurves}, along with the white dwarf flux distributions and their best-fit white dwarf model atmospheres. The example system of ASASSN-14kb has the lightcurve and flux distribution is shown in Figure~\ref{fig:results:12 new CVs:ASASSN-14kb all lightcurves}, and Figure~\ref{fig:results:12 new CVs:ASASSN-14kb flux plot}, respectively.
 In a few cases, the GP appears as a flat line along a residual of 0 despite some obvious scatter, e.g. ASASSN-14hq, seen in Figure~\ref{fig:ASASSN-14hq all lightcurves cont}. This is expected, as in these cases the residuals are fully described by the error in flux and the GP likelihood becomes dominated by the priors, sampling small values of GP amplitude.
-Table~\ref{table:12 new cvs:system_parameters} details the physical parameters of these 12 new systems, and notes on the modelling of each is given below.
 
 None of these systems presented the issues with their characterisations that was seen in Chapter~\ref{chpt:results:three peculiar white dwarfs}. The modelled white dwarf colours were described by cooling tracks well in most cases, with the exceptions of CSS090419 and CSS090622. Spectroscopic follow-up in these cases is desirable to probe these systems more deeply.
 
-Some results, however, are good demonstrations of the ability of the hierarchical GP modelling approach to usefully model poorer quality light curves in tandem with higher quality data.
+Some results are particularly good demonstrations of the ability of the hierarchical GP modelling approach to usefully model poorer quality light curves in tandem with higher quality data.
 An example of this is seen in the case of MAS0014, the light curves of which are seen in Figures~\ref{fig:MAS0014 all lightcurves},~\ref{fig:MAS0014 all lightcurves cont 1},~and~\ref{fig:MAS0014 all lightcurves cont 2}, where the high-quality binned data help a subtle bright spot egress to be confidently constrained in the eclipse of 2016/11/07 even in the presence of significant flickering.
 
-A more extreme example is that of SDSS J0748, which has the white dwarf and bright spot ingresses blended together for the majority of observations, but clearly distinct ingresses on the night of 2018/02/05 and somewhat distinct ingresses on 2018/02/07.
-Using the hierarchical structure to share information between observations makes characterisation possible in a system that would be extremely difficult to model otherwise.
+A more extreme example is that of SDSS J0748, which has the white dwarf and bright spot ingresses blended together for the majority of observations, but clearly distinct ingresses on the night of 2018/02/05 and somewhat distinct ingresses on 2018/02/07, seen in Figure~\ref{fig:SDSS J0748 all lightcurves}.
+Using the hierarchical structure to share information between observations constrains the parameter space, and makes characterisation possible in a system that would otherwise be extremely difficult to model.
 
+Table~\ref{table:12 new cvs:system_parameters} details the physical parameters of these 12 new systems, and notes on the modelling of each is given below.
 
 \begin{figure}
     \centering
@@ -63,10 +65,10 @@ Using the hierarchical structure to share information between observations makes
 
 \subsection{ASASSN-14hq}
 
-These observations fell into two binning categories, the 2016 and 2017 data were consistent with one another, and the January 2018 data were consistent enough to combine. The eclipse modelling suggests that the disc radius fell in brightness by $\sim 20\%$ in the $g_{\rm reg}$ and $\sim 50\%$ in the $u_{\rm reg}$ between these two batches, suggesting the disc was in a phase of dumping material onto the white dwarf faster than material enters it from the donor.
+These observations fell into two binning categories. The 2016 and 2017 data were consistent with one another, and the January 2018 data were consistent enough to combine. The eclipse modelling indicates that the disc radius fell in brightness by $\sim 20\%$ in the $g'$ and $\sim 50\%$ in the $u'$ between these two batches, suggesting the disc was in a phase of dumping material onto the white dwarf faster than material enters it from the donor during this period.
 
 For this system, the white dwarf fluxes were well-described by the model cooling tracks, with the white dwarf fitting phase producing a value of $\pi$ that agrees with Gaia ($3.40\pm0.07$ mas and $3.40\pm0.08$ mas, respectively).
-Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, falling just over $1\sigma$ outside the \citet{pala2020} range of $0.83\pm0.13 M_\odot$, and a donor mass approximately consistent with the pre-period minimum CV tracks.
+Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, though this falls just over $1\sigma$ outside the \citet{pala2020} range of $0.83\pm0.13 M_\odot$ so is well within the expected mass range, and a donor mass of $0.097\pm0.002 M_\odot$, consistent with the `optimal' pre-period minimum CV track.
 
 
 \subsection{ASASSN-14kb}
@@ -81,10 +83,12 @@ Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, falling 
 
 \subsection{AY For}
 
-AY For had the white dwarf and donor stars' masses estimated spectroscopically in \citet{mason2005} to be $M_{\rm wd} \sim 0.64 M_\odot$ and $M_{\rm donor} \sim 0.17 M_\odot$, with no error reported. These values are not consistent with these findings, of $M_{\rm wd} = 0.78\pm0.02 M_\odot$ and $M_{\rm donor} = 0.106\pm0.006 M_\odot$.
-This previous measurement, however, is dubious. It is based on inferring a donor mass and radius from the period using the model $M_{\rm donor} - P$ relation presented in \citet{howell2002}, which is then used to calculate a white dwarf mass. AY For is also claimed by \citet{mason2005} to be a pre-period minimum system, which is corroborated by this more rigorous analysis.
+AY For had the white dwarf and donor stars' masses estimated spectroscopically in \citet{mason2005} to be $M_{\rm wd} \sim 0.64 M_\odot$ and $M_{\rm donor} \sim 0.17 M_\odot$, with no error reported.
+These values are not consistent with my findings of $M_{\rm wd} = 0.78\pm0.02 M_\odot$ and $M_{\rm donor} = 0.106\pm0.006 M_\odot$.
+The previous measurement is highly dubious; it is based on inferring a donor mass and radius from the period using the model $M_{\rm donor} - P$ relation presented in \citet{howell2002}, which is then used to calculate a white dwarf mass from a spectroscopic $q$. This relies heavily on a poorly understood relationship, and extrapolates that further when giving a white dwarf mass.
+AY For is also claimed by \citet{mason2005} to be a pre-period minimum system, which is corroborated by this more rigorous analysis.
 
-The white dwarf fluxes of AY For were not well-described by the white dwarf cooling tracks, similarly to the systems in \S\ref{sect:three white dwarfs:method WD atmosphere fits}. There is high confidence that this is a real effect rather than a poor calibration, as the field about AY For was observed by the PANSTARRS survey, and the comparison star SDSS magnitudes are reported, which can be used to flux-calibrate the data independently of the standard star method typically used. Comparing these two calibrations finds comparison star fluxes that are within 2\% of each other. Rather, this system possibly suffers from a similar corrupting effect to that seen in the three CVs of Chapter~\ref{chpt:results:three peculiar white dwarfs}, though the disagreement here is not as severe as the extreme case of SSSJ0522. Modelling error is similarly unlikely, as the lightcurve fits generally show distinct ingress and egress features that are replicated in the models.
+The white dwarf fluxes of AY For were not well-described by the white dwarf cooling tracks, similarly to the systems in \S\ref{sect:three white dwarfs:method WD atmosphere fits}. There is high confidence that this is a real effect rather than a poor calibration, as the field about AY For was observed by the PANSTARRS survey, and the comparison star SDSS magnitudes are reported, which can be used to flux-calibrate the data independently of the standard star method typically used. Comparing these two calibrations finds comparison star fluxes that are within 2\% of each other. Rather, this system possibly suffers from a similar corrupting effect to that seen in the three CVs of Chapter~\ref{chpt:results:three peculiar white dwarfs}, though the disagreement here is not as severe as the extreme case of SSSJ0522-3505. Modelling error is similarly unlikely, as the lightcurve fits generally show distinct ingress and egress features that are replicated in the models. However, based on the in-depth analysis of Chapter~\ref{chpt:results:three peculiar white dwarfs}, we can still consider the system parameters of AY For to be robust.
 
 
 % Needs reworking
@@ -94,8 +98,15 @@ The white dwarf fluxes of AY For were not well-described by the white dwarf cool
 
 \subsection{CSS090419}
 
-CSS090419 significantly brightens in the $i'$ band, compared to the $r'$ band. This is unlikely to be calibration error in the $i'$ band, as calibration has otherwise proven to be robust, and this brightening is not seen in the ASASSN-15pb $i'$ band observations. Modelling error can also be eliminated, as the eclipse features are reasonably well resolved.  The white dwarf and bright spot ingresses are somewhat blended in the $r'$ and $i'$, but the egresses are distinct enough to compensate for this. However, the blended features are reflected in large uncertainty in white dwarf flux.
-This is not typical white dwarf behaviour, and cannot be reproduced by the white dwarf model atmospheres used here. The disagreement between the observed $i'$ flux and the best-fit model $i'$ flux is relatively small, less than $2\sigma$, so the resulting fit can still be considered valid. The posterior $\pi$ distribution is consistent with the Gaia measurement of $1.41\pm0.78$ mas, with slightly lower uncertainty.
+CSS090419 significantly brightens in the $i'$ band, compared to the $r'$ band. This is unlikely to be calibration error in the $i'$ band, as calibration has otherwise proven to be robust. In addition, this brightening is not seen in the ASASSN-15pb $i'$ band observations, suggesting it is not a systematic issue.
+
+A failure in model optimisation can reasonably be blamed, but can also be eliminated. The resulting fit appears to be acceptable, with little residual flux. These fits are given in Figures~\ref{fig:CSS090419 all lightcurves}~and~\ref{fig:CSS090419 all lightcurves cont 1}.
+The white dwarf and bright spot ingresses are somewhat blended in the $r'$ and $i'$, but the egresses are distinct enough to resolve a white dwarf flux. Further, the ingresses in the $u'$ and $g'$ are less blended, allowing the hierarchical structure to use these eclipses to constrain the poor $r'$ and $i'$ data.
+These blended features are reflected in large uncertainty in white dwarf flux. Indeed, the standard deviations on all four white dwarf fluxes are large enough that they are consistent with their mean -- a perfectly flat spectrum.
+
+This is not typical white dwarf behaviour, and cannot be reproduced by the white dwarf model atmospheres used here given the constraints. Whilst an extremely hot white dwarf is able to produce a flat spectrum in the optical range, the luminosity of such an object is forbidden by the Gaia distance measurement.
+This preference for a flat spectrum is reflected in the high, and highly uncertain, best fit $T_{\rm eff} = 18200 \pm 9000$K, though the posterior $\pi$ distribution is consistent with the Gaia measurement of $1.41\pm0.78$ mas, with slightly reduced uncertainty.
+Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\ref{chpt:results:three peculiar white dwarfs} the resulting characterisation can still be considered valid.
 
 
 \subsection{CSS090622}
@@ -229,7 +240,7 @@ CVs may follow inherently different evolutionary tracks due to differences in do
 If any individual system deviates from the adopted values in the models of \citet{knigge11} then $P_{\rm ex}$ for that system will be influenced by these differences as well as any extra AML. However, conclusions about $P_{\rm ex}$ drawn from the population at large should remain robust, as long as the population doesn't differ systematically from the values adopted in the models.
 The white dwarf mass used by \citet{knigge11} is somewhat lower than more recent observations suggest, using $M_{\rm WD} = 0.75 M_\odot$ versus the more recent value of $M_{\rm WD} = 0.83 \pm 0.17 M_\odot$ \citep{pala2020}.\todo{I can re-do this with MESA, but I really don't think it's worth bothering...}
 An updated version of Knigge's modelling is necessary to properly characterise the effect of this change on the donor evolutionary tracks, as this will affect both the size of the Roche lobes, and the rate of gravitational wave AML; alternatively, MESA models could be used here, though these are subject to their own biases and assumptions.
-Other CV models suggest that the effect of correcting $M_{\rm wd}$ will be small; at most around 2 minutes \citep{goliasch2015}, and this analysis is rudimentary so the slightly incorrect white dwarf mass is considered acceptable.
+Other CV models suggest that the effect of correcting $M_{\rm wd}$ will be small, at most around 2 minutes \citep{goliasch2015}. This analysis is not rigorous enough for this to become an issue, and the effects of using an incorrect white dwarf mass is considered acceptable.
 
 More seriously, $P_{\rm ex}$ is only an accurate proxy of additional AML if the underlying donor physics in the model are correct. For example, if the models incorrectly predict the mass of systems in the period gap, this can have a large effect on $P_{\rm ex}$. In the models of \citet{knigge11} this mass is fixed at the empirically derived value of $0.2 M_\odot$, as observations of superhumping and eclipsing CVs suggest that period gap occurs at donor masses of $0.20 \pm 0.02 M_\odot$ \citep{knigge2006}. Using model tracks with lower or higher masses for the donor mass of the period gap would alter $P_{\rm ex}$, though in this case the broad trend in $P_{\rm ex}$ will again be unchanged.
 
@@ -249,7 +260,7 @@ There are then three cases to describe the trend in $P_{\rm ex}$: the excess AML
     \centering
     \includegraphics[width=\columnwidth]{figures/results/Mdot/Period_excess_Mr.pdf}
     \includegraphics[width=\columnwidth]{figures/results/Mdot/Period_excess_Mwd.pdf}
-    \caption{The relation between the two body masses, and the period excess, $P_{\rm ex}$ is shown. The {\rm black crosses with error bars} are the observed data, and the {\bf solid red line} shows the best-fit solution to the data. {\bf Shaded red regions} show successively lower confidence intervals, with the darkest region being $1\sigma$ confidence, and the lightest region being $3\sigma$ confidence. The lines of best fit have the forms: $P_{\rm ex} = -(2.97\pm0.99) M_{\rm donor} + (0.34\pm0.09)$ and $P_{\rm ex} = -(1.66\pm0.32) M_{\rm wd} + (1.30\pm0.24)$.}
+    \caption{The relation between the two body masses, and the period excess, $P_{\rm ex}$ is shown. The {\bf black crosses with error bars} are the observed data, and the {\bf solid red line} shows the best-fit solution to the data. {\bf Shaded red regions} show successively lower confidence intervals, with the darkest region being $1\sigma$ confidence, and the lightest region being $3\sigma$ confidence. The lines of best fit have the forms: $P_{\rm ex} = -(11.8\pm3.7) M_{\rm donor} + (1.3\pm0.4)$ and $P_{\rm ex} = -(2.0\pm0.4) M_{\rm wd} + (1.6\pm0.3)$.}
     \label{fig:period excess}
 \end{figure}
 % \begin{figure}
