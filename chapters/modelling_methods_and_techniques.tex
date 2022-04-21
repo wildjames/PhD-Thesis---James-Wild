@@ -679,7 +679,11 @@ Finally, the mass loss can be converted to an angular momentum loss rate. The an
 \begin{equation}
     J = M_{\rm wd} M_{\rm donor} \sqrt{\frac{Ga}{M_{\rm wd} + M_{\rm donor}}}
 \end{equation}
-By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by $\dot J = {dJ}/{dM_{\rm donor}} \times {dM_{\rm donor}}/{dt}$. Note that here, I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $M_{\rm donor}$ and $a$ in the short period CV regime). Thus, a relation between $\dot M$ and $\dot J$ can be found:
+By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by
+\begin{equation}
+    \dot J = \frac{dJ}{dM_{\rm donor}} \frac{dM_{\rm donor}}{dt} + \frac{dJ}{dM_{\rm wd}} \frac{dM_{\rm wd}}{dt} + \frac{dJ}{da} \frac{da}{dt}
+\end{equation}
+The white dwarf does not retain any accreted material on long timescales, so $\dot M_{\rm wd} = 0$. For this derivation I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $\dot M_{\rm donor}$ and $\dot a$ in the short period CV regime). Thus, a relation between $\dot M$ and $\dot J$ can be found:
 \begin{align}
     \frac{dJ}{dM_{\rm donor}} = M_{\rm wd} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \\
     \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \label{eqn:modelling:Jdot from Mdot}
