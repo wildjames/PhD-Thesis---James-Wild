@@ -1,6 +1,6 @@
 HiPERCAM
 ULTRACAM
 ULTRASPEC
-lightcurve
+light curve
 GPs
 CAML

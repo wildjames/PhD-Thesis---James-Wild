@@ -107,8 +107,9 @@ When running a parallel tempered MCMC, the values used in the software are $\bet
 The number of temperatures used depends on the evaluation time; since parallel tempering runs multiple full ensembles in tandem, in models with very large numbers of parameters it becomes highly desirable to use as few temperatures as possible. However, the penalty in computation time per step comes with the benefit of a dramatically improved ability to locate the global minimum, especially in complex parameter space.
 
 \subsection{The binary chop}
+\label{sect:modelling:binary chop methodology}
 
-When searching for the root of a simple model, i.e. one with a single input parameter, $x$, and a single output metric, $y$, that either monotonically increases or decreases with $x$, we use the binary chop algorithm.
+When searching for the root of a simple model, i.e. one with a single input parameter, $x$, and a single output metric, $y$, that either monotonically increases or decreases with $x$, I use the binary chop algorithm.
 This requires relatively few evaluations to find the root of a function, i.e. $y(x_0) = 0$.
 If two values of $y$ are known to have opposite signs, e.g. $y_1(x_1)$ is positive and $y_2(x_2)$ is negative, it can be deduced that $x_0$ lies between $x_1$ and $x_2$. Then, by repeatedly evaluating midpoint between the two values of $x$ known to be closest to $x_0$, the algorithm will tend towards $x_1 \sim x_2 \sim x_0$. In practice, the optimisation terminates when $y(x_1) - y(x_2)$ is within some tolerance.
 Step-by-step, this proceeds as follows:
@@ -116,8 +117,8 @@ Step-by-step, this proceeds as follows:
     \setlength\itemsep{0em}
     \item First, evaluate the upper and lower limits of $x$, $x_{\rm low}$ and $x_{\rm high}$, to ensure that one returns a negative $y$, and one returns a positive $y$
     \item Evaluate $y(x_{\rm mid})$, where $x_{\rm mid} = 0.5(x_{\rm low} + x_{\rm high})$.
-    \item If $x_{\rm low}$ has the same sign as $x_{\rm high}$, assign $x_{\rm high} = x_{\rm mid}$, or vice-versa for $x_{\rm low}$.
-    \item Check if the difference between $y(x_{\rm low})$ and $y(x_{\rm high})$ is within tolerance. If it is, terminate the optimisation. Otherwise, repeat the process again.
+    \item If $x_{\rm mid}$ has the same sign as $x_{\rm high}$, assign $x_{\rm high} = x_{\rm mid}$, or vice-versa for $x_{\rm low}$.
+    \item Check if the difference between $y(x_{\rm low})$ and $y(x_{\rm high})$ is within tolerance. If it is, terminate the optimisation. Otherwise, repeat the process.
 \end{enumerate}
 
 
@@ -179,8 +180,8 @@ This is achieved by setting $N = -(\sigma_{\rm T0}\sigma_{\rm P})/(\sigma_{\rm P
 with no cross correlation, in theory. In practice, as $E$ must be rounded to an integer, some residual cross-correlation persists, but is minimised.
 
 \newpage
-\section{Modelling CV eclipse lightcurves}
-\label{sect:modelling:lightcurve modelling}
+\section{Modelling CV eclipse light curves}
+\label{sect:modelling:light curve modelling}
 
 \begin{table}
     \centering
@@ -215,7 +216,7 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
     \end{tabular}
 \end{table}
 
-To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, lightcurve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
+To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, light curve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
 
 CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, mcallister2017, McAllister2019}. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
 Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
@@ -252,7 +253,7 @@ Note that this model requires simultaneously fitting many variables simultaneous
 \label{sect:modelling:eclipse modelling}
 
 Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy. Notably the bright spot emits flux directionally, so beaming must also be accounted for in the model.
-The anatomy of a CV eclipse lightcurve is a sequence of five events, that usually occur in the following order:
+The anatomy of a CV eclipse light curve is a sequence of five events, that usually occur in the following order:
 \begin{enumerate}
     \setlength\itemsep{0em}
     \item a pre-eclipse hump is often seen as the bright spot rotates to point at the observer
@@ -264,10 +265,10 @@ The anatomy of a CV eclipse lightcurve is a sequence of five events, that usuall
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/introduction/example_eclipse.pdf}
-    \caption{Showing an example eclipse lightcurve, folded about the period of the eclipse. The {\bf solid black line} shows the brightness of the system varying over time. The {\bf blue solid lines} show the white dwarf ingress (left) and egress (right). The {\bf red dashed lines} show the ingress (left) and egress (right) of the bright spot. The pre-eclipse hump is the {\bf grey shaded region}}
-    \label{fig:introduction:example labelled eclipse lightcurve}
+    \caption{Showing an example eclipse light curve, folded about the period of the eclipse. The {\bf solid black line} shows the brightness of the system varying over time. The {\bf blue solid lines} show the white dwarf ingress (left) and egress (right). The {\bf red dashed lines} show the ingress (left) and egress (right) of the bright spot. The pre-eclipse hump is the {\bf grey shaded region}}
+    \label{fig:introduction:example labelled eclipse light curve}
 \end{figure}
-Figure~\ref{fig:introduction:example labelled eclipse lightcurve} shows a typical lightcurve, with these events noted.
+Figure~\ref{fig:introduction:example labelled eclipse light curve} shows a typical light curve, with these events noted.
 
 A single eclipse is described by 18 parameters:
 \begin{itemize}
@@ -386,7 +387,7 @@ Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previou
 
 CVs almost always display some amount of stochastic variability, known as flickering. Rather than attempting to model this physically, it is instead treated as correlated noise and characterised with a Gaussian process (GP).
 The application of GPs to capturing flickering was established by \citet{mcallister2017} based on work by \citet{roberts2012} and \citet{gibson2012}.
-The utility of this addition to the eclipse modelling step is a significant improvement in the accuracy of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key lightcurve features that modelling aims to reproduce, demonstrated by \citet{mcallister2017}.
+The utility of this addition to the eclipse modelling step is a significant improvement in the accuracy of parameter posteriors, as the GP can be used to subtract flickering from the observations while leaving the key light curve features that modelling aims to reproduce, demonstrated by \citet{mcallister2017}.
 
 This section is aimed at giving a working knowledge of GPs in the context of characterising flickering, and for more in-depth discussion the reader is directed towards these works. The mathematics below omits error in flux for legibility, but closely similar derivations are possible that include error when calculating the likelihood of a data set.
 
@@ -459,14 +460,14 @@ The slightly more complex parameter space that must now be explored, and more co
 \subsection{Hierarchical model structure}
 \label{sect:modelling:optimising eclipse model parameters}
 
-In this thesis, the lightcurve fitting model used by \citet{McAllister2019} is extended, adopting a hierarchical approach to reduce model complexity.
+In this thesis, the light curve fitting model used by \citet{McAllister2019} is extended, adopting a hierarchical approach to reduce model complexity.
 
-Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse lightcurve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{mcallister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
+Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse light curve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{mcallister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
 
 \begin{figure}
     \centering
     \includegraphics[width=.85\columnwidth ]{figures/results/three_cvs_with_weird_colours/GeneralFigs/hierarchical_model_structure.png}
-    \caption{The hierarchical structure of the lightcurve model. Parameters are inherited downwards, to produce an eclipse at the `leaves' of the tree, e.g. Eclipse 3 inherits the parameters of Band 2, which in turn inherits the Core parameters. $\mathrm{F_{WD, RS}}$\ represent the fluxes of the white dwarf and donor star, and $\mathrm{U_{LD}}$\ is the limb darkening coefficient of the white dwarf.}
+    \caption{The hierarchical structure of the light curve model. Parameters are inherited downwards, to produce an eclipse at the `leaves' of the tree, e.g. Eclipse 3 inherits the parameters of Band 2, which in turn inherits the Core parameters. $\mathrm{F_{WD, RS}}$\ represent the fluxes of the white dwarf and donor star, and $\mathrm{U_{LD}}$\ is the limb darkening coefficient of the white dwarf.}
     \label{fig:modelling:hierarchical_model}
 \end{figure}
 
@@ -659,34 +660,47 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 \subsection{Optimising mass loss rate to donor observations}
 \label{sect:modelling:optimising mass loss rate to observations}
 
-Finally, the mass loss rate required to match donor observations can be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
+The mass loss rate required to match donor observations can now be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
 When evaluating a proposed $\dot M$, two other key model parameters must be set. First the mass loss over a period of 1 Gyr is calculated. The initial model mass is then this expected 1 Gyr mass, in addition to the target mass. Doing this allows for some lead time before the model reaches the desired stellar mass, and gives the star time to reach both the main sequence, and settle to its equilibrium radius.
 The appropriate $f_{\rm spot}$ for the target mass is also calculated, and the model fixes $f_{\rm spot}$ at this value. Fixing $f_{\rm spot}$ this way accounts for the donor having comparable $\tau_{\rm KH}$ and $\tau_{\dot M}$, which would not allow the star to properly adjust to variable spot parameters.
 Finally, to find the uncertainty in $\dot M$, two further combinations of donor mass and radius were evaluated for each system: ($M = \bar M + \sigma_M$, $R = \bar R + \sigma_R$), and ($M = \bar M - \sigma_M$, $R = \bar R - \sigma_R$). The donor mass and radius are highly correlated (typical cross-correlation coefficient values for the eclipse modelled systems later analysed for this work are $\sim 0.9995$), so this is reasonable approximation to make.
 
-{\it{\bf A faster alternative is to run a fixed grid of models, and interpolate within it.}\todo{I altered the code to get error straight from binary chopping, so this isn't true any more}
-An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}. These models were run with fixed values of $f_{\rm spot}$, since varying $f_{\rm spot}$ with mass introduces a time lag between a change in $f_{\rm spot}$, and $R_{\rm donor}$ adjusting that is on a similar timescale to $\tau_{\dot M}$. This effect is demonstrated quantitatively in \S\ref{sect:modelling:tuning star spots to observations}.
+% {\it{\bf A faster alternative is to run a fixed grid of models, and interpolate within it.}\todo{I altered the code to get error straight from binary chopping, so this isn't true any more}
+% An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}. These models were run with fixed values of $f_{\rm spot}$, since varying $f_{\rm spot}$ with mass introduces a time lag between a change in $f_{\rm spot}$, and $R_{\rm donor}$ adjusting that is on a similar timescale to $\tau_{\dot M}$. This effect is demonstrated quantitatively in \S\ref{sect:modelling:tuning star spots to observations}.
 
-Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
+% Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
 
-This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
-For a given $(M_{\rm donor},\ R_{\rm donor})$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship later derived in \S\ref{sect:modelling:tuning star spots to observations} to choose the correct $f_{\rm spot}$ track, and the model grid can be interpolated for a value of $\dot M$.
-This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
-The central value of the binary chop was consistent with the interpolation in all cases.
-}
+% This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
+% For a given $(M_{\rm donor},\ R_{\rm donor})$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship later derived in \S\ref{sect:modelling:tuning star spots to observations} to choose the correct $f_{\rm spot}$ track, and the model grid can be interpolated for a value of $\dot M$.
+% This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
+% The central value of the binary chop was consistent with the interpolation in all cases.
+% }
 
-Finally, the mass loss can be converted to an angular momentum loss rate. The angular momentum of a binary is given by $J$,
+
+\subsection{Determining AML rate from system parameters}
+\label{sect:modelling:getting AML rate from system parameters}
+
+Finally, the mass loss can be converted to an angular momentum loss rate. To do so, I will begin by defining the total AML from the system, $\dot J$, as the sum of the typical system AML, $\dot J_{\rm sys}$ (i.e. gravitational and magnetic braking), and CAML, $\dot J_{\rm CAML}$,
 \begin{equation}
-    J = M_{\rm wd} M_{\rm donor} \sqrt{\frac{Ga}{M_{\rm wd} + M_{\rm donor}}}
+    \dot J = \dot J_{\rm sys} + \dot J_{\rm CAML}
 \end{equation}
-By differentiating for ${dJ}/{dM_{\rm donor}}$ with the quotient rule, we can find the AML rate by
+\citet{king1995} set a general formulation of CAML as some fraction of donor mass loss,
 \begin{equation}
-    \dot J = \frac{dJ}{dM_{\rm donor}} \frac{dM_{\rm donor}}{dt} + \frac{dJ}{dM_{\rm wd}} \frac{dM_{\rm wd}}{dt} + \frac{dJ}{da} \frac{da}{dt}
+    \frac{\dot J_{\rm sys}}{J} = \nu \frac{\dot M_{\rm donor}}{M_{\rm donor}}
 \end{equation}
-The white dwarf does not retain any accreted material on long timescales, so $\dot M_{\rm wd} = 0$. For this derivation I assume the effect of $\dot a$ is negligible, and ignore it (a fuller, more complex treatment of the algebra confirms this -- there is a difference of $\sim 4$ orders of magnitude between the contribution to $\dot J$ from $\dot M_{\rm donor}$ and $\dot a$ in the short period CV regime). Thus, a relation between $\dot M$ and $\dot J$ can be found:
-\begin{align}
-    \frac{dJ}{dM_{\rm donor}} = M_{\rm wd} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \\
-    \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{Ga} \bigg[ \frac{2M_{\rm wd} + M_{\rm donor}}{2 (M_{\rm wd} + M_{\rm donor})^{3/2}} \bigg] \label{eqn:modelling:Jdot from Mdot}
-\end{align}
+where the form of $\nu$ depends on the CAML prescription being used.
+
+The form of $\dot J_{\rm sys}$ in the presence of CAML is also given in \citet{king1995}.
+\begin{gather}
+    \frac{\dot J_{\rm sys}}{J} = D \frac{\dot M_{\rm donor}}{M_{\rm donor}} \\
+    D = \bigg(\frac{5}{6} - \frac{\zeta}{2}\bigg) - \frac{M_{\rm donor}}{M_{\rm wd}} + \alpha \bigg( \frac{M_{\rm donor}}{M_{\rm wd}} - \frac{1}{3} \frac{M_{\rm donor}}{M_{\rm wd} + M_{\rm donor}} \bigg)  - \nu
+\end{gather}
+$\alpha$ is the mass retention factor, $\dot M_{\rm total} / \dot M_{\rm donor}$. Following the findings of \citet{McAllister2019}, there is no growth of the white dwarf over time and thus $\alpha \equiv 1$. $\zeta$ is the mass-radius exponent of the donor star, $\frac{d(\ln R_{\rm donor})}{d(\ln M_{\rm donor})}$.
+
+After substituting $\alpha = 1$, we can then construct a form of $\dot J$ that is a function of component masses, $a$, $\dot M_{\rm donor}$, and $\zeta$,
+\begin{gather}
+    \dot J = J \frac{\dot M_{\rm donor}}{M_{\rm donor}} \cdot (D + \nu) \\
+    \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{\frac{G a }{M_{\rm wd} + M_{\rm donor}}} \bigg( \bigg(\frac{5}{6} - \frac{\zeta}{2}\bigg )  - \frac{1}{3} \frac{M_{\rm donor}}{M_{\rm wd} + M_{\rm donor}}\bigg ) \label{eqn:modelling:Jdot from Mdot}
+\end{gather}
 
 

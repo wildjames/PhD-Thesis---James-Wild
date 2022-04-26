@@ -3,9 +3,6 @@
 \label{chpt:observations and observational techniques} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Observations, and observational techniques}} % This is for the header on each page - perhaps a shortened title
 
-% In CVs with a sufficiently high inclination ($\gtrsim 80 \deg$, depending on mass ratio) the donor star will eclipse the white dwarf, accretion disc, and bright spot in quick succession once per orbit. Observing and modelling these eclipses, with knowledge of the orbital period and the temperature of the white dwarf, can yield a thorough characterisation of the CV. The methodology for this characterisation is described in detail in \S\ref{chpt:modelling and techniques}, but essentially relies on extracting the white dwarf temperature, mass, and radius from modelled white dwarf colours and the Gaia-reported system parallax, then combining the white dwarf mass and radius with the timing of various eclipse features to find the key parameters of donor mass, donor radius, and orbital separation.\todo{Stu marked this as duplication, but I dont think it is... And I think its necessary setup for the chapter.}
-% Since the important observables are colours and the timing of events, to properly characterise a CV we need flux-calibrated, high time resolution, multi-colour photometry of a target.
-
 The work of this thesis has made use of three instruments: ULTRASPEC, ULTRACAM, and HiPERCAM.
 These are time-series photometric imaging cameras, capable of taking high-cadence images of the night sky in one, three, or five colours, respectively.
 The observed eclipses typically span around 30 minutes and observations need to measure flux changes on timescales of a few seconds to resolve the eclipse.
@@ -70,7 +67,7 @@ All three cameras use CCD detectors, which are a staple of ground-based astronom
 CCDs are made up of a large grid of photosensitive pixels, which release electrons proportionally to the number of photons that fall on them. This signal is then moved pixel-by-pixel into the readout electronics, which is essentially a capacitor that has its voltage measured to determine the number of electrons that were released. This voltage is converted to electron counts with an Analog-to-Digital Converter (ADC), that outputs the corresponding integer number of electrons to the input charge, in Analog-to-Digital Units (ADU).
 To extract time-series photometric information from the raw image files, the HiPERCAM data reduction pipeline was used\footnote{Available https://cygnus.astro.warwick.ac.uk/phsaap/hipercam/docs/html/}.
 
-The analysis of this data uses flux-calibrated relative photometry, in which a reference star in the same image as the target is extracted and used as a known-constant flux source. Then, by using the ADU flux ratio between these two sources as the observable, effects from changes in weather, altitude, and seeing conditions are compensated for, since these variations are assumed to affect both the target and reference star equally. By multiplying the ADU ratio between the target and reference stars by the flux in mJy of the reference star, we can calibrate our photometry and produce a lightcurve of the target star.
+The analysis of this data uses flux-calibrated relative photometry, in which a reference star in the same image as the target is extracted and used as a known-constant flux source. Then, by using the ADU flux ratio between these two sources as the observable, effects from changes in weather, altitude, and seeing conditions are compensated for, since these variations are assumed to affect both the target and reference star equally. By multiplying the ADU ratio between the target and reference stars by the flux in mJy of the reference star, we can calibrate our photometry and produce a light curve of the target star.
 % Bias and flat field corrections are done for each observation, with calibration frames taken nightly as standard procedure.
 
 
@@ -128,7 +125,7 @@ However, in brighter stars with an already high signal-to-noise ratio the improv
 \section{Photometric calibration}
 \label{sect:observations:photometric extraction and calibration}
 
-A comparison star in the same frame as the target is used to account for seeing and transparency variations over an observation, and standard stars from \citet{smith2002} were used to transform the lightcurves from ADU to the SDSS $u'g'r'i'z'$ photometric system. At the core of the photometric calibrations is the following expression of the apparent magnitude in some band, $m_{app}$, of a target,
+A comparison star in the same frame as the target is used to account for seeing and transparency variations over an observation, and standard stars from \citet{smith2002} were used to transform the light curves from ADU to the SDSS $u'g'r'i'z'$ photometric system. At the core of the photometric calibrations is the following expression of the apparent magnitude in some band, $m_{app}$, of a target,
 \begin{equation}
     \label{eqn:observations:instrumental magnitude from scratch}
     m_{app} = m_{inst} + \chi k_{ext} + m_{zp} + C_{inst}c_{m}
@@ -213,6 +210,7 @@ These colour corrections are not generally the same for main sequence stars and 
     \captionof{table}{ULTRACAM colour term best fit lines from Figure~\ref{fig:observations:ULTRACAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
     \label{table:observations:all ULTRACAM colour corrections}
     \begin{tabular}{cccc}
+        \hline
         Correction          & Diagnostic    & $\phi$    & $c$ \\
         \hline
         \hline
@@ -232,7 +230,6 @@ These colour corrections are not generally the same for main sequence stars and 
                             &  $(g'-r')$    & -0.015    & 0.040 \\
                             &  $(g'-i')$    & -0.012    & 0.028 \\
         \hline
-        \hline
     \end{tabular}
 
     \includegraphics[width=\textwidth]{figures/observations/colour_term_tracks_UCAM.pdf}
@@ -246,26 +243,26 @@ These colour corrections are not generally the same for main sequence stars and 
     \captionof{table}{HiPERCAM colour term best fit lines from Figure~\ref{fig:observations:HiPERCAM colour corrections}. The data are modelled by equations of the form $(u'-u_{\rm sup}) = \phi + c_u(u'-g')$, with $c_u$\ being the relevant colour gradient.}
     \label{table:observations:all HiPERCAM colour corrections}
     \begin{tabular}{cccc}
-            Correction          & Diagnostic & $\phi$   & $c$ \\
-            \hline
-            \hline
-            $u'-u_{\rm sup}$    & $(u'-g')$   &   0.096   & 0.054\\
-                                & $(g'-r')$   &   0.150   & 0.029\\
-                                & $(g'-i')$   &   0.152   & 0.022\\
-            \hline
-            $g'-g_{\rm sup}$    & $(u'-g')$   &   0.008   & 0.023\\
-                                & $(g'-r')$   &   0.010   & 0.045\\
-                                & $(g'-i')$   &   0.014   & 0.031\\
-            \hline
-            $r'-r_{\rm sup}$    & $(u'-g')$   &   0.000   & 0.001\\
-                                & $(g'-r')$   &   0.001   & 0.003\\
-                                & $(g'-i')$   &   0.001   & 0.002\\
-            \hline
-            $i'-i_{\rm sup}$    & $(u'-g')$   &   0.033   & 0.022\\
-                                & $(g'-r')$   &   0.016   & 0.044\\
-                                & $(g'-i')$   &   0.012   & 0.030\\
-            \hline
-            \hline
+        \hline
+        Correction          & Diagnostic & $\phi$   & $c$ \\
+        \hline
+        \hline
+        $u'-u_{\rm sup}$    & $(u'-g')$   &   0.096   & 0.054\\
+                            & $(g'-r')$   &   0.150   & 0.029\\
+                            & $(g'-i')$   &   0.152   & 0.022\\
+        \hline
+        $g'-g_{\rm sup}$    & $(u'-g')$   &   0.008   & 0.023\\
+                            & $(g'-r')$   &   0.010   & 0.045\\
+                            & $(g'-i')$   &   0.014   & 0.031\\
+        \hline
+        $r'-r_{\rm sup}$    & $(u'-g')$   &   0.000   & 0.001\\
+                            & $(g'-r')$   &   0.001   & 0.003\\
+                            & $(g'-i')$   &   0.001   & 0.002\\
+        \hline
+        $i'-i_{\rm sup}$    & $(u'-g')$   &   0.033   & 0.022\\
+                            & $(g'-r')$   &   0.016   & 0.044\\
+                            & $(g'-i')$   &   0.012   & 0.030\\
+        \hline
     \end{tabular}
 
     \includegraphics[width=\textwidth]{figures/observations/colour_term_tracks_HCAM.pdf}
@@ -292,11 +289,11 @@ SDSS magnitudes are related to the instrumental magnitudes by:
 Initially, $u',g',r',i'$\ magnitudes are set equal to the instrumental magnitudes, and a new set of $u',g',r',i'$\ magnitudes are calculated. The new values are then used to repeat the calculation until a new iteration produces no change, typically after $\sim$4 loops.
 
 
-\subsection{Producing a flux-calibrated target lightcurve}
-\label{sect:observations:flux calibrating the lightcurve}
+\subsection{Producing a flux-calibrated target light curve}
+\label{sect:observations:flux calibrating the light curve}
 
-Finally, the target lightcurves can be calculated. Broadly, this encompasses two processes: the target star lightcurve must be corrected for transparency variations, and then converted from ADU counts to calibrated flux.
-As the aim is to produce a flux-calibrated lightcurve in the SDSS photometric system, from observations using a significantly different photometric system, the simple ADU ratio between the target and comparison is insufficient.
+Finally, the target light curves can be calculated. Broadly, this encompasses two processes: the target star light curve must be corrected for transparency variations, and then converted from ADU counts to calibrated flux.
+As the aim is to produce a flux-calibrated light curve in the SDSS photometric system, from observations using a significantly different photometric system, the simple ADU ratio between the target and comparison is insufficient.
 Consider the target star $g'$ magnitude and flux, $g^t, F^t$, and comparison star $g'$ magnitude and flux, $g^c, F^c$:
 \begin{align*}
     g^t =& g^t_{\rm inst,0} + g_{\rm zp} + c_{\rm g, sup}(g'-r')^t \\
@@ -317,7 +314,7 @@ where $K^{t,c} = 10^{-0.4c_{\rm g, sup}\big((g'-r')^t - (g'-r')^c\big)}$.
 This accounts for differences in wavelength response between the two systems when calculating the flux ratio, and is applied to each frame. The $(g'-r')^t$\ magnitudes are calculated using a sigma-clipped mean instrumental magnitudes computed from all frames in the observation. In practice, the factor $K^{t,c}$\ varies from $\sim 1.0 - 1.1$\ for our observations.
 
 While developing this correction method, some verification tests were performed.
-ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. Finally, AY For provided a case where the SDSS magnitudes of the comparison stars were known {\it a priori}, as the field has been observed in the PANSTARRS survey. The calibrated comparison star magnitudes using the technique provided here are within ~2\% of the PANSTARRS magnitudes, indicating a reasonable calibration. In all cases, the flux-calibrated lightcurves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
+ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522-3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. Finally, AY For provided a case where the SDSS magnitudes of the comparison stars were known {\it a priori}, as the field has been observed in the PANSTARRS survey. The calibrated comparison star magnitudes using the technique provided here are within ~2\% of the PANSTARRS magnitudes, indicating a reasonable calibration. In all cases, the flux-calibrated light curves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
 
 We add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature. This is a practice established by \citet{McAllister2019}, to account for possible systematic error in flux calibration and modelling.
 
