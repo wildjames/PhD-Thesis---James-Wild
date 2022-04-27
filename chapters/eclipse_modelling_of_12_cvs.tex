@@ -1,9 +1,7 @@
 \label{chpt:results:characterisation of 12 new CVs} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Eclipse modelling of 12 CVs}} % This is for the header on each page - perhaps a shortened title
 
-% As previously mentioned, a primary focus of this thesis is to grow the population of eclipse modelled CVs.
 A modest backlog of observed CV eclipse light curve data was reduced, calibrated, and modelled following the procedure outlined in \S\ref{sect:modelling:eclipse modelling}, and the results are presented here.
-% All CVs were fit using the new hierarchical model structure described in \S\ref{sect:modelling:optimising eclipse model parameters}, with eclipses binned together where possible to reduce the complexity of the parameter space.
 
 The systems modelled here were largely chosen based on their short periods, targeting the donor mass range for which mass loss rates could be inferred. They range in period from $1.4 - 2.2$ hours, and were drawn from a few sources.
 The All-Sky Automated Survey for Supernovae (ASASSN) \citep{shappee2014} is sensitive to transients, and is a valuable tool to identify CVs by their outbursts for follow-up once they re-enter quiescence. Such systems are recognised by their ASASSN moniker.
@@ -85,10 +83,11 @@ The majority of observations were made with ULTRACAM, though some systems are su
 \newpage
 \subsection{ASASSN-14hq}
 
-These observations fell into two binning categories: the 2016 and 2017 data, and the January 2018 data -- specific observation logs are given in Table~\ref{table:observing:observation logs ASASSN-14hq}. Eclipse modelling indicates that the disc radius fell in brightness by $\sim 20\%$ in the $g'$ and $\sim 50\%$ in the $u'$ between these two batches, suggesting the disc was in a phase of dumping material onto the white dwarf faster than material enters it from the donor during this period.
+These observations fell into two binning categories: the 2016 and 2017 data, and the January 2018 data -- specific observation logs are given in Table~\ref{table:observing:observation logs ASASSN-14hq}.
+Eclipse modelling indicates that the disc radius fell in brightness by $\sim 20\%$ in the $g'$ and $\sim 50\%$ in the $u'$ between these two batches, suggesting the disc may have been in a phase of dumping material onto the white dwarf faster than material enters it from the donor during this period. As this system was observed in outburst only two years prior to these observations, this is not unexpected.
 
 For this system, the white dwarf fluxes were well-described by the model cooling tracks, with the white dwarf fitting phase producing a value of $\pi$ that agrees with Gaia ($3.40\pm0.07$ mas and $3.40\pm0.08$ mas, respectively).
-Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, though this falls just over $1\sigma$ outside the \citet{pala2020} population measurement of $0.83\pm0.13 M_\odot$ so is well within the expected range. Models converged on a donor mass of $0.097\pm0.002 M_\odot$, consistent with the pre-period minimum CV track that amplifies gravitational braking by a factor of $\sim 2.5$.
+Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, though this falls just over $1\sigma$ outside the intrinsic scatter of the \citet{pala2020} population measurement of $0.83\pm0.13 M_\odot$ so is well within the expected range. Models converged on a donor mass of $0.097\pm0.002 M_\odot$, consistent with the pre-period minimum CV track that amplifies gravitational braking by a factor of $\sim 2.5$.
 
 % \begin{landscape}
 %     \input{observing_log_tables/ASASSN-14hq.tex}
@@ -119,8 +118,7 @@ Fitting found a somewhat low mass white dwarf, $0.67 \pm 0.07 M_\odot$, though t
 \newpage
 \subsection{ASASSN-14kb}
 
-ASASSN-14kb has very distinct modelling features, making it an easily characterised system. The 4 observations showed little variance between them, and the binned light curves seen in Figure~\ref{fig:ASASSN-14kb all light curves} show remarkably little flickering. Additionally, the white dwarf spectral energy distribution was well-described by the cooling tracks and exactly reproduces the Gaia $\pi$ distribution of $2.78\pm0.11$.
-
+ASASSN-14kb has very distinct modelling features, making it an easily characterised system. The 4 observations showed little variance between them, and the binned light curves seen in Figure~\ref{fig:ASASSN-14kb all light curves} show remarkably little residual flickering. Additionally, the white dwarf spectral energy distribution was well-described by the cooling tracks and exactly reproduces the Gaia $\pi$ distribution of $2.78\pm0.11$.
 The resulting donor mass of this CV appears to be significantly high for the observed period, sitting $\sim 3\sigma$ above the purely gravitational wave driven MESA donor track.
 
 % \begin{landscape}
@@ -146,9 +144,11 @@ The resulting donor mass of this CV appears to be significantly high for the obs
 \newpage
 \subsection{ASASSN-15pb}
 
-ASASSN-15pb was an ideal candidate for modelling. The data in all bands were consistent enough to be comfortably binned together, perhaps aided by the 6 observations spanning only 6 days. The bright spot and white dwarf ingresses are mildly blended in the $u'$, $g'$, and $r'$ observations, and slightly more strongly blended in the $i'$ band. Whilst this did not prevent the optimisation from strongly constraining the white dwarf fluxes (with the exception of the loosely constrained $i'$ band flux), this blending makes constraining the eclipse width, $\Delta\phi$, and white dwarf radius more challenging. Despite this, by drawing on information from all eclipses the quantities are well-constrained and the resulting system parameters are sound.
+ASASSN-15pb was an ideal candidate for modelling. The data in all bands were consistent enough to be comfortably binned together, aided by the 6 observations spanning only 6 days.
+The observations of this system take place in August 2016, only a year after the system was observed in outburst, but the system appears to have quickly returned to a reasonably well-behaved state and is suitable for modelling.
+The bright spot and white dwarf ingresses are mildly blended in the $u'$, $g'$, and $r'$ observations, and slightly more strongly blended in the $i'$ band. Whilst this did not prevent the optimisation from strongly constraining the white dwarf fluxes (with the exception of the loosely constrained $i'$ band flux), this blending makes constraining the eclipse width, $\Delta\phi$, and white dwarf radius more challenging. Despite this, by drawing on information from all eclipses the quantities are well-constrained, and the white dwarf fluxes are well-described by the model cooling tracks, so we can consideer the resulting system parameters sound.
 
-This is the longest period CV in this new sample, with a period lying in the region defined as the period gap by the \citet{knigge11} donor tracks. However, the donor mass is significantly lower than the $0.20 M_\odot$ period gap mass assumed by \citet{knigge11}, at $0.148\pm0.008 M_\odot$.
+This is the longest period CV in this new sample, lying in the region defined as the period gap by the \citet{knigge11} donor tracks. However, the donor mass is significantly lower than the $0.20 M_\odot$ period gap mass assumed by \citet{knigge11}, at $0.148\pm0.008 M_\odot$.
 
 % \begin{landscape}
 %     \input{observing_log_tables/ASASSN-15pb.tex}
@@ -177,6 +177,9 @@ This is the longest period CV in this new sample, with a period lying in the reg
 
 \newpage
 \subsection{ASASSN-17fo}
+
+ASASSN-17fo was observed in early 2018, and whilst the three eclipses were not suitably concordant to allow them to be binned together, the relevant eclipse features for modelling are impressively distinct with little flickering present. The resulting eclipse model described the data well, and the white dwarf fluxes find a good solution to models with $M_\mathrm{WD} = 0.85\pm0.01 M_\odot$ and a parallax of $1.79\pm0.20$~mas, in strong agreement with the Gaia $\pi$ of $1.96 \pm 0.20$~mas. However, the donor mass and period place this system well above the `standard' \citet{knigge11} donor track in Figure~\ref{fig:12 new cvs:donor model with eclipsers plotted}.
+
 
 % \begin{landscape}
 %     \input{observing_log_tables/ASASSN-17fo.tex}
@@ -257,6 +260,12 @@ The white dwarf fluxes of AY For were not well-described by the white dwarf cool
 \newpage
 \subsection{CSS090102}
 
+Despite these observations spanning three years, from May 2011 to August 2014, the eclipses were concordant enough to be binned together.
+The resulting data have somewhat weak bright spot egress features, but the optimised eclipse model reproduces the observation well, with very little residual scatter about the model.
+The white dwarf fluxes are again well-described by cooling tracks, producing a relatively low but reasonable $M_\mathrm{wd} = 0.62\pm0.03 M_\odot$ and the best-fit parallax of $1.41\pm0.30$~mas again agrees well with the Gaia observation of $\pi = 1.51\pm0.32$~mas.
+
+The best-fit system parameters place this CV at the donor mass at which the direction of period evolution begins to reverse. However, the observed period is significantly longer than the canonical period minimum, possibly indicating a significantly higher mass loss rate than is typical. Unfortunately, the donor mass is just below the threshold for the methodology of \S\ref{sect:modelling:evolutionary modelling} at $M_{\rm donor} = 0.060\pm0.003 M_\odot$, so this currently cannot be verified.
+
 
 % \begin{landscape}
 %     \input{observing_log_tables/CSS090102.tex}
@@ -284,13 +293,14 @@ The white dwarf fluxes of AY For were not well-described by the white dwarf cool
 
 The white dwarf of CSS090419 significantly brightens in the $i'$ band, compared to the $r'$ band. This is unlikely to be calibration error in the $i'$ band, as calibration has otherwise proven to be robust. In addition, this brightening is not seen in the ASASSN-15pb $i'$ band observations, suggesting it is not a systematic issue.
 
-A failure in model optimisation can reasonably be blamed, but can also be eliminated. The resulting fit appears to be acceptable, with little residual flux. These fits are given in Figures~\ref{fig:CSS090419 all light curves}~and~\ref{fig:CSS090419 all light curves cont 1}.
-The white dwarf and bright spot ingresses are somewhat blended in the $r'$ and $i'$, but the egresses are distinct enough to resolve a white dwarf flux. Further, the ingresses in the $u'$ and $g'$ are less blended, allowing the hierarchical structure to use these eclipses to constrain the poor $r'$ and $i'$ data.
+The resulting fit appears to be acceptable, with little residual flux. These fits are given in Figures~\ref{fig:CSS090419 all light curves}~and~\ref{fig:CSS090419 all light curves cont 1}, and show that the eclipse model does a good job of describing the data.
+However, the white dwarf and bright spot ingresses are somewhat blended in the $r'$ and $i'$, and whilst the egresses are distinct enough to resolve a white dwarf flux, the key parameters of $R_{\rm wd}$ and $\Delta \phi$ are more difficult to constrain.
+In addition, inspecting the light curves shows that there is some level of degeneracy between the disc flux and white dwarf flux, particularly in the $r'$ band, exacerbating the difficulty in modelling.
 These blended features are reflected in large uncertainty in white dwarf flux. Indeed, the standard deviations on all four white dwarf fluxes are large enough that they are consistent with their mean -- a perfectly flat spectrum.
 
 This is not typical white dwarf behaviour, and cannot be reproduced by the white dwarf model atmospheres used here given the constraints. Whilst an extremely hot white dwarf is able to produce a flat spectrum in the optical range, the luminosity of such an object is forbidden by the Gaia distance measurement.
-This preference for a flat spectrum is reflected in the high, and highly uncertain, best fit $T_{\rm eff} = 18200 \pm 9000$K, though the posterior $\pi$ distribution is consistent with the Gaia measurement of $1.41\pm0.78$ mas, with slightly reduced uncertainty.
-Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\ref{chpt:results:three peculiar white dwarfs} the resulting characterisation can still be considered valid.
+This preference for a flat spectrum is reflected in the high, and highly uncertain, best fit $T_{\rm eff} = 18200 \pm 9000$K, though the posterior $\pi$ distribution is consistent with the Gaia measurement of $1.41\pm0.78$ mas, with slightly reduced uncertainty. Also note that this system appears to have the lowest white dwarf mass of the sample, of only $0.59\pm0.08 M_\odot$.
+Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\ref{chpt:results:three peculiar white dwarfs} the uncertain white dwarf model has little impact on the system parameters, and the resulting characterisation can still be considered valid.
 
 
 % \begin{landscape}
@@ -322,6 +332,10 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 \newpage
 \subsection{CSS090622}
 
+These observations fell into two binning categories, due to a significant dimming of the disc by a factor of $\sim 3$ between 2014/8/5 and 2014/8/8. Note that all eclipses (except the bin A $u'$ eclipse) show a slight dip in flux before white dwarf ingress, possibly due to some absorbing feature in the disc.
+Whilst both data sets are suitable for modelling, with eclipse features that are distinct enough to characterise, the post-disc-dimming data are significantly improved, with clear, sharp ingresses and egresses. Without the improved feature resolution, this system could not have been modelled, due to the severely blended $u'$ band eclipse in the bin A eclipses.
+
+The resulting white dwarf flux fit is acceptable, converging on $\pi = 2.02\pm0.27$~mas to agree with the Gaia $\pi=2.08\pm0.27$~mas, and finding a white dwarf mass of $0.67\pm0.06 M_\odot$. The period and donor mass are consistent with the `optimal' \citet{knigge11} donor track.
 
 % \begin{landscape}
 %     \input{observing_log_tables/CSS090622.tex}
@@ -351,6 +365,9 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 
 \newpage
 \subsection{MASOT0014}
+
+As this system has strong disc features and significant flickering, modelling was challenging. Flickering during white dwarf ingress and egress resulted in uncertain white dwarf flux measurements, and the weak bright spot egress was similarly masked by flickering, though the severity of this was reduced somewhat by the hierarchical model. Despite this, the white dwarf fluxes are well-described by the cooling tracks, and Figure~\ref{fig:12 new cvs:donor model with eclipsers plotted} shows this system as consistent with the `standard' donor evolution track.
+Further supporting the model fitting is the Gaia $\pi = 2.31 \pm 0.13$~mas, closely agreeing with the white dwarf atmosphere fitting value of $2.42\pm0.11$~mas.
 
 % \begin{landscape}
 %     \input{observing_log_tables/MASOTJ0014.tex}
@@ -387,6 +404,11 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 \newpage
 \subsection{OGLE82}
 
+This system has only two observations, and 5 of the 6 resulting eclipses have distinct key eclipse features that make modelling significantly easier. The exception to this is the 2016/8/23 $u'$ band eclipse, which has a weak bright spot and so an obfuscated bright spot egress.
+Most eclipses have significant flickering visible, which reduces as expected during the white dwarf eclipse, and appears to be generally less severe in the eclipse of 2016/8/23.
+System parameters are well-constrained and sensible, with white dwarf fluxes that are reproduced by model cooling tracks and a donor mass that places this CV approximately $1\sigma$ above the `standard' donor track.
+
+
 % \begin{landscape}
 %     \input{observing_log_tables/OGLE82.tex}
 % \end{landscape}
@@ -415,6 +437,12 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 
 \newpage
 \subsection{SDSS J0748}
+
+For this system, several KG5 eclipses were recorded over the course of the observations. Whilst it is possible to use KG5 data in modelling, this was not done for this analysis. Rather, the KG5 eclipses were used to constrain the period, then discarded. The KG5 eclipses are still reported in Table~\ref{table:observing:observation logs SDSS0748}.
+
+SDSS J0748 has only two $u'$ band observations, one ULTRACAM observation, and one ULTRASPEC observation. These data have heavily blended white dwarf and bright spot ingresses, which are challenging to model.
+The poor $u'$ band data are reflected in the large uncertainty in white dwarf flux, since other important parameters such as $\Delta\phi$ and $R_{\rm wd}$ could be constrained by other eclipses. Importantly, the two eclipses from 2018/2/5 and 2018/2/7 have distinct features, that enable modelling, though interestingly the phase offset between the white dwarf eclipse and bright spot is significant enough that the white dwarf \textit{ingress} is blended with the bright spot \textit{egress} in the case of the former, which is not seen in any other eclipse presented here.
+
 
 % \begin{landscape}
 %     \input{observing_log_tables/SDSS0748.tex}
@@ -451,9 +479,11 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 \newpage
 \subsection{SDSS J1524}
 
-% \begin{landscape}
-%     \input{observing_log_tables/SDSS1524.tex}
-% \end{landscape}
+\todo{I'm not sure happy with these fits - I think they could be improved a bit. I'm doing some blackhole MCMC, and I'll write this when it's done. Should be done by Friday.}
+
+\begin{landscape}
+    \input{observing_log_tables/SDSS1524.tex}
+\end{landscape}
 
 \begin{figure}
     \centering
@@ -493,103 +523,114 @@ Despite these issues with the white dwarf fitting, as demonstrated in Chapter~\r
 
 
 \newpage
-\begin{landscape}
 
-    \begin{table*}
-        \centering
-        \caption{The system parameters found for the CVs analysed here. The reported parallax, $\pi$, is the posterior distribution from fitting the white dwarf fluxes, c.f.~\S\ref{sect:modelling:fitting white dwarf colours}.}
-        \label{table:12 new cvs:system_parameters}
-        \begin{tabular}{cccccc}
-            \hline \\
-            \textbf{System Name:}      & \textbf{ASASSN-14hq}    & \textbf{ASASSN-14kb}     & \textbf{ASASSN-15pb}      & \textbf{ASASSN-17fo}      & \textbf{AY For}       \\
-            \hline \hline \\
-            $M_\mathrm{WD}/M_\odot$    & $0.67\pm0.01$           & $0.74\pm0.02$            & $0.72\pm0.03$             & $0.85\pm0.01$             & $0.78\pm0.02$         \\
-            $R_\mathrm{WD}/R_\odot$    & $0.0119\pm0.0001$       & $0.0113\pm0.0002$        & $0.0115\pm0.0005$         & $0.0099\pm0.0001$         & $0.0106\pm0.0003$ \\
-            $M_\mathrm{donor}/M_\odot$ & $0.097\pm0.002$         & $0.134\pm0.003$          & $0.148\pm0.008$           & $0.109\pm0.002$           & $0.106\pm0.006$ \\
-            $R_\mathrm{donor}/R_\odot$ & $0.157\pm0.001$         & $0.164\pm0.001$          & $0.210\pm0.004$           & $0.1436\pm0.0007$         & $0.162\pm0.003$ \\
-            $q$                        & $0.145\pm0.002$         & $0.182\pm0.002$          & $0.206\pm0.004$           & $0.1267\pm0.0005$         & $0.136\pm0.004$ \\
-            \hline
-            $P$, hours                 & $1.78384800(7)$         & $1.63453(1)$             & $2.23896(3)$              & $1.477147(2)$             & $1.790756(1)$ \\
-            $a/R_\odot$,               & $0.681\pm0.004$         & $0.670\pm0.005$          & $0.824\pm0.014$           & $0.646\pm0.003$           & $0.717\pm0.007$ \\
-            $i$                        & $80.35\pm0.06$          & $84.4\pm0.1$             & $79.4\pm0.1$              & $84.23\pm0.03$            & $84.0\pm0.2$ \\
-            $K_\mathrm{WD}$, km/s      & $58.0\pm0.9$            & $76.2\pm1$               & $75\pm2$                  & $60.2\pm0.4$              & $57.8\pm2.0$ \\
-            $K_\mathrm{donor}$, km/s   & $399\pm2$               & $419\pm3$                & $364\pm6$                 & $468\pm2$                 & $425\pm4$ \\
-            \hline
-            $\pi$, mas                 & $3.40\pm0.07$           & $2.78\pm0.11$            & $1.0\pm0.2$               & $1.79\pm0.36$             & $2.12\pm0.16$ \\
-            $T_{\rm eff}$, K           & $14819\pm800$           & $17700\pm1000$           & $19200\pm1600$            & $14800\pm600$             & $18100\pm500$ \\
-            $\log(g), {\rm cgs}$       & $8.11\pm0.02$           & $8.21\pm0.03$            & $8.17\pm0.06$             & $8.37\pm0.02$             & $8.28\pm0.04$ \\
-            \hline
-            \hline
-        \end{tabular}
-    \end{table*}
+\begin{table*}
+    \centering
+    \caption{The system parameters found for the CVs analysed here. The reported parallax, $\pi$, is the posterior distribution from fitting the white dwarf fluxes, c.f.~\S\ref{sect:modelling:fitting white dwarf colours}.}
+    \label{table:12 new cvs:system_parameters}
+    \begin{tabular}{cccc}
+        \hline
+        \textbf{System Name:}      & \textbf{ASASSN-14hq}    & \textbf{ASASSN-14kb}     & \textbf{ASASSN-15pb}  \\
+        \hline
+        \hline
+        $M_\mathrm{WD}/M_\odot$    & $0.67\pm0.01$           & $0.74\pm0.02$            & $0.72\pm0.03$         \\
+        $R_\mathrm{WD}/R_\odot$    & $0.0119\pm0.0001$       & $0.0113\pm0.0002$        & $0.0115\pm0.0005$     \\
+        $M_\mathrm{donor}/M_\odot$ & $0.097\pm0.002$         & $0.134\pm0.003$          & $0.148\pm0.008$       \\
+        $R_\mathrm{donor}/R_\odot$ & $0.157\pm0.001$         & $0.164\pm0.001$          & $0.210\pm0.004$       \\
+        $q$                        & $0.145\pm0.002$         & $0.182\pm0.002$          & $0.206\pm0.004$       \\
+        \hline
+        $P$, hours                 & $1.78384800(7)$         & $1.63453(1)$             & $2.23896(3)$          \\
+        $a/R_\odot$                & $0.681\pm0.004$         & $0.670\pm0.005$          & $0.824\pm0.014$       \\
+        $i$                        & $80.35\pm0.06$          & $84.4\pm0.1$             & $79.4\pm0.1$          \\
+        $K_\mathrm{WD}$, km/s      & $58.0\pm0.9$            & $76.2\pm1$               & $75\pm2$              \\
+        $K_\mathrm{donor}$, km/s   & $399\pm2$               & $419\pm3$                & $364\pm6$             \\
+        \hline
+        $\pi$, mas                 & $3.40\pm0.07$           & $2.78\pm0.11$            & $1.0\pm0.2$           \\
+        $T_{\rm eff}$, K           & $14819\pm800$           & $17700\pm1000$           & $19200\pm1600$        \\
+        $\log(g), {\rm cgs}$       & $8.11\pm0.02$           & $8.21\pm0.03$            & $8.17\pm0.06$         \\
+        \hline
+        \hline \\[2em]
+        \hline
+        \textbf{System Name:}      & \textbf{ASASSN-17fo}      & \textbf{AY For}        & \textbf{CSS090102}     \\
+        \hline \hline \\
+        $M_\mathrm{WD}/M_\odot$    & $0.85\pm0.01$             & $0.78\pm0.02$          & $0.62\pm0.03$          \\
+        $R_\mathrm{WD}/R_\odot$    & $0.0099\pm0.0001$         & $0.0106\pm0.0003$      & $0.0126\pm0.0004$      \\
+        $M_\mathrm{donor}/M_\odot$ & $0.109\pm0.002$           & $0.106\pm0.006$        & $0.060\pm0.003$        \\
+        $R_\mathrm{donor}/R_\odot$ & $0.1436\pm0.0007$         & $0.162\pm0.003$        & $0.119\pm0.002$        \\
+        $q$                        & $0.1267\pm0.0005$         & $0.136\pm0.004$        & $0.094\pm0.002$        \\
+        \hline
+        $P$, hours                 & $1.477147(2)$             & $1.790756(1)$          & $1.49723786(5)$        \\
+        $a/R_\odot$                & $0.646\pm0.003$           & $0.717\pm0.007$        & $0.582\pm0.008$        \\
+        $i$                        & $84.23\pm0.03$            & $84.0\pm0.2$           & $88.7\pm0.6$           \\
+        $K_\mathrm{WD}$, km/s      & $60.2\pm0.4$              & $57.8\pm2.0$           & $40.9\pm1.2$           \\
+        $K_\mathrm{donor}$, km/s   & $468\pm2$                 & $425\pm4$              & $431\pm6$              \\
+        \hline
+        $\pi$, mas                 & $1.79\pm0.36$             & $2.12\pm0.16$          & $1.41\pm0.30$          \\
+        $T_{\rm eff}$, K           & $14800\pm600$             & $18100\pm500$          & $14800\pm1200$         \\
+        $\log(g), {\rm cgs}$       & $8.37\pm0.02$             & $8.28\pm0.04$          & $8.00\pm0.33$          \\
+        \hline
+        \hline \\[2em]
+    \end{tabular}
+\end{table*}
 
-    \begin{table*}
-        \centering
-        \caption{Table~\ref{table:12 new cvs:system_parameters}, continued.}
-        \label{table:12 new cvs:system_parameters cont 1}
-        \begin{tabular}{cccccc}
-            \hline \\
-            \textbf{System Name:}      & \textbf{CSS090102}     & \textbf{CSS090419}    & \textbf{CSS090622}    & \textbf{OGLE82}   & \textbf{SDSS J0748} \\
-            \hline \hline \\
-            $M_\mathrm{WD}/M_\odot$    & $0.62\pm0.03$          & $0.59\pm0.08$         & $0.67\pm0.06$         & $0.83\pm0.01$     & $0.68\pm0.02$ \\
-            $R_\mathrm{WD}/R_\odot$    & $0.0126\pm0.0004$      & $0.0122\pm0.0009$     & $0.0112\pm0.0007$     & $0.0099\pm0.0002$ & $0.0121\pm0.0004$ \\
-            $M_\mathrm{donor}/M_\odot$ & $0.060\pm0.003$        & $0.087\pm0.011$       & $0.104\pm0.009$       & $0.131\pm0.004$   & $0.066\pm0.004$ \\
-            $R_\mathrm{donor}/R_\odot$ & $0.119\pm0.002$        & $0.152\pm0.007$       & $0.155\pm0.005$       & $0.170\pm0.002$   & $0.117\pm0.002$ \\
-            $q$                        & $0.094\pm0.002$        & $0.146\pm0.003$       & $0.159\pm0.008$       & $0.157\pm0.002$   & $0.095\pm0.004$ \\
-            \hline
-            $P$, hours                 & $1.49723786(5)$        & $1.81062621(6)$       & $1.702302(6)$         & $1.7263398(6)$    & $1.39947(1)$ \\
-            $a/R_\odot$,               & $0.582\pm0.008$        & $0.660\pm0.030$       & $0.661\pm0.020$       & $0.720\pm0.006$   & $0.575\pm0.007$ \\
-            $i$                        & $88.7\pm0.6$           & $80.9\pm0.1$          & $88.2\pm0.6$          & $83.9\pm0.1$      & $81.7\pm0.2$ \\
-            $K_\mathrm{WD}$, km/s      & $40.9\pm1.2$           & $56.0\pm2.7$          & $63.7\pm2.5$          & $68.5\pm1.0$      & $42.2\pm1.8$ \\
-            $K_\mathrm{donor}$, km/s   & $431\pm6$              & $381\pm16$            & $408\pm12$            & $435\pm3$         & $450\pm5$ \\
-            \hline
-            $\pi$, mas                 & $1.41\pm0.30$          & $1.42\pm0.69$         & $2.02\pm0.27$         & $3.82\pm0.12$     & $1.83\pm0.14$ \\
-            $T_{\rm eff}$, K           & $14800\pm1200$         & $18200\pm9000$        & $9800\pm1500$         & $18000\pm4000$    & $22500\pm3000$ \\
-            $\log(g), {\rm cgs}$       & $8.00\pm0.33$          & $8.04\pm0.12$         & $8.16\pm0.08$         & $8.37\pm0.03$     & $8.11\pm0.03$ \\
-            \hline
-            \hline
-        \end{tabular}
-    \end{table*}
-
-    \begin{table*}
-        \centering
-        \caption{Table~\ref{table:12 new cvs:system_parameters}, continued.}
-        \label{table:12 new cvs:system_parameters cont 2}
-        \begin{tabular}{ccc}
-            \hline \\
-            \textbf{System Name:}      & \textbf{MASOT0014}     & \textbf{SDSS J1524} \\
-            \hline \hline \\
-            $M_\mathrm{WD}/M_\odot$    & $0.86\pm0.03$          & $0.80\pm0.04$ \\
-            $R_\mathrm{WD}/R_\odot$    & $0.0097\pm0.0003$      & $0.0103\pm0.0005$ \\
-            $M_\mathrm{donor}/M_\odot$ & $0.122\pm0.007$        & $0.074\pm0.008$ \\
-            $R_\mathrm{donor}/R_\odot$ & $0.165\pm0.003$        & $0.132\pm0.005$ \\
-            $q$                        & $0.142\pm0.004$        & $0.093\pm0.007$ \\
-            \hline
-            $P$, hours                 & $1.7167077(5)$         & $1.56764953(2)$ \\
-            $a/R_\odot$,               & $0.722\pm0.008$        & $0.652\pm0.01197$ \\
-            $i$                        & $84.8\pm0.3$           & $86.7\pm1.1$ \\
-            $K_\mathrm{WD}$, km/s      & $63.2\pm2.0$           & $42.9\pm3.4$ \\
-            $K_\mathrm{donor}$, km/s   & $445\pm5$              & $461\pm7$ \\
-            \hline
-            $\pi$, mas                 & $2.42\pm0.11$          & $1.92\pm0.19$ \\
-            $T_{\rm eff}$, K           & $17300\pm1000$         & $12500\pm1100$ \\
-            $\log(g), {\rm cgs}$       & $8.37\pm0.04$          & $8.32\pm0.06$ \\
-            \hline
-            \hline
-        \end{tabular}
-    \end{table*}
-\end{landscape}
+\begin{table*}
+    \centering
+    \caption{Table~\ref{table:12 new cvs:system_parameters}, continued.}
+    \label{table:12 new cvs:system_parameters cont 1}
+    \begin{tabular}{cccc}
+        \hline
+        \textbf{System Name:}      & \textbf{CSS090419}     & \textbf{CSS090622}    & \textbf{MASOT0014}     \\
+        \hline \hline \\
+        $M_\mathrm{WD}/M_\odot$    & $0.59\pm0.08$          & $0.67\pm0.06$         & $0.86\pm0.03$          \\
+        $R_\mathrm{WD}/R_\odot$    & $0.0122\pm0.0009$      & $0.0112\pm0.0007$     & $0.0097\pm0.0003$      \\
+        $M_\mathrm{donor}/M_\odot$ & $0.087\pm0.011$        & $0.104\pm0.009$       & $0.122\pm0.007$        \\
+        $R_\mathrm{donor}/R_\odot$ & $0.152\pm0.007$        & $0.155\pm0.005$       & $0.165\pm0.003$        \\
+        $q$                        & $0.146\pm0.003$        & $0.159\pm0.008$       & $0.142\pm0.004$        \\
+        \hline
+        $P$, hours                 & $1.81062621(6)$        & $1.702302(6)$         & $1.7167077(5)$         \\
+        $a/R_\odot$                & $0.660\pm0.030$        & $0.661\pm0.020$       & $0.722\pm0.008$        \\
+        $i$                        & $80.9\pm0.1$           & $88.2\pm0.6$          & $84.8\pm0.3$           \\
+        $K_\mathrm{WD}$, km/s      & $56.0\pm2.7$           & $63.7\pm2.5$          & $63.2\pm2.0$           \\
+        $K_\mathrm{donor}$, km/s   & $381\pm16$             & $408\pm12$            & $445\pm5$              \\
+        \hline
+        $\pi$, mas                 & $1.42\pm0.69$          & $2.02\pm0.27$         & $2.42\pm0.11$          \\
+        $T_{\rm eff}$, K           & $18200\pm9000$         & $9800\pm1500$         & $17300\pm1000$         \\
+        $\log(g), {\rm cgs}$       & $8.04\pm0.12$          & $8.16\pm0.08$         & $8.37\pm0.04$          \\
+        \hline
+        \hline \\[2em]
+        \hline
+        \textbf{System Name:}       & \textbf{OGLE82}   & \textbf{SDSS J0748}    & \textbf{SDSS J1524}     \\
+        \hline \hline \\
+        $M_\mathrm{WD}/M_\odot$     & $0.83\pm0.01$     & $0.68\pm0.02$          & $0.80\pm0.04$           \\
+        $R_\mathrm{WD}/R_\odot$     & $0.0099\pm0.0002$ & $0.0121\pm0.0004$      & $0.0103\pm0.0005$       \\
+        $M_\mathrm{donor}/M_\odot$  & $0.131\pm0.004$   & $0.066\pm0.004$        & $0.074\pm0.008$         \\
+        $R_\mathrm{donor}/R_\odot$  & $0.170\pm0.002$   & $0.117\pm0.002$        & $0.132\pm0.005$         \\
+        $q$                         & $0.157\pm0.002$   & $0.095\pm0.004$        & $0.093\pm0.007$         \\
+        \hline
+        $P$, hours                  & $1.7263398(6)$    & $1.39947(1)$           & $1.56764953(2)$         \\
+        $a/R_\odot$,                & $0.720\pm0.006$   & $0.575\pm0.007$        & $0.652\pm0.01197$       \\
+        $i$                         & $83.9\pm0.1$      & $81.7\pm0.2$           & $86.7\pm1.1$            \\
+        $K_\mathrm{WD}$, km/s       & $68.5\pm1.0$      & $42.2\pm1.8$           & $42.9\pm3.4$            \\
+        $K_\mathrm{donor}$, km/s    & $435\pm3$         & $450\pm5$              & $461\pm7$               \\
+        \hline
+        $\pi$, mas                  & $3.82\pm0.12$     & $1.83\pm0.14$          & $1.92\pm0.19$           \\
+        $T_{\rm eff}$, K            & $18000\pm4000$    & $22500\pm3000$         & $12500\pm1100$          \\
+        $\log(g), {\rm cgs}$        & $8.37\pm0.03$     & $8.11\pm0.03$          & $8.32\pm0.06$           \\
+        \hline
+        \hline
+    \end{tabular}
+\end{table*}
 
 
 
-\section{Exploration of results}
+\section{Comparing observations with model donor tracks}
 \label{sect:12 new cvs:eclipse modelling of 12 CVs}
 
 The observed donor properties can be compared to the \citet{knigge11}-like MESA donor tracks. Figure~\ref{fig:12 new cvs:donor model with eclipsers plotted} shows the full sample of short-period eclipse modelled CVs (a catalogue of these systems is given in Appendix~\ref{appendix:eclipse modelled CV data tables}) plotted with the `standard' donor track that includes only gravitational braking below the gap and the disagreement between model and data indeed persists. Whilst there is a large scatter present, new data continue to lie systematically to the right of the `standard' model track, and the need for extra AML continues to be supported by observations.\todo{The K11 mass-radius relation could be updated? Not really worth it, not my focus and not that many new systems.}
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/results/Mdot/K11_donor_track_with_eclipse_modelled_data.pdf}
-    \caption{Showing how eclipse modelled observations compare with evolutionary models in the short period regime. The {\bf solid blue line} is the `standard' MESA CV donor track with only gravitational braking below the period gap, and the {\bf solid green line} is the `optimal' track with $2.47\times$ amplified gravitational braking, described in \S\ref{sect:results:reproducing K11 tracks}. The {\bf magenta crosses} are the 3 CVs with peculiar colours from Chapter~\ref{chpt:results:three peculiar white dwarfs}, {\bf black circles} are the 12 systems of Chapter~\ref{chpt:results:characterisation of 12 new CVs}, {\bf gold upright triangles} are data from \citet{McAllister2019}, {\bf grey squares} are from \citet{Savoury2011}, and the {\bf brown inverted triangles} are the supplementary systems from \citet{copperwheat2010,mcallister2015,mcallister2017,mcallister2017b}.}
+    \includegraphics[width=\textwidth]{figures/results/K11_donor_track_with_eclipse_modelled_data.pdf}
+    \caption{Showing how eclipse modelled observations compare with evolutionary models in the short period regime. The {\bf solid blue line} is the `standard' \citet{knigge11} donor track with only gravitational braking below the period gap, and the {\bf solid green line} is the `optimal' track with $2.47\times$ amplified gravitational braking. The {\bf magenta crosses} are the 3 CVs with peculiar colours from Chapter~\ref{chpt:results:three peculiar white dwarfs}, {\bf black circles} are the 12 systems of Chapter~\ref{chpt:results:characterisation of 12 new CVs}, {\bf gold upright triangles} are data from \citet{McAllister2019}, {\bf grey squares} are from \citet{Savoury2011}, and the {\bf brown inverted triangles} are the supplementary systems from \citet{copperwheat2010,mcallister2015,mcallister2017,mcallister2017b}.}
     \label{fig:12 new cvs:donor model with eclipsers plotted}
 \end{figure}
 
@@ -598,6 +639,7 @@ The observed donor properties can be compared to the \citet{knigge11}-like MESA 
 \subsection{A preliminary look at AML in CVs}
 \label{sect:12 new cvs:period excess}
 
+\todo{I know you think this should be back in the previous chapter, but I think it fits better narratively here - the new data are fairly substantial, and I don't want the repetition. I've flagged it in the previous chapter, though.}
 The published results and analysis of the three CVs in Chapter~\ref{chpt:results:three peculiar white dwarfs} \citep{wild2021} pre-dates the more fully developed method to infer a donor mass loss rate described in \S\ref{sect:modelling:optimising mass loss rate to observations}.
 That analysis method was repeated using the new data presented here, significantly increasing the population of well-characterised CVs compared to what was available at publication. The core findings of that work persist with the new data set, lending further credence to the results.
 
@@ -609,7 +651,8 @@ The validity of $P_{\rm ex}$ is vulnerable to two key systematic biases; the val
 
 CVs may follow inherently different evolutionary tracks due to differences in donor metallicity \citep{stehle1997, harrison2016}, white dwarf mass \citep{knigge2006}, and the age of the donor when it first contacts the Roche lobe \citep{howell2001}. A population-wide scatter in this parameter space is not captured in the \citet{knigge11} model, which uses fixed values for these variables, but justification for the adopted values are given \citep{knigge11, knigge2006}.
 If any individual system deviates from the adopted values in the models of \citet{knigge11} then $P_{\rm ex}$ for that system will be influenced by these differences as well as any extra AML. However, conclusions about $P_{\rm ex}$ drawn from the population at large should remain robust, as long as the population doesn't differ systematically from the values adopted in the models.
-The white dwarf mass used by \citet{knigge11} is somewhat lower than more recent observations suggest, using $M_{\rm WD} = 0.75 M_\odot$ versus the more recent value of $M_{\rm WD} = 0.83 \pm 0.17 M_\odot$ \citep{pala2020}.\todo{I can re-do this with MESA, but I really don't think it's worth bothering...}
+The white dwarf mass used by \citet{knigge11} is somewhat lower than more recent observations suggest, using $M_{\rm WD} = 0.75 M_\odot$ versus the more recent value of $M_{\rm WD} = 0.83 \pm 0.17 M_\odot$ \citep{pala2020}.
+% \todo{I can re-do this with MESA, but I really don't think it's worth bothering...}
 An updated version of Knigge's modelling is necessary to properly characterise the effect of this change on the donor evolutionary tracks, as this will affect both the size of the Roche lobes, and the rate of gravitational wave AML; alternatively, MESA models could be used here, though these are subject to their own biases and assumptions.
 Other CV models suggest that the effect of correcting $M_{\rm wd}$ will be small, at most around 2 minutes \citep{goliasch2015}. This analysis is not rigorous enough for this to become an issue, and the effects of using an incorrect white dwarf mass is considered acceptable.
 
@@ -646,3 +689,6 @@ There are then three cases to describe the trend in $P_{\rm ex}$: the excess AML
 %     \caption{Showing the distribution of the best fit to the $M_{\rm wd} - P_{\rm ex}$ relationship plotted in the bottom panel of Figure~\ref{fig:period excess}.}
 %     \label{fig:period excess white dwarf corner}
 % \end{figure}
+
+
+\section{Summarising remarks}
