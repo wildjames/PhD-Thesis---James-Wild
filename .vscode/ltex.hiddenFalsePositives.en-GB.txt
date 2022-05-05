@@ -1,3 +1,4 @@
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThis subroutine uses the sThis was used to reproduce the `optimal' track.\\E$"}
 {"rule":"WITH_THE_EXCEPTION_OF","sentence":"^\\QWhilst this did not prevent the optimisation from strongly constraining the white dwarf fluxes (with the exception of the loosely constrained \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q band flux)\\E$"}
 {"rule":"A_NNS","sentence":"^\\QWithout the improved feature resolution, this system could not have been modelled, due to the severely blended \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q band eclipse in the bin A eclipses.\\E$"}
+{"rule":"SENT_START_CONJUNCTIVE_LINKING_ADVERB_COMMA","sentence":"^\\QFurther supporting the model fitting is the Gaia \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q mas, closely agreeing with the white dwarf atmosphere fitting value of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q mas.\\E$"}

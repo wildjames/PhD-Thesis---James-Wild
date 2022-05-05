@@ -57,6 +57,8 @@ CRTS SSSJ0522-3505 J052210-350530, hereafter SSSJ0522-3505, was first observed b
 \section{Eclipse modelling}
 \label{sect:three white dwarfs:eclipse modelling results}
 
+The observations were reduced, analysed for system ephemerides c.f. \S\ref{sect:modelling:getting ephemeris}, and phase folded for eclipse modelling following \S\ref{sect:modelling:eclipse modelling}.
+
 Phase-folded eclipse modelling gave good results in all three systems, each light curve being well-modelled with small residuals; the final optimisations are shown here in Figures~\ref{fig:ASASSN-17jf all light curves}~-~\ref{fig:SSSJ0522-3505 all light curves cont 2}.
 The Gaussian processes describing flickering in the systems were consistent with little to no variability, indicating that almost all the scatter in the flux residuals could be fully described by the uncertainty in flux measurement.
 However, when fitting white dwarf model atmospheres to the observed white dwarf fluxes, the resulting fits were not satisfactory. The bulk of this chapter discusses this poor fit, its possible causes, and its implications.
@@ -225,7 +227,7 @@ A poorly constrained white dwarf model might reasonably be expected to cast doub
 Fortunately, the effect of the uncertain white dwarf temperatures on the system parameters, most importantly on $M_{\rm wd}$, is mostly negligible.
 For example, increasing $T_{\rm eff}$ for ASASSN-17jf from 8000K to 12000K only changes $M_{\rm WD}$ by $0.001M_\odot$, compared to our statistical uncertainty of $0.031 M_\odot$. Even a large uncertainty in $T_{\rm eff}$ only has a minor impact on the system parameters; for example a change in the WD temp for SSSJ0522-3505 from $10000$K to $20000$K only changes $M_{\rm WD}$ by $0.02 M_\odot$, comparable with the measurement uncertainty. The system parameters are reported in Table~\ref{table:three white dwarfs:system_parameters main}.
 
-ASASSN-16kr has a recorded superhump period, and now also a $q$ measurement. It can therefore be used to calibrate the superhump period excess, $\epsilon$ vs. $q$ relationship, as done in \citet{McAllister2019}, though with a more extreme mass ratio system than was previously available. The system was not confidently classed as exhibiting stage B or C stage superhumps, so the results for both stages are given. Assuming the CV was in stage B, $q_B = 0.059\pm0.007$; assuming stage C and using the relevant relation from \citet{McAllister2019}, $q_C = 0.068\pm0.012$. In both cases, the estimated $q_\mathrm{B,C}$ is $\sim 2 \sigma$ higher than the observed value of $q = 0.044\pm0.002$. While a $2 \sigma$ difference is not a highly significant discrepancy, this may be preliminary evidence that the $\epsilon - q$ relation may over estimate $q$ for CVs at short periods, which has been suspected for some time \citep{pearson2007, knigge11}.
+ASASSN-16kr has a recorded superhump period, and now also a $q$ measurement. It can therefore be used to calibrate the superhump period excess, $\epsilon$ vs. $q$ relationship, as done in \citet{McAllister2019}, though with a more extreme mass ratio system than was previously available. The system was not confidently classed as exhibiting stage B or C stage superhumps, so the results for both stages are given. Assuming the CV was in stage B, $q_B = 0.059\pm0.007$; assuming stage C and using the relevant relation from \citet{McAllister2019}, $q_C = 0.068\pm0.012$. In both cases, the estimated $q_\mathrm{B,C}$ is $\sim 2 \sigma$ higher than the observed value of $q = 0.044\pm0.002$. Whilst a $2 \sigma$ difference is not a highly significant discrepancy, this could be preliminary evidence that the $\epsilon - q$ relation may over estimate $q$ for CVs at short periods, which has been suspected for some time \citep{pearson2007, knigge11}.
 
 
 \begin{table*}
@@ -299,13 +301,13 @@ Another possibility is a recent classical nova -- thermonuclear runaway in an ac
 
 However, assuming the white dwarf is in thermal equilibrium, $T_{\rm eff}$ can be used to estimate the long-term accretion rate of the system \citep{townsley2009}.
 If the modelled $T_{\rm eff}$ of SSSJ0522-3505 is both accurate and driven by accretion, it would correspond to $\dot M_{\rm WD} = 6\pm2 \times 10^{-10} M_\odot {\rm yr^{-1}}$, compared to accretion rates of $\sim10^{-10}-10^{-11} M_\odot {\rm yr^{-1}}$ expected for CVs in the post-period minimum regime \citep{Pala2017a}. Unfortunately, the MESA-based method to find $\dot M$ that is outlined in \S\ref{sect:modelling:evolutionary modelling} cannot be reliably applied to this system, as the $M_{\rm donor}$ is too low.
-Whilst somewhat high, a mass accretion rate of $10^{-10} M_\odot {\rm yr^{-1}}$ is not incompatible with the presence of dwarf nova outbursts in SSSJ0522-3505, since a hot, optically thick accretion disc that would forbid such outbursts would require an accretion rate of order $10^{-8} M_\odot {\rm yr^{-1}}$ \citep{Hameury1998} to be stable on long timescales.
+Although this is somewhat high, a mass accretion rate of $10^{-10} M_\odot {\rm yr^{-1}}$ is not incompatible with the presence of dwarf nova outbursts in SSSJ0522-3505, since a hot, optically thick accretion disc that would forbid such outbursts would require an accretion rate of order $10^{-8} M_\odot {\rm yr^{-1}}$ \citep{Hameury1998} to be stable on long timescales.
 
 
 \section{Summarising remarks}
 
+The original paper \citep{wild2021} examined the period excess as a qualitative diagnostic for excess AML, but this analysis is deferred to the end of Chapter~\ref{chpt:results:characterisation of 12 new CVs} where it repeated with an expanded data set -- though note that the conclusions are unchanged from the original paper.
+
 I contribute the component masses and radii, separations, white dwarf temperatures and surface gravities of three new short-period CVs to the population of well-characterised CV observations, two of which have extremely low-mass donor stars, and one which appears to be in the process of evolving through the period minimum.
 I measure the $T_{\rm eff}$ of the white dwarf in SSSJ0522-3505 to be $\sim10000$K higher than is typical for a CV. I note that the derived temperature is quite uncertain, but cannot confidently determine the origin of the discrepancy and summarise possible causes.
 All three of the newly modelled systems lie within $1\sigma$ of the `optimal' model mass-radius evolutionary tracks from \citet{knigge11}.
-
-The original paper \citep{wild2021} examined the period excess as a qualitative diagnostic for excess AML but this analysis is deferred to the end of Chapter~\ref{chpt:results:characterisation of 12 new CVs}, where it repeated with an expanded data set -- though note that the conclusions are unchanged from the original paper.
