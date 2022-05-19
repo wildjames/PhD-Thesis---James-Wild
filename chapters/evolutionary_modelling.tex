@@ -4,8 +4,8 @@
 \label{chpt:Mass loss and Angular momentum loss in short period CVs} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Mass loss and Angular momentum loss in short period CVs}} % This is for the header on each page - perhaps a shortened title
 
-The structure of this chapter is as follows: first, I demonstrate that MESA is capable of reproducing the canonical CV donor tracks of \citet{knigge11}, and use MESA to evaluate the range of donor masses for which the method detailed in \S\ref{sect:modelling:evolutionary modelling} can be reasonably applied. Then, I derive an empirical relationship for appropriate spot parameters as a function of donor mass, and use this to infer $\dot M_{\rm donor}$ and $\dot J$ for the well-characterised eclipse modelled CV sample.
-Finally, I explore the implications of these data, and the correlations between them.
+The structure of this chapter is as follows: first, I demonstrate that MESA is capable of reproducing the canonical CV donor tracks of \citet{knigge11}, and use MESA to evaluate the range of donor masses for which the method detailed in \S\ref{sect:modelling:evolutionary modelling} can be reasonably applied.
+Then, I derive an empirical relationship for appropriate spot parameters as a function of donor mass, and use this to infer $\dot M_{\rm donor}$ and $\dot J$ for the well-characterised eclipse modelled CV sample.
 
 The analysis of this section includes eclipse modelled data from several sources: the 15 systems contained in this thesis, the 15 CVs characterised by \citet{McAllister2019}, and the 14 CVs modelled by \citet{Savoury2011}. An additional 4 systems from \citet{mcallister2015,mcallister2017, mcallister2017b}; and \citet{copperwheat2010} were used, detailed in Table~\ref{appendix:table:supplementary systems}. A full catalogue of all these data is given in Appendix~\ref{appendix:eclipse modelled CV data tables}.
 There is some overlap between the CVs contained in \citet{McAllister2019} and \citet{Savoury2011}, and where this is the case the more recent findings of \citet{McAllister2019} are preferred.
@@ -114,12 +114,13 @@ The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fs
 
 Below masses of $\sim 0.12 M_\odot$, the required $f_{\rm spot}$ becomes slightly negative, i.e. default MESA models are larger than observations plus the $4.5\%$ non-spherical correction.
 Since a negative coverage fraction is unphysical, negative values of $f_{\rm spot}$ are set equal to 0 and it should be emphasised that derived mass loss rates may become somewhat unreliable below this mass.
-% Below $M_{\rm donor} = 0.121 M_\odot$ the brown relation transitions to the \citet{baraffe2015} theoretical tracks, so model agreement is perhaps unsurprising here.
+% Below $M_{\rm donor} = 0.121 M_\odot$ the Brown relation transitions to the \citet{baraffe2015} theoretical tracks, so model agreement is perhaps unsurprising here.
 However, the clear trend in $f_{\rm spot}$ towards 0 prior to this, and the close proximity to $f_{\rm spot} = 0$ below $0.12 M_\odot$ suggests that the MESA radius calibration given here is still valid.
 % The severity of this unreliability is not catastrophic, as the minimum value of $f_{\rm spot}$ is still reasonably close to 0.
 
-There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is $\sim 3\%$ between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate.
+There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is $\sim 3\%$ between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate. Below $\sim 0.1 M_\odot$, the scatter is not able to be characterised.
 Whilst this may skew an individual system, on average the inferred mass loss from model radius should be accurate. Therefore, this effect should not corrupt the $\dot M$ results with a large enough sample size.
+Since the uncertainties I report here do not include the effects of the scatter in the Brown mass-radius relation, they are underestimates of the true uncertainty. However, due to the very poor constraints on the scatter, this effect is ignored until more information is available.
 
 \begin{figure}
     \centering
@@ -138,7 +139,7 @@ The special case of SDSS J1524 is included despite having a donor mass of $0.074
 
 Table~\ref{table:results:Jdot results} shows the AML rates, $\dot J$, calculated using Equation~\ref{eqn:modelling:Jdot from Mdot} for the systems for which $\dot M$ could be calculated from donor properties. Also shown is the AML expected from gravitational losses alone for that system, and the ratio between the observed and expected values.
 
-Two systems appear to have less AML than is predicted by gravitational losses: ASASSN-17fo (from Chapter~\ref{chpt:results:characterisation of 12 new CVs}) and SDSS J0903 \citep{Savoury2011}, and an erroneous eclipse model result can be eliminated in each case.
+Two systems appear to have less AML than is predicted by gravitational losses: ASASSN-17fo (from Chapter~\ref{chpt:characterisation of 12 new CVs}) and SDSS J0903 \citep{Savoury2011}, and an erroneous eclipse model result can be eliminated in each case.
 ASASSN-17fo is confidently eclipse modelled, with distinct, well modelled eclipse features and a good white dwarf flux fit, so is unlikely to be unreliable. SDSS J0903 also has a confident eclipse model fit. Whilst the bright spot features of this system are less distinct, the fitting results are satisfactory.
 However, the inferred $\dot M$ is contingent on a chain of assumptions all holding true; the eclipse modelling must be robust, the MESA configuration must be accurate \textit{for the specific donor being considered}, and the equilibrium radius of the donor in question must be well-described by the Brown relation. A failure in any of these steps will produce incorrect values of $\dot M$ and $\dot J$, and the consequences of the breakdown of these assumptions is discussed in \S\ref{sect:massloss and AML:systematic bias}.
 
@@ -147,7 +148,7 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
 
 \begin{table*}
     \centering
-    \caption{The inferred $\dot M$ for eclipse-modelled CVs. For the Source column, `W22' are from Chapter~\ref{chpt:results:characterisation of 12 new CVs}, `M19' are systems modelled by \citet{McAllister2019}, `M17b' is from \citet{mcallister2017b}, `S11' are from \citet{Savoury2011}}
+    \caption{The inferred $\dot M$ for eclipse-modelled CVs. For the Source column, `W22' are from Chapter~\ref{chpt:characterisation of 12 new CVs}, `M19' are systems modelled by \citet{McAllister2019}, `M17b' is from \citet{mcallister2017b}, `S11' are from \citet{Savoury2011}}
     \label{table:results:mdot modelling}
     \begin{tabular}{llccc}
         \hline \\
@@ -269,16 +270,23 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
 \subsection{Systematic issues with mass loss estimation}
 \label{sect:massloss and AML:systematic bias}
 
-It is critical to treat these mass loss rates with caution.\todo{Unsure if this might be more suited to the next section}
+It is critical to treat these mass loss rates with caution.
 The sample as given here is subject to systematic bias as a result of the sparse nature of the data used to calibrate the Brown relation, and the validity of $\dot M$ and $\dot J$ is sensitive to the validity of the MESA configuration for the donor model.
 Whilst the majority of CV donors are probably well-described by my MESA configuration, we cannot assume that \textit{all} donors will be; the configuration could easily be invalidated by, for example, the presence of a more evolved donor, or one with a substantially different metallicity from typical M dwarfs.
 This would alter the mass-radius exponent of the donor ($\zeta$ in Equation~\ref{eqn:modelling:Jdot from Mdot}) and corrupt the inferred $\dot J$.
 
 Beyond a potentially incorrect MESA configuration, there is a more serious problem with the unknown scatter in the Brown relation.
-Consider a star which lies below the Brown relation, i.e. one with a smaller zero-$\dot M$ radius than its mass suggests. If this star begins to experience mass loss, and we measure its radius to be inflated beyond the Brown relation (after factoring for Roche geometry), the corresponding mass loss rate we would find will be \textit{lower} than reality, as some amount of the star's inflation -- the amount required to inflate it to agree with the Brown relation -- is ignored. \todo{make a figure for this.}
-This will also cause some stars to fail to have $\dot M$ inferred. If the equilibrium radius is small enough, it becomes likely that the amount of inflation induced by mass loss is not sufficient to bring the star up to the baseline assumed zero-$\dot M$ radius. Such a donor would not be possible to reproduce using this methodology, and 9 such donors (approximately a quarter of the sample) are seen in Table~\ref{table:results:mdot modelling}.
+Consider a star which lies below the Brown relation, i.e. one with a smaller zero-$\dot M$ radius than its mass suggests. If this star begins to experience mass loss, and we measure its radius to be inflated beyond the Brown relation (after factoring for Roche geometry), the corresponding mass loss rate we would find will be \textit{lower} than reality, as some amount of the star's inflation -- the amount required to inflate it to agree with the Brown relation -- is ignored.
+This is illustrated in Figure~\ref{fig:massloss and AML:brown scatter causes bias}.
+This will also cause some stars to fail to have $\dot M$ inferred. If the zero-$\dot M$ radius is small enough, it becomes likely that the amount of inflation induced by mass loss is not sufficient to bring the star up to the radius assumed by the Brown relation. Such a donor would not be possible to reproduce using this methodology, and 9 such donors (approximately a quarter of the sample) are seen in Table~\ref{table:results:mdot modelling}.
+\begin{figure}
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/results/brown_scatter_causes_bias.png}
+    \caption{Illustrating how scatter about the Brown relation can corrupt inferred $\dot M$ rates. The upper solid black line shows the observed radius of a donor, and the lower three lines show possible zero $\dot M$ radii. The dotted black line shows the radius predicted by the Brown relation. The arrows show the amount of inflation induced by $\dot M$, with longer arrows requiring more $\dot M$. The black arrow shows the reported value, but assumes the donor would exactly agree with the Brown relation. If the singleton radius of a donor corresponds to star A (blue line), some extra $\dot M$ will be incorrectly attributed to the system (shown as the dotted section). If the singleton radius of the donor corresponds to star B (red line), some amount of $\dot M$ will be ignored (again shown as the dotted section).}
+    \label{fig:massloss and AML:brown scatter causes bias}
+\end{figure}
 
-The combination of these two effects makes our dataset as a whole systematically over-estimate $\dot M$. This is because systems with donors that scatter below the Brown relation are preferentially removed from the sample. They are more likely to have inflations that lie below the baseline radius, and are systems which would have had their $\dot M$ under-estimated.
+The combination of these two effects makes our dataset as a whole systematically over-estimate $\dot M$. This is because systems with donors that scatter below the Brown relation are preferentially removed from the sample -- they are more likely to have inflations that lie below the baseline radius (i.e. they lie below the dotted black line in Figure~\ref{fig:massloss and AML:brown scatter causes bias}), and are systems which would have had their $\dot M$ under-estimated.
 Donors which scatter above the Brown relation are not removed in this way, so over-estimated $\dot M$ become over-represented in the sample.
 Some portion of systems are, for the same reasons, reported with abnormally low $\dot M$ -- i.e. ASASSN-17fo and SDSS J0903 -- as their donors scatter below the Brown relation, but not by enough as to remove them from the sample.
 Finally, since our reported $\dot M$ do not consider the intrinsic scatter in the M dwarf population, the uncertainties in $\dot M$ reported are likely to be significantly under-estimated.

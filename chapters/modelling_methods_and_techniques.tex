@@ -487,13 +487,13 @@ If the radius of an equivalent star in the absence of mass loss is known, and th
 
 The stellar evolution code used is the MESA codebase \citep{paxton2011,paxton2013,Paxton_2015,paxton2019}, a one-dimensional stellar evolution model. MESA is highly flexible, due to its use of various `modules', wherein each module supplies code with an element of the physics of the star. These are configurable with relatively simple input files, and can be customised to extend MESA with new physics not contained in the core codebase.
 Regarding CV modelling in particular, there is \textit{a priori} cause for confidence; largely default MESA configurations are capable of modelling CV donor tracks with impressive accuracy, even reproducing the period gap by a shutdown of magnetic braking triggered by the donor becoming fully convective \citep{Paxton_2015}.
-\S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and shows that with some small modifications the agreement between MESA and \citet{knigge11} can be improved further.
+\S\ref{sect:results:reproducing K11 tracks} also demonstrates this capability, and shows that with some small modifications the agreement between the evolutionary tracks produced by MESA and \citet{knigge11} can be improved further.
 
 Note that all MESA models for this thesis were run using version 21.12.1 of the MESA codebase, and use the configuration detailed in \S\ref{sect:modelling:MESA configs}, unless specified otherwise.
 
 To extract mass loss rates, I will go through three steps.
 Firstly, I demonstrate how the radius of a zero-$\dot M$ singleton model of a given mass can be tuned to match the M dwarf mass-radius relationship given by \citet{brown2022} by introducing star spots.
-Secondly, I explore the range of masses for which the radius is a reasonable diagnostic for present-day mass loss rate.
+Secondly, I explore the range of donor masses for which the radius is insensitive to mass loss history -- donors within this mass range can be used to find the secular mass loss rate.
 Finally, I outline the method by which I search for mass loss rates that produce stellar models matching CV donor observations.
 % Note that all code used for these steps is publicly available online.\todo{But not until Meridith says so!!!!!!}
 
@@ -503,8 +503,9 @@ Finally, I outline the method by which I search for mass loss rates that produce
 
 Broadly speaking, when computing a stellar evolution model one must simply input models of physical processes, describe some initial conditions, and allow the stellar model to evolve over time. Unfortunately, the physics of stars in not completely understood, and the processes that affect a star's evolution significantly differ depending on its conditions.
 Whilst some core physics is fixed, MESA provides many options for which prescriptions to use for a particular process, or even which processes to consider at all.
-MESA has default configuration vales that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
-As such, some tailoring of configuration files must be done in order to produce accurate donor models. The configuration files of this work are available online at the MESA project database\footnote{Cococubed}\todo{Upload this when you can.}.
+MESA has default configuration values that are reasonable for some common stellar conditions, but some tuning of the model physics is a necessary step for any rigorous modelling.
+As such, some tailoring of configuration files must be done in order to produce accurate donor models.
+% The configuration files of this work are available online at the MESA project database\footnote{Cococubed}\todo{Upload this when you can.}.
 
 Parameters that are not discussed below are left as the MESA default.
 Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here use the default MESA metallicity, $Z = 0.02$ (\lstinline{initial_z = 0.02d0}), $Y = 0.28$(\lstinline{initial_z = 0.28d0}).
@@ -577,9 +578,9 @@ A general problem in the modelling of low mass stars is an under-estimation of t
 Recently, \citet{brown2022} characterised a sample of $\sim 15000$ M dwarfs with Gaia parallaxes, radii, and 2MASS $K_S$ measurements from \citet{morrell2019} with a 5th order polynomial, $R(M)$, referred to as the Brown relation. Notably, this relation shifts to the theoretical \citet{baraffe2015} tracks at $M < 0.121 M_\odot$, as the data become increasingly sparse at such low masses.
 We use this semi-empirical mass-radius relation as the baseline `zero mass loss' benchmark radius for comparison against models.
 
-The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, however the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
+The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, but the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
 To partially account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
-However, it must be emphasised that the non-spherical Roche geometry is not solely a geometric effect -- the breakdown of spherical symmetry fundamentally alters the structure of the star near the surface, the effects of which are not captured by this radius correction. However, for the purposes of this work, these effects can be considered negligible.
+However, it must be emphasised that the non-spherical Roche geometry is not solely a geometric effect -- the breakdown of spherical symmetry means that the gravitational potential of the star is no longer similar to a point mass, which fundamentally alters the structure of the star near the surface where the effects are largest and increases the stellar radius \citep{renvoize2002}. The effects are not captured by this radius correction. However, for the purposes of this work, these effects can be considered negligible.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
@@ -587,7 +588,8 @@ However, it must be emphasised that the non-spherical Roche geometry is not sole
     \label{fig:modelling:MESA inflation over Brown relation}
 \end{figure}
 
-To achieve this baseline inflation, I introduce star spots into MESA. Star spots are magnetic phenomena, where the magnetic pressure from concentrations of magnetic field lines provides partial pressure support to the photospheric material, and since spots must remain in pressure equilibrium with the spotted surface, the temperature in a spotted region is reduced by ideal gas laws. As a consequence, the cooler spotted regions emit less black body radiation, inhibiting energy flux out of the stellar interior, and inflating the star.
+To artificially inflate the MESA models to account for the discrepancy with empirical mass radius relationships, and the additional inflation caused by departures from spherical symmetry, I introduce star spots into MESA.
+Star spots are magnetic phenomena, where the magnetic pressure from concentrations of magnetic field lines provides partial pressure support to the photospheric material, and since spots must remain in pressure equilibrium with the spotted surface, the temperature in a spotted region is reduced by ideal gas laws. As a consequence, the cooler spotted regions emit less black body radiation, inhibiting energy flux out of the stellar interior, and inflating the star.
 
 \subsubsection{The star spot model}
 \label{setc:modelling:star spot model description}
@@ -686,7 +688,7 @@ Finally, the mass loss can be converted to an angular momentum loss rate. To do 
 \end{equation}
 \citet{king1995} set a general formulation of CAML as some fraction of donor mass loss,
 \begin{equation}
-    \frac{\dot J_{\rm sys}}{J} = \nu \frac{\dot M_{\rm donor}}{M_{\rm donor}}
+    \frac{\dot J_{\rm CAML}}{J} = \nu \frac{\dot M_{\rm donor}}{M_{\rm donor}}
 \end{equation}
 where the form of $\nu$ depends on the CAML prescription being used.
 
@@ -708,4 +710,4 @@ After substituting $\alpha = 1$, we can then construct a form of $\dot J$ that i
     \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{\frac{G a }{M_{\rm wd} + M_{\rm donor}}} \bigg( \bigg(\frac{5}{6} - \frac{\zeta}{2}\bigg )  - \frac{1}{3} \frac{M_{\rm donor}}{M_{\rm wd} + M_{\rm donor}}\bigg ) \label{eqn:modelling:Jdot from Mdot}
 \end{gather}
 
-
+As a product of the eclipse modelling and MESA modelling, all the necessary quantities for Equation~\ref{eqn:modelling:Jdot from Mdot} are known. Therefore, we can deduce the secular AML rate for the modelled CV systems.
