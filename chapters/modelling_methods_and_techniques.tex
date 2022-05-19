@@ -2,12 +2,13 @@
 \label{chpt:modelling and techniques}
 
 This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and using MESA models to infer the long-term mass loss rate of a system from its donor properties.
+The MESA modelling was done in collaboration with Meridith Joyce\footnote{Space Telescope Science Institute: Baltimore, MD, US} and Marc Pinsonneault\footnote{Ohio State University, OH, US}, whom I thank for their contributions to building the MESA configuration for M dwarfs, and help in designing the star spot implementation.
 Since the models used in this analysis are computationally expensive and require large parameter spaces, the choice of fitting algorithm is important. The majority of the parameter optimisation done in this work uses a type of Markhov Chain Monte Carlo (MCMC) technique, and this is described in detail in \S\ref{sect:modelling:parameter optimisation of many variables}, before discussing the models themselves.
 
 
 \section{Parameter optimisation of many variables}
 \label{sect:modelling:parameter optimisation of many variables}
-Frequently in science, a model must have its input parameters fit to data. For models with few input parameters and well-behaved evaluation metrics (i.e. goodness-of-fit varies smoothly with input parameters), optimisation is relatively easy, but this is often not the case; for example the eclipse modelling portion of this work (\S\ref{sect:modelling:eclipse modelling}) has 18 parameters for a single eclipse, and fitting a full dataset frequently involves fitting  100+ parameters. To make matters worse, the eclipse model is fairly expensive to compute in large numbers, making a full exploration of the parameter space impractical.
+Frequently in science, a model must have its input parameters fit to data. For models with few input parameters and well-behaved evaluation metrics (i.e. model likelihood varies smoothly with input parameters), optimisation is relatively easy, but this is often not the case; for example the eclipse modelling portion of this work (\S\ref{sect:modelling:eclipse modelling}) has a noisy likelihood landscape, and requires 18 parameters for a single eclipse. Fitting a full dataset of multiple eclipses frequently involves fitting 100+ parameters. To make matters worse, the eclipse model is fairly expensive to compute in large numbers, making a full exploration of the parameter space impractical.
 
 The MCMC method is now a well-established tool in astronomy. It is robust, efficient when used properly, and yields the probability distribution of the variables being optimised even when the distributions are not well-described by simple functions. This has led to MCMC often being the method of choice when fitting models.
 This section provides a working knowledge of MCMC, but for an in-depth introduction and review of the technique and its various sub-types see \citet{sharma2017}.
@@ -528,6 +529,18 @@ However, we use the more complete reaction network given by \lstinline{pp_and_cn
 In addition, the JINA Reaclib reaction rate library \citep{cyburt2010} is used: \lstinline{set_rates_preference = .true., new_rates_preference = 2}
 
 
+\subsubsection{Opacity tables}
+
+MESA uses two opacities: radiative opacity and conductive opacity, with options to select which opacity sources to use and when to use them. I use the opacities calculated for \citet{Asplund2009} solar abundances by setting the following flags:
+\begin{itemize}
+    \item \lstinline{kap_file_prefix = `a09'}
+    \item \lstinline{kap_lowT_prefix = `lowT_fa05_a09p'}
+    \item \lstinline{kap_CO_prefix = `a09_co'}
+\end{itemize}
+Note that MESA uses separate opacity tables for high (\lstinline{kap_file_prefix}) and low (\lstinline{kap_lowT_prefix}) temperatures, and I set both to the appropriate tables for \citet{Asplund2009}. For completeness, I also set the higher temperature, hydrogen-poor/metal-rich opacity table to the \citet{Asplund2009} (\lstinline{kap_CO_prefix}), though the stars modelled here are all low temperature M dwarfs and this does not affect these specific results.
+
+
+
 \subsubsection{Surface boundary lookup tables}
 \label{sect:modelling:MESA surface boundary tables}
 
@@ -595,7 +608,7 @@ Star spots are magnetic phenomena, where the magnetic pressure from concentratio
 \label{setc:modelling:star spot model description}
 
 As MESA is a one-dimensional code and star spots are a two-dimensional phenomenon, spots are modelled using the formulation given by \citet{sommers2015}, based on work by \citet{spruit1986}.
-This implementation was done as a collaboration with Meridith Joyce\footnote{Accreditation} and Marc Pinsonneault\footnote{Accreditation}.
+This implementation was done as a collaboration with Meridith Joyce\footnote{Space Telescope Science Institute: Baltimore, MD, US} and Marc Pinsonneault\footnote{Ohio State University, OH, US}.
 
 Under this spot treatment, two effects are considered: the photosphere is made inhomogeneous by the presence of spots, and convection is inhibited by the presence of a strong magnetic field.
 In the \citet{sommers2015} formulation, the former effect is enforced by altering the effective temperature to a surface-weighted average of the spotted and unspotted surface, and the latter by augmenting the radiative gradient of the star.
