@@ -35,14 +35,14 @@ Unfortunately, while HiPERCAM was used to observe eclipses for some systems, no 
 
 HiPERCAM is capable of incredibly fast frame rates of up to $\sim 1000 \rm Hz$, though this capability was not used for this work.
 However, as part of the effort to achieve this frame rate by reducing dead-time between frames HiPERCAM is capable of exposing a frame while {\it simultaneously} reading out the previous image.
-This is achieved by masking half of a CCD, and only exposing with one side. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ ms) and can be read out during the next exposure time. To compensate up for masking half of a CCD, four CCDs side-by-side are used to make up the full exposing area. As a consequence, HiPERCAM has four sets of readout electronics that operate in tandem.
+This is achieved by masking half of the CCD, and only exposing with one half. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ ms) and can be read out during the next exposure time. HiPERCAM has four sets of readout electronics that operate in tandem.
 This virtual elimination of dead-time is a significant benefit when resolving the large, rapid changes in flux during the ingresses and egresses of CV eclipses.
 
 
 
 \subsection{ULTRACAM}
 \label{sect:observations:ultracam}
-o
+
 ULTRACAM is a three-beam optical imager sensitive to wavelengths between $\sim 300 - 1100 \rm nm$, and is the direct predecessor to HiPERCAM \citep{dhillon2007}.
 It is similarly built for high-speed photometric studies, but is not capable of the extreme framerates of HiPERCAM, limited to framerates of $\lesssim 500 \rm Hz$.
 ULTRACAM uses the same frame transfer readout technique to HiPERCAM, though uses only two CCDs.

@@ -1,31 +1,30 @@
 \label{chpt:conclusion} % for referencing this chapter elsewhere, use \ref{chpt:label}
 \lhead{\emph{Conclusions and future work}} % This is for the header on each page - perhaps a shortened title
 
-In this thesis, I have extended the CV eclipse model to allow for a tiered structure of shared eclipse parameters as a logical progression of the work by \citet{McallisterThesis}.
+I have extended the CV eclipse model to allow for a tiered structure of shared eclipse parameters as a logical progression of the work by \citet{McallisterThesis}.
 Using this new hierarchical eclipse model I characterise the component masses and radii, separations, white dwarf temperatures and surface gravities of 15 new short-period CVs.
 Future work should be directed to improving the optimisation of the eclipse light curve modelling -- the Affine invariant sampler with parallel tempering that is employed here is inefficient for problems with more than $\sim5$ parameters, and the model frequently has more than 100 free parameters.
-Whilst the optimisation does work, it is likely sub-optimal. The optimisation of expensive, non-differentiable models with many free parameters is inherently difficult, and it remains to be seen how significant an improvement is possible.
+While the optimisation works, it is likely sub-optimal. Unfortunately, the optimisation of expensive, non-differentiable models with many free parameters is inherently difficult, and it remains to be seen how significant an improvement is possible.
 
 Some issues were encountered during the modelling of a handful of systems, which are recommended for UV spectroscopic follow-up studies to probe them in more detail: $T_{\rm eff}$ of the white dwarf in SSSJ0522-3505 appears to be $\sim$10000K higher than is typical for a CV, and the white dwarfs of CSS090419 and CSS090622 appear to \textit{brighten} in the $i'$ band, contrary to models.
 However, I justify the assertion that these problems do not significantly impact the final results of modelling.
 
-The newly extended sample of eclipse modelled CVs appears to loosely track canonical CV donor evolutionary tracks, suggesting the possibility of a less unified donor track than is typically thought, though a significantly larger sample is necessary before more concrete claims can be made.
+The newly extended sample of eclipse modelled CVs follows the canonical CV donor evolutionary tracks, though with significant scatter that suggests the possibility of a less unified donor track than is typically thought. A significantly larger sample is necessary before more concrete claims can be made.
 
-I demonstrate the effectiveness of MESA in modelling CV evolution, and produce a configuration that reasonably closely replicates the canonical CV donor evolution. I also note that with some additional work, MESA should be capable of even closer agreement.
+I demonstrate the effectiveness of MESA in modelling CV evolution, and produce a configuration that replicates the canonical CV donor evolutionary sequence. I also note that with some additional work, MESA should be capable of even closer agreement.
 Instead, I focus on an empirical reproduction of the observed M dwarf mass-radius relationship of \citet{brown2022} by introducing star spots to MESA. By adjusting the star spot parameters, I am able to exactly reproduce the Brown mass-radius relation.
 
 Based on prior work by \citet{knigge2006,knigge11}, I use these MESA M dwarf models to deduce the mass loss rates of the M dwarf donors of eclipse modelled CVs by comparing their measured masses and radii with those of MESA models with varying degrees of mass loss.
 As such, I present the first sample of donor-derived secular mass loss rate estimates for CVs, and use these data to interrogate the source of the long-standing excess AML implied by CV prior observations.
-The data are preliminary, and are contingent on a robust sample of M dwarf masses and radii to calibrate the MESA models.
+The data are preliminary, and are contingent on the validity of the M dwarf masses and radii to calibrate the MESA models.
 The best available M dwarf mass-radius sample is sparsely populated below $\sim 0.12 M_\odot$, so I cannot marginalise over the intrinsic scatter in the M dwarf mass-radius relationship, biasing the sample towards higher $\dot M$ while also polluting it with some unphysically low $\dot M$ systems. Future observations of low mass M dwarf masses and radii should be able to rectify this shortfall.
 
 The results here are considered preliminary for a few reasons. Primarily, the mass-radius relationship used to calibrate the MESA model radii at zero mass loss is poorly sampled and incomplete, reverting to theoretical models at $0.121 M_\odot$ -- the majority of my data lie in this poorly understood mass range.
 In addition, significant further work is needed to grow the population of eclipse modelled low-$M_{\rm donor}$ CVs and improve these statistics, and continued eclipse modelling targeting short period CVs will be invaluable to confidently determining the source of excess AML.
-Specific effort should be targeted towards confident characterisation of CVs at slightly higher $M_{\rm donor}$ of $\sim0.15$ (i.e. a period of $\sim 1.8 - 2.2$ hours), where existing data are somewhat sparse and have large error bars. The clustering of confident data at lower masses leaves the current sample subject to an over-reliance on data with donor masses below $\sim 0.12 M_\odot$.
+Specific effort should be targeted towards confident characterisation of CVs at slightly higher $M_{\rm donor}$ of $\sim0.15$ (i.e. a period of $\sim 1.8 - 2.2$ hours), where existing data are somewhat sparse and have large uncertainties. The clustering of confident data at lower masses leaves the current sample subject to an over-reliance on data with donor masses below $\sim 0.12 M_\odot$.
 
 These results suggest that magnetic braking is a poor description of the excess AML inferred from eclipse modelling of CVs, and indicate that eCAML continues to be a better descriptor of the data.
-The basic prediction of eCAML -- that the relationship between $\dot J / J$ and $\dot M / (M_{\rm donor} M_{\rm wd})$ follows a straight line -- is seen in the data, though I suggest in \S\ref{sect:massloss and AML:systematic bias} that my $\dot M$ are systematically over-estimated.
+The basic prediction of eCAML -- that the relationship between $\dot J / J$ and $\dot M / (M_{\rm donor} M_{\rm wd})$ follows a straight line -- is seen in the data, though I suggest in \S\ref{sect:massloss and AML:systematic bias} that my $\dot M$ are systematically over-estimated so cannot yet be used to calibrate eCAML.
 It must be reiterated, however, that the data presented here are themselves \textit{not} well-described by eCAML.
- Calibrating the eCAML free parameter from these data results in a higher constant of proportionality and concludes that virtually all CVs are dynamically unstable, which is not self-consistent. This is likely a result of the systematic over-estimation of $\dot M$.
-
+Calibrating the eCAML free parameter from these data results in a higher constant of proportionality and concludes that virtually all CVs are dynamically unstable, which is not self-consistent.
 

@@ -3,7 +3,7 @@
 
 A modest backlog of observed CV eclipse light curve data was reduced, calibrated, and modelled following the procedure outlined in \S\ref{sect:modelling:eclipse modelling}, and the results are presented here.
 
-The systems modelled in this chapter were chosen largely based on their short periods, targeting the donor mass range for which mass loss rates could be inferred. They range in period from $1.4 - 2.2$ hours, and were drawn from a few sources.
+The systems modelled in this chapter were chosen largely based on their short periods, targeting the donor mass range for which mass loss rates could be inferred ($0.08 M_\odot < M_{\rm donor} < 0.20 M_\odot$, shown in \S\ref{sect:results:MESA massloss allowable mass range}). They range in period from $1.4 - 2.2$ hours, and were drawn from a few sources.
 The All-Sky Automated Survey for Supernovae (ASASSN) \citep{shappee2014} is sensitive to transients, and is a valuable tool to identify CVs by their outbursts for follow-up once they re-enter quiescence; such systems are recognised by their ASASSN moniker.
 Other candidate systems were gathered from a variety of sources, which are cited below.
 % The vsnet alert system also provided several systems, which are marked below with (v).
@@ -483,11 +483,17 @@ The poor $u'$ band data are reflected in the large uncertainty in white dwarf fl
 \newpage
 \subsection{SDSS J1524}
 
-\todo{I'm not sure happy with these fits - I think they could be improved a bit. I'm doing some blackhole MCMC, and I'll write this when it's done. Should be done by Friday.}
+The binning of this system was somewhat non-standard, as the three filters on the eclipse of 2014/3/3 were not all equally consistent. The $g_{\rm reg}$ eclipse was consistent with the A binning group, but the $u_{\rm reg}$ and $r_{\rm reg}$ eclipses were not.
+As such, the $u_{\rm reg}$ and $r_{\rm reg}$ eclipses of this observation were fit individually, and the $g_{\rm reg}$ light curve was binned with the other relevant data.
+The resulting fits are broadly satisfactory, though some eclipses (namely the $g_{\rm reg}$ and $r_{\rm reg}$ eclipses of the A binning group) appear to have fairly poor white dwarf ingresses and egresses.
+However, the resulting fits give a well-constrained donor mass that agrees strongly with the `optimal' \citet{knigge11} donor track, suggesting the results are reasonable. The white dwarf fits are not ideal, but do not diverge from models by enough to cause concern.
 
-\begin{landscape}
-    \input{observing_log_tables/SDSS1524.tex}
-\end{landscape}
+
+
+
+% \begin{landscape}
+%     \input{observing_log_tables/SDSS1524.tex}
+% \end{landscape}
 
 \begin{figure}
     \centering
@@ -605,21 +611,21 @@ The poor $u'$ band data are reflected in the large uncertainty in white dwarf fl
         \hline
         \textbf{System Name:}       & \textbf{OGLE82}   & \textbf{SDSS J0748}    & \textbf{SDSS J1524}     \\
         \hline \hline \\
-        $M_\mathrm{wd}/M_\odot$     & $0.83\pm0.01$     & $0.68\pm0.02$          & $0.80\pm0.04$           \\
-        $R_\mathrm{wd}/R_\odot$     & $0.0099\pm0.0002$ & $0.0121\pm0.0004$      & $0.0103\pm0.0005$       \\
-        $M_\mathrm{donor}/M_\odot$  & $0.131\pm0.004$   & $0.066\pm0.004$        & $0.074\pm0.008$         \\
-        $R_\mathrm{donor}/R_\odot$  & $0.170\pm0.002$   & $0.117\pm0.002$        & $0.132\pm0.005$         \\
-        $q$                         & $0.157\pm0.002$   & $0.095\pm0.004$        & $0.093\pm0.007$         \\
+        $M_\mathrm{wd}/M_\odot$     & $0.83\pm0.01$     & $0.68\pm0.02$          & $0.99\pm0.01$           \\
+        $R_\mathrm{wd}/R_\odot$     & $0.0099\pm0.0002$ & $0.0121\pm0.0004$      & $0.0082\pm0.0003$       \\
+        $M_\mathrm{donor}/M_\odot$  & $0.131\pm0.004$   & $0.066\pm0.004$        & $0.097\pm0.003$         \\
+        $R_\mathrm{donor}/R_\odot$  & $0.170\pm0.002$   & $0.117\pm0.002$        & $0.144\pm0.001$         \\
+        $q$                         & $0.157\pm0.002$   & $0.095\pm0.004$        & $0.099\pm0.001$         \\
         \hline
         $P$, hours                  & $1.7263398(6)$    & $1.39947(1)$           & $1.56764953(2)$         \\
-        $a/R_\odot$,                & $0.720\pm0.006$   & $0.575\pm0.007$        & $0.652\pm0.01197$       \\
-        $i$                         & $83.9\pm0.1$      & $81.7\pm0.2$           & $86.7\pm1.1$            \\
-        $K_\mathrm{wd}$, km/s       & $68.5\pm1.0$      & $42.2\pm1.8$           & $42.9\pm3.4$            \\
-        $K_\mathrm{donor}$, km/s    & $435\pm3$         & $450\pm5$              & $461\pm7$               \\
+        $a/R_\odot$,                & $0.720\pm0.006$   & $0.575\pm0.007$        & $0.701\pm0.006$       \\
+        $i$                         & $83.9\pm0.1$      & $81.7\pm0.2$           & $85.8\pm0.1$            \\
+        $K_\mathrm{wd}$, km/s       & $68.5\pm1.0$      & $42.2\pm1.8$           & $48.6\pm0.8$            \\
+        $K_\mathrm{donor}$, km/s    & $435\pm3$         & $450\pm5$              & $493\pm5$               \\
         \hline
-        $\pi$, mas                  & $3.82\pm0.12$     & $1.83\pm0.14$          & $1.92\pm0.19$           \\
-        $T_{\rm eff}$, K            & $18000\pm4000$    & $22500\pm3000$         & $12500\pm1100$          \\
-        $\log(g), {\rm cgs}$        & $8.37\pm0.03$     & $8.11\pm0.03$          & $8.32\pm0.06$           \\
+        $\pi$, mas                  & $3.82\pm0.12$     & $1.83\pm0.14$          & $1.95\pm0.18$           \\
+        $T_{\rm eff}$, K            & $18000\pm4000$    & $22500\pm3000$         & $12500\pm900$          \\
+        $\log(g), {\rm cgs}$        & $8.37\pm0.03$     & $8.11\pm0.03$          & $8.61\pm0.04$           \\
         \hline
         \hline
     \end{tabular}
@@ -633,13 +639,13 @@ The poor $u'$ band data are reflected in the large uncertainty in white dwarf fl
 The observed donor properties can be compared to the \citet{knigge11}-like MESA donor tracks. Figure~\ref{fig:12 new cvs:donor model with eclipsers plotted} shows the full sample of short-period eclipse modelled CVs (a catalogue of these systems is given in Appendix~\ref{appendix:eclipse modelled CV data tables}) plotted with the `standard' donor track that includes only gravitational braking below the gap and the disagreement between model and data indeed persists.
 
 There is a large scatter in the observations, but new data continue to lie systematically to the right of the `standard' model track, and the need for extra AML continues to be supported by observations.
-The new data appear to have a significant scatter compared to previous data, which aligned closely with the donor tracks.
+The new data appear to have a significant scatter about the canonical donor evolutionary tracks.
 Typically, scatter in CV donor tracks is explained as being due to different white dwarf masses, but the effect of this on $P$ is thought to be relatively small, on the order of a few minutes \citep{goliasch2015}, and falls significantly short of explaining these new results.
 Further discrediting this as the source of scatter is Figure~\ref{fig:12 new cvs:donor model with eclipsers plotted}, which illustrates that whilst the average white dwarf mass of this sample is indeed slightly lower than the canonical \citet{pala2020} value, the difference is small and its effects are unlikely to be significant.
 
 There are then two possibilities for this scatter: either the parameter estimations of this thesis are somehow flawed, or CV donor evolution is not as unified as believed; at this time, it is difficult to rule out either option.
 The majority of the eclipse model fits do not give significant cause for concern about their validity. In theory, the new hierarchical model only requires a single example of distinct egresses to constrain the mass ratio, with other eclipses only needed to constrain the white dwarf fluxes. However, I have not included a thorough study into the hierarchical model's ability to recover parameters from blended eclipse features. Such a study would be desirable, to better understand the capabilities of the new model.
-If, however, these results are to be believed, this may indicate that the canonical idea of a unified track does not account for possibly significant effects, such as variation in the age or formation metallicity of the donor, or variations in the degree of excess AML that is known to be present in these CVs.
+If, however, these results are to be believed (and there is little cause not to), this may indicate that the canonical idea of a unified track does not account for possibly significant effects, such as variation in the age or formation metallicity of the donor, or variations in the degree of excess AML that is known to be present in these CVs.
 
 
 % \todo{The K11 mass-radius relation could be updated? Not really worth it, not my focus and not that many new systems.}
@@ -662,7 +668,7 @@ If, however, these results are to be believed, this may indicate that the canoni
 \subsection{A preliminary look at AML in CVs}
 \label{sect:12 new cvs:period excess}
 
-The published results and analysis of the three CVs in Chapter~\ref{chpt:three peculiar white dwarfs} \citep{wild2021} pre-date the more fully developed method to infer a donor mass loss rate described in \S\ref{sect:modelling:optimising mass loss rate to observations}. However, that preliminary analysis remains of interest, and motivates the next chapter.
+The published results and analysis of the three CVs in Chapter~\ref{chpt:three peculiar white dwarfs} \citep{wild2021} pre-date the more fully developed method to infer a donor mass loss rate described in \S\ref{sect:modelling:optimising mass loss rate to observations}. However, that preliminary analysis remains of interest, and motivates Chapter~\ref{chpt:Mass loss and Angular momentum loss in short period CVs}.
 As such, the preliminary AML analysis method of \citet{wild2021} was repeated using the new data presented here, significantly increasing the population of well-characterised CVs compared to what was available at publication. The core findings of that work persist with the new data set, lending further credence to the results.
 
 In order to qualitatively evaluate missing AML, the period \textit{excess} was examined, $P_{\rm ex} = P_{\rm obs} - P_{\rm std}$. Here, $P_{\rm obs}$ is the observed period, and $P_{\rm std}$ is the period predicted by the \citet{knigge11} CV donor track with only $1\times$ gravitational braking below the period gap, interpolated across $M_{\rm donor}$.

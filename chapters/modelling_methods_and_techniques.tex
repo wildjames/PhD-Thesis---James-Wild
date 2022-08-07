@@ -2,7 +2,8 @@
 \label{chpt:modelling and techniques}
 
 This chapter describes in detail the two modelling techniques used for this thesis: the characterisation of a CV using multi-band eclipse modelling, and using MESA models to infer the long-term mass loss rate of a system from its donor properties.
-The MESA modelling was done in collaboration with Meridith Joyce\footnote{Space Telescope Science Institute: Baltimore, MD, US} and Marc Pinsonneault\footnote{Ohio State University, OH, US}, whom I thank for their contributions to building the MESA configuration for M dwarfs, and help in designing the star spot implementation.
+The MESA modelling was done in collaboration with Meridith Joyce\footnote{Space Telescope Science Institute: Baltimore, MD, US} and Marc Pinsonneault\footnote{Ohio State University, OH, US}, whom I thank for their contributions to building the MESA configuration for M dwarfs, and in designing the star spot implementation.
+
 Since the models used in this analysis are computationally expensive and require large parameter spaces, the choice of fitting algorithm is important. The majority of the parameter optimisation done in this work uses a type of Markhov Chain Monte Carlo (MCMC) technique, and this is described in detail in \S\ref{sect:modelling:parameter optimisation of many variables}, before discussing the models themselves.
 
 
@@ -84,7 +85,7 @@ At each step in the MCMC, every walker has a new position proposed this way.
 The affine invariant ensemble sampler benefits significantly from having the walkers in the ensemble interact, as they can communicate to other walkers regions of high $\mathcal{L}$ even between walkers in different local minima. Further, the sampler has a higher likelihood to accept dispersing steps than consolidating steps, so walkers are only likely to gather in deep minima, increasing exploration except in the case of a significantly higher likelihood.
 This improves the ensemble's ability to both locate the global minimum, and to sample non-spherical probability distributions (a task that can be difficult for simpler sampling techniques).
 Further, this algorithm is able to have the proposal and evaluation of new steps in every chain performed \textit{simultaneously}, significantly improving computation time;
-a typical rule-of-thumb is to use $2n$ walkers for $n$ parameters being optimised \citet{goodman2010}, and since the number of walkers is almost always larger than the number of available threads, increased evaluation time scales well with more threaded computation.
+a typical rule-of-thumb is to use $2n$ walkers for $n$ parameters being optimised \citep{goodman2010}, and since the number of walkers is almost always larger than the number of available threads, increased evaluation time scales well with more threaded computation.
 
 
 \subsubsection{Parallel tempering}
@@ -331,7 +332,7 @@ This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}
 
 The choice of prior is important in Bayesian inference, but we have very little prior knowledge on a system. The prior distributions used were generally uniform and span the numerically allowed range\footnote{e.g.\ angles are limited to be between 0 and $2\pi$, and fluxes range from 0 to the peak flux of the eclipses.}, with a few exceptions.
 
-As it is unconstrained by data, $u_{\rm ld}$ initially uses a Gaussian prior centred on 0.3 with a width of 0.1.
+As it is unconstrained by data, $u_{\rm ld}$ initially uses a Gaussian prior centred on 0.3 with a width of 0.1. Once a constraint on $T_{\rm eff}$ is known, a more accurate value of $u_{\rm ld}$ can be calculated and used for future fitting.
 The bright spot scale draws from a log-uniform prior between 0 and 0.2, which favours smaller values, and $\theta_{\rm az}$ is forbidden from values that would cause the bright spot strip to deviate from a tangent to the disc by $>80^\circ$.
 Finally, some combinations of parameters are forbidden in the model. The values of $q$ and $\Delta\phi$ must be such that $i \leq 90^\circ$ for an eclipse to occur, and the disc radius is constrained by the maximum radius before precession becomes a significant effect, $R_{\rm disc} / a < 0.46$ \citep{hellier2001}.
 
@@ -443,7 +444,7 @@ In this model each $t_i$ is a single time value, making $\Lambda$ a $1\times 1$ 
 \subsubsection{Evaluating a model fit with a Gaussian process}
 \label{sect:modelling:GP model evaluation}
 
-Finally, the $\mathcal{L}$ of a set of ${\bf y}, {\bf t}$ can be calculated given a GP, i.e. $\mathcal{L}(\alpha, \lambda | {\bf y}, {\bf t})$, analogous to $P({\bf y} | {\bf t})$ \citep{rasmussen2006}.
+Finally, the $\mathcal{L}$ of a set of ${\bf y}, {\bf t}$ can be calculated given a GP, i.e. $\mathcal{L}({\bf y} | \alpha, \lambda, {\bf t})$, analogous to $P({\bf y} | {\bf t})$ \citep{rasmussen2006}.
 This is the pertinent step to the modelling, as the likelihood function of the data is replaced with the likelihood of the GP.
 When evaluating a proposed $\Theta$ in the MCMC, rather than using $\mathcal{L} \propto \mathrm{exp}(-\chi^2/2)$ the likelihood function is replaced with the likelihood of the residuals after observed fluxes have had the eclipse modelled fluxes subtracted, i.e. ${\bf y}_{\rm res} = {\bf y}_{\rm obs} - {\bf y}_{\rm model}$, given an $(\alpha, \lambda)$ pair. This is expressed more clearly algebraically, as
 \begin{equation}
@@ -475,7 +476,7 @@ Changes in the disc radius and brightness profile, and bright spot parameters ca
 The top level of the model provides the core parameters, which are unchanging between all observing bands and constant across our observations: $q,\ R_\mathrm{wd}/a$, and $\Delta\phi$. We assume the white dwarf and donor fluxes do not change on the timescale of our observations, and so these variables, along with the limb darkening coefficient of the white dwarf, are shared between all eclipses observed with the same filters. The bottom level holds parameters that can vary quickly enough to change between eclipses, i.e. parameters describing the accretion disc and bright spot. By handling parameters this way, we maximise the amount of data informing important variables. We also somewhat reduce the number of free parameters, which aids in model fitting, but the chief justification for the hierarchical approach is that it ensures consistency between eclipses - something not guaranteed when fitting eclipses individually.
 
 Where possible, data were also binned together. Ideally, this has three beneficial effects: the number of eclipses, and therefore the number of parameters, is reduced; binning increases the signal-to-noise ratio of the data; and as the flickering component is not consistent between eclipses, should reduce the degree of flickering present in the data. However, as CV eclipses often have variable bright spot and disc contributions, it is frequently not reasonable to combine eclipses. Varying bright spot and eclipse features will become smeared out when binned, corrupting crucial elements of the eclipse.
-This smearing effect is also subtly present, even in data that are consistent. As a bin width must be chosen that will not precisely align with the integration times of the photometric data, binning will always introduce a small blurring of timing data, and whilst this is a small effect, it can significantly alter the white dwarf ingress and egress features.
+This smearing effect is also subtly present, even in data that appear consistent. As a bin width must be chosen that will not precisely align with the integration times of the photometric data, binning will always introduce a small blurring of timing data, and whilst this is a small effect, it can significantly alter the white dwarf ingress and egress features.
 Therefore, binning is only done when data are sufficiently similar, and is treated with caution.
 
 
@@ -554,7 +555,7 @@ Different choices of atmosphere table results in different surface temperatures 
 
 For these MESA models, the \lstinline{tau_10} grid was used, which interpolates the PHOENIX \citep{hauschildt1999, hauschildt2001} and \citet{castelli2003} stellar atmospheres (which assume solar metallicity) at $\tau = 10$ for the base of the atmosphere \citep{paxton2010,paxton2011}.
 Note that none of the atmosphere tables available in MESA accurately reproduce observations of M dwarfs across the range of donor masses required. In fact, of the available tables, the \lstinline{tau_10} gives some of the less accurate modelled mass-radius relations for low mass stars.
-However, this atmosphere grid was chosen as it produces stars that are {\it consistently}\ smaller than required for stars with $M < 0.3 M_\odot$, a deficit that is compensated for in \S\ref{sect:modelling:tuning star spots to observations}, using the method described in \S\ref{setc:modelling:star spot model description}. In this way, rather than relying on the atmosphere table to produce the correct stellar radii, the radius can be manually adjusted to match empirical results.
+However, this atmosphere grid was chosen as it produces stars that are {\it consistently}\ smaller than required for stars with $M < 0.3 M_\odot$, a deficit that is compensated for in \S\ref{sect:modelling:tuning star spots to observations}, using the method described in \S\ref{setc:modelling:star spot model description}. In this way, rather than relying on the atmosphere table to produce the correct stellar radii, the radius can be manually adjusted to match observations.
 
 
 \subsubsection{Mixing length theory}
@@ -593,7 +594,7 @@ We use this semi-empirical mass-radius relation as the baseline `zero mass loss'
 
 The difference between singleton MESA models with no mass loss and the Brown relation is shown in Figure~\ref{fig:modelling:MESA inflation over Brown relation}, but the goal is not to reproduce the Brown relation exactly; CV donors are filling their Roche lobes, so are non-spherical.
 To partially account for this effect, \citet{knigge11} introduces a $4.5\%$ radius inflation over isolated stars, and I mirror this approach. Thus, the target radius inflation in Figure~\ref{fig:modelling:MESA inflation over Brown relation} is $4.5\%$.
-However, it must be emphasised that the non-spherical Roche geometry is not solely a geometric effect -- the breakdown of spherical symmetry means that the gravitational potential of the star is no longer similar to a point mass, which fundamentally alters the structure of the star near the surface where the effects are largest and increases the stellar radius \citep{renvoize2002}. The effects are not captured by this radius correction. However, for the purposes of this work, these effects can be considered negligible.
+However, it must be emphasised that the non-spherical Roche geometry is not solely a geometric effect -- the breakdown of spherical symmetry means that the gravitational potential of the star is no longer similar to a point mass, which fundamentally alters the structure of the star near the surface where the effects are largest and increases the stellar radius \citep{renvoize2002}. The effects are not captured by this radius correction. However, for the purposes of this work, they can be considered negligible.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/MESA_inflation_over_brown.pdf}
@@ -611,7 +612,7 @@ As MESA is a one-dimensional code and star spots are a two-dimensional phenomeno
 This implementation was done as a collaboration with Meridith Joyce\footnote{Space Telescope Science Institute: Baltimore, MD, US} and Marc Pinsonneault\footnote{Ohio State University, OH, US}.
 
 Under this spot treatment, two effects are considered: the photosphere is made inhomogeneous by the presence of spots, and convection is inhibited by the presence of a strong magnetic field.
-In the \citet{sommers2015} formulation, the former effect is enforced by altering the effective temperature to a surface-weighted average of the spotted and unspotted surface, and the latter by augmenting the radiative gradient of the star.
+In the \citet{sommers2015} model, the former effect is enforced by altering the effective temperature to a surface-weighted average of the spotted and unspotted surface, and the latter by augmenting the radiative gradient of the star.
 
 The spots cover a fraction of the stellar surface, $f_{\rm spot}$, and a temperature contrast of $x_{\rm spot} = T_{\rm  spot} / T_{\rm amb}$, where the effective temperature of the spotted surface is $T_{\rm spot}$, and the effective temperature of the ambient, unspotted surface is $T_{\rm amb}$. The surface-weighted average of the star, $T_{\rm av}$ is then,
 \begin{equation}

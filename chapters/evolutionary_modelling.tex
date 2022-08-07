@@ -135,7 +135,6 @@ Since the uncertainties I report here do not include the effects of the scatter 
 \label{sect:modelling:donor mass loss rates}
 
 Overall, there are 33 systems with eclipse-modelled characterisations available with donors in the correct mass range of $0.08 M_\odot < M_{\rm donor} < 0.20 M_\odot$, catalogued in Table~\ref{table:results:mdot modelling}.
-The special case of SDSS J1524 is included despite having a donor mass of $0.074\pm0.008$, slightly below $0.08 M_\odot$, as the measurement is within $1\sigma$ of this limit.
 
 Table~\ref{table:results:Jdot results} shows the AML rates, $\dot J$, calculated using Equation~\ref{eqn:modelling:Jdot from Mdot} for the systems for which $\dot M$ could be calculated from donor properties. Also shown is the AML expected from gravitational losses alone for that system, and the ratio between the observed and expected values.
 
@@ -163,7 +162,7 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
         MASTER OT J0014     &  W22      & $0.123 \pm 0.006$ & $0.165 \pm 0.002$ & $-10.279 \pm 0.328$ \\
         OGLE82              &  W22      & $0.132 \pm 0.003$ & $0.170 \pm 0.001$ & $-11.686 \pm 1.078$ \\
         SDSS J0748          &  W22      & $0.085 \pm 0.010$ & $0.128 \pm 0.005$ & $-10.438 \pm 0.152$ \\
-        SDSS J1524          &  W22      & $0.074 \pm 0.007$ & $0.132 \pm 0.004$ & $-10.111 \pm 0.000$ \\
+        SDSS J1524          &  W22      & $0.097 \pm 0.003$ & $0.144 \pm 0.001$ & $-10.210 \pm 0.030$ \\
         CSS080623           &  M19      & $0.081 \pm 0.005$ & $0.128 \pm 0.002$ & $-10.343 \pm 0.041$ \\
         CSS110113           &  M19      & $0.105 \pm 0.007$ & $0.149 \pm 0.003$ & $-10.272 \pm 0.129$ \\
         OY Car              &  M19      & $0.093 \pm 0.004$ & $0.139 \pm 0.001$ & $-10.278 \pm 0.046$ \\
@@ -172,7 +171,7 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
         SSS100615           &  M19      & $0.083 \pm 0.005$ & $0.128 \pm 0.002$ & $-10.384 \pm 0.038$ \\
         ASASSN-14ag         &  M17b     & $0.093 \pm 0.010$ & $0.135 \pm 0.007$ & $-10.416 \pm 0.211$ \\
         CTCV J2354-4700     &  S11      & $0.101 \pm 0.003$ & $0.146 \pm 0.001$ & $-10.245 \pm 0.030$ \\
-        SDSS J1152          &  S11      & $0.087 \pm 0.006$ & $0.142 \pm 0.003$ & $-10.068 \pm 0.025$ \\
+        % SDSS J1152          &  S11      & $0.087 \pm 0.006$ & $0.142 \pm 0.003$ & $-10.068 \pm 0.025$ \\
         OU Vir              &  S11      & $0.116 \pm 0.002$ & $0.163 \pm 0.001$ & $-10.067 \pm 0.026$ \\
         XZ Eri              &  S11      & $0.091 \pm 0.004$ & $0.135 \pm 0.001$ & $-10.352 \pm 0.054$ \\
         SDSS J0903          &  S11      & $0.099 \pm 0.004$ & $0.136 \pm 0.002$ & $-10.677 \pm 0.155$ \\
@@ -223,7 +222,7 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
         MASTER OT J0014 &  W22      & $26.842 \pm 0.325$    & $26.745 \pm 0.014$    & $1.661 \pm 1.488$ \\
         OGLE82          &  W22      & $25.428 \pm 1.083$    & $26.767 \pm 0.009$    & $0.980 \pm 8.280$ \\
         SDSS J0748      &  W22      & $26.645 \pm 0.156$    & $26.629 \pm 0.053$    & $1.116 \pm 0.442$ \\
-        SDSS J1524      &  W22      & $26.990 \pm 0.015$    & $26.568 \pm 0.061$    & $2.672 \pm 0.390$ \\
+        SDSS J1524      &  W22      & $27.027 \pm 0.031$    & $26.723 \pm 0.043$    & $2.027 \pm 0.234$ \\
         CSS080623       &  M19      & $26.705 \pm 0.042$    & $26.615 \pm 0.026$    & $1.238 \pm 0.141$ \\
         CSS110113       &  M19      & $26.895 \pm 0.128$    & $26.701 \pm 0.019$    & $1.633 \pm 0.502$ \\
         OY Car          &  M19      & $26.844 \pm 0.046$    & $26.666 \pm 0.014$    & $1.517 \pm 0.168$ \\
@@ -282,7 +281,7 @@ This will also cause some stars to fail to have $\dot M$ inferred. If the zero-$
 \begin{figure}
     \centering
     \includegraphics[width=.7\textwidth]{figures/results/brown_scatter_causes_bias.png}
-    \caption{Illustrating how scatter about the Brown relation can corrupt inferred $\dot M$ rates. The upper solid black line shows the observed radius of a donor, and the lower three lines show possible zero $\dot M$ radii. The dotted black line shows the radius predicted by the Brown relation. The arrows show the amount of inflation induced by $\dot M$, with longer arrows requiring more $\dot M$. The black arrow shows the reported value, but assumes the donor would exactly agree with the Brown relation. If the singleton radius of a donor corresponds to star A (blue line), some extra $\dot M$ will be incorrectly attributed to the system (shown as the dotted section). If the singleton radius of the donor corresponds to star B (red line), some amount of $\dot M$ will be ignored (again shown as the dotted section).}
+    \caption{Illustrating how scatter about the Brown relation can corrupt inferred $\dot M$ rates. The upper solid black line shows the observed radius of a donor, and the lower three lines show possible zero $\dot M$ radii. The dotted black line shows the radius predicted by the Brown relation. The arrows show the amount of inflation induced by $\dot M$, with longer arrows requiring more $\dot M$. The black arrow shows the reported value, but assumes the donor would exactly agree with the Brown relation. If the zero-$\dot M$ radius of a donor corresponds to star A (blue line), some extra $\dot M$ will be incorrectly attributed to the system (shown as the dotted section). If the zero-$\dot M$ radius of the donor corresponds to star B (red line), some amount of $\dot M$ will be ignored (again shown as the dotted section).}
     \label{fig:massloss and AML:brown scatter causes bias}
 \end{figure}
 
@@ -350,7 +349,7 @@ As the eclipse modelling of CVs also produces a measure of $T_{\rm eff}$, the sy
         MAS0014          &  W22  & $0.86 \pm 0.03$ & $17300\pm  1000$ & $ -9.97 \pm 0.03$ \\
         OGLE82           &  W22  & $0.84 \pm 0.02$ & $18000\pm  4400$ & $ -9.95 \pm 0.12$ \\
         SDSS J0748       &  W22  & $0.80 \pm 0.05$ & $28400\pm  3300$ & $ -9.73 \pm 0.06$ \\
-        SDSS J1524       &  W22  & $0.80 \pm 0.04$ & $12500\pm  1100$ & $-10.08 \pm 0.05$ \\
+        SDSS J1524       &  W22  & $0.99 \pm 0.01$ & $12500\pm   900$ & $-10.17 \pm 0.03$ \\
         ASASSN-16kr      &  W20  & $0.95 \pm 0.02$ & $11500\pm   300$ & $-10.19 \pm 0.01$ \\
         ASASSN-17jf      &  W20  & $0.70 \pm 0.03$ & $12020\pm   850$ & $-10.03 \pm 0.04$ \\
         SSSJ1502-3505    &  W20  & $0.76 \pm 0.02$ & $22800\pm  1500$ & $ -9.80 \pm 0.03$ \\
