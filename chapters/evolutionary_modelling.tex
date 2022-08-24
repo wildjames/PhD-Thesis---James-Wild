@@ -49,7 +49,7 @@ With a more tailored donor configuration this could likely be improved without i
 
 
 \newpage
-\section{For what range of masses can we extract mass loss rates?}
+\section{For what range of masses can mass loss rates be extracted?}
 \label{sect:results:MESA massloss allowable mass range}
 
 % This section evaluates the feasibility of using the radius of a star to extract present-day mass loss rates.
@@ -67,7 +67,7 @@ The donor is inflated by mass loss, but since the stellar structure reacts relat
 % The donor is inflated by mass loss, but because the stellar structure as a whole reacts relatively slowly, the effect of past mass loss is retained and the degree of inflation becomes sensitive to the mass loss \textit{history} of the donor.
 
 Calculating the two timescales for CVs reveals that for much of their lives, $\tau_{\rm KH} \sim \tau_{\dot M}$ \citep{knigge11} - meaning that most CV donors are \textit{almost} able to maintain thermal equilibrium, but are still mildly affected by mass loss.
-Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star adjusts on timescales comparable to $\tau_{\dot M}$, the degree of inflation only depends on the present-day average $\dot M$. In this regime, we can discard the mass loss history of the donor, and use the radius inflation as a diagnostic for the baseline mass loss rate, averaged over $\tau_{\dot M} \sim 1$Gyr.
+Under this almost-equilibrium regime, mass loss induces some degree of radius inflation in the donor, but because the star adjusts on timescales comparable to $\tau_{\dot M}$, the degree of inflation only depends on the present-day average $\dot M$. In this regime, the mass loss history of the donor can be discarded, and the radius inflation becomes a diagnostic for the baseline mass loss rate, averaged over $\tau_{\dot M} \sim 1$Gyr.
 % This is also the justification for the CV tracks in \S\ref{sect:results:reproducing K11 tracks} to not include the star spot radius correction. As the donor decreases in mass, the necessary spot parameters to correct its radius will change (refer to \S\ref{sect:modelling:tuning star spots to observations}). However, the donor structure would only react to a change in spot parameters on the $\tau_{\rm KH}$ timescale, causing a CV donor model to effectively have the `wrong' spot parameters for its mass, due to the time lag between parameters changing and the donor radius responding to that change.
 
 
@@ -80,11 +80,11 @@ The rise in $\tau_{\rm KH}$ relative to $\tau_{\dot M}$ becomes significant at $
     \label{fig:results:how does tauKH and tauMdot vary with donor mass}
 \end{figure}
 
-We can determine the range of donor masses for which $\tau_{\rm KH} \sim \tau_{\dot M}$ from MESA models.
+The range of donor masses for which $\tau_{\rm KH} \sim \tau_{\dot M}$ can be determined using MESA models.
 First, a series of singleton models (this time using the MESA configuration given in \S\ref{sect:modelling:MESA configs}) were evaluated with varying amounts of fixed mass loss rates, uniformly spaced between $\log (\dot M, M_\odot \mathrm{yr}^{-1}) = -9.9 \rightarrow -10.8$.
 Then, a series of MESA CV models were run with gravitational losses amplified by $x = 1 \rightarrow 6$, using the configuration and AML amplification in \S\ref{sect:results:reproducing K11 tracks}.
 Finally, each model has its radius, $R$, and $\dot M$ extracted at $0.1 M_\odot$. Since the CV models have varying $\dot M$ and the singleton models do not, if $\dot M$ history does not affect radius inflation the radii between the two sets of models will match, and a disagreement indicates that history plays a significant role in radius inflation.
- Figure~\ref{fig:results:comparing radii at 0.1Msun} shows this, and little divergence between the two sets of radii is visible. Note that higher $\dot M$ show a small but increasing degree of divergence, as we might expect since higher $\dot M$ corresponds to lower $\tau_{\dot M}$.
+ Figure~\ref{fig:results:comparing radii at 0.1Msun} shows this, and little divergence between the two sets of radii is visible. Note that higher $\dot M$ show a small but increasing degree of divergence, as might be expected since higher $\dot M$ corresponds to lower $\tau_{\dot M}$.
 \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{figures/modelling/compare_0.1Msun_with_CV_track_K11_fig1.pdf}
@@ -92,7 +92,7 @@ Finally, each model has its radius, $R$, and $\dot M$ extracted at $0.1 M_\odot$
     \label{fig:results:comparing radii at 0.1Msun}
 \end{figure}
 
-Now, by looking at what level of divergence historical changes in $\dot M$ induces at various donor masses, we can evaluate what mass range is acceptable.
+Now, by looking at what level of divergence historical changes in $\dot M$ induces at various donor masses, the allowable mass range can be evaluated.
 By instead plotting the difference between the two sets of models, and repeating the same process for a range of masses, Figure~\ref{fig:results:comparing radii over a range of masses} is produced.
 The upper limit on mass must be $0.2 M_\odot$, as this is the enforced mass of the period gap, and for a lower limit I impose an acceptable level of disagreement of $3\%$. It can be seen that the minimum acceptable mass is then $0.08 M_\odot$.
 \begin{figure}
@@ -125,7 +125,7 @@ Since the uncertainties I report here do not include the effects of the scatter 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_4.5.pdf}
-    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best fit value of $f_{\rm spot}$. The {\bf dotted lines} show the acceptable deviation from perfect agreement in order to terminate the binary chop, and the {\bf dashed line} shows the target inflation. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
+    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best-fit value of $f_{\rm spot}$. The {\bf dotted lines} show the acceptable deviation from perfect agreement in order to terminate the binary chop, and the {\bf dashed line} shows the target inflation. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
     \label{fig:modelling:fspot mass relationship}
 \end{figure}
 
@@ -271,11 +271,11 @@ Aside from these two cases the inferred $\dot M$ are generally physically reason
 
 It is critical to treat these mass loss rates with caution.
 The sample as given here is subject to systematic bias as a result of the sparse nature of the data used to calibrate the Brown relation, and the validity of $\dot M$ and $\dot J$ is sensitive to the validity of the MESA configuration for the donor model.
-Whilst the majority of CV donors are probably well-described by my MESA configuration, we cannot assume that \textit{all} donors will be; the configuration could easily be invalidated by, for example, the presence of a more evolved donor, or one with a substantially different metallicity from typical M dwarfs.
+Whilst the majority of CV donors are probably well-described by my MESA configuration, it cannot be assumed that \textit{all} donors will be; the configuration could easily be invalidated by, for example, the presence of a more evolved donor, or one with a substantially different metallicity from typical M dwarfs.
 This would alter the mass-radius exponent of the donor ($\zeta$ in Equation~\ref{eqn:modelling:Jdot from Mdot}) and corrupt the inferred $\dot J$.
 
 Beyond a potentially incorrect MESA configuration, there is a more serious problem with the unknown scatter in the Brown relation.
-Consider a star which lies below the Brown relation, i.e. one with a smaller zero-$\dot M$ radius than its mass suggests. If this star begins to experience mass loss, and we measure its radius to be inflated beyond the Brown relation (after factoring for Roche geometry), the corresponding mass loss rate we would find will be \textit{lower} than reality, as some amount of the star's inflation -- the amount required to inflate it to agree with the Brown relation -- is ignored.
+Consider a star which lies below the Brown relation, i.e. one with a smaller zero-$\dot M$ radius than its mass suggests. If this star begins to experience mass loss, and its radius is measured to be inflated beyond the Brown relation (after factoring for Roche geometry), the corresponding mass loss rate found will be \textit{lower} than reality, as some amount of the star's inflation -- the amount required to inflate it to agree with the Brown relation -- is ignored.
 This is illustrated in Figure~\ref{fig:massloss and AML:brown scatter causes bias}.
 This will also cause some stars to fail to have $\dot M$ inferred. If the zero-$\dot M$ radius is small enough, it becomes likely that the amount of inflation induced by mass loss is not sufficient to bring the star up to the radius assumed by the Brown relation. Such a donor would not be possible to reproduce using this methodology, and 9 such donors (approximately a quarter of the sample) are seen in Table~\ref{table:results:mdot modelling}.
 \begin{figure}
@@ -295,7 +295,7 @@ With a proper characterisation of the intrinsic population scatter, it will be p
 
 
 
-\section{Mass loss from white dwarf properties}
+\section{Inferring mass loss from white dwarf properties}
 \label{sect:modelling:white dwarf mass loss rates}
 
 % The characterised CVs also have the white dwarf temperature constrained to within $\sim 2000 \rm K$, allowing the short-term mass loss rate to also be inferred as suggested in \S\ref{sect:modelling:mdot from wd temperature}.
@@ -306,7 +306,7 @@ With a proper characterisation of the intrinsic population scatter, it will be p
 The white dwarf temperature also reveals information on the mass transfer rate, and the following summary is described more quantitatively by \citet{townsley2009}.
 In brief, as accreted material strikes the surface of the white dwarf its kinetic energy is converted to thermal energy, heating the white dwarf surface.
 The degree of this heating is related to the rate at which material falls to the surface -- if more material falls in, more heating is induced.
-Since, in general, we can assume that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a proxy diagnostic of the donor $\dot M$.
+Since, in general, it can be assumed that the rate material falls onto the white dwarf is roughly equal to the rate at which material enters the accretion disc from the donor, the white dwarf $T_{\rm eff}$ becomes a proxy diagnostic of the donor $\dot M$.
 Simulations demonstrate that even through successive Nova eruptions, the core temperature of the white dwarf is stable over timescales of $\sim 10^8$ years \citep{epelstain2007}, so if the accretion rate falls, the white dwarf $T_{\rm eff}$ is able to cool to the appropriate, lower temperature and remain accurate to the present-day accretion rate.
 
 The white dwarf temperature approach holds a major advantage over using the donor properties: measurements of white dwarf temperatures are easier to gather in large sample sizes.

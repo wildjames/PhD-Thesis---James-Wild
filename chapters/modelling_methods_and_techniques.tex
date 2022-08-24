@@ -105,13 +105,13 @@ The cold case of $T \equiv 1$ behaves equivalently to a normal ensemble sampler.
 
 Note that because hotter walkers are less sensitive to $\mathcal{L}$, their posterior no longer accurately reflects the `true' distribution. If a parameter is described by a Gaussian distribution with a standard deviation, $\sigma$, the tempered $\mathcal{L}$ will have a standard deviation of $\sigma \sqrt{T}$.
 
-When running a parallel tempered MCMC, the values used in the software are $\beta = 1/T$, for which we choose between 3 and 5 evenly spaced values of $\beta$ between 0 and 1.
+When running a parallel tempered MCMC, the values used in the software are $\beta = 1/T$, for which I choose between 3 and 5 evenly spaced values of $\beta$ between 0 and 1.
 The number of temperatures used depends on the evaluation time; since parallel tempering runs multiple full ensembles in tandem, in models with very large numbers of parameters it becomes highly desirable to use as few temperatures as possible. However, the penalty in computation time per step comes with the benefit of a dramatically improved ability to locate the global minimum, especially in complex parameter space.
 
-\subsection{The binary chop}
-\label{sect:modelling:binary chop methodology}
+\subsection{The bisection method}
+\label{sect:modelling:bisection method methodology}
 
-When searching for the root of a simple model, i.e. one with a single input parameter, $x$, and a single output metric, $y$, that either monotonically increases or decreases with $x$, I use the binary chop algorithm.
+When searching for the root of a simple model, i.e. one with a single input parameter, $x$, and a single output metric, $y$, that either monotonically increases or decreases with $x$, I use the bisection method.
 This requires relatively few evaluations to find the root of a function, i.e. $y(x_0) = 0$.
 If two values of $y$ are known to have opposite signs, e.g. $y_1(x_1)$ is positive and $y_2(x_2)$ is negative, it can be deduced that $x_0$ lies between $x_1$ and $x_2$. Then, by repeatedly evaluating midpoint between the two values of $x$ known to be closest to $x_0$, the algorithm will tend towards $x_1 \sim x_2 \sim x_0$. In practice, the optimisation terminates when $y(x_1) - y(x_2)$ is within some tolerance.
 Step-by-step, this proceeds as follows:
@@ -134,8 +134,8 @@ Crucial to both observing and modelling an eclipse is a good knowledge of the or
 \end{equation}
 where $T_{\rm ecl}$ is the time of mid-eclipse, $T_0$ is the mid-eclipse time of the zeroth eclipse, and $E$ is the eclipse number. Accurately calculating $T_{\rm ecl}$ is important to scheduling observations of a system, and $P_{\rm orb}$ is a crucial to the eclipse modelling.
 
-As observations are often separated by several months or even years, an error in $P_{\rm orb}$ of even $\sim 0.1$ seconds can accumulate to give significantly inaccurate predicted eclipse times. This need for precision also requires the definition of {\it where} a time is recorded from, as the delay introduced by the light travel time from one side of the earth's orbit to the other can significantly offset an observed time. All eclipse times presented in this thesis are given in the Barycentric Modified Julian Date (BMJD), which is the time of eclipse as measured from the centre of mass of the solar system. Note that this is different to the heliocentric MJD often seen in the literature, and where heliocentric literature values are used, they are converted to BMJD.
-Two timescales are relevant: UTC, in which a clock ticks at the rate of an earth-bound observer; and TDB, in which a clock ticks at the rate of an observer at the barycentre of the solar system. Literature values, and the clocks in the observing cameras, use UTC time. This is converted to TDB during photometric calibration, for consistency with the BMJD times used.
+As observations are often separated by several months or even years, an error in $P_{\rm orb}$ of even $\sim 0.1$ seconds can accumulate to give significantly inaccurate predicted eclipse times. This need for precision also requires the definition of {\it where} a time is recorded from, as the delay introduced by the light travel time from one side of the Earth's orbit to the other can significantly offset an observed time. All eclipse times presented in this thesis are given in the Barycentric Modified Julian Date (BMJD), which is the time of eclipse as measured from the centre of mass of the solar system. Note that this is different to the heliocentric MJD often seen in the literature, and where heliocentric literature values are used, they are converted to BMJD.
+Two timescales are relevant: UTC, in which a clock ticks at the rate of an Earth-bound observer; and TDB, in which a clock ticks at the rate of an observer at the barycentre of the solar system. Literature values, and the clocks in the observing cameras, use UTC time. This is converted to TDB during photometric calibration, for consistency with the BMJD times used.
 
 \subsection{Finding eclipse times}
 \label{sect:modelling:finding eclipse times}
@@ -220,7 +220,7 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
 
 To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, light curve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
 
-CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, mcallister2017, McAllister2019}. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
+CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, mcallister2017, McAllister2019}. The code used for this modelling, however, is the publicly available \lstinline{lfit_python} software\footnote{Available at \href{https://github.com/StuartLittlefair/lfit_python/tree/d36f5449350ef9cad6a285d6fd4cb9bdcd443c13}{https://github.com/StuartLittlefair/lfit\_python}}, based on the \lstinline{lcurve}\footnote{Available at \href{https://cygnus.astro.warwick.ac.uk/phsaap/software/}{https://cygnus.astro.warwick.ac.uk/phsaap/software/}} code authored by Tom Marsh. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
 Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
 The white dwarf mass-radius relationship was recently tested by \citet{parsons2017}, and found to be a reasonable assumption.
 Assuming that the mass stream following a ballistic trajectory appears to be a reasonable assumption, as the thermal velocity of the donor surface is orders of magnitude lower than the orbital velocity of the two stars.
@@ -330,7 +330,7 @@ This mode is called the `simple' bright spot model, and fixes $\theta_{\rm tilt}
 
 \subsubsection{Choice of priors}
 
-The choice of prior is important in Bayesian inference, but we have very little prior knowledge on a system. The prior distributions used were generally uniform and span the numerically allowed range\footnote{e.g.\ angles are limited to be between 0 and $2\pi$, and fluxes range from 0 to the peak flux of the eclipses.}, with a few exceptions.
+The choice of prior is important in Bayesian inference, but I have very little prior knowledge on a system. The prior distributions used were generally uniform and span the numerically allowed range\footnote{e.g.\ angles are limited to be between 0 and $2\pi$, and fluxes range from 0 to the peak flux of the eclipses.}, with a few exceptions.
 
 As it is unconstrained by data, $u_{\rm ld}$ initially uses a Gaussian prior centred on 0.3 with a width of 0.1. Once a constraint on $T_{\rm eff}$ is known, a more accurate value of $u_{\rm ld}$ can be calculated and used for future fitting.
 The bright spot scale draws from a log-uniform prior between 0 and 0.2, which favours smaller values, and $\theta_{\rm az}$ is forbidden from values that would cause the bright spot strip to deviate from a tangent to the disc by $>80^\circ$.
@@ -345,7 +345,7 @@ The eclipse modelling uses proxy variables, so some processing must be done to c
 \subsubsection{Fitting white dwarf colours}
 \label{sect:modelling:fitting white dwarf colours}
 By modelling the eclipse in multiple bands, at least three observations of white dwarf flux are available.
-The DA white dwarf cooling model from \citet{Bergeron1995}\footnote{Available at \href{http://www.astro.umontreal.ca/~bergeron/CoolingModels}{http://www.astro.umontreal.ca/~bergeron/CoolingModels}} is fit to these flux observations.
+The DA white dwarf cooling model from \citet{Bergeron1995}\footnote{Available at \href{http://www.astro.umontreal.ca/~bergeron/CoolingModels}{http://www.astro.umontreal.ca/$\sim$bergeron/CoolingModels}} is fit to these flux observations.
 These cooling models yield the absolute magnitude of the white dwarf in each band, $M$, for a given effective temperature, $T_{\rm eff}$ and surface gravity, $\log (g)$. This absolute magnitude is then easily translated to an apparent magnitude, $m$, given a system parallax, $\pi$, and interstellar extinction coefficient, ${\rm E(B-V)}$,
 \begin{equation}
     m = M - 5\log (\pi\mathrm{,\ arcsec}) - 5
@@ -376,7 +376,7 @@ If no solution could be found, the \citet{panei2000} models were searched, spann
 Both of these mass-radius relationships account for the white dwarf $T_{\rm eff}$.
 If no solution has been found with these two tracks, the \citet{hamada1961} 0 Kelvin mass-radius relation is checked for solutions. This track spans the largest range in mass, from $0.14 - 1.44 M_\odot$. If no solution is found with the \citet{hamada1961} tracks, the model is considered invalid, though this did not occur for any system in this thesis.
 
-Then, the inclination is calculated. $\Delta \phi$ is solely a function of $q$, and $i$. Therefore, we can use the eclipse model values of $\Delta\phi$ and $q$ to calculate the system inclination - this is done by proposing candidate values of $i$, and comparing the calculated $\Delta \phi_{\rm calc}(q,i)$ with the modelled $\Delta \phi$, and adjusting $i$ as needed until the two agree.
+Then, the inclination is calculated. $\Delta \phi$ is solely a function of $q$, and $i$. Therefore, the eclipse model values of $\Delta\phi$ and $q$ are used to calculate the system inclination - this is done by proposing candidate values of $i$, and comparing the calculated $\Delta \phi_{\rm calc}(q,i)$ with the modelled $\Delta \phi$, and adjusting $i$ as needed until the two agree.
 
 Now, three quantities are known; $i$, $M_{\rm wd}$, and $R_{\rm wd}$. As previously mentioned, $R_{\rm donor}$ is assumed to be the Roche radius, from Equation~\ref{eqn:introduction:eggleton approximation}, and $M_{\rm donor}$ is found simply by $(q \cdot M_{\rm wd})$. $a$ is calculated from the two component masses and $P_{\rm orb}$, using Kepler's laws. Finally, the orbital velocities, $K_{\rm wd,\ donor}$ respectively, of the two stars are calculated using Kepler's laws.
 \begin{align}
@@ -464,7 +464,7 @@ The slightly more complex parameter space that must now be explored, and more co
 
 In this thesis, the light curve fitting model used by \citet{McAllister2019} is extended, adopting a hierarchical approach to reduce model complexity.
 
-Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse light curve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{mcallister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and we broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
+Changes in the disc radius and brightness profile, and bright spot parameters can mean that the same CV has a significantly different eclipse light curve at different times, often making it difficult to justify averaging together many eclipses, as features can become smeared out and uninformative. In the worst-case scenario, all 18 parameters would be independently variable for each eclipse, in each band. However, by sharing some parameters between eclipses and bands, this large number of free parameters is slightly reduced, and the posterior of some parameters can be informed by multiple eclipses. \citet{mcallister2017} share $q,\ R_{\rm wd} / x_{l1}$, and $\Delta\phi$ between eclipses, and I broaden that concept by organising the model into a hierarchical structure, a schematic of which is shown in Figure~\ref{fig:modelling:hierarchical_model}.
 
 \begin{figure}
     \centering
@@ -473,7 +473,7 @@ Changes in the disc radius and brightness profile, and bright spot parameters ca
     \label{fig:modelling:hierarchical_model}
 \end{figure}
 
-The top level of the model provides the core parameters, which are unchanging between all observing bands and constant across our observations: $q,\ R_\mathrm{wd}/a$, and $\Delta\phi$. We assume the white dwarf and donor fluxes do not change on the timescale of our observations, and so these variables, along with the limb darkening coefficient of the white dwarf, are shared between all eclipses observed with the same filters. The bottom level holds parameters that can vary quickly enough to change between eclipses, i.e. parameters describing the accretion disc and bright spot. By handling parameters this way, we maximise the amount of data informing important variables. We also somewhat reduce the number of free parameters, which aids in model fitting, but the chief justification for the hierarchical approach is that it ensures consistency between eclipses - something not guaranteed when fitting eclipses individually.
+The top level of the model provides the core parameters, which are unchanging between all observing bands and constant across our observations: $q,\ R_\mathrm{wd}/a$, and $\Delta\phi$. I assume the white dwarf and donor fluxes do not change on the timescale of our observations, and so these variables, along with the limb darkening coefficient of the white dwarf, are shared between all eclipses observed with the same filters. The bottom level holds parameters that can vary quickly enough to change between eclipses, i.e. parameters describing the accretion disc and bright spot. By handling parameters this way, I maximise the amount of data informing important variables. I also somewhat reduce the number of free parameters, which aids in model fitting, but the chief justification for the hierarchical approach is that it ensures consistency between eclipses - something not guaranteed when fitting eclipses individually.
 
 Where possible, data were also binned together. Ideally, this has three beneficial effects: the number of eclipses, and therefore the number of parameters, is reduced; binning increases the signal-to-noise ratio of the data; and as the flickering component is not consistent between eclipses, should reduce the degree of flickering present in the data. However, as CV eclipses often have variable bright spot and disc contributions, it is frequently not reasonable to combine eclipses. Varying bright spot and eclipse features will become smeared out when binned, corrupting crucial elements of the eclipse.
 This smearing effect is also subtly present, even in data that appear consistent. As a bin width must be chosen that will not precisely align with the integration times of the photometric data, binning will always introduce a small blurring of timing data, and whilst this is a small effect, it can significantly alter the white dwarf ingress and egress features.
@@ -510,7 +510,7 @@ As such, some tailoring of configuration files must be done in order to produce 
 % The configuration files of this work are available online at the MESA project database\footnote{Cococubed}\todo{Upload this when you can.}.
 
 Parameters that are not discussed below are left as the MESA default.
-Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here use the default MESA metallicity, $Z = 0.02$ (\lstinline{initial_z = 0.02d0}), $Y = 0.28$(\lstinline{initial_z = 0.28d0}).
+Notably left as default is the metallicity of the donor stars; robust measurements of donor metallicity are challenging, though some recent attempts have yielded results \citep{harrison2016,harrison2018}. However, these are prone to systematic error, and refer to a small sample size. All MESA models presented here use the default MESA metallicity, $Z = 0.02$ (\lstinline{initial_z = 0.02d0}), $Y = 0.28$(\lstinline{initial_y = 0.28d0}).
 
 
 \subsubsection{Model initialisation}
@@ -676,7 +676,7 @@ Values of $f_{\rm spot}$ and $x_{\rm spot}$ can be passed to MESA as user-config
 \subsection{Optimising mass loss rate to donor observations}
 \label{sect:modelling:optimising mass loss rate to observations}
 
-The mass loss rate required to match donor observations can now be found. As the inflation of the donor increases monotonically with increasing mass loss, the binary chop algorithm is used to precisely and accurately optimise mass loss.
+The mass loss rate required to match donor observations can now be found. As the inflation of the donor increases monotonically with increasing mass loss, the bisection method is used to precisely and accurately optimise mass loss.
 When evaluating a proposed $\dot M$, two other key model parameters must be set. First the mass loss over a period of 1 Gyr is calculated. The initial model mass is then this expected 1 Gyr mass, in addition to the target mass. Doing this allows for some lead time before the model reaches the desired stellar mass, and gives the star time to reach both the main sequence, and settle to its equilibrium radius.
 The appropriate $f_{\rm spot}$ for the target mass is also calculated, and the model fixes $f_{\rm spot}$ at this value. Fixing $f_{\rm spot}$ this way accounts for the donor having comparable $\tau_{\rm KH}$ and $\tau_{\dot M}$, which would not allow the star to properly adjust to variable spot parameters.
 Finally, to find the uncertainty in $\dot M$, two further combinations of donor mass and radius were evaluated for each system: ($M = \bar M + \sigma_M$, $R = \bar R + \sigma_R$), and ($M = \bar M - \sigma_M$, $R = \bar R - \sigma_R$). The donor mass and radius are highly correlated (typical cross-correlation coefficient values for the eclipse modelled systems later analysed for this work are $\sim 0.9995$), so this is reasonable approximation to make.
@@ -713,15 +713,15 @@ The form of $\dot J_{\rm sys}$ in the presence of CAML is also given in \citet{k
 \end{gather}
 $\alpha$ is the mass retention factor, $\dot M_{\rm total} / \dot M_{\rm donor}$. Following the findings of \citet{McAllister2019}, there is no growth of the white dwarf over time and thus $\alpha \equiv 1$. $\zeta$ is the mass-radius exponent of the donor star, $\frac{d(\ln R_{\rm donor})}{d(\ln M_{\rm donor})}$.
 
-The final equation we need is for the total $J$ of the binary. This is simply given by
+The final equation needed is for the total $J$ of the binary. This is simply given by
 \begin{equation}
-    M_{\rm wd} M_{\rm donor} \sqrt{\frac{G a }{M_{\rm wd} + M_{\rm donor}}}
+    J_{\rm tot} = M_{\rm wd} M_{\rm donor} \sqrt{\frac{G a }{M_{\rm wd} + M_{\rm donor}}}
 \end{equation}
 
-After substituting $\alpha = 1$, we can then construct a form of $\dot J$ that is a function of component masses, $a$, $\dot M_{\rm donor}$, and $\zeta$,
+After substituting $\alpha = 1$, $\dot J$ as a function of component masses, $a$, $\dot M_{\rm donor}$, and $\zeta$, is found
 \begin{gather}
     \dot J = J \frac{\dot M_{\rm donor}}{M_{\rm donor}} \cdot (D + \nu) \\
     \dot J = M_{\rm wd} \dot M_{\rm donor} \sqrt{\frac{G a }{M_{\rm wd} + M_{\rm donor}}} \bigg( \bigg(\frac{5}{6} - \frac{\zeta}{2}\bigg )  - \frac{1}{3} \frac{M_{\rm donor}}{M_{\rm wd} + M_{\rm donor}}\bigg ) \label{eqn:modelling:Jdot from Mdot}
 \end{gather}
 
-As a product of the eclipse modelling and MESA modelling, all the necessary quantities for Equation~\ref{eqn:modelling:Jdot from Mdot} are known. Therefore, we can deduce the secular AML rate for the modelled CV systems.
+As a product of the eclipse modelling and MESA modelling, all the necessary quantities for Equation~\ref{eqn:modelling:Jdot from Mdot} are known. Therefore, the secular AML rate for the modelled CV systems can be deduced.

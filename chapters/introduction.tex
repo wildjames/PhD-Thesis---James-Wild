@@ -13,7 +13,7 @@ The mass transfer also gives rise to two more observable features of a CV: an ac
 Systems actively undergoing mass transfer are important to our understanding of stellar evolution. A diversity of stars will experience a mass transfer phase, and losing mass strongly influences a stars' evolutionary path and must be accounted for (e.g. \citealt{renzini1981, smith2014} for single stars, or \citealt{hurley2002} for binaries). Of such systems, CVs in particular are interesting as modelling their eclipse light curves can yield precise, independent measures of both stars' mass and radius \citep{wood1986,Littlefair2008,Savoury2011}. Further, since the donor stars' evolution is dominated by its mass loss, CVs provide a window into binary evolution \citep{knigge2006}.
 The mass loss itself is driven by poorly-understood mechanisms, classically attributed to stellar magnetism and gravitational waves, that can also be probed using CV observation and modelling.
 
-Since CVs are binary stars, in the case of eclipsing systems it is possible to make direct observations of orbital separations, stellar masses, and radii. This lends some powerful diagnostics, in addition to parameters accessible with more general techniques such as spectroscopic analysis.
+Since CVs can have directly observed orbital separations, stellar masses, and radii, they gain additional powerful diagnostics, in addition to parameters accessible with more general techniques such as spectroscopic analysis.
 The ability to thoroughly characterise CVs makes them an excellent test-bed for binary modelling, and the complex processes that contribute to their evolution.
 Unfortunately, whilst reasonably accurate semi-empirical modelling of most of the CV evolutionary track and population distribution has been possible for more than a decade (e.g. \citealt{knigge11,Paxton_2015}), the field has yet to produce physically motivated theoretical models capable of accurately reproducing either the CV population distribution or complete evolutionary track, indicating some shortfalls in our understanding \citep{schreiber2015,Schreiber2016}.
 Of most significance to this work is the problem of missing Angular Momentum Loss (AML), where CVs with low mass donor stars appear to be losing angular momentum much faster than our models predict \citep{Schreiber2016}. This first chapter will summarise the current understanding of CV formation and evolution, with a focus on the issues with CV evolutionary models.
@@ -27,7 +27,7 @@ In a two-body orbital system, the Roche potential of a point is an effective pot
 \begin{equation}
     {\bf \phi} = -\frac{G M_1}{|{\bf r - r}_1|} - \frac{G M_2}{|{\bf r - r}_2|} - \frac{1}{2}({\bf \Omega} \times {\bf r})^2
 \end{equation}
-Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is the position vector being considered relative to the centre of mass, and $\bf \Omega$ is the angular momentum vector of the binary. $M_{1,2}$ and ${\bf r}_{1,2}$ are the masses and position vectors of the two orbiting bodies. measured from the centre of mass. Figure~\ref{fig:roche} shows this graphically.
+Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is the position vector being considered relative to the centre of mass, and $\bf \Omega$ is the angular momentum vector of the binary. $M_{1,2}$ and ${\bf r}_{1,2}$ are the masses and position vectors of the two orbiting bodies, measured from the centre of mass. Figure~\ref{fig:roche} shows this graphically.
 \begin{figure}
     \centering
     \includegraphics[width=.6\columnwidth]{figures/introduction/roche.png}
@@ -36,7 +36,7 @@ Where $\phi$ is the Roche potential, G is the gravitational constant, $\bf r$ is
 \end{figure}
 
 There are five key locations in the Roche potential, called Lagrange points. The first Lagrange point, $L_1$, is the point at which a small (co-rotating) mass is attracted both equally and oppositely by both bodies, and their effects are cancelled out.
-We can trace the line of constant potential that passes through $L_1$ giving two teardrops joined at the tips, and the teardrop encapsulating an object is known as its Roche lobe.
+The line of constant potential that passes through $L_1$ gives two teardrops joined at the tips, and the teardrop encapsulating an object is known as its Roche lobe.
 Matter that lies beyond the Roche lobe is no longer gravitationally bound to that body, and will leave the surface of the object. If the matter crosses into the other object's Roche lobe, the material will fall onto that body, otherwise the material will be ejected.
 Ejected material will no longer be in a stable orbit, and will go on to either be ejected from the system entirely, or find a new higher orbit where the two-body effects are negligible.
 
@@ -50,7 +50,7 @@ where $a$ is the orbital separation, and $q$ is the mass ratio of the system, $M
 
 \section{Accretion in CVs}
 \label{sect:introduction:accretion}
-Accretion physics is important to the appearance and behaviour of a CV. whilst it is summarised here, more in-depth descriptions can be found in \citet{warner1995, hellier2001, ritter2010}.
+Accretion physics is important to the appearance and behaviour of a CV. Whilst it is summarised here, more in-depth descriptions can be found in \citet{warner1995, hellier2001, ritter2010}.
 
 When the donor star overfills its Roche lobe, matter is ejected from its surface at thermal velocities, $\sim 10 \rm km\ s^{-1}$ for a 5000K M dwarf, which is small compared to the orbital velocity of the system (M dwarf velocities of $\sim 400-500 \rm\ km s^{-1}$ are common in the observations reported in Chapters \ref{chpt:three peculiar white dwarfs} and \ref{chpt:characterisation of 12 new CVs}). Since the ejected material is effectively stationary as it leaves the donor, it falls along a ballistic trajectory towards the white dwarf primary and forms an accretion disc around it.
 
@@ -65,13 +65,13 @@ Since turbulent eddies cannot be larger than $H$ or have velocities greater than
 
 Material that enters the disc must lose gravitational potential energy before it can be accreted to the white dwarf surface. Approximately half of this energy is lost thermally, through radiating accretion light, and the other half is converted to the kinetic energy necessary to maintain orbit about the white dwarf at lower altitudes. This low orbit has typical velocities roughly an order of magnitude higher than the rotational velocity of the white dwarf, so for material to settle on the stars' surface it must dissipate a large amount of kinetic energy. A region between the inner edge of the disc, and the surface of the white dwarf where this deceleration occurs is called the boundary layer, and can be a significant contributor to the total brightness of a CV.
 
-As the white dwarf is accreting material onto its surface, one might expect it to grow in mass over time, and possibly even detonate as a type Ia supernova when it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \citep{zorotovic2011}, but were this the case we would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
+As the white dwarf is accreting material onto its surface, one might expect it to grow in mass over time, and possibly even detonate as a type Ia supernova when it crosses the $1.4 M_\odot$ Chandrasekhar limit. This postulation is supported by the white dwarfs in CVs being significantly more massive than their singleton counterparts \citep{zorotovic2011}, but were this the case one would expect there to be a relationship between age, and white dwarf mass. \citet{McAllister2019} searched for this relationship, but found no correlation between the two, indicating that the white dwarfs in CVs do not grow over time, and are unlikely to reach the Chandrasekhar limit. Growth is thought to be limited by the accreted material cyclically detonating, in events called Classical Novae outlined in \S\ref{sect:introduction:classical novae} \citep{Wijnen2015,sparks2021}. Serial detonation is even invoked as a potential source of AML, dubbed Consequential AML (CAML), that is described in \S\ref{sect:introduction:CAML}.
 
 
 \newpage
 \section{CV variability and subtypes}
 \label{sect:introduction:CV subtypes}
-Several subtypes of CV exist that can lie significantly outside the normal evolutionary tracks we expect, contain exotic components, or undergo outbursts.
+Several subtypes of CV exist that can lie significantly outside the normal evolutionary tracks, contain exotic components, or undergo outbursts.
 In addition, it is common for CVs to display a significant short term, stochastic variability, known as flickering. This quasi-random noise is not fully understood, but is known to be localised to the vicinity of the white dwarf or bright spot \citep{horne1985,bruch1996,bruch2000}, though does not appear to lie directly on it.
 Here I briefly describe the various subtypes of CVs, though note that only quiescent CVs are suitable for analysis in this work.
 
@@ -83,7 +83,7 @@ The formation channel of CVs does not require that the secondary star meets any 
 \subsection{Magnetic CVs}
 \label{sect:introduction:magnetic CVs}
 
-It is possible for white dwarfs to have very strong magnetic fields, in the region of tens to hundreds of megaGauss. Such white dwarfs are called polars and are an interesting field of study in their own right, but when a polar is accreting material from a donor star the system is designated as an AM Her star and the intense magnetic field strength alters the CV in a two main ways. The strong field lines of the polar mean that the hot, charged photosphere material transferred to the primary cannot form an accretion disc and instead falls directly onto the surface of the white dwarf. The impacting material forms a bright spot on the white dwarf surface, which is usually bright enough to be visible from earth. In addition, the strong field lines force the white dwarf to become tidally locked to the donor star.
+It is possible for white dwarfs to have very strong magnetic fields, in the region of tens to hundreds of megagauss. Such white dwarfs are called polars and are an interesting field of study in their own right, but when a polar is accreting material from a donor star the system is designated as an AM Her star and the intense magnetic field strength alters the CV in a two main ways. The strong field lines of the polar mean that the hot, charged photosphere material transferred to the primary cannot form an accretion disc and instead falls directly onto the surface of the white dwarf. The impacting material forms a bright spot on the white dwarf surface, which is usually bright enough to be visible from Earth. In addition, the strong field lines force the white dwarf to become tidally locked to the donor star.
 
 There is also a subclass of magnetic CVs with weaker field strengths of a few megagauss, known as DQ Her stars. In these systems, the white dwarf is not tidally locked, and a partial disc can exist.
 
@@ -128,7 +128,7 @@ The third subtype are SU UMa stars. These systems are known for their more compl
 \subsection{SU UMa stars}
 \label{sect:introduction:SU UMa}
 
-SU UMa stars are distinguished by exhibiting superoutbursts, similar to the regular dwarf nova outbursts that the star still undergoes, but with greater amplitudes and durations, and longer recurrence times. These outbursts are triggered by the disc radius growing to such an extent that it becomes tidally perturbed by the donor star, and becomes elliptical. This can only take place when the donor star is less than $\sim 1/3$ the white dwarf mass, so only short period systems see these superoutbursts. \citep{hellier2001}.
+SU UMa stars are distinguished by exhibiting superoutbursts, similar to the regular dwarf nova outbursts that the star still undergoes, but with greater amplitudes and durations, and longer recurrence times. These outbursts are triggered by the disc radius growing to such an extent that it begins to be tidally perturbed by the donor star, and becomes elliptical. This can only take place when the donor star is less than $\sim 1/3$ the white dwarf mass, so only short period systems see these superoutbursts. \citep{hellier2001}.
 SU UMa stars are known for their superhumps, which also arises from the disc eccentricity. The tidal interaction between the disc and the donor produces an area of increased luminosity at the edge of the disc between the white dwarf and the donor \citep{warner1988}. As the disc is elliptical, the distance between this disc edge and the donor varies over the course of an orbit, causing variation in brightness as the donor moves around the disc.
 These fluctuations are the superhumps, and are useful as they provide a diagnostic to the mass ratio for the system as the  \citep{Patterson1998, Patterson2001, patterson2005}.
 
@@ -170,7 +170,7 @@ The common envelope phase can be parametrised with the energies involved, namely
 \begin{equation}
     \alpha = \frac{U_{\rm bind}}{\Delta U_{\rm orb}}
 \end{equation}
-This is known as the $\alpha$ formalism \citep{demarco2011}, and is a good illustration of how poorly we understand CE evolution. $\alpha$ should be a metric we can predict with models, but this has proven very challenging and several competing frameworks exist \citep{ivanova2020}.
+This is known as the $\alpha$ formalism \citep{demarco2011}, and is a good illustration of how poorly the field understands CE evolution. $\alpha$ should be a metric that can be predicted with models, but this has proven very challenging and several competing frameworks exist \citep{ivanova2020}.
 
 The energy needed to liberate the envelope is expected to come from the orbit of the binary, but some systems have been observed and characterised with $\alpha > 1$. suggesting that other sources, like the thermal output of the stars, can contribute to the envelope ejection \citep{demarco2011, ivanova2013}. Common envelope evolution remains a very difficult problem to solve, and only approximate models currently exist \citep{ivanova2020}, but the following scenario is generally accepted as likely in the case of CVs.
 
@@ -212,15 +212,15 @@ When mass moves from the donor to the white dwarf primary, the redistribution of
     J = M_1 a_1 v_1 + M_2 a_2 v_2 = M_1 a_1 \frac{2\pi a_1}{P_{orb}} + M_2 a_2 \frac{2\pi a_2}{P_{orb}}
 \end{equation}
 where the distance from each star to the centre of mass is $a_{1,2}$, and the velocity of each star is $v_{1,2}$.
-The binary separation between the stars is $a = a_1 + a_1$, and the ratio between the stars' distances to the centre of mass is the inverse of their mass ratio, i.e. $\frac{a_2}{a_1} = \frac{M_1}{M_2}$. By substituting $P_{orb}$ for Kepler's 3rd law, we can construct a simple equation for $J$,
+The binary separation between the stars is $a = a_1 + a_1$, and the ratio between the stars' distances to the centre of mass is the inverse of their mass ratio, i.e. $\frac{a_2}{a_1} = \frac{M_1}{M_2}$. By substituting $P_{orb}$ for Kepler's 3rd law, a simple equation for $J$ can be constructed,
 \begin{equation}
     J = M_1 M_2 \bigg( \frac{Ga}{M_1 + M_2} \bigg)^{1/2}
 \end{equation}
-Now, by taking the natural log of both sides and differentiating with respect to time we find the following relation between the derivatives.
+Now, by taking the natural log of both sides and differentiating with respect to time, the following relation between the derivatives is found.
 \begin{equation}
     \frac{\dot a}{a} = 2\frac{\dot J}{J} + \frac{(\dot M_1+\dot M_2)}{M_1+M_2} + 2\frac{\dot M_1}{M_1} + 2\frac{\dot M_2}{M_2}
 \end{equation}
-For the specific case where the total system mass is fully conserved, we can use $\dot M = 0$, $\dot M_1 = -\dot M_2$, and $\dot J \equiv 0$ to simplify the above
+For the specific case where the total system mass is fully conserved, $\dot M = 0$, $\dot M_1 = -\dot M_2$, and $\dot J \equiv 0$ allows the above to be simplified,
 \begin{equation}
     \label{eqn:introduction:orbital separation change due to mass transfer}
     \frac{\dot a}{a} = 2\frac{\dot M_1}{M_1} + 2\frac{\dot M_2}{M_2} = 2(q-1) \frac{\dot M_2}{M_2}
@@ -231,9 +231,9 @@ or by similarly differentiating the logarithm of $P_{orb}^2 \propto a^3$,
     \frac{\dot P_{orb}}{P_{orb}} = \frac{3}{2}\frac{\dot a}{a} = 3(q-1) \frac{\dot M_2}{M_2}
 \end{equation}
 
-Equations \ref{eqn:introduction:orbital separation change due to mass transfer} and \ref{eqn:introduction:orbital period change due to mass transfer} tell us how the binary responds to mass transfer. As mass is lost from the secondary, $\dot M_2$ is negative and we can see that systems with $q>1$ will have their orbits contract, and systems with $q<1$ will have their orbits widen in response to mass transfer.
+Equations \ref{eqn:introduction:orbital separation change due to mass transfer} and \ref{eqn:introduction:orbital period change due to mass transfer} tell us how the binary responds to mass transfer. As mass is lost from the secondary, $\dot M_2$ is negative and systems with $q>1$ will have their orbits contract, whilst systems with $q<1$ will have their orbits widen in response to mass transfer.
 
-We must also consider the response of the Roche lobe radius to mass transfer.
+The effect of mass transfer on the Roche lobe is important to CVs, and must be considered.
 A simpler, more easily manipulated alternative to the Eggleton $R_L$ approximation (Equation~\ref{eqn:introduction:eggleton approximation}) from \citep{paczynski1971},
 \begin{equation}
     \frac{R_L}{a} = 0.462 \frac{q}{1 + q}^{1/3}
@@ -243,14 +243,14 @@ although this only holds between $0 < q < 0.8$ and is accurate to 2\%. Taking th
     \label{eqn:introduction:Roche lobe in response to mass loss}
     \frac{\dot R_L}{R_L} = \frac{\dot a}{a} + \frac{\dot M_2}{3 M_2} = \bigg ( 2q - \frac{5}{3} \bigg )\frac{\dot M_2}{M_2}
 \end{equation}
-However, this reveals the flaw in assuming fully conservative mass transfer ($\dot M \equiv 0$, $\dot J \equiv 0$), as this implies that for $q < 5/6$, $R_L$ will increase in response to mass transfer. This is not compatible with continuous mass transfer without some mechanism (such as the nuclear expansion of an evolved donor ascending the red giant branch, as during the CV formation), and as most CVs are observed with $q < 5/6$ and do not possess such a mechanism.
+However, this reveals the flaw in assuming fully conservative mass transfer ($\dot M \equiv 0$, $\dot J \equiv 0$), as this implies that for $q < 5/6$, $R_L$ will increase in response to mass transfer. This is not compatible with continuous mass transfer without some mechanism driving the stars closer together again (such as the nuclear expansion of an evolved donor ascending the red giant branch, as during the CV formation), and as most CVs are observed with $q < 5/6$ and do not possess such a mechanism.
 
-Finally, we can also approximate the stability criteria for mass transfer using the equations above.
+Finally, the stability criteria for mass transfer can be evaluated using the equations above.
 The maximum stable value of $q$ can be found by considering the mass-radius exponent of the donor ($\xi$), and its Roche lobe ($\xi_{\rm L}$). For the donor, $\xi$ can be found by simply differentiating the general equation $R \propto M^\xi$.
 \begin{equation}
     \xi = \frac{{\rm d\ ln\ }R_2}{{\rm d\ ln\ }M_2}
 \end{equation}
-Similarly, by using Equation~\ref{eqn:introduction:Roche lobe in response to mass loss} we find
+Similarly, by using Equation~\ref{eqn:introduction:Roche lobe in response to mass loss},
 \begin{equation}
     \xi_{\rm L} = \frac{{\rm d\ ln\ }R_L}{{\rm d\ ln\ }M_2} = 2q - \frac{5}{3}
 \end{equation}
@@ -259,7 +259,7 @@ For stable mass transfer, the response of the Roche lobe must be less than the r
 \begin{equation}
     q < \frac{1}{2}\xi + \frac{5}{6}
 \end{equation}
-for which we can substitute in a theoretical value of $\xi$ to find the maximum $q$. For a low mass, main sequence star ($M < 0.8M_\odot$), $\xi \simeq 0.8$ \citep{knigge11} and we find $q < 1.23$. Below $M_2 \lesssim 0.43 M_\odot$, the star becomes deeply convective and $\xi$ falls sharply to $\xi = -1/3$ \citep{paczynski1965,rappaport1982}, and $q \lesssim 2/3$.
+for which a theoretical value of $\xi$ can be used to find the maximum $q$. For a low mass, main sequence star ($M < 0.8M_\odot$), $\xi \simeq 0.8$ \citep{knigge11} and $q < 1.23$. Below $M_2 \lesssim 0.43 M_\odot$, the star becomes deeply convective and $\xi$ falls sharply to $\xi = -1/3$ \citep{paczynski1965,rappaport1982}, and $q \lesssim 2/3$.
 
 
 \subsection{Period evolution and key population features}
@@ -281,11 +281,10 @@ Each of these features are discussed in turn.
 
 \subsubsection{The period maximum}
 \label{sect:introduction:period maximum}
-In order for a system be be a CV, mass must be transferring from a less massive star, onto a compact object, constraining the maximum value of $q$ to $\sim1$, and demanding that the secondary extends out to $\sim R_L$.
 
 There are three constraints on a CV pertinent to the maximum allowable period. The mass ratio, $q = \frac{M_{\rm donor}}{M_{\rm wd}}$, must be low enough for thermally stable mass transfer ($q < 1.23$ from \S\ref{sect:introduction:stability criterion}, here approximated as $q = 1.0$), the donor radius must be approximately equal to the Roche radius, and maximum mass of a white dwarf is well known to be limited to $\le 1.4M_{\odot}$ before triggering thermonuclear runaway \citep{chandrasekhar1942}.
 
-Now, to find the theoretical period maximum, we simply find the period corresponding to the largest possible donor star. \citet{warner1995} shows that the average density, $\rho_{av}$, for objects that fill their $R_L$ follows a robust relationship;
+Now, to find the theoretical period maximum, one must simply find the period corresponding to the largest possible donor star. \citet{warner1995} shows that the average density, $\rho_{av}$, for objects that fill their $R_L$ follows a robust relationship;
 \begin{equation}
     \frac{\rho_{av}}{\rho_{\odot}} = 75.9 P_{orb}^{-2}(h)
 \end{equation}
@@ -307,7 +306,7 @@ For long-period CVs, $\alpha = 0.67\pm0.04$ \citep{knigge11}, and equation \ref{
 \subsubsection{The period gap}
 \label{sect:introduction:period gap}
 
-Between periods of around 2-3 hours, there is a dramatic fall in the number of CVs we detect and volume-limited samples indicate that this is a real effect and not a selection bias \citep{Kolb1998,pala2020}. The origin of this gap in the period distribution is something of an open problem.
+Between periods of around 2-3 hours, there is a dramatic fall in the number of CVs detected and volume-limited samples indicate that this is a real effect and not a selection bias \citep{Kolb1998,pala2020}. The origin of this gap in the period distribution is something of an open problem.
 
 Models indicate that long period systems ($P > 3$h) have far higher mass loss rates than short period systems ($P < 2$h) \citep{ritter1985}. This suggests a significant change in braking mechanisms between the two regimes.
 Recall that the donor star is inflated by mass loss (\S\ref{sect:introduction:Summary of how AML and Mdot drive period evolution}).
@@ -343,7 +342,7 @@ This has been confirmed by \citet{knigge11}, who found that for period bouncer C
 \subsection{Problems with the classical picture}
 \label{sect:introduction:modern AML}
 
-A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the two main sources of AML, but attempts to quantify this with evolutionary models and population synthesis models consistently fall short. Gravitational losses are well understood, and have been independantly observed and studied, but the sources and consequences of magnetic braking is not so easy.
+A solid knowledge of exactly how and why CVs lose angular momentum has remained surprisingly elusive for several decades now. Early theories established gravitational waves and magnetic braking as the two main sources of AML, but attempts to quantify this with evolutionary models and population synthesis models consistently fall short. Gravitational losses are well understood, and have been independantly observed and studied, but the sources and consequences of magnetic braking are not so easy.
 
 % The spin rates and masses of CV donors are not seen in the singleton stars that are usually used to characterise magnetic braking \citep{rappaport1983,matt2015,garraffo2018a}.
 % In addition, the disruption of magnetic braking is often motivated by the donor transitioning to a fully convective state, but X-ray emission level is a diagnostic of magnetic flux \citep{pevtsov2003}, and \citet{wright2016} found that the X-ray flux of main sequence stars is similar between fully convective and non-convective main-sequence stars, implying a similar magnetic field strength. Furthermore, disagreement between observational and theoretical period gap and minimum locations \citep{knigge11} has left the disrupted magnetic braking model an area of active research.
@@ -395,7 +394,7 @@ By modelling CV evolution including this process, several issues of older CV pop
 \end{enumerate}
 The introduction of a modified, empirically calibrated CAML produces models that do not suffer from these issues, making a compelling case for its use -- though it is unsurprising that observations can be matched by the introduction of an unrestricted free parameter.
 
-The maximum dynamically stable mass transfer rate of a CV is a function of $q$, related via the adiabatic mass-radius exponent, $\xi_{ad}$, and the mass-radius exponent of the Roche radius, $\xi_{L}$. Where the two intersect forms a threshold beyond which runaway mass transfer (much like the pre-CV common envelope phase) is triggered, and most likely results in a merger between the two bodies. We begin similarly to the derivation in \S\ref{sect:introduction:stability criterion},
+The maximum dynamically stable mass transfer rate of a CV is a function of $q$, related via the adiabatic mass-radius exponent, $\xi_{ad}$, and the mass-radius exponent of the Roche radius, $\xi_{L}$. Where the two intersect forms a threshold beyond which runaway mass transfer (much like the pre-CV common envelope phase) is triggered, and most likely results in a merger between the two bodies. Similarly to the derivation in \S\ref{sect:introduction:stability criterion},
 \begin{equation}
     \label{eqn:introduction:CAML stability threshold}
     \xi_{ad} = \frac{{\rm d} ln(R_2)}{{\rm d} ln(M_2)}_{ad} = \frac{{\rm d} ln(R_L)}{{\rm d} ln(M_2)} = \xi_L
@@ -486,7 +485,7 @@ for the unsaturated regime, and
 \end{equation}
 in the saturated regime. In both cases, $p$ is assigned as $p = 2$ in order to agree with the most common literature spin-scaling prescription, $T \propto \Omega_*^3$.
 $\chi$ is the inverse critical $Ro$ for saturation, for which \citet{matt2015} adopt a value of $10$.
-The rotation rates of the donor and the sun are $\Omega_{*,\odot}$ respectively, and $T_0$ is given by a function of mass and radius,
+The rotation rates of the donor and the Sun are $\Omega_{*,\odot}$ respectively, and $T_0$ is given by a function of mass and radius,
 \begin{equation}
     T_0 = 9.5 \times 10^{30} {\rm erg} \bigg(\frac{R_*}{R_\odot} \bigg) \bigg(\frac{M_*}{M_\odot} \bigg)
 \end{equation}
@@ -518,7 +517,7 @@ More importantly for the CV field, the parameter space of CVs is completely unco
 \subsubsection{Garraffo prescription for magnetic torque}
 \label{sect:introduction:Garraffo magnetic braking prescription}
 
-The \citet{garraffo2018a} model considers the morphology of the magnetic field to also be important to the strength of magnetic braking, based on the work by \citet{garraffo2015}. The primary justification for this inclusion is observations of open clusters of a known age, where a bimodality is seen in the rotation rates of stars of similar masses. Some stars appear to be fast rotators, and some are slow rotators, and there is a dearth of systems between the two.
+The \citet{garraffo2018a} model considers the morphology of the magnetic field to also be important to the strength of magnetic braking, based on the work by \citet{garraffo2015}. The primary justification for this inclusion is observations of open clusters of a known age, where a bimodality is seen in the rotation rates of stars of similar masses. Some stars appear to be fast rotators, and some are slow rotators, and there is a dEarth of systems between the two.
 Previous attempts to model this bimodality have relied on an unexplained transition between an efficient braking state, and an inefficient braking state \citep{spada2011,reiners2012, gallet2013}, and \citet{garraffo2018a} expand on this by offering a shift in magnetic field morphology as the underlying trigger.
 
 Their formalisation of this is based on two assumptions. They assume that stars with a dipolar magnetic field follow a known spin-down law, with a mass dependence reflecting $\tau_{\rm cz}$ \citep{skumanich1972}. Second, they assume that there is some relationship between field morphology and stellar spin rate. Specifically, that stars rotating more rapidly have more complex magnetic fields. This is formalised via an AML rate, $\dot J$,
@@ -557,7 +556,7 @@ The \citet{garraffo2018a} prescription is simpler in concept than the \citet{mat
 
 \subsubsection{Comparisons to the Rappaport, Verbundt and Joss model}
 
-We can examine the differences between these prescriptions in the case of CV evolution by applying them to a donor evolutionary track, and \citet{knigge11} has constructed a donor sequence using their own models that reasonably accurately reproduces observations. The masses, radii, and periods along the sequence are given, so the would-be effects of the magnetic braking prescriptions described above can be calculated. In addition to the two previously discussed prescriptions, the default MESA \citep{Paxton_2015} magnetic braking prescription \citep{rappaport1983} is included. This prescription includes a magnetic braking index, $\gamma$,
+The differences between these prescriptions in the case of CV evolution can be examined by applying them to a donor evolutionary track, and \citet{knigge11} has constructed a donor sequence using their own models that reasonably accurately reproduces observations. The masses, radii, and periods along the sequence are given, so the would-be effects of the magnetic braking prescriptions described above can be calculated. In addition to the two previously discussed prescriptions, the default MESA \citep{Paxton_2015} magnetic braking prescription \citep{rappaport1983} is included. This prescription includes a magnetic braking index, $\gamma$,
 \begin{equation}
     \dot J = -3.8\times10^{-30} M R_\odot^4 \bigg( \frac{R}{R_\odot} \bigg)^\gamma \omega^3\  {\rm dyn\ cm}
 \end{equation}
@@ -571,7 +570,7 @@ Note that in the specific case of CVs, period and radius are synonymous with one
     \label{fig:introduction:rappaport garraffo matt magnetic braking}
 \end{figure}
 
-Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} shows how the \citet{matt2015} magnetic braking prescription compares to the default MESA magnetic braking prescription, from \citet{rappaport1983}. Most prescriptions see a discontinuity at $0.2M_\odot$, where \citet{knigge11} imposes the magnetic braking cutoff and the donor contracts to its equilibrium radius.
+Figure~\ref{fig:introduction:rappaport garraffo matt magnetic braking} shows how the \citet{matt2015} magnetic braking prescription compares to the \citet{garraffo2018a} and MESA \citet{rappaport1983} magnetic braking prescriptions. Most prescriptions see a discontinuity at $0.2M_\odot$, where \citet{knigge11} imposes the magnetic braking cutoff and the donor contracts to its equilibrium radius.
 
 The differences between the three prescriptions is clear in both the overall strength of the prescriptions, but also in how they evolve with mass. All the prescriptions shown decrease at lower masses, but at different rates. In the context of CV evolution, a different dropoff rates of magnetic braking would alter the shape of the donor mass-radius sequence, so observations of CV donors should be able to allow us to evaluate the effectiveness of different braking prescriptions.
 
