@@ -14,7 +14,7 @@ There is some overlap between the CVs contained in \citet{McAllister2019} and \c
 \section{Reproducing the canonical CV donor tracks}
 \label{sect:results:reproducing K11 tracks}
 
-MESA can closely reproduce the two \citet{knigge11} donor tracks. Recall from \S\ref{sect:introduction:the missing aml problem} that two such tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by $2.47\times$.
+MESA can closely reproduce the two \citet{knigge11} donor tracks. Recall from \S\ref{sect:introduction:the missing aml problem} that two such tracks are constructed, a `standard' track with only typical gravitational braking below the period gap, and an `optimal' track that amplifies gravitational braking by a factor of $2.47$.
 
 Initial work to reproduce CV evolution is outlined in \citet{Paxton_2015}. A subsequent reproduction of the `optimal' track was undertaken by \citet{Pala2017a}, and I continue to refine their process.
 By default, MESA shuts off magnetic braking when the donor becomes fully convective, a practice which I motivate in \S\ref{sect:introduction:the missing aml problem} to be spurious. Instead, MESA is altered to enforce a fixed magnetic braking cut-off at $0.2 M_\odot$, arbitrarily fixing the donor mass of the period gap in line with \citet{knigge11} (this is justified by observations - the mass of the period gap appears to be $0.20\pm0.02 M_\odot$ \citep{knigge11}).
@@ -118,7 +118,7 @@ Since a negative coverage fraction is unphysical, negative values of $f_{\rm spo
 However, the clear trend in $f_{\rm spot}$ towards 0 prior to this, and the close proximity to $f_{\rm spot} = 0$ below $0.12 M_\odot$ suggests that the MESA radius calibration given here is still valid.
 % The severity of this unreliability is not catastrophic, as the minimum value of $f_{\rm spot}$ is still reasonably close to 0.
 
-There is significant scatter in the Brown mass-radius relation, that is not captured in these models. The inherent scatter in radius for the observations is $\sim 3\%$ between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate. Below $\sim 0.1 M_\odot$, the scatter is not able to be characterised.
+There is significant scatter in the Brown mass-radius relation that is not captured in these models. The inherent scatter in radius for the observations is $\sim 3\%$ between 0.1 and 0.2 $M_\odot$, which adds to the uncertainty in modelled radius inflation, and thus mass loss rate. Below $\sim 0.1 M_\odot$, the scatter is not able to be characterised.
 Whilst this may skew an individual system, on average the inferred mass loss from model radius should be accurate. Therefore, this effect should not corrupt the $\dot M$ results with a large enough sample size.
 Since the uncertainties I report here do not include the effects of the scatter in the Brown mass-radius relation, they are underestimates of the true uncertainty. However, due to the very poor constraints on the scatter, this effect is ignored until more information is available.
 

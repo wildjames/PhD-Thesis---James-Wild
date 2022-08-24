@@ -202,7 +202,7 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
         $q$                                                             & Mass ratio                                              \\
         $a$                                                             & Orbital separation                                      \\
         $x_{l1}$                                                        & Distance from the white dwarf to the $L_1$ point        \\
-        $i$                                                             & inclination                                             \\
+        $i$                                                             & Inclination                                             \\
         $\Delta \phi$                                                   & White dwarf eclipse width in units of phase             \\
         $R_{\rm disc}$                                                  & Accretion disc radius                                   \\
         $b$                                                             & Disc surface profile exponent                           \\
@@ -221,7 +221,7 @@ with no cross correlation, in theory. In practice, as $E$ must be rounded to an 
 To determine the system parameters for the CVs in this study, the eclipse light-curves were modelled. This method is more frequently applicable in CVs than the more traditional approach of using spectroscopic eclipsing binaries, since the donor star is rarely directly visible. Compared to using the superhump period excess to estimate the mass ratio \citep{patterson2005, knigge2006}, light curve modelling requires few assumptions. However, it does require reasonably precise alignment of the system and so is not possible for a large fraction of CVs.
 
 CV eclipse modelling was first developed by \citet{wood1986}, and has been refined significantly over the last decade \citep{Savoury2011, littlefair2014, mcallister2017, McAllister2019}. The code used for this modelling, however, is the publicly available \lstinline{lfit_python} software\footnote{Available at \href{https://github.com/StuartLittlefair/lfit_python/tree/d36f5449350ef9cad6a285d6fd4cb9bdcd443c13}{https://github.com/StuartLittlefair/lfit\_python}}, based on the \lstinline{lcurve}\footnote{Available at \href{https://cygnus.astro.warwick.ac.uk/phsaap/software/}{https://cygnus.astro.warwick.ac.uk/phsaap/software/}} code authored by Tom Marsh. The method relies on four assumptions, namely that: \textit{(1)} the stream of mass flowing from the donor to the white dwarf follows a ballistic trajectory, \textit{(2)} the white dwarf obeys a theoretical mass-radius relationship, \textit{(3)} the white dwarf is unobscured by the accretion disc or other sources of intra-system material, and \textit{(4)} the donor exactly fills its Roche lobe.
-Most of these assumptions are considered robust, though the visibility of the white dwarf been called into question by \citet{Spark2015}.
+Most of these assumptions are considered robust, though the visibility of the white dwarf has been called into question by \citet{Spark2015}.
 The white dwarf mass-radius relationship was recently tested by \citet{parsons2017}, and found to be a reasonable assumption.
 Assuming that the mass stream following a ballistic trajectory appears to be a reasonable assumption, as the thermal velocity of the donor surface is orders of magnitude lower than the orbital velocity of the two stars.
 However, the most convincing argument to the validity of these assumptions are comparative studies, showing good consistency between eclipse modelling and other techniques \citep{tulloch2009,copperwheat2012,savoury2012,sion2022}.
@@ -255,7 +255,7 @@ Note that this model requires simultaneously fitting many variables simultaneous
 \label{sect:modelling:eclipse modelling}
 
 Recall that the light from a CV originates from four distinct objects in the system. The white dwarf and donor star, the accretion disc about the white dwarf, and the bright spot impact region (hereafter simply `the bright spot'), where transferred material impacts the outer rim of the accretion disc and liberates significant amounts of energy. Notably the bright spot emits flux directionally, so beaming must also be accounted for in the model.
-The anatomy of a CV eclipse light curve is a sequence of five events, that usually occur in the following order:
+The anatomy of a CV eclipse light curve is a sequence of five events that usually occur in the following order:
 \begin{enumerate}
     \setlength\itemsep{0em}
     \item a pre-eclipse hump is often seen as the bright spot rotates to point at the observer

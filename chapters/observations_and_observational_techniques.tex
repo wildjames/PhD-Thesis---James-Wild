@@ -35,7 +35,7 @@ Unfortunately, while HiPERCAM was used to observe eclipses for some systems, no 
 
 HiPERCAM is capable of incredibly fast frame rates of up to $\sim 1000 \rm Hz$, though this capability was not used for this work.
 However, as part of the effort to achieve this frame rate by reducing dead-time between frames HiPERCAM is capable of exposing a frame while {\it simultaneously} reading out the previous image.
-This is achieved by masking half of the CCD, and only exposing with one half. When a frame is finished exposing, it is shuttled across to the masked side (a rapid process, $6.8 - 7.8$ ms) and can be read out during the next exposure time. HiPERCAM has four sets of readout electronics that operate in tandem.
+This is achieved by masking half of the CCD, and only exposing with one half. When a frame is finished exposing, the electrons are shuttled across to the masked side (a rapid process, $6.8 - 7.8$ ms) and can be read out during the next exposure time. HiPERCAM has four sets of readout electronics that operate in tandem.
 This virtual elimination of dead-time is a significant benefit when resolving the large, rapid changes in flux during the ingresses and egresses of CV eclipses.
 
 
@@ -193,7 +193,7 @@ To perform the colour corrections, Equation~\ref{eqn:observations:basic magnitud
 where $g_{\rm zp}$\ is the zero point, $g_{\rm inst} = -2.5 \rm log(ADU_{\rm exp}/{\it t}_{\rm exp})$
 for an exposure time of $t_{\rm exp}$, and $c_{\rm g, sup}$\ is the colour term correction gradient. In theory, the atmospheric extinction term also has some colour dependency, as extinction varies with wavelength. However, the effect is negligible between these photometric systems, so it is omitted.
 
-The optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM and HiPERCAM components in the optical path. Precomputed stellar models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the $T_{\rm eff}$ and $\log(g)$ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$, spanning from $\log(g)= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which were then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with $\log(g)=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to assess the impact of the different spectral shape on the resulting colour terms.
+In order to compute the colour term correction gradients, the optical path of each system was simulated using the \texttt{pysynphot} package, with measured throughputs of all ULTRACAM and HiPERCAM components in the optical path. Precomputed stellar models from \citet{Dotter2016} and \citet{Choi2016} were used to generate the $T_{\rm eff}$ and $\log(g)$ values of an $8.5$\ Gyr isochrone for main sequence stars with masses from 0.1 to 3 $M_\odot$, spanning from $\log(g)= 3.73 \to 5.17$, and $\rm{T_{eff}} = 2900K \to 10,300K$. The Phoenix model atmospheres \citep{allard2012} were used to generate model spectra of each mass, which were then folded through each optical path to calculate an AB magnitude. In addition, white dwarf models with $\log(g)=8.5$\ were similarly processed \citep{koester2010, tremblay2009}, to assess the impact of the different spectral shape on the resulting colour terms.
 
 The colour terms between the SDSS and Super SDSS systems were then synthesised, e.g., $g'-g_{\rm sup}$, on ULTRACAM and HiPERCAM for each model atmosphere. These data were plotted against synthesised SDSS colours, i.e. $(u'-g')$, $(g'-r')$, $(g'-i')$, and a straight line was fit to the colour relationship for the combined dataset of both white dwarf and main sequence stars. In the example case of $g'-g_{\rm sup}$, this would be
 \begin{align*}
@@ -274,7 +274,7 @@ These colour corrections are not generally the same for main sequence stars and 
 \subsection{Calculating comparison star magnitudes}
 \label{sect:comparison star mag calc}
 
-The stars in the target frame often do not have known brightnesses in the SDSS photometric system, and so this must be determined by observation. The network of SDSS photometric standards provided by \citet{smith2002} are used as calibrating objects, with robust, accurate known magnitudes. By observing a flux standard during clear conditions, the comparison stars' magnitude can then be calculated from a similarly clear observation.
+The comparison stars in the target frame often do not have known brightnesses in the SDSS photometric system, and so this must be determined by observation. The network of SDSS photometric standards provided by \citet{smith2002} are used as calibrating objects, with robust, accurate known magnitudes. By observing a flux standard during clear conditions, the comparison stars' magnitude can then be calculated from a similarly clear observation.
 Equation~\ref{eqn:observations:basic magnitude equation} was used to calculate the zero points of the telescope/instrument combination in each band from a standard star observation.
 
 The comparison star magnitudes were then calculated from observations.
@@ -316,7 +316,7 @@ This accounts for differences in wavelength response between the two systems whe
 While developing this correction method, some verification tests were performed.
 ASASSN-16kr was observed in both the standard SDSS filters in 2018, and the super SDSS filters in 2019. This presented an opportunity to compare the corrected 2019 data with the fluxes observed in 2018. Additionally, both ASASSN-16kr and SSSJ0522$-$3505 use multiple standard stars across observations, which should agree if the calibration has been done correctly. Finally, AY For provided a case where the SDSS magnitudes of the comparison stars were known {\it a priori}, as the field has been observed in the Pan-STARRS survey. The calibrated comparison star magnitudes using the technique provided here are within ~2\% of the Pan-STARRS magnitudes, indicating a reasonable calibration. In all cases, the flux-calibrated light curves were similar and the white dwarf colours consistent, suggesting that this method of flux calibration is indeed accurate.
 
-I add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature. This is a practice established by \citet{McAllister2019}, to account for possible systematic error in flux calibration and modelling.
+I add a 3\% systematic error in quadrature to the white dwarf fluxes when fitting for the effective temperature. This is a practice established by \citet{McAllister2019}, to account for systematic error in flux calibration and modelling.
 
 \newpage
 \section{Catalogue of observations}
