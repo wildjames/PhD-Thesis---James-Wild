@@ -681,17 +681,6 @@ When evaluating a proposed $\dot M$, two other key model parameters must be set.
 The appropriate $f_{\rm spot}$ for the target mass is also calculated, and the model fixes $f_{\rm spot}$ at this value. Fixing $f_{\rm spot}$ this way accounts for the donor having comparable $\tau_{\rm KH}$ and $\tau_{\dot M}$, which would not allow the star to properly adjust to variable spot parameters.
 Finally, to find the uncertainty in $\dot M$, two further combinations of donor mass and radius were evaluated for each system: ($M = \bar M + \sigma_M$, $R = \bar R + \sigma_R$), and ($M = \bar M - \sigma_M$, $R = \bar R - \sigma_R$). The donor mass and radius are highly correlated (typical cross-correlation coefficient values for the eclipse modelled systems later analysed for this work are $\sim 0.9995$), so this is reasonable approximation to make.
 
-% {\it{\bf A faster alternative is to run a fixed grid of models, and interpolate within it.}\todo{I altered the code to get error straight from binary chopping, so this isn't true any more}
-% An interpolation grid was constructed with MESA models of fixed $\dot M$ and $f_{\rm spot}$, initialised at a mass of $0.3 M_\odot$. These models were singleton stars, with the configuration described in \S\ref{sect:modelling:MESA configs}. These models were run with fixed values of $f_{\rm spot}$, since varying $f_{\rm spot}$ with mass introduces a time lag between a change in $f_{\rm spot}$, and $R_{\rm donor}$ adjusting that is on a similar timescale to $\tau_{\dot M}$. This effect is demonstrated quantitatively in \S\ref{sect:modelling:tuning star spots to observations}.
-
-% Values of $\dot M$ ranged from $-12<\log(\dot M)<-8$ in $\frac{1}{6}$ increments, and $f_{\rm spot}$ spanned from $0<f_{\rm spot}<-0.65$ in increments of 0.05. The initial mass value of $0.3 M_\odot$ was chosen to allow the donor to fully adjust to the $\dot M$-induced inflated radius before reaching the $0.2 M_\odot$ period gap emergence mass.
-
-% This results in a grid of model samples in a 4D cube with the axes of mass, radius, $f_{\rm spot}$, and $\dot M$.
-% For a given $(M_{\rm donor},\ R_{\rm donor})$ pair, a value of $f_{\rm spot}$ can be interpolated from the relationship later derived in \S\ref{sect:modelling:tuning star spots to observations} to choose the correct $f_{\rm spot}$ track, and the model grid can be interpolated for a value of $\dot M$.
-% This approach is not as accurate as the binary chop optimisation, as the radii from stellar models are not linear functions of the input parameters. However, it is orders of magnitude faster to perform, so is used to characterise the error about a central $\dot M$ value, found with the binary chop algorithm.
-% The central value of the binary chop was consistent with the interpolation in all cases.
-% }
-
 
 \subsection{Determining AML rate from system parameters}
 \label{sect:modelling:getting AML rate from system parameters}

@@ -109,7 +109,7 @@ The upper limit on mass must be $0.2 M_\odot$, as this is the enforced mass of t
 
 With star spots implemented in MESA in \S\ref{sect:modelling:starspots in MESA}, the Brown relation can now be reproduced.
 For simplicity, $x_{\rm spot}$ is fixed at 0 and $f_{\rm spot}$ is varied.
-Since radius increases monotonically with $f_{\rm spot}$, a binary chop is performed (see \S\ref{sect:modelling:binary chop methodology}), optimising for $\Delta R=R_{\rm MESA}-(1.045\times R_{\rm Brown})=0$ at a stellar age of 2~Gyrs for a range of masses. The 4.5\% radius increase is to compensate for the non-spherical Roche geometry of the donor, c.f. \citet{knigge11}.
+Since radius increases monotonically with $f_{\rm spot}$, a bisection optimisation is performed (see \S\ref{sect:modelling:bisection method methodology}), optimising for $\Delta R=R_{\rm MESA}-(1.045\times R_{\rm Brown})=0$ at a stellar age of 2~Gyrs for a range of masses. The 4.5\% radius increase is to compensate for the non-spherical Roche geometry of the donor, c.f. \citet{knigge11}.
 The resulting M-$f_{\rm spot}$ relation is shown in Figure~\ref{fig:modelling:fspot mass relationship}.
 
 Below masses of $\sim 0.12 M_\odot$, the required $f_{\rm spot}$ becomes slightly negative, i.e. default MESA models are larger than observations plus the $4.5\%$ non-spherical correction.
@@ -125,7 +125,7 @@ Since the uncertainties I report here do not include the effects of the scatter 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/modelling/fspot_relation_to_match_brown_plus_4.5.pdf}
-    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best-fit value of $f_{\rm spot}$. The {\bf dotted lines} show the acceptable deviation from perfect agreement in order to terminate the binary chop, and the {\bf dashed line} shows the target inflation. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
+    \caption{{\it Top}: The required $f_{\rm spot}$ that is applied to tune M dwarf MESA models to match the Brown relation, plus an added $4.5\%$ inflation due to non-spherical Roche geometry. {\it Bottom}: the residuals from the best-fit value of $f_{\rm spot}$. The {\bf dotted lines} show the acceptable deviation from perfect agreement in order to terminate the bisection method optimisation, and the {\bf dashed line} shows the target inflation. Note that when finding the necessary value of $f_{\rm spot}$ to match the Brown relation $x_{\rm spot} \equiv 0$, and negative values of $f_{\rm spot}$ were allowed. However, in all subsequent modelling, negative $f_{\rm spot}$ were set to 0. {\bf Red squares} show evaluated MESA models.}
     \label{fig:modelling:fspot mass relationship}
 \end{figure}
 
